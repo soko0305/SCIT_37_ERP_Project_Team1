@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="utf-8">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Language" content="en">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>supplier</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+<meta name="description"
+	content="This is an example dashboard created using build-in elements and components.">
+
+<!-- Disable tap highlight on IE -->
+<meta name="msapplication-tap-highlight" content="no">
+
+<link
+	href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css"
+	rel="stylesheet">
+<script
+	src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
+</head>
+
+<body>
+
+	<div class="card-body">
+		<div class="form-group row">
+			<label for="inputPassword" class="col-sm-3 text-right col-form-label">일자</label>
+			<div class="col-sm-6">
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<div class="input-group-text">
+							<i class="fa fa-calendar-alt"></i>
+						</div>
+					</div>
+					<input class="form-control input-mask-trigger"
+						data-inputmask-alias="datetime"
+						data-inputmask-inputformat="dd/mm/yyyy" im-insert="false">
+
+				</div>
+				<small class="form-text text-muted">일자는 sysdate</small>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="inputPassword" class="col-sm-3 text-right col-form-label">원자재명</label>
+			<div class="col-sm-6">
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<div class="input-group-text">
+							<i class="fa fa-calendar-alt"></i>
+						</div>
+					</div>
+					<input class="form-control input-mask-trigger"
+						data-inputmask-alias="datetime"
+						data-inputmask-inputformat="설탕" im-insert="false">
+
+				</div>
+				<small class="form-text text-muted"> </small>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="inputPassword" class="col-sm-3 text-right col-form-label">거래처명</label>
+			<div class="col-sm-6">
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<div class="input-group-text">
+							<i class="fa fa-calendar-alt"></i>
+						</div>
+					</div>
+					<input class="form-control input-mask-trigger"
+						data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'autoGroup': true, 'digits': 2, 'digitsOptional': false, 'prefix': '$ ', 'placeholder': '0'"
+						im-insert="true" style="text-align: right;">
+
+				</div>
+				<small class="form-text text-muted">거래처는 원자재 입력시 바로 자동입력됨</small>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="inputPassword" class="col-sm-3 text-right col-form-label">License
+				plate:</label>
+			<div class="col-sm-6">
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<div class="input-group-text">
+							<i class="fa fa-calendar-alt"></i>
+						</div>
+					</div>
+					<input class="form-control input-mask-trigger"
+						data-inputmask="'mask': '[9-]AAA-999'" im-insert="true">
+
+				</div>
+				<small class="form-text text-muted"> data-inputmask="'mask':
+					'[9-]AAA-999'" </small>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="inputPassword" class="col-sm-3 text-right col-form-label">Decimal:</label>
+			<div class="col-sm-6">
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<div class="input-group-text">
+							<i class="fa fa-calendar-alt"></i>
+						</div>
+					</div>
+					<input class="form-control input-mask-trigger"
+						data-inputmask="'alias': 'decimal', 'groupSeparator': ',', 'autoGroup': true"
+						im-insert="true" style="text-align: right;">
+
+				</div>
+				<small class="form-text text-muted">
+					data-inputmask="'alias': 'decimal', 'groupSeparator': ',',
+					'autoGroup': true" </small>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="inputPassword" class="col-sm-3 text-right col-form-label">IP
+				address:</label>
+			<div class="col-sm-6">
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<div class="input-group-text">
+							<i class="fa fa-calendar-alt"></i>
+						</div>
+					</div>
+					<input class="form-control input-mask-trigger" id="ip"
+						data-inputmask="'alias': 'ip'" im-insert="true">
+
+				</div>
+				<small class="form-text text-muted">
+					data-inputmask="'alias': 'ip'" </small>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="inputPassword" class="col-sm-3 text-right col-form-label">Email
+				address:</label>
+			<div class="col-sm-6">
+				<div class="input-group">
+					<div class="input-group-prepend">
+						<div class="input-group-text">
+							<i class="fa fa-calendar-alt"></i>
+						</div>
+					</div>
+					<input class="form-control input-mask-trigger" id="email"
+						data-inputmask="'alias': 'email'" im-insert="true">
+
+				</div>
+				<small class="form-text text-muted">
+					data-inputmask="'alias': 'email'" </small>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

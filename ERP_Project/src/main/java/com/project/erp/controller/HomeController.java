@@ -13,7 +13,7 @@ public class HomeController {
 	
 	@RequestMapping(value="/", method = RequestMethod.GET)
 	public String home(){
-		return "materials_view";
+		return "order_insert";
 	}
 
 	@RequestMapping(value="/header", method = RequestMethod.GET)
