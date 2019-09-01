@@ -13,26 +13,18 @@ public class HomeController {
 	
 	@RequestMapping(value="/", method = RequestMethod.GET)
 	public String home(){
- 
-		
-		return "signup";
-/*		return "inventory/inventoryManagement"; */
+		return "main/index";
 		}
  
  
- 
-
- 
- 
-
 	@RequestMapping(value="/header", method = RequestMethod.GET)
 	public String header(){
-		return "menu/header";
+		return "main/header";
 	}
 	
 	@RequestMapping(value="/navbar", method = RequestMethod.GET)
 	public String navbar(){
-		return "menu/navbar";
+		return "main/navbar";
 	}
 	
 }
