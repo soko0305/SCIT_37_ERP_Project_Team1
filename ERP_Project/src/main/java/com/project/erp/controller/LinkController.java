@@ -25,14 +25,9 @@ public class LinkController {
 	public String Management3(){
 		return "management3";
 	}
-<<<<<<< HEAD
-=======
-	
+
 	@RequestMapping(value="/haraManagement4", method = RequestMethod.GET)
 	public String Management4(){
 		return "management4";
 	}
-
->>>>>>> hara
-
 }
