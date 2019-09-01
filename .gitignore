@@ -11,4 +11,3 @@ Servers/Pivotal tc Server Developer Edition v3.1-config/catalina.properties
 Servers/Pivotal tc Server Developer Edition v3.1-config/catalina.policy
 Servers/.settings/org.eclipse.wst.server.core.prefs
 Servers/.project
-ERP_Project/src/main/resources/application.properties
