@@ -21,5 +21,9 @@ public class LinkController {
 		return "management2";
 	}
 
+	@RequestMapping(value="/haraManagement3", method = RequestMethod.GET)
+	public String Management3(){
+		return "management3";
+	}
 
 }
