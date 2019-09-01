@@ -1,23 +1,7 @@
 Manifest-Version: 1.0
 Implementation-Title: ERP_Project
 Implementation-Version: 0.0.1-SNAPSHOT
-<<<<<<< HEAD
 Built-By: user
-=======
-<<<<<<< HEAD
-Built-By: jyb
-=======
-<<<<<<< HEAD
-Built-By: jyb
-=======
-<<<<<<< HEAD
-Built-By: kita
-=======
-Built-By: 하라
->>>>>>> master
->>>>>>> 8b25896e7976de73da4b219b4c623ce7d0967232
->>>>>>> master
->>>>>>> 09c66369431d06c1a9d429e2c3fb1855e6477575
 Implementation-Vendor-Id: com.project.erp
 Build-Jdk: 1.8.0_202
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
