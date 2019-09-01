@@ -16,5 +16,14 @@ public class HomeController {
 		return "materials_view";
 	}
 
+	@RequestMapping(value="/header", method = RequestMethod.GET)
+	public String header(){
+		return "menu/header";
+	}
+	
+	@RequestMapping(value="/navbar", method = RequestMethod.GET)
+	public String navbar(){
+		return "menu/navbar";
+	}
 	
 }
