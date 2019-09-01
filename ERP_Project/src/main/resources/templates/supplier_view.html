@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="utf-8">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Language" content="en">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>supplier</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+<meta name="description"
+	content="This is an example dashboard created using build-in elements and components.">
+
+<!-- Disable tap highlight on IE -->
+<meta name="msapplication-tap-highlight" content="no">
+
+<link
+	href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css"
+	rel="stylesheet">
+<script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
+</head>
+
+<body>
+	<div class="fixed-table-container" style="padding-bottom: 0px;">
+		<div class="fixed-table-header" style="display: none;">
+			<table></table>
+		</div>
+		<div class="fixed-table-body">
+			<div class="fixed-table-loading" style="top: 41.8px; display: none;">
+				Loading, please wait...</div>
+			<table data-toggle="table"
+				data-url="https://api.github.com/users/wenzhixin/repos?type=owner&amp;sort=full_name&amp;direction=asc&amp;per_page=100&amp;page=1"
+				data-sort-name="stargazers_count" data-sort-order="desc"
+				class="table table-hover">
+				<thead>
+					<tr>
+						<th style="" data-field="name"><div
+								class="th-inner sortable both">거래처코드</div>
+							<div class="fht-cell"></div></th>
+						<th style="" data-field="stargazers_count"><div
+								class="th-inner sortable both desc">거래처명</div>
+							<div class="fht-cell"></div></th>
+						<th style="" data-field="forks_count"><div
+								class="th-inner sortable both">전화번호</div>
+							<div class="fht-cell"></div></th>
+						<th style="" data-field="description"><div
+								class="th-inner sortable both">이메일</div>
+							<div class="fht-cell"></div></th>
+						<th style="" data-field="description"><div
+								class="th-inner sortable both">업데이트</div>
+							<div class="fht-cell"></div></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-index="0">
+						<td style="">0001</td>
+						<td style="">한국무역아카데미</td>
+						<td style="">+8202-123-4567</td>
+						<td style="">www.kita.net</td>
+						<td><button class="mb-2 mr-2 btn-square btn btn-primary">수정
+							</button>
+							<button class="mb-2 mr-2 btn-square btn btn-primary">삭제
+							</button></td>
+					</tr>
+					<tr data-index="1">
+						<td style="">0002</td>
+						<td style="">일본무역아카데미</td>
+						<td style="">+8101-123-4567</td>
+						<td style="">www.jp.net</td>
+						<td><button class="mb-2 mr-2 btn-square btn btn-primary">수정
+							</button>
+							<button class="mb-2 mr-2 btn-square btn btn-primary">삭제
+							</button></td>
+					</tr>
+					<tr data-index="2">
+						<td style="">0003</td>
+						<td style="">호주무역아카데미</td>
+						<td style="">+6200-123-4567</td>
+						<td style="">www.au.net</td>
+						<td><button class="mb-2 mr-2 btn-square btn btn-primary">수정
+							</button>
+							<button class="mb-2 mr-2 btn-square btn btn-primary">삭제
+							</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="fixed-table-footer" style="display: none;">
+			<table>
+				<tbody>
+					<tr></tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
