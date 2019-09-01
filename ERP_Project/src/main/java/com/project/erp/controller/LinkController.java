@@ -15,5 +15,11 @@ public class LinkController {
 	public String Management1(){
 		return "management1";
 	}
+	
+	@RequestMapping(value="/haraManagement2", method = RequestMethod.GET)
+	public String Management2(){
+		return "management2";
+	}
+
 
 }
