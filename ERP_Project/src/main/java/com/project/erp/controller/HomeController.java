@@ -13,7 +13,11 @@ public class HomeController {
 	
 	@RequestMapping(value="/", method = RequestMethod.GET)
 	public String home(){
+<<<<<<< HEAD
 		return "signup";
+=======
+		return "inventory/inventoryManagement";
+>>>>>>> a0ac510d4bcb2e81fe2892c4e50aafafb4e057ae
 	}
 
 	@RequestMapping(value="/header", method = RequestMethod.GET)
