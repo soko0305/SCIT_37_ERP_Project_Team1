@@ -14,7 +14,51 @@
     <!-- Disable tap highlight on IE -->
     <meta name="msapplication-tap-highlight" content="no">
 
-<link href="./main.8d288f825d8dffbbe55e.css" rel="stylesheet"></head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
+<link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
+<script>
+   var isChecked = false;//중복확인버튼 누름여부
+
+   $(function() {
+
+      $("#signupButton").click(function() {
+
+         if (isChecked) {
+            $("#signupForm").submit();
+         }else{
+            alert("중복확인버튼을 먼저 누르세요.");
+         }
+
+      });
+      
+      $(".checkId").click(function(){
+         
+         $.ajax({
+            
+            url:"selectUser",
+            data:{userid:$("#userid").val()},
+            type:"get",
+            success:function(dataFromServer){
+               if(dataFromServer=="ok"){
+                  $("#message").html("사용가능한 아이디 입니다.");
+                  isChecked=true;
+               }else{
+                  $("#message").html("중복된 아이디 입니다.");
+                  isChecked=false;
+               }
+            }
+         });
+         
+      });
+      
+      $("#userid").on("change",function(){
+         isChecked=false;
+      });
+
+   });
+</script>
 
 <body>
 <div class="app-container app-theme-white body-tabs-shadow">
@@ -29,12 +73,18 @@
                             <div>
                                 <form class="">
                                     <div class="form-row">
-                                        <div class="col-md-6">
-                                            <div class="position-relative form-group"><label for="exampleID" class=""><span class="text-danger">*</span> 아이디</label><input name="id" id="exampleid" placeholder="id here..." type="id"
-                                                                                                                                                                                class="form-control"></div>
-                                        </div>    
-
-                                        <div class="col-md-6">
+                                        <div class="col-md-8">
+                                            <div class="position-relative form-group"><label for="exampleID" class=""><span class="text-danger">*</span> 아이디</label><input name="id" id="exampleid" placeholder="id here..." type="id" class="form-control">                                              									
+                                   
+                                            </div>
+                                             
+                                        </div>
+                                        <div class="ml-auto">
+                                            <button class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg" type="button">중복 확인</button>
+                                        </div>
+                                                                               
+      									<font color="red" id="message"></font>
+                                         <div class="col-md-6">
                                             <div class="position-relative form-group"><label for="examplePassword" class=""><span class="text-danger">*</span> 비밀번호</label><input name="password" id="examplePassword" placeholder="Password here..."
                                                                                                                                                                                       type="password" class="form-control"></div>
                                         </div>
@@ -50,13 +100,27 @@
                                         <div class="col-md-6">
                                             <div class="position-relative form-group"><label for="exampleName" class=""><span class="text-danger">*</span> 성명</label><input name="text" id="exampleName" placeholder="Name here..." type="text" class="form-control"></div>
                                         </div>                                        
+                                        <div class="col-md-6">
+                                            <div class="position-relative form-group"><label for="examplePosition" class=""><span class="text-danger">*</span> 직책</label><input name="text" id="examplePosition" placeholder="Position here..." type="text" class="form-control"></div>
+                                        </div>                                        
+                                        <div class="col-md-6">
+                                            <div class="position-relative form-group"><label for="exampleDivision" class=""><span class="text-danger">*</span> 부서</label><input name="text" id="exampleDivision" placeholder="Division here..." type="text" class="form-control"></div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="position-relative form-group"><label for="exampleAddress" class=""><span class="text-danger">*</span> 주소</label><input name="text" id="exampleAddress" placeholder="Address here..." type="text" class="form-control"></div>
+                                        </div>                                                
+                                        <div class="col-md-6">
+                                            <div class="position-relative form-group"><label for="examplePhone" class=""><span class="text-danger">*</span> 연락처</label><input name="number" id="examplePhone" placeholder="Phone here..." type="tel" class="form-control"></div>
+                                        </div>                                                                          
+  
                                         
-
+                                        
+                                        
                                     </div>
 
-                                    <div class="mt-4 d-flex align-items-center"><h5 class="mb-0">Already have an account? <a href="javascript:void(0);" class="text-primary">Sign in</a></h5>
+                                    <div class="mt-4 d-flex align-items-center"><h5 class="mb-0">이미 가입되어있으신가요? <a href="javascript:void(0);" class="text-primary">로그인</a></h5>
                                         <div class="ml-auto">
-                                            <button class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg">Create Account</button>
+                                            <button class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg">계정 만들기</button>
                                         </div>
                                     </div>
                                 </form>
