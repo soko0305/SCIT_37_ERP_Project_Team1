@@ -13,8 +13,17 @@ public class HomeController {
 	
 	@RequestMapping(value="/", method = RequestMethod.GET)
 	public String home(){
-		return "management1";
+		return "index";
 	}
 
+	@RequestMapping(value="/header", method = RequestMethod.GET)
+	public String header(){
+		return "menu/header";
+	}
+	
+	@RequestMapping(value="/navbar", method = RequestMethod.GET)
+	public String navbar(){
+		return "menu/navbar";
+	}
 	
 }
