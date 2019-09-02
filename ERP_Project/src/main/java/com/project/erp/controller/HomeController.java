@@ -13,9 +13,16 @@ public class HomeController {
 	
 	@RequestMapping(value="/", method = RequestMethod.GET)
 	public String home(){
+<<<<<<< HEAD
 
 		return "main/index";
 		}
+=======
+		return "main/index";
+		}
+ 
+ 
+>>>>>>> soko
 
 	@RequestMapping(value="/header", method = RequestMethod.GET)
 	public String header(){
