@@ -27,4 +27,19 @@ public class HomeController {
 		return "main/navbar";
 	}
 	
+	@RequestMapping(value="/drawerWrapper", method = RequestMethod.GET)
+	public String drawerWrapper(){
+		return "main/drawerWrapper";
+	}
+	
+	@RequestMapping(value="/wrapperFooter", method = RequestMethod.GET)
+	public String wrapperFooter(){
+		return "main/wrapperFooter";
+	}
+	
+	@RequestMapping(value="/setting", method = RequestMethod.GET)
+	public String setting(){
+		return "main/setting";
+	}
+	
 }
