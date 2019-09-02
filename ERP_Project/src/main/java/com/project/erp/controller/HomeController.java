@@ -13,16 +13,8 @@ public class HomeController {
 	
 	@RequestMapping(value="/", method = RequestMethod.GET)
 	public String home(){
-<<<<<<< HEAD
-		return "supplier_view";
+		return "all_view";
 	}
-
-=======
-		return "main/index";
-		}
- 
- 
->>>>>>> master
 	@RequestMapping(value="/header", method = RequestMethod.GET)
 	public String header(){
 		return "main/header";

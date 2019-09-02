@@ -11,6 +11,14 @@ public class MoonController {
 	public String goSupplier(){
 		return "supplier_view";
 	}
+	@RequestMapping(value="/goSupplierInsert", method = RequestMethod.GET)
+	public String goSupplierInsert(){
+		return "supplier_insert";
+	}
+	@RequestMapping(value="/goSupplierUpdate", method = RequestMethod.GET)
+	public String goSupplierUpdate(){
+		return "supplier_update";
+	}
 	@RequestMapping(value="/goMaterials", method = RequestMethod.GET)
 	public String goMaterials(){
 		return "materials_view";
@@ -23,4 +31,5 @@ public class MoonController {
 	public String goBuy(){
 		return "buy";
 	}
+
 }
