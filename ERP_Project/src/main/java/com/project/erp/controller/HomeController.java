@@ -23,7 +23,7 @@ public class HomeController {
  
 
  
- 
+
 
 	@RequestMapping(value="/header", method = RequestMethod.GET)
 	public String header(){
