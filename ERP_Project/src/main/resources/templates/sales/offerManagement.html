@@ -41,9 +41,9 @@
                                     <i class="pe-7s-notebook icon-gradient bg-mixed-hopes">
                                     </i>
                                 </div>
-                                <div>실시간 재고관리
+                                <div>실시간 주문관리
                                     <div class="page-title-subheading">
-                                    	실시간 재고 상황 검색, 수정 기능
+                                    	바이어로부터의 실시간 주문내역 확인 및 Status 수정 기능
                                     </div>
                                 </div>
                             </div>    
@@ -55,48 +55,58 @@
                         <div class="page-title-wrapper">
                             </div>
                             <div class="page-title-actions">
-                               <div class="row"> 
-                             <div class="main-card mb-3 card">
-                        <div class="card-body">
-                              <div class="main-card mb-3 card">
-                        <div class="card-body">
-                            <table data-toggle="table"
-                                   data-url="https://api.github.com/users/wenzhixin/repos?type=owner&sort=full_name&direction=asc&per_page=100&page=1"
-                                   data-sort-name="stargazers_count"
-                                   data-sort-order="desc">
-                                <thead>
-                                <tr>
-                                    <th data-field="name"
-                                        data-sortable="true">
-                                        번호
-                                    </th>
-                                    <th data-field="stargazers_count"
-                                        data-sortable="true">
-                                        거래처
-                                    </th>
-                                  
-                                    <th data-field="description"
-                                        data-sortable="true">
-                                        주문 내역
-                                    </th>
-                                      <th data-field="forks_count"
-                                        data-sortable="true">
-                                        status
-                                    </th>
-                                      <th data-field="forks_count"
-                                        data-sortable="true">
-                                        주문일자
-                                    </th>
-                                      <th data-field="forks_count"
-                                        data-sortable="true">
-                                        승인 및 반려
-                                    </th>
-                                </tr>
-                                </thead>
-                            </table>
+                       
+                            
+                            <div class="main-card mb-3 card">
+                                <div class="card-body"><h5 class="card-title">Simple table</h5>
+                                    <table class="mb-0 table">
+                                        <thead>
+                                        <tr>
+                                            <th>주문 번호</th>
+                                            <th>거래처</th>
+                                            <th>주문 (클릭시 주문 상세)</th>
+                                            <th>Status</th>
+                                            <th>주문날짜와 시간</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <th scope="row">20190812-0001</th>
+                                            <td>DaumKakao</td>
+                                            <td>초콜릿</td>
+                                            <td>  <button class="mb-2 mr-2 btn btn-primary" >
+                                	승인
+                           </button></td>
+                                            <th>2019/08/12 12:12:12</th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">20190812-0002</th>
+                                            <td>Naver</td>
+                                            <td>풀떼기</td>
+                                            <td><button class="mb-2 mr-2 btn btn-primary">
+                                	승인
+                           </button></td></td>
+                                            <th>2019/08/12 12:12:12</th>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">20190812-0003</th>
+                                            <td>Google</td>
+                                            <td>쥐</td>
+                                            <td><button class="mb-2 mr-2 btn btn-primary">
+                                	승인
+                           </button></td></td>
+                                            <th>2019/08/12 12:12:12</th>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+        
+                             </div>
+                             </div>
+                
                 <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
                 
                 
