@@ -1,44 +1,38 @@
 <!doctype html>
-<html lang="utf-8">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="en">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Research Inventory</title>
+    <title>Grid Tables - Basic example of a Bootstrap 4 table with sort, search and filter functionality.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"
     />
     <meta name="description" content="Basic example of a Bootstrap 4 table with sort, search and filter functionality.">
 
     <!-- Disable tap highlight on IE -->
     <meta name="msapplication-tap-highlight" content="no">
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
 <link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
-</head>
+<script>
+	$(function(){	
+		$("#header").load("/header");
+		$("#navbar").load("/navbar");
+		$("#setting").load("/setting");
+	});
+</script>
 <body>
 <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
-<!-- 헤더 삽입 -->
-<!-- 세팅 삽입 -->    
-    
-        <div class="app-main">
-    
-    
-    <!-- 사이드바 넣기 -->
-    
-    
-            <div class="app-main__outer">
-<div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
-    
-    	<!-- 헤더 및 setting 삽입  -->
+    <div id="header"></div>
+    <div id="setting"></div> 
             <div class="app-main">
-            <!-- 사이드 바 삽입 -->
-            	<!-- 실제내용 -->
+            
+                     <div id="navbar"></div>
                 <div class="app-main__outer">
                 <div class="app-main__inner">
-                    <div class="app-page-title">
+                     <div class="app-page-title">
                         <div class="page-title-wrapper">
                             <div class="page-title-heading">
                                 <div class="page-title-icon">
@@ -52,9 +46,7 @@
                                 </div>
                             </div> 
                           </div>
-                    </div>            
-        
-                    
+                    </div>                 
                     <div class="main-card mb-3 card">
                         <div class="card-body">
                             <!-- search 코딩 -->
@@ -81,7 +73,7 @@
                        
                        </form>
                         
-                            <table data-toggle="table">
+                            <table  class="mb-0 table table-bordered">
                                 <thead>
                                 <tr>
                                     <th data-field="name"
@@ -127,13 +119,9 @@
                         </div>
                     </div>
                 </div>
-                    </div>
+                <!-- footer 삽입 -->    </div>
     </div>
 </div>
-
-                <!-- app-wrapper-footer 삽입 -->    </div>
-    </div>
-</div>
-<!-- app-drawer-wrapper 삽입 -->
+<!-- drawer 삽입 -->
 <div class="app-drawer-overlay d-none animated fadeIn"></div><script type="text/javascript" src="./assets/scripts/main.8d288f825d8dffbbe55e.js"></script></body>
 </html>
