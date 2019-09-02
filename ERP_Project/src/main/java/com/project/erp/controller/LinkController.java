@@ -16,25 +16,25 @@ public class LinkController {
 		return "sales/buyerList";
 	}
 	
-	@RequestMapping(value="/haraManagement2", method = RequestMethod.GET)
+	@RequestMapping(value="/offerManagement", method = RequestMethod.GET)
 	public String Management2(){
 		return "sales/offerManagement";
 	}
 
-
-	@RequestMapping(value="/haraManagement3", method = RequestMethod.GET)
+	@RequestMapping(value="/realTimeTracing", method = RequestMethod.GET)
 	public String Management3(){
-		return "sales/management3";
+		return "sales/realTimeTracing";
 	}
 
-
-	@RequestMapping(value="/haraManagement4", method = RequestMethod.GET)
+	@RequestMapping(value="/salesHistory", method = RequestMethod.GET)
 	public String Management4(){
-		return "sales/management4";
+		return "sales/salesHistory";
 	}
 	
-	@RequestMapping(value="/haraManagement5", method = RequestMethod.GET)
-	public String Management5(){
+	@RequestMapping(value="/haraBasicTemplate", method = RequestMethod.GET)
+	public String basicTemplate(){
 		return "sales/haraBasicTemplate";
 	}
+	
+
 }
