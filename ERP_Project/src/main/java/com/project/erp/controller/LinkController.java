@@ -11,27 +11,30 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class LinkController {
 
 	
-	@RequestMapping(value="/haraManagement", method = RequestMethod.GET)
+	@RequestMapping(value="/buyerList", method = RequestMethod.GET)
 	public String Management1(){
-		return "management1";
+		return "sales/buyerList";
 	}
 	
 	@RequestMapping(value="/haraManagement2", method = RequestMethod.GET)
 	public String Management2(){
-		return "management2";
+		return "sales/offerManagement";
 	}
 
-<<<<<<< HEAD
+
 	@RequestMapping(value="/haraManagement3", method = RequestMethod.GET)
 	public String Management3(){
-		return "management3";
+		return "sales/management3";
 	}
-=======
- 
->>>>>>> a71a10aa9a77e7548661972564e75109e0f85b77
+
 
 	@RequestMapping(value="/haraManagement4", method = RequestMethod.GET)
 	public String Management4(){
-		return "management4";
+		return "sales/management4";
+	}
+	
+	@RequestMapping(value="/haraManagement5", method = RequestMethod.GET)
+	public String Management5(){
+		return "sales/haraBasicTemplate";
 	}
 }
