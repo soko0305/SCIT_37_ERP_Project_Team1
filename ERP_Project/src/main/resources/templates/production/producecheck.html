@@ -13,6 +13,8 @@
 
     <!-- Disable tap highlight on IE -->
     <meta name="msapplication-tap-highlight" content="no">
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
 <link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
@@ -21,6 +23,11 @@
 		$("#header").load("/header");
 		$("#navbar").load("/navbar");
 		$("#setting").load("/setting");
+		
+		$('#toggle-two').bootstrapToggle({
+		      on: '생산 완료',
+		      off: '생산 미완료'
+		    });
 	});
 </script>
 <body>
@@ -120,11 +127,11 @@
                                     </th>
                                     <th data-field="dd"
                                         data-sortable="true">
-                                        	진행률
+                                        	적재창고
                                     </th>
                                      <th data-field="dd"
                                         data-sortable="true">
-                                        	적재창고
+                                        	진행상황
                                     </th>                                    
                                    <th data-field="ff"
                                         data-sortable="true">
@@ -134,12 +141,14 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td>										<td>
-											<button class="mb-2 mr-2 btn-square btn btn-primary"
+                                <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td><input type="checkbox" data-toggle="toggle" data-on="생산 완료" data-off="생산 미완료"></td>										<td>
+
+																			
+											<button class="mb-2 mr-2 btn btn-primary"
 												onclick="window.open('goMaterialsUpdate','window_name','width=100,height=100,location=no,status=no,scrollbars=yes');">수정</button>
-											<button class="mb-2 mr-2 btn-square btn btn-primary"
+											<button class="mb-2 mr-2 btn btn-primary"
 												onclick="">삭제</button>
-										</td></td>
+										</td>
                                 </tr>
                                 </tbody>
                             </table>
