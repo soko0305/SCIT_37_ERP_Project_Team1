@@ -13,7 +13,7 @@ public class LinkController {
 	
 	@RequestMapping(value="/haraManagement", method = RequestMethod.GET)
 	public String Management1(){
-		return "management1";
+		return "haraBasicTemplate2";
 	}
 	
 	@RequestMapping(value="/haraManagement2", method = RequestMethod.GET)
@@ -30,5 +30,11 @@ public class LinkController {
 	@RequestMapping(value="/haraManagement4", method = RequestMethod.GET)
 	public String Management4(){
 		return "management4";
+	}
+	
+
+	@RequestMapping(value="/index", method = RequestMethod.GET)
+	public String index(){
+		return "main/index";
 	}
 }
