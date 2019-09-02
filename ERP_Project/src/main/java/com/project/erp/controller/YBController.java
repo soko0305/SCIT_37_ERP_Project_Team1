@@ -33,8 +33,25 @@ public class YBController {
 	public String notice(){
 		return "member/notice";
 	} 
-	@RequestMapping(value="/productioncheck", method = RequestMethod.GET)
-	public String productioncheck(){
-		return "production/productioncheck";
+	@RequestMapping(value="/producecheck", method = RequestMethod.GET)
+	public String producecheck(){
+		return "production/producecheck";
 	} 
- }
+	 
+	@RequestMapping(value="/produceinsert", method = RequestMethod.GET)
+	public String produceinsert(){
+		return "production/produceinsert";
+	} 
+	@RequestMapping(value="/productioninsert", method = RequestMethod.GET)
+	public String productioninsert(){
+		return "production/productioninsert";
+	} 
+	@RequestMapping(value="/productionview", method = RequestMethod.GET)
+	public String productionview(){
+		return "production/productionview";
+	} 
+	
+	
+}
+
+
