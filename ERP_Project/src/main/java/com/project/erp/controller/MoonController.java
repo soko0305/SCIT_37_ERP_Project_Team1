@@ -9,27 +9,27 @@ public class MoonController {
 
 	@RequestMapping(value="/goSupplier", method = RequestMethod.GET)
 	public String goSupplier(){
-		return "supplier_view";
+		return "rawMaterial/supplier_view";
 	}
 	@RequestMapping(value="/goSupplierInsert", method = RequestMethod.GET)
 	public String goSupplierInsert(){
-		return "supplier_insert";
+		return "rawMaterial/supplier_insert";
 	}
 	@RequestMapping(value="/goSupplierUpdate", method = RequestMethod.GET)
 	public String goSupplierUpdate(){
-		return "supplier_update";
+		return "rawMaterial/supplier_update";
 	}
 	@RequestMapping(value="/goMaterials", method = RequestMethod.GET)
 	public String goMaterials(){
-		return "materials_view";
+		return "rawMaterial/materials_view";
 	}
 	@RequestMapping(value="/goOrder", method = RequestMethod.GET)
 	public String goOrder(){
-		return "orderCheck";
+		return "rawMaterial/orderCheck";
 	}
 	@RequestMapping(value="/goBuy", method = RequestMethod.GET)
 	public String goBuy(){
-		return "buy";
+		return "rawMaterial/buy";
 	}
 
 }
