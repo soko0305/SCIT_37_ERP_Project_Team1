@@ -23,6 +23,14 @@ public class MoonController {
 	public String goMaterials(){
 		return "rawMaterial/materials_view";
 	}
+	@RequestMapping(value="/goMaterialsInsert", method = RequestMethod.GET)
+	public String goMaterialsInsert(){
+		return "rawMaterial/materials_insert";
+	}
+	@RequestMapping(value="/goMaterialsUpdate", method = RequestMethod.GET)
+	public String goMaterialsUpdate(){
+		return "rawMaterial/materials_update";
+	}
 	@RequestMapping(value="/goOrder", method = RequestMethod.GET)
 	public String goOrder(){
 		return "rawMaterial/orderCheck";

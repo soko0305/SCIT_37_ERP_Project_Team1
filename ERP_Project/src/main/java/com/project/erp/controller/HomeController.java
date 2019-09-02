@@ -14,12 +14,16 @@ public class HomeController {
 	@RequestMapping(value="/", method = RequestMethod.GET)
 	public String home(){
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return "inventory/confirmInventory";
 		}
  
  
 =======
 		return "all_view";
+=======
+		return "rawMaterial/all_view";
+>>>>>>> 5ea069831d16bf150e66cc496e9d82ba5f14c538
 	}
 >>>>>>> 7c8243a65573d86d7c9df2187eb3d2131710f940
 	@RequestMapping(value="/header", method = RequestMethod.GET)
