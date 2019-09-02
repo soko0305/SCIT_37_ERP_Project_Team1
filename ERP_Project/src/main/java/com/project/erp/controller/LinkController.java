@@ -13,11 +13,7 @@ public class LinkController {
 	
 	@RequestMapping(value="/buyerList", method = RequestMethod.GET)
 	public String Management1(){
-<<<<<<< HEAD
-		return "haraBasicTemplate2";
-=======
 		return "sales/buyerList";
->>>>>>> master
 	}
 	
 	@RequestMapping(value="/offerManagement", method = RequestMethod.GET)
@@ -25,20 +21,10 @@ public class LinkController {
 		return "sales/offerManagement";
 	}
 
-<<<<<<< HEAD
-	@RequestMapping(value="/haraManagement3", method = RequestMethod.GET)
-=======
-
 	@RequestMapping(value="/realTimeTracing", method = RequestMethod.GET)
->>>>>>> master
 	public String Management3(){
 		return "sales/realTimeTracing";
 	}
-<<<<<<< HEAD
-
-=======
->>>>>>> master
-
 
 	@RequestMapping(value="/salesHistory", method = RequestMethod.GET)
 	public String Management4(){
@@ -51,8 +37,4 @@ public class LinkController {
 	}
 	
 
-	@RequestMapping(value="/index", method = RequestMethod.GET)
-	public String index(){
-		return "main/index";
-	}
 }
