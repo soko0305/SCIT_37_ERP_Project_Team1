@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Grid Tables - Basic example of a Bootstrap 4 table with sort, search and filter functionality.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"
+    />
+    <meta name="description" content="Basic example of a Bootstrap 4 table with sort, search and filter functionality.">
+
+    <!-- Disable tap highlight on IE -->
+    <meta name="msapplication-tap-highlight" content="no">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
+<link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
+<script>
+	$(function(){	
+		$("#header").load("/header");
+		$("#navbar").load("/navbar");
+		$("#setting").load("/setting");
+	});
+</script>
+<body>
+<div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
+    <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Header삽입@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+    <div id="header"></div>
+    <div id="setting"></div> 
+            <div class="app-main">
+            <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@왼쪽 메뉴@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+                     <div id="navbar"></div>
+                <div class="app-main__outer">
+                <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+                <div class="app-main__inner">
+                    <div class="app-page-title">
+                        <div class="page-title-wrapper">
+                            <div class="page-title-heading">
+                                <div class="page-title-icon">
+                                    <i class="pe-7s-notebook icon-gradient bg-mixed-hopes">
+                                    </i>
+                                </div>
+                                <div>실시간 배송추적
+                                    <div class="page-title-subheading">
+                                    	실시간 배송추적
+                                    </div>
+                                </div>
+                            </div>    
+                          </div>
+                    </div>         
+                    
+                    <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@위에 달린 메뉴 -->
+  
+                            <div class="page-title-actions">
+                                <div class="main-card mb-3 card">
+                                    <div class="card-body"><h5 class="card-title">Search</h5>
+                        <!-- search 코딩 -->
+                           <select class="mb-2 form-control" style="display:inline ;width: 173px" >
+                                    <option>운송장 번호</option>
+                                    <option>물품 이름</option>
+                                    <option>도착 주소</option>
+                                    <option>배송 상태</option>
+                                    
+                           </select>
+                        <input type="text" class="form-control" name="daterange" value="01/01/2018 - 01/15/2018" style="display:inline ;width: 300px">
+                        <input placeholder="default" type="text" class="mb-2 form-control" style="display:inline ;width: 300px">        
+                        <button class="mb-2 mr-2 btn btn-primary" style="display:inline ;height: 37px;width: 95px">Search </button>
+                        </div>
+                        </div>
+                     	</div>
+                                  
+               -
+                                   
+                      
+                            <div class="main-card mb-3 card">
+                                <div class="card-body"><h5 class="card-title">Simple table</h5>
+                                    <table class="mb-0 table">
+                                        <thead>
+                                        <tr>
+                                            <th>운송장 번호</th>
+                                            <th>물품명</th>
+                                              <th>거래처</th>
+                                            <th>도착주소</th>
+                                            <th>Status</th>
+                                            <th>주문날짜와 시간</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <th scope="row">20190812-0001</th>
+                                            <td>초콜릿</td>
+                                             <td>DaumKakao</td>
+                                            <td>서울특별시 강남구 삼성동</td>
+                                            <td>  <button class="mb-2 mr-2 btn btn-danger" disabled>
+                                	도착
+                           </button></td>
+                                            <td>2019/08/12 12:12:12</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">20190812-0002</th>
+                                            <td>풀떼기</td>
+                                              <td>Naver</td>
+                                            <td>경기도 분당시</td>
+                                            <td> <button class="mb-2 mr-2 btn btn-warning" disabled>
+                                	집하
+                           </button></td>
+                                            <td>2019/08/12 12:12:12</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">20190812-0003</th>
+                                            <td>쥐</td>
+                                                <td>Google</td>
+                                            <td>미국 실리콘밸리</td>
+                                                    <td> <button class="mb-2 mr-2 btn btn-primary" disabled>
+                                	배송중
+                           </button></td>
+                                            <td>2019/08/12 12:12:12</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                             </div>
+                             </div>
+                      	
+                               
+
+                <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+                
+                
+                
+                
+                
+                <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@footer 삽입@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->   
+                 </div>
+    </div>
+</div>
+<!-- drawer 삽입 -->
+<div class="app-drawer-overlay d-none animated fadeIn"></div><script type="text/javascript" src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script></body>
+</html>
