@@ -46,11 +46,14 @@ public class YBController {
 	public String productioninsert(){
 		return "production/productioninsert";
 	} 
-	@RequestMapping(value="/productionview", method = RequestMethod.GET)
-	public String productionview(){
-		return "production/productionview";
+	@RequestMapping(value="/productioncheck", method = RequestMethod.GET)
+	public String productioncheck(){
+		return "production/productioncheck";
 	} 
-	
+	@RequestMapping(value="/sample", method = RequestMethod.GET)
+	public String sample(){
+		return "production/sample";
+	} 	
 	
 }
 
