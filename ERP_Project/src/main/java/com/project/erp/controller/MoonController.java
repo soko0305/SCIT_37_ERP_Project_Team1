@@ -33,7 +33,11 @@ public class MoonController {
 	}
 	@RequestMapping(value="/goOrder", method = RequestMethod.GET)
 	public String goOrder(){
-		return "rawMaterial/orderCheck";
+		return "rawMaterial/order_view";
+	}
+	@RequestMapping(value="/goOrderInsert", method = RequestMethod.GET)
+	public String goOrderInsert(){
+		return "rawMaterial/order_insert";
 	}
 	@RequestMapping(value="/goBuy", method = RequestMethod.GET)
 	public String goBuy(){
