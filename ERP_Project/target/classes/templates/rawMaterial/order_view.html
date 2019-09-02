@@ -343,54 +343,59 @@
 				<div class="app-main__inner">
 					<!-- app-page-title -->
 					<div class="main-card mb-3 card">
+						<!-- <button class="mb-2 mr-2 btn-square btn btn-primary"
+							onclick="location.href='goSupplierInsert'">거래처추가</button> -->
 						<div class="card-body">
 							<table style="width: 100%;" id="example"
 								class="table table-hover table-striped table-bordered">
 								<thead>
 									<tr>
 										<th>일자</th>
-										<th>원자재코드</th>
 										<th>원자재명</th>
+										<th>창고</th>
 										<th>수량</th>
-										<th>구매상태</th>
+										<th>요청란</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
-										<td>19.07.01</td>
-										<td>1100</td>
-										<td>카카오</td>
-										<td>15ea</td>
-										<td>
-											미도착
-										</td>
-									</tr>
-									<tr>
-										<td>19.08.03</td>
-										<td>1200</td>
+										<td>19.09.01</td>
 										<td>설탕</td>
-										<td>10g</td>
+										<td>A창고</td>
+										<td>25g</td>
 										<td>
-											도착
+											<button class="mb-2 mr-2 btn-square btn btn-primary"
+												onclick="window.open('goOrderInsert','window_name','width=430,height=500,location=no,status=no,scrollbars=yes');">요청하기</button>
 										</td>
 									</tr>
 									<tr>
-										<td>19.09.02</td>
-										<td>1100</td>
+										<td>19.07.01</td>
 										<td>카카오</td>
-										<td>15ea</td>
+										<td>A창고</td>
+										<td>5ea</td>
 										<td>
-											미도착
+											<button class="mb-2 mr-2 btn-square btn btn-primary" type="button">요청완료</button>
 										</td>
 									</tr>
+									<tr>
+										<td>19.08.01</td>
+										<td>쪼꼬파우다</td>
+										<td>A창고</td>
+										<td>100g</td>
+										<td>
+											<button class="mb-2 mr-2 btn-square btn btn-primary"
+												onclick="window.open('goOrderInsert','window_name','width=430,height=500,location=no,status=no,scrollbars=yes');">요청하기</button>
+										</td>
+									</tr>
+
 								</tbody>
 								<tfoot>
 									<tr>
-										<th>거래처코드</th>
-										<th>거래처명</th>
-										<th>전화번호</th>
-										<th>이메일</th>
-										<th>업데이트</th>
+										<th>일자</th>
+										<th>원자재명</th>
+										<th>창고</th>
+										<th>수량</th>
+										<th>요청란</th>
 									</tr>
 								</tfoot>
 							</table>

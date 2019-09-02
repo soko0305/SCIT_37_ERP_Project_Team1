@@ -41,9 +41,9 @@
                                     <i class="pe-7s-notebook icon-gradient bg-mixed-hopes">
                                     </i>
                                 </div>
-                                <div>실시간 주문관리
+                                <div>실시간 배송추적
                                     <div class="page-title-subheading">
-                                    	바이어로부터의 실시간 주문내역 확인 및 Status 수정 기능
+                                    	실시간 배송추적
                                     </div>
                                 </div>
                             </div>    
@@ -51,20 +51,37 @@
                     </div>         
                     
                     <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@위에 달린 메뉴 -->
-                                <div class="app-page-title">
-                        <div class="page-title-wrapper">
-                            </div>
+  
                             <div class="page-title-actions">
-                       
-                            
+                                <div class="main-card mb-3 card">
+                                    <div class="card-body"><h5 class="card-title">Search</h5>
+                        <!-- search 코딩 -->
+                           <select class="mb-2 form-control" style="display:inline ;width: 173px" >
+                                    <option>운송장 번호</option>
+                                    <option>물품 이름</option>
+                                    <option>도착 주소</option>
+                                    <option>배송 상태</option>
+                                    
+                           </select>
+                        <input type="text" class="form-control" name="daterange" value="01/01/2018 - 01/15/2018" style="display:inline ;width: 300px">
+                        <input placeholder="default" type="text" class="mb-2 form-control" style="display:inline ;width: 300px">        
+                        <button class="mb-2 mr-2 btn btn-primary" style="display:inline ;height: 37px;width: 95px">Search </button>
+                        </div>
+                        </div>
+                     	</div>
+                                  
+               -
+                                   
+                      
                             <div class="main-card mb-3 card">
                                 <div class="card-body"><h5 class="card-title">Simple table</h5>
                                     <table class="mb-0 table">
                                         <thead>
                                         <tr>
-                                            <th>주문 번호</th>
-                                            <th>거래처</th>
-                                            <th>주문 (클릭시 주문 상세)</th>
+                                            <th>운송장 번호</th>
+                                            <th>물품명</th>
+                                              <th>거래처</th>
+                                            <th>도착주소</th>
                                             <th>Status</th>
                                             <th>주문날짜와 시간</th>
                                         </tr>
@@ -72,30 +89,33 @@
                                         <tbody>
                                         <tr>
                                             <th scope="row">20190812-0001</th>
-                                            <td>DaumKakao</td>
                                             <td>초콜릿</td>
-                                            <td>  <button class="mb-2 mr-2 btn btn-primary" >
-                                	승인
+                                             <td>DaumKakao</td>
+                                            <td>서울특별시 강남구 삼성동</td>
+                                            <td>  <button class="mb-2 mr-2 btn btn-danger" disabled>
+                                	도착
                            </button></td>
-                                            <th>2019/08/12 12:12:12</th>
+                                            <td>2019/08/12 12:12:12</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">20190812-0002</th>
-                                            <td>Naver</td>
                                             <td>풀떼기</td>
-                                            <td><button class="mb-2 mr-2 btn btn-primary">
-                                	승인
-                           </button></td></td>
-                                            <th>2019/08/12 12:12:12</th>
+                                              <td>Naver</td>
+                                            <td>경기도 분당시</td>
+                                            <td> <button class="mb-2 mr-2 btn btn-warning" disabled>
+                                	집하
+                           </button></td>
+                                            <td>2019/08/12 12:12:12</td>
                                         </tr>
                                         <tr>
                                             <th scope="row">20190812-0003</th>
-                                            <td>Google</td>
                                             <td>쥐</td>
-                                            <td><button class="mb-2 mr-2 btn btn-primary">
-                                	승인
-                           </button></td></td>
-                                            <th>2019/08/12 12:12:12</th>
+                                                <td>Google</td>
+                                            <td>미국 실리콘밸리</td>
+                                                    <td> <button class="mb-2 mr-2 btn btn-primary" disabled>
+                                	배송중
+                           </button></td>
+                                            <td>2019/08/12 12:12:12</td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -106,7 +126,9 @@
         
                              </div>
                              </div>
-                
+                      	
+                               
+
                 <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
                 
                 
