@@ -25,101 +25,86 @@
 </script>
 <body>
 <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
+    <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Header삽입@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
     <div id="header"></div>
     <div id="setting"></div> 
             <div class="app-main">
-            
+            <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@왼쪽 메뉴@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
                      <div id="navbar"></div>
                 <div class="app-main__outer">
+                <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
                 <div class="app-main__inner">
-                     <div class="app-page-title">
+                    <div class="app-page-title">
                         <div class="page-title-wrapper">
                             <div class="page-title-heading">
                                 <div class="page-title-icon">
                                     <i class="pe-7s-notebook icon-gradient bg-mixed-hopes">
                                     </i>
                                 </div>
-                                <div>재고 검색
+                                <div>실시간 재고관리
                                     <div class="page-title-subheading">
-                                    	필요 재고 검색 기능
+                                    	실시간 재고 상황 검색, 수정 기능
                                     </div>
                                 </div>
-                            </div> 
+                            </div>    
                           </div>
-                    </div>                 
-                    <div class="main-card mb-3 card">
+                    </div>         
+                    
+                    <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@위에 달린 메뉴 -->
+                                <div class="app-page-title">
+                        <div class="page-title-wrapper">
+                            </div>
+                            <div class="page-title-actions">
+                               <div class="row"> 
+                             <div class="main-card mb-3 card">
                         <div class="card-body">
-                            <!-- search 코딩 -->
-                        <form>
-                           <select class="mb-2 form-control" style="display:inline ;width: 150px" >
-                                    <option>Default Select</option>
-                           </select>
-                            <select class="mb-2 form-control" style="display:inline ;width: 150px">
-                                    <option>Default Select</option>
-                           </select>
-                           <select class="mb-2 form-control" style="display:inline ;width: 150px">
-                                    <option>Default Select</option>
-                           </select>
-                           <select class="mb-2 form-control" style="display:inline ;width: 150px">
-                                    <option>Default Select</option>
-                           </select>
-                          <input placeholder="default" type="text" class="mb-2 form-control" style="display:inline ;width: 300px">        
-                                
-                           <button class="mb-2 mr-2 btn btn-primary" style="display:inline ;height: 37px;width: 95px">
-                                	Search
-                           </button>
-                           
-                      	
-                       
-                       </form>
-                        
-                            <table  class="mb-0 table table-bordered">
+                              <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <table data-toggle="table"
+                                   data-url="https://api.github.com/users/wenzhixin/repos?type=owner&sort=full_name&direction=asc&per_page=100&page=1"
+                                   data-sort-name="stargazers_count"
+                                   data-sort-order="desc">
                                 <thead>
                                 <tr>
                                     <th data-field="name"
                                         data-sortable="true">
-                                        	품목코드
+                                        번호
                                     </th>
                                     <th data-field="stargazers_count"
                                         data-sortable="true">
-                                        	품명
+                                        거래처
                                     </th>
-                                    <th data-field="company"
+                                  
+                                    <th data-field="description"
                                         data-sortable="true">
-                                        	출처
+                                        주문 내역
                                     </th>
-                                    <th data-field="forks_count"
+                                      <th data-field="forks_count"
                                         data-sortable="true">
-                                        	관리창고
+                                        status
                                     </th>
-                                    <th data-field="prorobuy"
+                                      <th data-field="forks_count"
                                         data-sortable="true">
-                                        	재고종류
+                                        주문일자
                                     </th>
-                                    <th data-field="kind"
+                                      <th data-field="forks_count"
                                         data-sortable="true">
-                                        	재고품목
-                                    </th>
-                                    <th data-field="etc"
-                                        data-sortable="true">
-                                        	재고수량
-                                    </th>
-                                    <th data-field="dd"
-                                        data-sortable="true">
-                                        	단가
+                                        승인 및 반려
                                     </th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td>
-                                </tr>
-                                </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-                <!-- footer 삽입 -->    </div>
+                <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+                
+                
+                
+                
+                
+                <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@footer 삽입@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->   
+                 </div>
     </div>
 </div>
 <!-- drawer 삽입 -->
