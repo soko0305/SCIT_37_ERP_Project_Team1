@@ -25,27 +25,30 @@
 	rel="stylesheet">
 	
 <script>
-//추가 버튼
-$("#addStaff").click(function(){
-     
-    var addStaffText =  '<input type="text" placeholder="원자재명">'+
-       					'<input type="number" placeholder="수량">'+
-        				'<button class="btn btn-default" id="delStaff">삭제</button><br>';
-         
-    var trHtml = $(".test");
-     
-    trHtml.append(addStaffText);
-     
+
+$(function(){
+	$("#addStaff").click(function(){
+		addRow();
+	});
+	$("#delStaff").click(function(){
+		deleteRow();
+	});
 });
- 
-//삭제 버튼
-$("#delStaff").click(function(){
-     
-    var trHtml = $(this).parent().parent();
-     
-    trHtml.remove(); //tr 테그 삭제
-     
-});
+
+function addRow(){
+	var html ='<input type="text" placeholder="원자재명">'
+			+'<input type="text" placeholder="수량">'
+			+'<button type="button" id="delStaff">-</button>'
+			+'<br>';
+	$(".test1").append(html);
+}
+
+function deleteRow(){
+	var html = $(this).parent().parent();
+    
+	html.remove(); //tr 테그 삭제
+}
+
 </script>
 
 </head>
@@ -414,8 +417,8 @@ $("#delStaff").click(function(){
 									</div>
 									<div class="position-relative form-group">
 										<label for="exampleAddress" class="">원자재 등록</label>
-										<button id="addStaff">+</button>
-									<div class="test">
+										<button type="button" id="addStaff">+</button>
+									<div class="test1">
        									 <!-- <input type="text" placeholder="원자재명">
        									 <input type="number" placeholder="수량">
        									 <input type="button" class="btnAdd" value="Add"><br> -->        

@@ -48,7 +48,7 @@ public class YBController {
 	} 
 	@RequestMapping(value="/productioncheck", method = RequestMethod.GET)
 	public String productioncheck(){
-		return "production/productioncheck";
+		return "production/productioncheck2";
 	} 
 	@RequestMapping(value="/sample", method = RequestMethod.GET)
 	public String sample(){
