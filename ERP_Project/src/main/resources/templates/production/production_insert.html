@@ -26,21 +26,20 @@
 	
 <script>
 //추가 버튼
-$(document).on("click","button[name=addStaff]",function(){
+$("#addStaff").click(function(){
      
-    var addStaffText =  '<name="trStaff">'+
-   						'<input type="text" placeholder="원자재명">'+
+    var addStaffText =  '<input type="text" placeholder="원자재명">'+
        					'<input type="number" placeholder="수량">'+
-        				'<button class="btn btn-default" name="delStaff">삭제</button>';
+        				'<button class="btn btn-default" id="delStaff">삭제</button><br>';
          
-    var trHtml = $( "[name=trStaff]:last" ); //last를 사용하여 trStaff라는 명을 가진 마지막 태그 호출
+    var trHtml = $(".test");
      
-    trHtml.after(addStaffText); //마지막 trStaff명 뒤에 붙인다.
+    trHtml.append(addStaffText);
      
 });
  
 //삭제 버튼
-$(document).on("click","button[name=delStaff]",function(){
+$("#delStaff").click(function(){
      
     var trHtml = $(this).parent().parent();
      
@@ -415,11 +414,11 @@ $(document).on("click","button[name=delStaff]",function(){
 									</div>
 									<div class="position-relative form-group">
 										<label for="exampleAddress" class="">원자재 등록</label>
-										<button name="addStaff">+</button>
-									<div>
-       									 <input type="text" placeholder="원자재명">
+										<button id="addStaff">+</button>
+									<div class="test">
+       									 <!-- <input type="text" placeholder="원자재명">
        									 <input type="number" placeholder="수량">
-       									 <input type="button" class="btnAdd" value="Add"><br>        
+       									 <input type="button" class="btnAdd" value="Add"><br> -->        
         							</div> 
 									</div>
 									<div class="position-relative form-group">
