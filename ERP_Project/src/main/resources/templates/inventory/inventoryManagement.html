@@ -39,9 +39,9 @@
                                     <i class="pe-7s-notebook icon-gradient bg-mixed-hopes">
                                     </i>
                                 </div>
-                                <div>실시간 재고관리
+                                <div>생산조회
                                     <div class="page-title-subheading">
-                                    	실시간 재고 상황 검색, 수정 기능
+                                    	생산현황 조회 및 수정,삭제
                                     </div>
                                 </div>
                             </div>    
@@ -50,30 +50,36 @@
                         <div class="card-body">
                             <!-- search 코딩 -->
                         <form>
-                           <select class="mb-2 form-control" style="display:inline ;width: 252px" >
-                                    <option>Default Select</option>
+                           <select class="mb-2 form-control" style="display:inline ;width: 430px" >
+                                    <option>시리얼 넘버</option>
                            </select>
-                            <select class="mb-2 form-control" style="display:inline ;width: 252px">
-                                    <option>Default Select</option>
+                            <select class="mb-2 form-control" style="display:inline ;width: 400px">
+                                    <option>품목</option>
                            </select>
-                           <select class="mb-2 form-control" style="display:inline ;width: 252px">
+<!--                            <select class="mb-2 form-control" style="display:inline ;width: 252px">
                                     <option>Default Select</option>
-                           </select>
-                           <select class="mb-2 form-control" style="display:inline ;width: 252px">
+                           </select> -->
+<!--                            <select class="mb-2 form-control" style="display:inline ;width: 252px">
                                     <option>Default Select</option>
-                           </select>
+                           </select> -->
+                           
+ 
+                           
+                           
                        <div>
                         <div class="input-group">
                                       <div class="input-group-prepend datepicker-trigger">
                                             <div class="input-group-text" style="height: 38px">
-                                                  <i class="fa fa-calendar-alt"></i>
+ <input type="text" class="form-control" name="daterange" value="01/01/2018 - 01/15/2018" style="display:inline ;width: 400px">                                            
+                                                  <!-- <i class="fa fa-calendar-alt"></i> -->
+
                                           </div>
                                       </div>
-                               <input type="text" class="form-control" data-toggle="datepicker-icon">
+                               <!-- <input type="text" class="form-control" data-toggle="datepicker-icon"> -->
                                <input placeholder="default" type="text" class="mb-2 form-control" style="display:inline ;width: 100px">        
                                 
                                 <button class="mb-2 mr-2 btn btn-primary" style="display:inline ;height: 37px;width: 95px">
-                                	Search
+                                	검색
                            </button>
                         </div>
                         </div>
@@ -95,27 +101,27 @@
                                     </th>
                                     <th data-field="company"
                                         data-sortable="true">
-                                        	출처
+                                        	생산시작일
                                     </th>
                                     <th data-field="forks_count"
                                         data-sortable="true">
-                                        	관리창고
+                                        	생산종료일
                                     </th>
                                     <th data-field="prorobuy"
                                         data-sortable="true">
-                                        	재고종류
+                                        	원재료비
                                     </th>
                                     <th data-field="kind"
                                         data-sortable="true">
-                                        	재고품목
+                                        	가공비
                                     </th>
                                     <th data-field="etc"
                                         data-sortable="true">
-                                        	재고수량
+                                        	진행상태
                                     </th>
                                     <th data-field="dd"
                                         data-sortable="true">
-                                        	단가
+                                        	적재창고
                                     </th>
                                    <th data-field="ff"
                                         data-sortable="true">

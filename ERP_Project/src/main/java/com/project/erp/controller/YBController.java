@@ -33,4 +33,8 @@ public class YBController {
 	public String notice(){
 		return "member/notice";
 	} 
+	@RequestMapping(value="/productioncheck", method = RequestMethod.GET)
+	public String productioncheck(){
+		return "production/productioncheck";
+	} 
  }
