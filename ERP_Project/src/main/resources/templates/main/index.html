@@ -19,20 +19,24 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
 <link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
-
+<script>
+	$(function(){	
+		$("#header").load("/header");
+		$("#navbar").load("/navbar");
+		$("#setting").load("/setting");
+	});
+</script>
+</head>
 <body>
 <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
             
     
     
-    <!-- 헤더, 세팅 넣기 -->
+    <div id="header"></div>
+    <div id="setting"></div>
     
-    
-    
-    
-   
     <div class="app-main">
-     <!-- 사이드바 코딩 넣기 -->
+         <div id="navbar"></div>
      			<!-- 본문 -->
                 <div class="app-main__outer">
                 <div class="app-main__inner">
@@ -1805,9 +1809,11 @@
                         </div>
                     </div>
                 </div>
-                <!-- footer wrapper  삽입-->    </div>
+                <!-- wapper footer -->   </div>
     </div>
 </div>
-<!-- drawer wrapper  삽입-->
-<div class="app-drawer-overlay d-none animated fadeIn"></div><script type="text/javascript" src="./assets/scripts/main.8d288f825d8dffbbe55e.js"></script></body>
+<!-- drawer wapper -->
+<div class="app-drawer-overlay d-none animated fadeIn"></div>
+<script type="text/javascript" src="./assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
+</body>
 </html>
