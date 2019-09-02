@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="utf-8">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Language" content="en">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>supplier</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+<meta name="description"
+	content="This is an example dashboard created using build-in elements and components.">
+
+<!-- Disable tap highlight on IE -->
+<meta name="msapplication-tap-highlight" content="no">
+
+<link
+	href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css"
+	rel="stylesheet">
+
+
+</head>
+
+<body>
+
+	<div class="card-body">
+		<div id="example_wrapper" class="dataTables_wrapper dt-bootstrap4">
+			<div class="row">
+				<div class="col-sm-12 col-md-6">
+					<div class="dataTables_length" id="example_length">
+						<label>Show <select name="example_length"
+							aria-controls="example"
+							class="custom-select custom-select-sm form-control form-control-sm"><option
+									value="10">10</option>
+								<option value="25">25</option>
+								<option value="50">50</option>
+								<option value="100">100</option></select> entries
+						</label>
+					</div>
+				</div>
+				<form>
+                           <select class="mb-2 form-control" style="display:inline ;width: 173px">
+                                    <option>Default Select</option>
+                           </select>
+                            <select class="mb-2 form-control" style="display:inline ;width: 173px">
+                                    <option>Default Select</option>
+                           </select>
+                           <select class="mb-2 form-control" style="display:inline ;width: 173px">
+                                    <option>Default Select</option>
+                           </select>
+                           <select class="mb-2 form-control" style="display:inline ;width: 173px">
+                                    <option>Default Select</option>
+                           </select>
+                       <div>
+                        <input type="text" class="form-control" name="daterange" value="01/01/2018 - 01/15/2018" style="display:inline ;width: 300px">
+                        <input placeholder="default" type="text" class="mb-2 form-control" style="display:inline ;width: 300px">        
+                                
+                                <button class="mb-2 mr-2 btn btn-primary" style="display:inline ;height: 37px;width: 95px">
+                                	Search
+                           </button>
+                        </div>
+                           
+                      	
+                       
+                       </form>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<table style="width: 100%;" id="example"
+						class="table table-hover table-striped table-bordered dataTable dtr-inline"
+						role="grid" aria-describedby="example_info">
+						<thead>
+							<tr role="row">
+								<th class="sorting_asc" tabindex="0" aria-controls="example"
+									rowspan="1" colspan="1" style="width: 129.2px;"
+									aria-sort="ascending"
+									aria-label="Name: activate to sort column descending">일자</th>
+								<th class="sorting" tabindex="0" aria-controls="example"
+									rowspan="1" colspan="1" style="width: 203.2px;"
+									aria-label="Position: activate to sort column ascending">원자재코드</th>
+								<th class="sorting" tabindex="0" aria-controls="example"
+									rowspan="1" colspan="1" style="width: 90.2px;"
+									aria-label="Office: activate to sort column ascending">원자재명</th>
+								<th class="sorting" tabindex="0" aria-controls="example"
+									rowspan="1" colspan="1" style="width: 44.2px;"
+									aria-label="Age: activate to sort column ascending">수량</th>
+								<th class="sorting" tabindex="0" aria-controls="example"
+									rowspan="1" colspan="1" style="width: 93.2px;"
+									aria-label="Start date: activate to sort column ascending">구매상태</th>
+							</tr>
+						</thead>
+						<tbody>
+
+
+							<tr role="row" class="odd">
+								<td class="sorting_1" tabindex="0">19.08.21</td>
+								<td>Systems Administrator</td>
+								<td>New York</td>
+								<td>59</td>
+								<td>미도착</td>
+							</tr>
+							<tr role="row" class="even">
+								<td class="sorting_1" tabindex="0">19.08.23</td>
+								<td>Senior Marketing Designer</td>
+								<td>London</td>
+								<td>43</td>
+								<td>도착</td>
+							</tr>
+							<tr role="row" class="odd">
+								<td class="sorting_1" tabindex="0">19.09.01</td>
+								<td>Regional Director</td>
+								<td>London</td>
+								<td>47</td>
+								<td>미착품</td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr>
+								<th rowspan="1" colspan="1">일자</th>
+								<th rowspan="1" colspan="1">원자재코드</th>
+								<th rowspan="1" colspan="1">원자재명</th>
+								<th rowspan="1" colspan="1">수량</th>
+								<th rowspan="1" colspan="1">구매상태</th>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12 col-md-5">
+					<div class="dataTables_info" id="example_info" role="status"
+						aria-live="polite">Showing 21 to 30 of 57 entries</div>
+				</div>
+				<div class="col-sm-12 col-md-7">
+					<div class="dataTables_paginate paging_simple_numbers"
+						id="example_paginate">
+						<ul class="pagination">
+							<li class="paginate_button page-item previous"
+								id="example_previous"><a href="#" aria-controls="example"
+								data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
+							<li class="paginate_button page-item "><a href="#"
+								aria-controls="example" data-dt-idx="1" tabindex="0"
+								class="page-link">1</a></li>
+							<li class="paginate_button page-item "><a href="#"
+								aria-controls="example" data-dt-idx="2" tabindex="0"
+								class="page-link">2</a></li>
+							<li class="paginate_button page-item active"><a href="#"
+								aria-controls="example" data-dt-idx="3" tabindex="0"
+								class="page-link">3</a></li>
+							<li class="paginate_button page-item "><a href="#"
+								aria-controls="example" data-dt-idx="4" tabindex="0"
+								class="page-link">4</a></li>
+							<li class="paginate_button page-item "><a href="#"
+								aria-controls="example" data-dt-idx="5" tabindex="0"
+								class="page-link">5</a></li>
+							<li class="paginate_button page-item "><a href="#"
+								aria-controls="example" data-dt-idx="6" tabindex="0"
+								class="page-link">6</a></li>
+							<li class="paginate_button page-item next" id="example_next"><a
+								href="#" aria-controls="example" data-dt-idx="7" tabindex="0"
+								class="page-link">Next</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

@@ -13,26 +13,31 @@ public class HomeController {
 	
 	@RequestMapping(value="/", method = RequestMethod.GET)
 	public String home(){
- 
-		
-		return "signup";
-/*		return "inventory/inventoryManagement"; */
-		}
- 
- 
- 
-
- 
- 
-
+		return "rawMaterial/all_view";
+	}
 	@RequestMapping(value="/header", method = RequestMethod.GET)
 	public String header(){
-		return "menu/header";
+		return "main/header";
 	}
 	
 	@RequestMapping(value="/navbar", method = RequestMethod.GET)
 	public String navbar(){
-		return "menu/navbar";
+		return "main/navbar";
+	}
+	
+	@RequestMapping(value="/drawerWrapper", method = RequestMethod.GET)
+	public String drawerWrapper(){
+		return "main/drawerWrapper";
+	}
+	
+	@RequestMapping(value="/wrapperFooter", method = RequestMethod.GET)
+	public String wrapperFooter(){
+		return "main/wrapperFooter";
+	}
+	
+	@RequestMapping(value="/setting", method = RequestMethod.GET)
+	public String setting(){
+		return "main/setting";
 	}
 	
 }
