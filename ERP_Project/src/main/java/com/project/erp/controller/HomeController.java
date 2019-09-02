@@ -17,14 +17,7 @@ public class HomeController {
 		}
  
  
-<<<<<<< HEAD
- 
 
- 
-
-
-=======
->>>>>>> e3e94a34201d69a02956ad7201bbe09c4be8e42c
 	@RequestMapping(value="/header", method = RequestMethod.GET)
 	public String header(){
 		return "main/header";

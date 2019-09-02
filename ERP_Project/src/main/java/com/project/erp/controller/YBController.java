@@ -9,12 +9,12 @@ public class YBController {
 
 	@RequestMapping(value="/signup", method = RequestMethod.GET)
 	public String signup(){
-		return "signup";
+		return "member/signup";
 	}
 	
 	@RequestMapping(value="/login", method = RequestMethod.GET)
 	public String login(){
-		return "login";
+		return "member/login";
 	}
 	
 	@RequestMapping(value="/inventoryManagement123", method = RequestMethod.GET)
@@ -27,10 +27,10 @@ public class YBController {
 	} 
 	@RequestMapping(value="/freeboard", method = RequestMethod.GET)
 	public String freeboard(){
-		return "freeboard";
+		return "member/freeboard";
 	} 
 	@RequestMapping(value="/notice", method = RequestMethod.GET)
 	public String notice(){
-		return "notice";
+		return "member/notice";
 	} 
  }
