@@ -43,5 +43,11 @@ public class MoonController {
 	public String goBuy(){
 		return "rawMaterial/buy";
 	}
+	
+	
+	@RequestMapping(value="/production_insert", method = RequestMethod.GET)
+	public String production_insert(){
+		return "production/production_insert";
+	}
 
 }
