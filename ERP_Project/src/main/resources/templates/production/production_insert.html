@@ -26,7 +26,7 @@
 	
 <script>
 
-$(function(){
+/* $(function(){
 	$("#addStaff").click(function(){
 		addRow();
 	});
@@ -36,19 +36,31 @@ $(function(){
 });
 
 function addRow(){
-	var html ='<input type="text" placeholder="원자재명">'
+	var html ='<tr><input type="text" placeholder="원자재명">'
 			+'<input type="text" placeholder="수량">'
 			+'<button type="button" id="delStaff">-</button>'
-			+'<br>';
+			+'</tr>;
 	$(".test1").append(html);
 }
 
 function deleteRow(){
-	var html = $(this).parent().parent();
-    
-	html.remove(); //tr 테그 삭제
-}
-
+	var clickedRow = $(this).closest("tr").remove();   
+} */
+$(function() {
+	 $("#addTR").click(function () {
+	  var row = "
+	<tr>";
+	   row += "<td><input type='text' name='idx[]' value='' /></td>";
+	   row += "<td><span>날 누르면 삭제가 됨</span></td>";
+	   row += "</tr>
+	";
+	  $("#table").append(row);
+	 });
+	 
+	 $("#table").on("click", "span", function() {
+	  $(this).closest("tr").remove();
+	 });
+	});
 </script>
 
 </head>
@@ -417,12 +429,12 @@ function deleteRow(){
 									</div>
 									<div class="position-relative form-group">
 										<label for="exampleAddress" class="">원자재 등록</label>
-										<button type="button" id="addStaff">+</button>
-									<div class="test1">
+										<button type="button" id="addTR">날 누르면 추가가 됨</button>
+									<table id="table">
        									 <!-- <input type="text" placeholder="원자재명">
        									 <input type="number" placeholder="수량">
        									 <input type="button" class="btnAdd" value="Add"><br> -->        
-        							</div> 
+        							</table> 
 									</div>
 									<div class="position-relative form-group">
 										<label for="exampleAddress2" class="">생산품 생산비</label><input
