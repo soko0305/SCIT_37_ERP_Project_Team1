@@ -47,14 +47,15 @@ function deleteRow(){
 	var clickedRow = $(this).closest("tr").remove();   
 } */
 $(function() {
+	var count = 0;
 	 $("#addTR").click(function () {
-	  var row = "
-	<tr>";
-	   row += "<td><input type='text' name='idx[]' value='' /></td>";
-	   row += "<td><span>날 누르면 삭제가 됨</span></td>";
-	   row += "</tr>
-	";
+	  var row = '<tr>';
+	   row += '<td><input placeholder="원재료" type="text" class="form-control"></td>';
+	   row += '<td><input placeholder="수량" type="number" class="form-control"></td>';
+	   row += '<td><button class="mb-2 mr-2 btn-transition btn btn-outline-light" id="del'+count+'" style="height: 20px; width: 20px; padding-left: 4.5px; padding-top: 0px ;margin-top: 7px;">+</button></td>';
+	   row += '</tr>';
 	  $("#table").append(row);
+	  count += 1;
 	 });
 	 
 	 $("#table").on("click", "span", function() {
@@ -408,7 +409,8 @@ $(function() {
 						<div class="main-card mb-3 card">
 							<div class="card-body">
 								<h5 class="card-title">생산품 등록</h5>
-								<form class="">
+								
+								<!-- form 시켜줘여함 -->
 									<div class="form-row">
 										<div class="col-md-6">
 											<div class="position-relative form-group">
@@ -418,7 +420,10 @@ $(function() {
 													class="form-control">
 											</div>
 										</div>
-										<div class="col-md-6">
+										
+									</div>
+									<div class="form-row">
+									<div class="col-md-6">
 											<div class="position-relative form-group">
 												<label for="examplePassword11" class="">생산품종류</label><input
 													name="pKind" id="pKind"
@@ -427,15 +432,21 @@ $(function() {
 											</div>
 										</div>
 									</div>
-									<div class="position-relative form-group">
-										<label for="exampleAddress" class="">원자재 등록</label>
-										<button type="button" id="addTR">날 누르면 추가가 됨</button>
-									<table id="table">
-       									 <!-- <input type="text" placeholder="원자재명">
-       									 <input type="number" placeholder="수량">
-       									 <input type="button" class="btnAdd" value="Add"><br> -->        
-        							</table> 
+									<div class="form-row">
+									<div class="col-md-6">
+											<div class="position-relative form-group">
+												<label for="examplePassword11" class="">원자재 등록</label>
+												<button class="mb-2 mr-2 btn-transition btn btn-outline-light" id="addTR" style="height: 20px; width: 20px; padding-left: 4.5px; padding-top: 0px ;margin-top: 7px;">+</button>
+												<table id="table">        
+        										</table> 
+												
+											</div>
+										</div>
 									</div>
+									</div>
+									
+									
+									
 									<div class="position-relative form-group">
 										<label for="exampleAddress2" class="">생산품 생산비</label><input
 											name="pPrice" id="pPrice"
@@ -443,7 +454,7 @@ $(function() {
 											class="form-control">
 									</div>
 									<button class="mt-2 btn btn-primary">등록</button>
-								</form>
+								
 							</div>
 						</div>
 					</div>
@@ -997,8 +1008,7 @@ $(function() {
 	</div>
 </div>
 <div class="app-drawer-overlay d-none animated fadeIn"></div>
-<script type="text/javascript"
-	src="./assets/scripts/main.cba69814a806ecc7945a.js"></script>
+
 
 <svg id="SvgjsSvg1001" width="2" height="0"
 	xmlns="http://www.w3.org/2000/svg" version="1.1"
