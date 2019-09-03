@@ -26,44 +26,21 @@
 	
 <script>
 
-/* $(function(){
-	$("#addStaff").click(function(){
-		addRow();
-	});
-	$("#delStaff").click(function(){
-		deleteRow();
-	});
-});
-
-function addRow(){
-	var html ='<tr><input type="text" placeholder="원자재명">'
-			+'<input type="text" placeholder="수량">'
-			+'<button type="button" id="delStaff">-</button>'
-			+'</tr>;
-	$(".test1").append(html);
-}
-
-function deleteRow(){
-	var clickedRow = $(this).closest("tr").remove();   
-} */
 $(function() {
-	var count = 0;
 	 $("#addTR").click(function () {
-	  var row = '<tr>';
-	   row += '<td><input placeholder="원재료" type="text" class="form-control"></td>';
-	   row += '<td><input placeholder="수량" type="number" class="form-control"></td>';
-	   row += '<td><button class="mb-2 mr-2 btn-transition btn btn-outline-light" id="del'+count+'" style="height: 20px; width: 20px; padding-left: 4.5px; padding-top: 0px ;margin-top: 7px;">+</button></td>';
+	  var row = "<tr>";
+	   row += '<td><input name="pKind" id="pKind" placeholder="원자재명" type="text"class="form-control"></td>';
+	   row += '<td><input name="pAmount" id="pAmount" placeholder="수량" type="number"class="form-control"></td>';
+	   row += '<td>  <button class="mb-2 mr-2 btn-transition btn btn-outline-primary btn-sm" style="height: 20px; width: 20px; padding-left: 6.5px; padding-top: 0px ;margin-top: 7px; margin-left: 7px">-</button></td>';
 	   row += '</tr>';
-	  $("#table").append(row);
-	  count += 1;
+	  $(".test1").append(row);
 	 });
 	 
-	 $("#table").on("click", "span", function() {
+	 $(".test1").on("click", "button", function() {
 	  $(this).closest("tr").remove();
 	 });
 	});
 </script>
-
 </head>
 <body>
 	<div
@@ -409,8 +386,7 @@ $(function() {
 						<div class="main-card mb-3 card">
 							<div class="card-body">
 								<h5 class="card-title">생산품 등록</h5>
-								
-								<!-- form 시켜줘여함 -->
+								<!-- form 필요 -->
 									<div class="form-row">
 										<div class="col-md-6">
 											<div class="position-relative form-group">
@@ -422,6 +398,7 @@ $(function() {
 										</div>
 										
 									</div>
+									
 									<div class="form-row">
 									<div class="col-md-6">
 											<div class="position-relative form-group">
@@ -431,22 +408,17 @@ $(function() {
 													class="form-control">
 											</div>
 										</div>
-									</div>
-									<div class="form-row">
-									<div class="col-md-6">
-											<div class="position-relative form-group">
-												<label for="examplePassword11" class="">원자재 등록</label>
-												<button class="mb-2 mr-2 btn-transition btn btn-outline-light" id="addTR" style="height: 20px; width: 20px; padding-left: 4.5px; padding-top: 0px ;margin-top: 7px;">+</button>
-												<table id="table">        
-        										</table> 
-												
-											</div>
 										</div>
+									
+									<div class="position-relative form-group">
+										<label for="exampleAddress" class="">원자재 등록</label>
+										<button class="mb-2 mr-2 btn-transition btn btn-outline-primary" id="addTR" style="height: 20px; width: 20px; padding-left: 4.5px; padding-top: 0px ;margin-top: 7px;">+</button>
+									<div class="test1">
+       									 <!-- <input type="text" placeholder="원자재명">
+       									 <input type="number" placeholder="수량">
+       									 <input type="button" class="btnAdd" value="Add"><br> -->        
+        							</div> 
 									</div>
-									</div>
-									
-									
-									
 									<div class="position-relative form-group">
 										<label for="exampleAddress2" class="">생산품 생산비</label><input
 											name="pPrice" id="pPrice"
@@ -454,7 +426,7 @@ $(function() {
 											class="form-control">
 									</div>
 									<button class="mt-2 btn btn-primary">등록</button>
-								
+							
 							</div>
 						</div>
 					</div>
@@ -1008,7 +980,6 @@ $(function() {
 	</div>
 </div>
 <div class="app-drawer-overlay d-none animated fadeIn"></div>
-
 
 <svg id="SvgjsSvg1001" width="2" height="0"
 	xmlns="http://www.w3.org/2000/svg" version="1.1"

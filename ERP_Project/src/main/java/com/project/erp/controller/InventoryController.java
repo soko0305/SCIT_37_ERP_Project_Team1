@@ -10,9 +10,5 @@ public class InventoryController {
 	public String goInventory(){
 		return "inventory/inventoryManagement";
 	}
-	
-	@RequestMapping(value="/aaaa", method = RequestMethod.GET)
-	public String aaa(){
-		return "sample/production_insert2";
-	}
+
 }
