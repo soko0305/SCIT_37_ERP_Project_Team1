@@ -10,4 +10,5 @@ public class InventoryController {
 	public String goInventory(){
 		return "inventory/inventoryManagement";
 	}
+
 }
