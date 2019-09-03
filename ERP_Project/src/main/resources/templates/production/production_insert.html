@@ -26,7 +26,7 @@
 	
 <script>
 
-$(function(){
+/*$(function(){
 	$("#addStaff").click(function(){
 		addRow();
 	});
@@ -36,30 +36,30 @@ $(function(){
 });
 
 function addRow(){
-	var html ='<input type="text" placeholder="원자재명">'
+	var str ='<div><input type="text" placeholder="원자재명">'
 			+'<input type="text" placeholder="수량">'
 			+'<button type="button" id="delStaff">-</button>'
-			+'<br>;
-	$(".test1").append(html);
+			+'</div>';
+	$(".test1").append(str);
 }
 
 function deleteRow(){
-}
-/*$(function() {
-	 $("#addTR").click(function () {
-	  var row = "
-	<tr>";
-	   row += "<td><input type='text' name='idx[]' value='' /></td>";
-	   row += "<td><span>날 누르면 삭제가 됨</span></td>";
-	   row += "</tr>
-	";
-	  $("#table").append(row);
+	var str = $(this).closest("div");
+} */
+$(function() {
+	 $("#addStaff").click(function () {
+	  var row = "<tr>";
+	   row += '<td><input name="pKind" id="pKind" placeholder="원자재명" type="text"class="form-control"></td>';
+	   row += '<td><input name="pAmount" id="pAmount" placeholder="수량" type="text"class="form-control"></td>';
+	   row += '<td><button type="button" class="mt-2 btn btn-primary">-</button></td>';
+	   row += '</tr>';
+	  $(".test1").append(row);
 	 });
 	 
-	 $("#table").on("click", "span", function() {
+	 $(".test1").on("click", "button", function() {
 	  $(this).closest("tr").remove();
 	 });
-	});*/
+	});
 </script>
 </head>
 <body>
@@ -427,7 +427,7 @@ function deleteRow(){
 									</div>
 									<div class="position-relative form-group">
 										<label for="exampleAddress" class="">원자재 등록</label>
-										<button type="button" id="addStaff">+</button>
+										<button type="button" class="mt-2 btn btn-primary" id="addStaff">+</button>
 									<div class="test1">
        									 <!-- <input type="text" placeholder="원자재명">
        									 <input type="number" placeholder="수량">
