@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class MoonController {
 
+	@RequestMapping(value="/goAllView", method = RequestMethod.GET)
+	public String goAllView(){
+		return "rawMaterial/all_view";
+	}
 	@RequestMapping(value="/goSupplier", method = RequestMethod.GET)
 	public String goSupplier(){
 		return "rawMaterial/supplier_view";
