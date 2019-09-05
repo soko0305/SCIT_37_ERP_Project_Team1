@@ -18,7 +18,89 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
 <link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
-<script>
+
+<!-- <script>
+	$(function(){
+		var isChecked = false;
+		var userStatus = $("#getUserStatus").val();
+		
+		$("#signupButton").click(function(){
+			
+			if(isChecked){
+				checkValueForm();
+			}else{
+				$("#errorMessage").html("중복체크를 해야합니다");
+			}
+			
+		});
+		
+		 
+		
+		function checkValueForm(){
+			var check=/[^\s][ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/gi;
+			var userPw = $("#password").val();
+			var reUserPw = $("#passwordcheck").val();
+			var userName = $("#name").val();
+			var userEmail = $("#email").val();
+			var userPhoneNum =$("#tel").val();
+	 
+		 
+			if(userPw.length>=3 && userPw.length<=10){
+				if(userPw==reUserPw){
+					if(userEmail.length!=0 && userPhoneNum.length!=0 ){
+									$("#signupForm").submit();
+							}else{
+								$("#errorMessage").html("기입 사항을 모두 기입해주시기 바랍니다");
+							}else{
+						$("#errorMessage").html("이름 양식이 잘못되었습니다");
+					}
+				}else{
+					$("#errorMessage").html("입력하신 비밀번호와 확인 비밀번호가 다릅니다");
+				}
+			}else{
+				$("#errorMessage").html("비밀번호는 3-10 글자 입력해주시기 바랍니다");
+			}
+				
+		}
+	
+		
+		
+		$("#checkButton").click(function(){
+			var check=/[^a-z0-9]/g; 
+			var userId = $("#inputUserId").val();
+			if(userId.length>=3 && userId.length<=10){
+				if(!(check.test(userId))){
+			
+					$.ajax({
+						url: "selectMemberById",
+						type: "get",
+						data:{userId:userId},
+						success:function(serverData){
+							if(serverData.userId==null){
+								isChecked = true;
+								$("#errorMessage").html(userId+" 는 사용가능 아이디입니다");
+							}else{
+								isChecked = false;
+								$("#errorMessage").html("중복되는 아이디가 있습니다");
+							}	
+						}
+					});
+				}else{
+					$("#errorMessage").html("아이디는 소문자와 숫자 소합만 사용해주시기 바랍니다");
+				}
+			}else{
+				$("#errorMessage").html("아이디는 3-10글자를 입력해주시기 바랍니다");
+			}
+		});
+		
+		$("#inputUserId").change(function(){
+			isChecked = false;
+			$("#errorMessage").html("");
+		});
+			});
+
+</script> -->
+<!-- <script>
    var isChecked = false;//중복확인버튼 누름여부
 
    $(function() {
@@ -59,7 +141,7 @@
       });
 
    });
-</script>
+</script> -->
 
 <body>
 <div class="app-container app-theme-white body-tabs-shadow">
@@ -84,7 +166,7 @@
                                             <button class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg" id="checkId" name="checkId" type="button">
                                             	중복 확인</button>
                                         </div>
-                                  <font color="red" id="message"></font>
+                                  <font color="red" id="errorMessage"></font>
                                          <div class="col-md-6">
                                             <div class="position-relative form-group"><label for="examplePassword" class="">
                                             <span class="text-danger">*</span>
