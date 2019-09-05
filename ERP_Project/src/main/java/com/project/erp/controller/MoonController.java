@@ -38,8 +38,15 @@ public class MoonController {
 		return "rawMaterial/supplier_insert";
 	}
 	@RequestMapping(value="/goSupplierUpdate", method = RequestMethod.GET)
-	public String goSupplierUpdate(){
-		return "rawMaterial/supplier_update";
+	public String goSupplierUpdate(SupplierVO supplier, Model model){
+		System.out.println("goSupplierUpdateForm : " + supplier);
+		SupplierVO result = sDAO.supplierOneSelect(supplier);
+		if(result == null) {
+			return "/rawMaterial/All_view";
+		}else {
+			model.addAttribute("result", result);
+			return "rawMaterial/supplier_update";
+		}
 	}
 	@RequestMapping(value="/goMaterials", method = RequestMethod.GET)
 	public String goMaterials() {

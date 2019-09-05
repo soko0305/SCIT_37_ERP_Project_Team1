@@ -13,40 +13,66 @@ public class SupplierDAO {
 
 	@Autowired
 	SqlSessionTemplate sqlSession;
-	
+
 	public int supplierInsert(SupplierVO supplier) {
 		int result = 0;
-		
+
 		SupplierMapper mapper = sqlSession.getMapper(SupplierMapper.class);
 		try {
 			result = mapper.supplierInsert(supplier);
-		}catch (Exception e) {
+		} catch (Exception e) {
+			e.printStackTrace();
+			return result;
+		}
+		return result;
+	}
+
+	public ArrayList<SupplierVO> supplierAllSelect() {
+		ArrayList<SupplierVO> result = null;
+
+		SupplierMapper mapper = sqlSession.getMapper(SupplierMapper.class);
+		try {
+			result = mapper.supplierAllSelect();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return result;
+		}
+		return result;
+	}
+
+	public int supplierDelete(SupplierVO supplier) {
+		int result = 0;
+
+		SupplierMapper mapper = sqlSession.getMapper(SupplierMapper.class);
+		try {
+			result = mapper.supplierDelete(supplier);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return result;
+		}
+		return result;
+	}
+
+	public int supplierUpdate(SupplierVO supplier) {
+		int result = 0;
+
+		SupplierMapper mapper = sqlSession.getMapper(SupplierMapper.class);
+		try {
+			result = mapper.supplierUpdate(supplier);
+		} catch (Exception e) {
 			e.printStackTrace();
 			return result;
 		}
 		return result;
 	}
 	
-	public ArrayList<SupplierVO> supplierAllSelect(){
-		ArrayList<SupplierVO> result = null;
+	public SupplierVO supplierOneSelect(SupplierVO supplier) {
+		SupplierVO result = null;
 		
 		SupplierMapper mapper = sqlSession.getMapper(SupplierMapper.class);
 		try {
-			result = mapper.supplierAllSelect();
-		}catch (Exception e) {
-			e.printStackTrace();
-			return result;
-		}			
-		return result;
-	}
-
-	public int supplierDelete(SupplierVO supplier) {
-		int result = 0;
-		
-		SupplierMapper mapper = sqlSession.getMapper(SupplierMapper.class);
-		try {
-			result = mapper.supplierDelete(supplier);
-		}catch (Exception e) {
+			result = mapper.supplierOneSelect(supplier);
+		} catch (Exception e) {
 			e.printStackTrace();
 			return result;
 		}

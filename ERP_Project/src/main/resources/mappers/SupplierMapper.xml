@@ -48,4 +48,33 @@
 			supplierSeq=#{supplierSeq}
 	</delete>
 	
+	<update id="supplierUpdate" parameterType="com.project.erp.vo.SupplierVO">
+		update
+			supplier
+		set
+			supplierName=#{supplierName}
+			,supplierOwner=#{supplierOwner}
+			,supplierAddr=#{supplierAddr}
+			,supplierTel=${supplierTel}
+			,supplierPIC=${supplierPIC}
+			,supplierEmail=${supplierEmail}
+		where
+			supplierSeq=#{supplierSeq}
+	</update>
+	
+	<select id="supplierOneSelect" parameterType="com.project.erp.vo.SupplierVO" resultType="com.project.erp.vo.SupplierVO">
+		select
+			supplierSeq
+			,supplierName
+			,supplierOwner
+			,supplierAddr
+			,supplierTel
+			,supplierPIC
+			,supplierEmail
+		from
+			supplier
+		where
+			supplierSeq=#{supplierSeq}
+	</select>
+	
 </mapper>

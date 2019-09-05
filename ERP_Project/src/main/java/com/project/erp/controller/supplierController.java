@@ -26,19 +26,7 @@ public class supplierController {
 			return "/rawMaterial/supplier_view";
 		}
 	}
-	
-	/*@RequestMapping(value="/supplierAllSelect", method=RequestMethod.POST)
-	public String supplierAllSelect(Model model) {
 
-		ArrayList<SupplierVO> result = sDAO.supplierAllSelect();
-		
-		if(result != null) {
-			model.addAttribute("supplierList", result);
-			return "/rawMaterial/supplier_view";
-		}else {
-			return "/rawMaterial/All_view";
-		}	
-	}*/
 	@RequestMapping(value="/supplierDelete", method=RequestMethod.POST)
 	public String supplierDelete(SupplierVO supplier) {
 		System.out.println("supplierDelete : " + supplier);
@@ -49,5 +37,17 @@ public class supplierController {
 		}else {
 			return "/rawMaterial/supplier_view";
 		}
+	}
+	@RequestMapping(value="/supplierUpdate", method=RequestMethod.POST)
+	public String supplierUpdate(SupplierVO supplier) {
+		System.out.println("supplierUpdate : " + supplier);
+		int result = sDAO.supplierUpdate(supplier);
+		
+		if(result == 0) {
+			return "/rawMaterial/all_view";
+		}else {
+			return "/rawMaterial/supplier_view";
+		}
+		
 	}
 }

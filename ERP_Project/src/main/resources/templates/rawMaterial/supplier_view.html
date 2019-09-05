@@ -23,22 +23,20 @@
 <link
 	href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css"
 	rel="stylesheet">
-	<script>
+<script>
 		$(function(){
 			
 			$(".btn-primary").click(function(){
 				var type = $(this).attr("data-type");
 				var seq =  $(this).val();
 				if(type=='delete'){
-					
-					//var form = document.getElementById('formTry');
-					//document.getElementById("seq").value=seq;
-					//form.submit();
-					
 					$("#seq").val(seq);
-					
-					$("#fromTry").submit();
-					/* location.href="supplierDelete?supplierSeq="+seq+""; */
+					$("#deleteForm").submit();
+				}else if(type=='update'){
+					$("#seq1").val(seq);
+					$("#updateForm").submit();
+				}else{
+					location.href="goSupplierInsert";
 				}
 			});
 		});
@@ -46,9 +44,13 @@
 </head>
 <body>
 
-<form id="fromTry" action="supplierDelete" method="post">
-	<input type="hidden" id="seq" name="supplierSeq">
-</form>
+	<form id="deleteForm" action="supplierDelete" method="post">
+		<input type="hidden" id="seq" name="supplierSeq">
+	</form>
+	
+	<form id="updateForm" action="goSupplierUpdate" method="get">
+		<input type="hidden" id="seq1" name="supplierSeq">
+	</form>
 
 	<div
 		class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
@@ -370,7 +372,7 @@
 					<!-- app-page-title -->
 					<div class="main-card mb-3 card">
 						<button class="mb-2 mr-2 btn-square btn btn-primary"
-							onclick="location.href='goSupplierInsert'">거래처추가</button>
+							data-type="insert">거래처추가</button>
 						<div class="card-body">
 							<table style="width: 100%;" id="example"
 								class="table table-hover table-striped table-bordered">
@@ -383,45 +385,11 @@
 										<th>공급처연락처</th>
 										<th>공급처담당자명</th>
 										<th>공급처이메일</th>
+										<th>업데이트</th>
 									</tr>
 								</thead>
 								<tbody>
-									<!-- <tr>
-										<td>0001</td>
-										<td>기억회사</td>
-										<td>010.111.1234</td>
-										<td>a@go.com</td>
-										<td>
-											<button class="mb-2 mr-2 btn-square btn btn-primary"
-												onclick="window.open('goSupplierUpdate','window_name','width=430,height=500,location=no,status=no,scrollbars=yes');">수정</button>
-											<button class="mb-2 mr-2 btn-square btn btn-primary"
-												onclick="">삭제</button>
-										</td>
-									</tr>
-									<tr>
-										<td>0002</td>
-										<td>니은회사</td>
-										<td>011.222.1234</td>
-										<td>b@go.com</td>
-										<td>
-											<button class="mb-2 mr-2 btn-square btn btn-primary"
-												onclick="window.open('address','window_name','width=430,height=500,location=no,status=no,scrollbars=yes');">수정</button>
-											<button class="mb-2 mr-2 btn-square btn btn-primary"
-												onclick="">삭제</button>
-										</td>
-									</tr>
-									<tr>
-										<td>0003</td>
-										<td>디귿회사</td>
-										<td>017.333.1234</td>
-										<td>c@go.com</td>
-										<td>
-											<button class="mb-2 mr-2 btn-square btn btn-primary"
-												onclick="window.open('address','window_name','width=430,height=500,location=no,status=no,scrollbars=yes');">수정</button>
-											<button class="mb-2 mr-2 btn-square btn btn-primary"
-												onclick="">삭제</button>
-										</td>
-									</tr> -->
+
 									<tr th:each="list : ${supplierList}">
 										<td th:text="${list.supplierSeq}"></td>
 										<td th:text="${list.supplierName}"></td>
@@ -432,12 +400,11 @@
 										<td th:text="${list.supplierEmail}"></td>
 										<td>
 											<button class="mb-2 mr-2 btn-square btn btn-primary"
-												onclick="window.open('address','window_name','width=430,height=500,location=no,status=no,scrollbars=yes');">수정</button>
-											<button class="mb-2 mr-2 btn-square btn btn-primary" data-type="delete" th:value="${list.supplierSeq}"
-												>삭제</button>
-										
+												data-type="update" th:value="${list.supplierSeq}">수정</button>
+											<button class="mb-2 mr-2 btn-square btn btn-primary"
+												data-type="delete" th:value="${list.supplierSeq}">삭제</button>
 										</td>
-									</th:each>
+									</tr>
 								</tbody>
 								<tfoot>
 									<tr>
@@ -448,6 +415,7 @@
 										<th>공급처연락처</th>
 										<th>공급처담당자명</th>
 										<th>공급처이메일</th>
+										<th>업데이트</th>
 									</tr>
 								</tfoot>
 							</table>
