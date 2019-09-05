@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="utf-8">
@@ -23,7 +23,33 @@
 <link
 	href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css"
 	rel="stylesheet">
+	<script>
+		$(function(){
+			
+			$(".btn-primary").click(function(){
+				var type = $(this).attr("data-type");
+				var seq =  $(this).val();
+				if(type=='delete'){
+					
+					//var form = document.getElementById('formTry');
+					//document.getElementById("seq").value=seq;
+					//form.submit();
+					
+					$("#seq").val(seq);
+					
+					$("#fromTry").submit();
+					/* location.href="supplierDelete?supplierSeq="+seq+""; */
+				}
+			});
+		});
+	</script>
+</head>
 <body>
+
+<form id="fromTry" action="supplierDelete" method="post">
+	<input type="hidden" id="seq" name="supplierSeq">
+</form>
+
 	<div
 		class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
 		<!-- 헤더 부분 -->
@@ -350,15 +376,17 @@
 								class="table table-hover table-striped table-bordered">
 								<thead>
 									<tr>
-										<th>거래처코드</th>
-										<th>거래처명</th>
-										<th>전화번호</th>
-										<th>이메일</th>
-										<th>업데이트</th>
+										<th>공급처seq</th>
+										<th>공급처명</th>
+										<th>공급처대표명</th>
+										<th>공급처주소</th>
+										<th>공급처연락처</th>
+										<th>공급처담당자명</th>
+										<th>공급처이메일</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
+									<!-- <tr>
 										<td>0001</td>
 										<td>기억회사</td>
 										<td>010.111.1234</td>
@@ -393,16 +421,33 @@
 											<button class="mb-2 mr-2 btn-square btn btn-primary"
 												onclick="">삭제</button>
 										</td>
-									</tr>
-
+									</tr> -->
+									<tr th:each="list : ${supplierList}">
+										<td th:text="${list.supplierSeq}"></td>
+										<td th:text="${list.supplierName}"></td>
+										<td th:text="${list.supplierOwner}"></td>
+										<td th:text="${list.supplierAddr}"></td>
+										<td th:text="${list.supplierTel}"></td>
+										<td th:text="${list.supplierPIC}"></td>
+										<td th:text="${list.supplierEmail}"></td>
+										<td>
+											<button class="mb-2 mr-2 btn-square btn btn-primary"
+												onclick="window.open('address','window_name','width=430,height=500,location=no,status=no,scrollbars=yes');">수정</button>
+											<button class="mb-2 mr-2 btn-square btn btn-primary" data-type="delete" th:value="${list.supplierSeq}"
+												>삭제</button>
+										
+										</td>
+									</th:each>
 								</tbody>
 								<tfoot>
 									<tr>
-										<th>거래처코드</th>
-										<th>거래처명</th>
-										<th>전화번호</th>
-										<th>이메일</th>
-										<th>업데이트</th>
+										<th>공급처seq</th>
+										<th>공급처명</th>
+										<th>공급처대표명</th>
+										<th>공급처주소</th>
+										<th>공급처연락처</th>
+										<th>공급처담당자명</th>
+										<th>공급처이메일</th>
 									</tr>
 								</tfoot>
 							</table>
@@ -880,6 +925,7 @@
 		</div>
 	</div>
 	<div class="app-drawer-overlay d-none animated fadeIn"></div>
+
 	<script type="text/javascript"
 		src="./assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
 </body>

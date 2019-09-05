@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.erp.dao.SupplierMapper">
+	<insert id="supplierInsert" parameterType="com.project.erp.vo.SupplierVO">
+		insert into supplier
+		(
+			supplierSeq
+			,supplierName
+			,supplierOwner
+			,supplierAddr
+			,supplierTel
+			,supplierPIC
+			,supplierEmail
+		)
+		values
+		(
+			supplierSeq.nextval
+			,#{supplierName}
+			,#{supplierOwner}
+			,#{supplierAddr}
+			,#{supplierTel}
+			,#{supplierPIC}
+			,#{supplierEmail}
+		)
+	</insert>
+	
+	<select id="supplierAllSelect" resultType="com.project.erp.vo.SupplierVO">
+		select
+			supplierSeq
+			,supplierName
+			,supplierOwner
+			,supplierAddr
+			,supplierTel
+			,supplierPIC
+			,supplierEmail
+		from
+			supplier
+	</select>
+	
+	<delete id="supplierDelete" parameterType="com.project.erp.vo.SupplierVO">
+		delete
+		from
+			supplier
+		where
+			supplierSeq=#{supplierSeq}
+	</delete>
+	
+</mapper>

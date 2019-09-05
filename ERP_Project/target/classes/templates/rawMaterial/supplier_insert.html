@@ -367,35 +367,47 @@
 						id="tab-content-0" role="tabpanel">
 						<div class="main-card mb-3 card">
 							<div class="card-body">
-								<h5 class="card-title">거래처 등록</h5>
-								<form class="">
+								<h5 class="card-title">공급처 등록</h5>
+								<form class="" action="supplierInsert" method="post">
 									<div class="form-row">
 										<div class="col-md-6">
 											<div class="position-relative form-group">
-												<label for="exampleEmail11" class="">거래처코드</label><input
-													name="email" id="exampleEmail11"
-													placeholder="supplier_seq(자동입력 혹은 없을 예정)" type="text"
+												<label for="supplierName" class="">공급처명</label><input
+													name="supplierName" id="supplierName"
+													placeholder="OO회사" type="text"
 													class="form-control">
 											</div>
 										</div>
 										<div class="col-md-6">
 											<div class="position-relative form-group">
-												<label for="examplePassword11" class="">거래처명</label><input
-													name="password" id="examplePassword11"
-													placeholder="기억회사" type="text"
+												<label for="supplierOwner" class="">공급처대표명</label><input
+													name="supplierOwner" id="supplierOwner"
+													placeholder="OOO회장" type="text"
 													class="form-control">
 											</div>
 										</div>
 									</div>
 									<div class="position-relative form-group">
-										<label for="exampleAddress" class="">전화번호</label><input
-											name="address" id="exampleAddress" placeholder="010.1111.2222"
-											type="tel" class="form-control">
+										<label for="supplierAddr" class="">공급처주소</label><input
+											name="supplierAddr" id="supplierAddr" placeholder="서울특별시강남구대치동"
+											type="text" class="form-control">
 									</div>
 									<div class="position-relative form-group">
-										<label for="exampleAddress2" class="">이메일</label><input
-											name="address2" id="exampleAddress2"
-											placeholder="a@go.com" type="email"
+										<label for="supplierTel" class="">공급처연락처</label><input
+											name="supplierTel" id="supplierTel"
+											placeholder="01011114444" type="number"
+											class="form-control">
+									</div>
+									<div class="position-relative form-group">
+										<label for="supplierPIC" class="">공급처담장자명</label><input
+											name="supplierPIC" id="supplierPIC"
+											placeholder="나인뮤지스 경리" type="text"
+											class="form-control">
+									</div>
+									<div class="position-relative form-group">
+										<label for="supplierEmail" class="">공급처이메일</label><input
+											name="supplierEmail" id="supplierEmail"
+											placeholder="나인뮤지스 경리" type="email"
 											class="form-control">
 									</div>
 									<button class="mt-2 btn btn-primary">등록</button>

@@ -1,19 +1,37 @@
 package com.project.erp.controller;
 
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.project.erp.dao.SupplierDAO;
+import com.project.erp.vo.SupplierVO;
 
 @Controller
 public class MoonController {
 
+	@Autowired
+	SupplierDAO sDAO;
+	
 	@RequestMapping(value="/goAllView", method = RequestMethod.GET)
 	public String goAllView(){
 		return "rawMaterial/all_view";
 	}
 	@RequestMapping(value="/goSupplier", method = RequestMethod.GET)
-	public String goSupplier(){
-		return "rawMaterial/supplier_view";
+	public String goSupplier(Model model){
+		ArrayList<SupplierVO> result = sDAO.supplierAllSelect();
+		
+		if(result != null) {
+			model.addAttribute("supplierList", result);
+			return "/rawMaterial/supplier_view";
+		}else {
+			return "/rawMaterial/All_view";
+		}
+		/*return "rawMaterial/supplier_view";*/
 	}
 	@RequestMapping(value="/goSupplierInsert", method = RequestMethod.GET)
 	public String goSupplierInsert(){
@@ -24,9 +42,9 @@ public class MoonController {
 		return "rawMaterial/supplier_update";
 	}
 	@RequestMapping(value="/goMaterials", method = RequestMethod.GET)
-	public String goMaterials(){
-		return "rawMaterial/materials_view";
-	}
+	public String goMaterials() {
+			return "rawMaterial/materials_view";
+		}
 	@RequestMapping(value="/goMaterialsInsert", method = RequestMethod.GET)
 	public String goMaterialsInsert(){
 		return "rawMaterial/materials_insert";
