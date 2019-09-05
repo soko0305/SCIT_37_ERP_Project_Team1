@@ -12,6 +12,10 @@ public class YBController {
 		return "member/signup";
 	}
 	
+	@RequestMapping(value="/signup2", method = RequestMethod.GET)
+	public String signup2(){
+		return "member/signup2";
+	}	
 	@RequestMapping(value="/login", method = RequestMethod.GET)
 	public String login(){
 		return "member/login";
@@ -37,7 +41,10 @@ public class YBController {
 	public String producecheck(){
 		return "production/producecheck";
 	} 
-	 
+	@RequestMapping(value="/producecheck2", method = RequestMethod.GET)
+	public String producecheck2(){
+		return "production/producecheck2";
+	}  
 	@RequestMapping(value="/produceinsert", method = RequestMethod.GET)
 	public String produceinsert(){
 		return "production/produceinsert";
