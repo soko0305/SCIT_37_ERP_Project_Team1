@@ -13,16 +13,28 @@
 
     <!-- Disable tap highlight on IE -->
     <meta name="msapplication-tap-highlight" content="no">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
-<link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
-<script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
+	<link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
+  	<!-- firebase -->
+	<script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-auth.js"></script>
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#config-web-app -->
+  <!-- firebaseUI -->
+  <script src="https://cdn.firebase.com/libs/firebaseui/4.0.0/firebaseui.js"></script>
+  <!-- firebase -->
+  <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
+  <!-- firebase Config and initialize -->	
+  <script src="firebase/firebase-config.js"></script>
+    
+	<script>
 	$(function(){	
 		$("#header").load("/header");
 		$("#navbar").load("/navbar");
 		$("#setting").load("/setting");
 	});
-</script>
+	</script>
 </head>
 <body>
 <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">    
@@ -166,10 +178,13 @@
 </script>
 <script>
 	$(function(){
+		var database = firebase.database();
+		database.ref('test/').set({"name": "test2", "intro": "hello"});
 		var type=null;
 		var storage_seq=null;
 		$("#insertStorage").click(function(){ 
 			var g_oWindow = window.open("/goInsertStorage", "Input Storage Information","width=400, height=500, location=no, toolbar=no, menubar=no, scrollbars=no, status=no, resizable=yes");
+			
 		});  
 		
 		$(".btn-lg").click(function(){
@@ -185,6 +200,28 @@
 			if(type=="delete"){
 			confirm("정말 창고 정보를 삭제하시겠습니까?");
 			}
+			
+			/*database.ref("carpark/").on('value', function(snapshot){
+				selectStillParking();
+			});
+			function putParkingDataToFirebase(serverData){
+				for(var i =0 ; i<serverData.length ; i++){
+					database.ref("carpark/"+"parkspaceNum"+serverData[i].parkspaceNum).update({
+						parkingNum:serverData[i].parkingNum
+						, carNum:serverData[i].carNum
+						, parkspaceNum:serverData[i].parkspaceNum
+						, startDate:serverData[i].startDate
+						, endDate:serverData[i].endDate
+						, fee:serverData[i].fee
+						, carType:serverData[i].carType
+						, parkingState:serverData[i].parkingState
+					});
+				}
+			}
+			
+			function deleteDataFromFirebase(carparkNum){
+				database.ref("carpark/"+"parkspaceNum"+carparkNum).set("empty");
+			}*/
 		});
 	});
 </script>
