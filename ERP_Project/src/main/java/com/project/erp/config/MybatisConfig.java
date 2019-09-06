@@ -11,17 +11,17 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 @Configuration
 public class MybatisConfig {
-	@Bean
-	public SqlSessionFactory sqlSessionFactory(DataSource datasource)throws Exception{
-		SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
-		sqlSessionFactory.setDataSource(datasource);
-		sqlSessionFactory.setMapperLocations(
-				new PathMatchingResourcePatternResolver().getResources("classpath:/mappers/*.xml"));
-		return (SqlSessionFactory)sqlSessionFactory.getObject();
-	}
-	
-	@Bean
-	public SqlSessionTemplate sqlSession(SqlSessionFactory sqlSessionFactory) throws Exception{
-		return new SqlSessionTemplate(sqlSessionFactory);
-	}
+   @Bean
+   public SqlSessionFactory sqlSessionFactory(DataSource datasource)throws Exception{
+      SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
+      sqlSessionFactory.setDataSource(datasource);
+      sqlSessionFactory.setMapperLocations(
+            new PathMatchingResourcePatternResolver().getResources("classpath:/mappers/*.xml"));
+      return (SqlSessionFactory)sqlSessionFactory.getObject();
+   }
+   
+   @Bean
+   public SqlSessionTemplate sqlSession(SqlSessionFactory sqlSessionFactory) throws Exception{
+      return new SqlSessionTemplate(sqlSessionFactory);
+   }
 }
