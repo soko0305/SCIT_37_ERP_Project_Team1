@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.erp.dao.RawMaterialMapper">
+	<insert id="rawMaterialInsert" parameterType="com.project.erp.vo.RawMaterialVO">
+		INSERT INTO RAWMATERIAL
+		(
+			RAWM_CODE
+			,SUPPLIERSEQ
+			,RAWM_NAME
+			,RAWM_SORT
+			,RAWM_PRICE
+			,RAWM_MINIMUM
+			,RAWM_SET
+			,RAWM_AUTOORDER
+		)
+		VALUES
+		(
+			RAWM_CODE.NEXTVAL
+			,#{SUPPLIERSEQ}
+			,#{RAWM_NAME}
+			,#{RAWM_SORT}
+			,#{RAWM_PRICE}
+			,#{RAWM_MINIMUM}
+			,#{RAWM_SET}
+			,#{RAWM_AUTOORDER}
+		)
+
+	</insert>
+	
+</mapper>

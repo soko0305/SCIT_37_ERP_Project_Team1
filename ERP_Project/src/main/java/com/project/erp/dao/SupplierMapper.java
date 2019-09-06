@@ -20,4 +20,6 @@ public interface SupplierMapper {
 	public int supplierDelete(SupplierVO supplier);
 	
 	public int supplierUpdate(SupplierVO supplier);
+	
+	public ArrayList<SupplierVO> supplierDashSelect();
 }

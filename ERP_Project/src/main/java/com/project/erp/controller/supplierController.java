@@ -35,7 +35,7 @@ public class supplierController {
 		if(result == 0) {
 			return "/rawMaterial/all_view";
 		}else {
-			return "/rawMaterial/supplier_view";
+			return "redirect:/goSupplierList";
 		}
 	}
 	@RequestMapping(value="/supplierUpdate", method=RequestMethod.POST)
@@ -46,7 +46,7 @@ public class supplierController {
 		if(result == 0) {
 			return "/rawMaterial/all_view";
 		}else {
-			return "/rawMaterial/supplier_view";
+			return "redirect:/goSupplierList";
 		}
 		
 	}

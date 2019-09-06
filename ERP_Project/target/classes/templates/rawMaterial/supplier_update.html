@@ -26,21 +26,21 @@
 <script>
 	$(function(){
 		$(".btn-primary").click(function(){
-			var seq = $("#supplierSeq").val();
-			var name = $("#supplierName").val();
-			var owner = $("#supplierOwner").val();
-			var addr = $("#supplierAddr").val();
-			var tel = $("#supplierTel").val();
-			var pic = $("#supplierPIC").val();
-			var email = $("#supplierEmail").val();
+			var seq = $("#supplierseq").val();
+			var name = $("#supplier_name").val();
+			var owner = $("#supplier_owner").val();
+			var addr = $("#supplier_addr").val();
+			var tel = $("#supplier_tel").val();
+			var pic = $("#supplier_pic").val();
+			var email = $("#supplier_email").val();
 			
-			$("#supplierSeq1").val(seq);
-			$("#supplierName1").val(name);
-			$("#supplierOwner1").val(owner);
-			$("#supplierAddr1").val(addr);
-			$("#supplierTel1").val(tel);
-			$("#supplierPIC1").val(pic);
-			$("#supplierEmail1").val(email);
+			$("#supplierseq1").val(seq);
+			$("#supplier_name1").val(name);
+			$("#supplier_owner1").val(owner);
+			$("#supplier_addr1").val(addr);
+			$("#supplier_tel1").val(tel);
+			$("#supplier_pic1").val(pic);
+			$("#supplier_email1").val(email);
 			
 			$("#supplierUpdateForm").submit();
 		});
@@ -51,32 +51,32 @@
 	
 	<div class="col-md-3">
 		<div class="form-group">
-			<label for="showEasing">공급처seq</label> <input id="supplierSeq" name="supplierSeq"
-				type="text" readonly="readonly" th:value="${result.supplierSeq}" class="form-control">
+			<label for="showEasing">공급처seq</label> <input id="supplierseq" name="supplierseq"
+				type="text" readonly="readonly" th:value="${result.supplierseq}" class="form-control">
 		</div>
 		<div class="form-group">
-			<label for="showEasing">공급처명</label> <input id="supplierName" name="supplierName"
-				type="text" th:value="${result.supplierName}" class="form-control">
+			<label for="showEasing">공급처명</label> <input id="supplier_name" name="supplier_name"
+				type="text" th:value="${result.supplier_name}" class="form-control">
 		</div>
 		<div class="form-group">
-			<label for="hideEasing">공급처대표명</label> <input id="supplierOwner" name="supplierOwner"
-				type="text" th:value="${result.supplierOwner}" class="form-control">
+			<label for="hideEasing">공급처대표명</label> <input id="supplier_owner" name="supplier_owner"
+				type="text" th:value="${result.supplier_owner}" class="form-control">
 		</div>
 		<div class="form-group">
-			<label for="showMethod">공급처주소</label> <input id="supplierAddr" name="supplierAddr"
-				type="text" th:value="${result.supplierAddr}" class="form-control">
+			<label for="showMethod">공급처주소</label> <input id="supplier_addr" name="supplier_addr"
+				type="text" th:value="${result.supplier_addr}" class="form-control">
 		</div>
 		<div class="form-group">
-			<label for="showMethod">공급처연락처</label> <input id="supplierTel" name="supplierTel"
-				type="tel" th:value="${result.supplierTel}" class="form-control">
+			<label for="showMethod">공급처연락처</label> <input id="supplier_tel" name="supplier_tel"
+				type="tel" th:value="${result.supplier_tel}" class="form-control">
 		</div>
 		<div class="form-group">
-			<label for="showMethod">공급처담당자명</label> <input id="supplierPIC" name="supplierPIC"
-				type="text" th:value="${result.supplierPIC}" class="form-control">
+			<label for="showMethod">공급처담당자명</label> <input id="supplier_pic" name="supplier_pic"
+				type="text" th:value="${result.supplier_pic}" class="form-control">
 		</div>
 		<div class="form-group">
-			<label for="showMethod">공급처이메일</label> <input id="supplierEmail" name="supplierEmail"
-				type="email" th:value="${result.supplierEmail}" class="form-control">
+			<label for="showMethod">공급처이메일</label> <input id="supplier_email" name="supplier_email"
+				type="email" th:value="${result.supplier_email}" class="form-control">
 		</div>
 		<div class="form-group">
 		<button type="submit" class="mb-2 mr-2 btn-square btn btn-primary">수정</button>
@@ -84,13 +84,13 @@
 	</div>
 	
 	<form action="supplierUpdate" method="post" id="supplierUpdateForm">
-		<input type="hidden" id="supplierSeq1" name="supplierSeq">
-		<input type="hidden" id="supplierName1" name="supplierName">
-		<input type="hidden" id="supplierOwner1" name="supplierOwner">
-		<input type="hidden" id="supplierAddr1" name="supplierAddr">
-		<input type="hidden" id="supplierTel1" name="supplierTel">
-		<input type="hidden" id="supplierPIC1" name="supplierPIC">
-		<input type="hidden" id="supplierEmail1" name="supplierEmail">
+		<input type="hidden" id="supplierseq1" name="supplierseq">
+		<input type="hidden" id="supplier_name1" name="supplier_name">
+		<input type="hidden" id="supplier_owner1" name="supplier_owner">
+		<input type="hidden" id="supplier_addr1" name="supplier_addr">
+		<input type="hidden" id="supplier_tel1" name="supplier_tel">
+		<input type="hidden" id="supplier_pic1" name="supplier_pic">
+		<input type="hidden" id="supplier_email1" name="supplier_email">
 	</form>
 </body>
 </html>

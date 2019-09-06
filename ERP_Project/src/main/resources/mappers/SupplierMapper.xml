@@ -7,35 +7,35 @@
 	<insert id="supplierInsert" parameterType="com.project.erp.vo.SupplierVO">
 		insert into supplier
 		(
-			supplierSeq
-			,supplierName
-			,supplierOwner
-			,supplierAddr
-			,supplierTel
-			,supplierPIC
-			,supplierEmail
+			supplierseq
+			,supplier_name
+			,supplier_owner
+			,supplier_addr
+			,supplier_tel
+			,supplier_pic
+			,supplier_email
 		)
 		values
 		(
-			supplierSeq.nextval
-			,#{supplierName}
-			,#{supplierOwner}
-			,#{supplierAddr}
-			,#{supplierTel}
-			,#{supplierPIC}
-			,#{supplierEmail}
+			supplierseq.nextval
+			,#{supplier_name}
+			,#{supplier_owner}
+			,#{supplier_addr}
+			,#{supplier_tel}
+			,#{supplier_pic}
+			,#{supplier_email}
 		)
 	</insert>
 	
 	<select id="supplierAllSelect" resultType="com.project.erp.vo.SupplierVO">
 		select
-			supplierSeq
-			,supplierName
-			,supplierOwner
-			,supplierAddr
-			,supplierTel
-			,supplierPIC
-			,supplierEmail
+			supplierseq
+			,supplier_name
+			,supplier_owner
+			,supplier_addr
+			,supplier_tel
+			,supplier_pic
+			,supplier_email
 		from
 			supplier
 	</select>
@@ -45,36 +45,53 @@
 		from
 			supplier
 		where
-			supplierSeq=#{supplierSeq}
+			supplierseq=#{supplierseq}
 	</delete>
 	
 	<update id="supplierUpdate" parameterType="com.project.erp.vo.SupplierVO">
 		update
 			supplier
 		set
-			supplierName=#{supplierName}
-			,supplierOwner=#{supplierOwner}
-			,supplierAddr=#{supplierAddr}
-			,supplierTel=#{supplierTel}
-			,supplierPIC=#{supplierPIC}
-			,supplierEmail=#{supplierEmail}
+			supplier_name=#{supplier_name}
+			,supplier_owner=#{supplier_owner}
+			,supplier_addr=#{supplier_addr}
+			,supplier_tel=#{supplier_tel}
+			,supplier_pic=#{supplier_pic}
+			,supplier_email=#{supplier_email}
 		where
-			supplierSeq=#{supplierSeq}
+			supplierseq=#{supplierseq}
 	</update>
 	
 	<select id="supplierOneSelect" parameterType="com.project.erp.vo.SupplierVO" resultType="com.project.erp.vo.SupplierVO">
 		select
-			supplierSeq
-			,supplierName
-			,supplierOwner
-			,supplierAddr
-			,supplierTel
-			,supplierPIC
-			,supplierEmail
+			supplierseq
+			,supplier_name
+			,supplier_owner
+			,supplier_addr
+			,supplier_tel
+			,supplier_pic
+			,supplier_email
 		from
 			supplier
 		where
-			supplierSeq=#{supplierSeq}
+			supplierseq=#{supplierseq}
+	</select>
+	
+	<select id="supplierDashSelect" resultType="com.project.erp.vo.SupplierVO">
+		select
+			supplierseq
+			,supplier_name
+			,supplier_owner
+			,supplier_addr
+			,supplier_tel
+			,supplier_pic
+			,supplier_email
+		from
+			supplier
+		where
+			rownum&lt;=3
+		order by
+			supplierseq desc
 	</select>
 	
 </mapper>

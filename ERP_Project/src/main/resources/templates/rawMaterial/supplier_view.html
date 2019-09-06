@@ -45,11 +45,11 @@
 <body>
 
 	<form id="deleteForm" action="supplierDelete" method="post">
-		<input type="hidden" id="seq" name="supplierSeq">
+		<input type="hidden" id="seq" name="supplierseq">
 	</form>
 	
 	<form id="updateForm" action="goSupplierUpdate" method="get">
-		<input type="hidden" id="seq1" name="supplierSeq">
+		<input type="hidden" id="seq1" name="supplierseq">
 	</form>
 
 	<div
@@ -391,18 +391,18 @@
 								<tbody>
 
 									<tr th:each="list : ${supplierList}">
-										<td th:text="${list.supplierSeq}"></td>
-										<td th:text="${list.supplierName}"></td>
-										<td th:text="${list.supplierOwner}"></td>
-										<td th:text="${list.supplierAddr}"></td>
-										<td th:text="${list.supplierTel}"></td>
-										<td th:text="${list.supplierPIC}"></td>
-										<td th:text="${list.supplierEmail}"></td>
+										<td th:text="${list.supplierseq}"></td>
+										<td th:text="${list.supplier_name}"></td>
+										<td th:text="${list.supplier_owner}"></td>
+										<td th:text="${list.supplier_addr}"></td>
+										<td th:text="${list.supplier_tel}"></td>
+										<td th:text="${list.supplier_pic}"></td>
+										<td th:text="${list.supplier_email}"></td>
 										<td>
 											<button class="mb-2 mr-2 btn-square btn btn-primary"
-												data-type="update" th:value="${list.supplierSeq}">수정</button>
+												data-type="update" th:value="${list.supplierseq}">수정</button>
 											<button class="mb-2 mr-2 btn-square btn btn-primary"
-												data-type="delete" th:value="${list.supplierSeq}">삭제</button>
+												data-type="delete" th:value="${list.supplierseq}">삭제</button>
 										</td>
 									</tr>
 								</tbody>

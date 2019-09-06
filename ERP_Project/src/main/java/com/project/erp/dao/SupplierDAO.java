@@ -78,4 +78,17 @@ public class SupplierDAO {
 		}
 		return result;
 	}
+	
+	public ArrayList<SupplierVO> supplierDashSelect(){
+		ArrayList<SupplierVO> result = null;
+
+		SupplierMapper mapper = sqlSession.getMapper(SupplierMapper.class);
+		try {
+			result = mapper.supplierDashSelect();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return result;
+		}
+		return result;
+	}
 }
