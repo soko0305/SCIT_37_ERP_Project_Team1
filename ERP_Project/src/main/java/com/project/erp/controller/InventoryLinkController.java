@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class InventoryLinkController {
 	@RequestMapping(value="/goStorage", method = RequestMethod.GET)
 	public String goStorageManagement(){
-		return "inventory/storage";
+		return "inventory/warehouse";
 	}
 	
 	@RequestMapping(value="/goInventoryManagement", method = RequestMethod.GET)
@@ -28,11 +28,11 @@ public class InventoryLinkController {
 	
 	@RequestMapping(value="/goInsertStorage", method = RequestMethod.GET)
 	public String goInsertStorage(){
-		return "inventory/insertStorageInfo";
+		return "inventory/insertWarehouseInfo";
 	}
 	
 	@RequestMapping(value="/goUpdateStorage", method = RequestMethod.GET)
 	public String goUpdateStorage(){
-		return "inventory/updateStorageInfo";
+		return "inventory/updateWarehouseInfo";
 	}
 }
