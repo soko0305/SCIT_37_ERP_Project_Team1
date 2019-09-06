@@ -55,9 +55,9 @@
 			supplierName=#{supplierName}
 			,supplierOwner=#{supplierOwner}
 			,supplierAddr=#{supplierAddr}
-			,supplierTel=${supplierTel}
-			,supplierPIC=${supplierPIC}
-			,supplierEmail=${supplierEmail}
+			,supplierTel=#{supplierTel}
+			,supplierPIC=#{supplierPIC}
+			,supplierEmail=#{supplierEmail}
 		where
 			supplierSeq=#{supplierSeq}
 	</update>

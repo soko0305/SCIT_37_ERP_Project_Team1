@@ -23,15 +23,15 @@ public class MoonController {
 	}
 	@RequestMapping(value="/goSupplier", method = RequestMethod.GET)
 	public String goSupplier(Model model){
-		ArrayList<SupplierVO> result = sDAO.supplierAllSelect();
+		/*ArrayList<SupplierVO> result = sDAO.supplierAllSelect();
 		
 		if(result != null) {
 			model.addAttribute("supplierList", result);
 			return "/rawMaterial/supplier_view";
 		}else {
 			return "/rawMaterial/All_view";
-		}
-		/*return "rawMaterial/supplier_view";*/
+		}*/
+		return "redirect:/goSupplierList";
 	}
 	@RequestMapping(value="/goSupplierInsert", method = RequestMethod.GET)
 	public String goSupplierInsert(){
@@ -72,6 +72,29 @@ public class MoonController {
 	public String goBuy(){
 		return "rawMaterial/buy";
 	}
+	@RequestMapping(value="/goSupplierList", method = RequestMethod.GET)
+	public String goSupplierList(Model model){
+		ArrayList<SupplierVO> result = sDAO.supplierAllSelect();
+		
+		if(result != null) {
+			model.addAttribute("supplierList", result);
+			return "/rawMaterial/supplier_view";
+		}else {
+			return "/rawMaterial/All_view";
+		}
+	}
+	
+	
+	
+	
+	@RequestMapping(value="/Moon_test", method = RequestMethod.GET)
+	public String Moon_test(){
+		return "rawMaterial/Moon_test";
+	}
+	
+	
+	
+	
 	
 	
 	@RequestMapping(value="/production_insert", method = RequestMethod.GET)
