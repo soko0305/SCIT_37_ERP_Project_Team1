@@ -75,87 +75,7 @@
                     
                     
                     <!--  테이블 내용 -->
-                <table style="width: 97em">
-                	<tr>
-                		<td>
-                            <div class="main-card mb-3 card">
-                                        <div class="card-header">
-                                        <i class="header-icon lnr-laptop-phone icon-gradient bg-plum-plate"> </i>창고1
-                                            <div class="btn-actions-pane-right actions-icon-btn" style="margin-top: 0.7em;">
-                                                <button class="mb-2 mr-2 btn-pill btn-transition btn btn-outline-primary btn-sm" type="button" style="float: right;">
-                                   				 detail
-                                    			</button>
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
-                                        	<p>관리 재고 수량 : x</p>
-                                        	<p>관리 생산품 재고 수량 : x</p>
-                                        	<p>관리 원자재 관리 수량 : x</p>
-                                        	<p>면적 : </p>
-                                        	<p>위치 : </p>
-                                        	<p>개설일 : </p>
-                                        	
-                                        </div>
-                                        <div class="d-block text-right card-footer">
-                                       <button class="btn-shadow-primary btn btn-primary btn-lg" button-type="update" data-seq="">Update</button>
-                                            <button class="mr-2 btn btn-link btn-sm" button-type="delete" data-seq="">Delete</button>
-                                        </div>
-                                    </div>
-                            
-                		</td>
-                		
-                		<td style="padding-left: 2em">
-                            <div class="main-card mb-3 card">
-                                        <div class="card-header">
-                                        <i class="header-icon lnr-laptop-phone icon-gradient bg-plum-plate"> </i>창고1
-                                            <div class="btn-actions-pane-right actions-icon-btn" style="margin-top: 0.7em;">
-                                                <button class="mb-2 mr-2 btn-pill btn-transition btn btn-outline-primary btn-sm" type="button" style="float: right;">
-                                   				 detail
-                                    			</button>
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
-                                        	<p>관리 재고 수량 : x</p>
-                                        	<p>관리 생산품 재고 수량 : x</p>
-                                        	<p>관리 원자재 관리 수량 : x</p>
-                                        	<p>면적 : </p>
-                                        	<p>위치 : </p>
-                                        	<p>개설일 : </p>
-                                        </div>
-                                        <div class="d-block text-right card-footer">
-                                        <button class="btn-shadow-primary btn btn-primary btn-lg" button-type="update" data-seq="">Update</button>
-                                            <button class="mr-2 btn btn-link btn-sm" button-type="delete" data-seq="">Delete</button>
-                                        </div>
-                                    </div>
-                
-                		</td>
-                		<td style="padding-left: 2em">
-                	
-                            <div class="main-card mb-3 card">
-                                        <div class="card-header">
-                                        <i class="header-icon lnr-laptop-phone icon-gradient bg-plum-plate"> </i>창고1
-                                            <div class="btn-actions-pane-right actions-icon-btn" style="margin-top: 0.7em;">
-                                                <button class="mb-2 mr-2 btn-pill btn-transition btn btn-outline-primary btn-sm" type="button" style="float: right;">
-                                   				 detail
-                                    			</button>
-                                            </div>
-                                        </div>
-                                        <div class="card-body">
-                                        	<p>관리 재고 수량 : x</p>
-                                        	<p>관리 생산품 재고 수량 : x</p>
-                                        	<p>관리 원자재 관리 수량 : x</p>
-                                        	<p>면적 : </p>
-                                        	<p>위치 : </p>
-                                        	<p>개설일 : </p>
-                                        </div>
-                                        <div class="d-block text-right card-footer">
-                                              <button class="btn-shadow-primary btn btn-primary btn-lg" button-type="update" data-seq="">Update</button>
-                                            <button class="mr-2 btn btn-link btn-sm" button-type="delete" data-seq="">Delete</button>
-                                        </div>
-                                    </div>
-                            
-                		</td>	
-                	</tr>
+                <table style="width: 97em" id="warehouseTable">
                 </table>
                     
                     
@@ -178,15 +98,20 @@
 </script>
 <script>
 	$(function(){
+		//파이어베이스 객체 호출
 		var database = firebase.database();
-		database.ref('test/').set({"name": "test2", "intro": "hello"});
+		
+		//창고관리 버튼 타입 및 창고코드 변수
 		var type=null;
 		var storage_seq=null;
+		
+		//창고 추가 버튼 눌렀을때
 		$("#insertStorage").click(function(){ 
 			var g_oWindow = window.open("/goInsertStorage", "Input Storage Information","width=400, height=500, location=no, toolbar=no, menubar=no, scrollbars=no, status=no, resizable=yes");
 			
 		});  
 		
+		//창고 정보 수정 버튼 눌렀을때
 		$(".btn-lg").click(function(){
 			type= $(this).attr("button-type");
 			storage_seq= $(this).attr("data-seq");
@@ -194,6 +119,7 @@
 			
 		});
 		
+		//창고 삭제 버튼 눌렀을 때
 		$(".btn-sm").click(function(){
 			type= $(this).attr("button-type");
 			storage_seq= $(this).attr("data-seq");
@@ -201,7 +127,58 @@
 			confirm("정말 창고 정보를 삭제하시겠습니까?");
 			}
 			
-			/*database.ref("carpark/").on('value', function(snapshot){
+		
+		//처음 들어왔을 때 창고 리스트 가져오기
+		$.ajax({
+			url: selectAllInventory,
+			type: get,
+			success:function(serverData){
+				printAllInventory(serverData);
+			}
+		});
+		
+		//UI에 창고 리스트 전체 출력
+			function printAllInventory(serverData){
+				for(var i = 0 ; i<serverData.length ; i++){
+					var str='';
+					if(serverData.length>=2&&i%3==0){
+						str+='<tr>';
+					}
+					str+='<td>';
+					str+='<div class="main-card mb-3 card">';
+					str+='<div class="card-header">';
+					str+='<i class="header-icon lnr-laptop-phone icon-gradient bg-plum-plate"> </i>'+serverData[i].warehouse_name+'';
+					str+='<div class="btn-actions-pane-right actions-icon-btn" style="margin-top: 0.7em;">';
+					str+='<button class="mb-2 mr-2 btn-pill btn-transition btn btn-outline-primary btn-sm" button-type="detail" data-seq="'+serverData[i].warehouse_code+'" type="button" style="float: right;">';
+					str+='detail';
+					str+='</button>';
+					str+='</div>';
+					str+='</div>';
+					str+='<div class="card-body">';
+					str+='<p>관리 재고 수량 : x</p>';
+					str+='<p>관리 생산품 재고 수량 : x</p>';
+					str+='<p>관리 원자재 관리 수량 : x</p>';
+					str+='<p>면적 : '+serverData[i].warehouse_size+'</p>';
+					str+='<p>위치 : '+serverData[i].warehouse_addr+'</p>';
+					str+='<p>개설일 : '+serverData[i].warehouse_date+'</p>';	
+					str+='</div>';
+					str+='<div class="d-block text-right card-footer">';
+					str+='<button class="btn-shadow-primary btn btn-primary btn-lg" button-type="update" data-seq="'+serverData[i].warehouse_code+'">Update</button>';
+					str+='<button class="mr-2 btn btn-link btn-sm" button-type="delete" data-seq="'+serverData[i].warehouse_code+'">Delete</button>';
+					str+='</div>';
+					str+='</div>';  
+					str+='</td>';
+					if(serverData.length>=2&&i%3==2){
+						str+='<tr>';
+					}
+					$("#warehouseTable").append(str);
+				}
+		}
+			
+			
+			/*
+			파이어베이스 관련 코딩
+			database.ref("carpark/").on('value', function(snapshot){
 				selectStillParking();
 			});
 			function putParkingDataToFirebase(serverData){
