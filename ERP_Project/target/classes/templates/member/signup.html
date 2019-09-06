@@ -18,47 +18,88 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
 <link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
-<script>
-   var isChecked = false;//중복확인버튼 누름여부
 
-   $(function() {
+ <script>
+ 
+	$("#signupForm").submit();
 
-      $("#signupButton").click(function() {
+/* 	$(function(){
+		var isChecked = false;
+ 		
+		$("#signupButton").click(function(){
+			if(isChecked){
+				checkValueForm();
+			}else{
+				$("#errorMessage").html("중복체크를 해야합니다");
+			}
+		});
+		
+		function checkValueForm(){
+			var check=/[^\s][ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/gi;
+			var userPw = $("#userpw").val();
+			var reUserPw = $("#userpwcheck").val();
+			var userName = $("#name").val();
+			var userEmail = $("#email").val();
+			var userPhoneNum =$("#phonenumber").val();
+			var userPosition =$("#userstatus").val();	
+			var userDivison =$("#userdepartment").val();	
+			var userAdress =$("#address").val();	
+			var userPhoneNum =$("#phonenumber").val();			
+  
+			if(userPw.length>=3 && userPw.length<=10){
+				if(userPw==reUserPw){
+					if(check.test(userName)){
+							if(userEmail.length!=0 && userPhoneNum.length!=0 && userPosition.length!=0 && userDivison.length!=0 && userAdress.length!=0){
+									$("#signupForm").submit();
+						}else{  
+							$("#errorMessage").html("기입 사항을 모두 기입해주시기 바랍니다");
+					}
+					}else{
+						$("#errorMessage").html("이름 양식이 잘못되었습니다");
+ 				}
+				}else{
+				$("#errorMessage").html("입력하신 비밀번호와 확인 비밀번호가 다릅니다");
+  			}
+ 			}else{
+				$("#errorMessage").html("비밀번호는5 글자 이상 입력해주시기 바랍니다");
+			}
+			
+			$("#checkButton").click(function(){
+				var check=/[^a-z0-9]/g; 
+				var userId = $("#userid").val();
+				if(userId.length>=3 && userId.length<=10){
+					if(!(check.test(userId))){
+				
+						$.ajax({
+							url: "selectMemberById",
+							type: "get",
+							data:{userId:userId},
+							success:function(serverData){
+								if(serverData.userId==null){
+									isChecked = true;
+									$("#errorMessage").html(userId+" 는 사용가능 아이디입니다");
+								}else{
+									isChecked = false;
+									$("#errorMessage").html("중복되는 아이디가 있습니다");
+								}	
+							}
+						});
+					}else{
+						$("#errorMessage").html("아이디는 소문자와 숫자 소합만 사용해주시기 바랍니다");
+					}
+				}else{
+					$("#errorMessage").html("아이디는 3-10글자를 입력해주시기 바랍니다");
+				}
+			});
+			
+			$("#userid").change(function(){
+				isChecked = false;
+				$("#errorMessage").html("");
+			});
+				}); */
+ </script>  
 
-         if (isChecked) {
-            $("#signupForm").submit();
-         }else{
-            alert("중복확인버튼을 먼저 누르세요.");
-         }
 
-      });
-      
-      $(".checkId").click(function(){
-         
-         $.ajax({
-            
-            url:"selectUser",
-            data:{userid:$("#userid").val()},
-            type:"get",
-            success:function(dataFromServer){
-               if(dataFromServer=="ok"){
-                  $("#message").html("사용가능한 아이디 입니다.");
-                  isChecked=true;
-               }else{
-                  $("#message").html("중복된 아이디 입니다.");
-                  isChecked=false;
-               }
-            }
-         });
-         
-      });
-      
-      $("#userid").on("change",function(){
-         isChecked=false;
-      });
-
-   });
-</script>
 
 <body>
 <div class="app-container app-theme-white body-tabs-shadow">
@@ -68,79 +109,71 @@
                     <div class="h-100 d-md-flex d-sm-block bg-white justify-content-center align-items-center col-md-12 col-lg-7">
                         <div class="mx-auto app-login-box col-sm-12 col-md-10 col-lg-9">
                             <div class="app-logo"></div>
-                            <h4>
-                                <div>회원가입</div></h4>
+                            
+                                <div><h4>회원가입</div></h4>
                             <div>
-                                <form class="">
+                                <form id="signupForm" action="insertMember" method="post">
                                     <div class="form-row">
                                         <div class="col-md-4">
                                             <div class="position-relative form-group"><label for="exampleID" class="">
                                             <span class="text-danger">*</span>
-                                            	 아이디</label><input name="userid" id="userid" placeholder="id here..." type="id" class="form-control">                                                                         
-                                   
+                                            	 아이디</label><input name="userid" id="userid" placeholder="id ..." type="text" class="form-control">
                                             </div>
-                                             
-                                        </div>
+                                         </div>
                                         <div class="col-md-3"><br>
-                                            <button class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg" type="button">
+                                            <button class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg" id="checkId" name="checkId" type="button">
                                             	중복 확인</button>
                                         </div>
-                                                                               
-                                 <font color="red" id="message"></font>
+                                  <font color="red" id="errorMessage"></font>
                                          <div class="col-md-6">
                                             <div class="position-relative form-group"><label for="examplePassword" class="">
                                             <span class="text-danger">*</span>
-                                            	 비밀번호</label><input name="userpassword" id="userlePassword" placeholder="Password here..."
-                                                                                                                                                                                      type="password" class="form-control"></div>
+                                            	 비밀번호</label><input name="userpw" id="userpw" placeholder="Password ..."
+                                               type="password" class="form-control"></div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="position-relative form-group"><label for="examplePasswordRep" class="">
                                             <span class="text-danger">*</span> 
-                                            	비밀번호 확인</label><input name="passwordrep" id="examplePasswordRep"
-                                                                                                                                                                                                placeholder="Repeat Password here..." type="password"
-                                                                                                                                                                                                class="form-control"></div>
+                                            	비밀번호 확인</label><input name="userpwcheck" id="userpwcheck"
+                                                placeholder="Repeat Password ..." type="password" class="form-control"></div>
                                         </div>                                        
                                         <div class="col-md-6">
                                             <div class="position-relative form-group">
                                             <label for="exampleEmail" class=""><span class="text-danger">*</span> 
-                                            	이메일</label><input name="email" id="exampleEmail" placeholder="Email here..." type="email"
-                                                                                                                                                                                class="form-control"></div>
+                                            	이메일</label><input name="email" id="email" placeholder="Email ..." type="email"
+                                                                             class="form-control"></div>
                                         </div>                                        
                                         <div class="col-md-6">
                                             <div class="position-relative form-group">
                                             <label for="exampleName" class=""><span class="text-danger">*</span> 
-                                            	성명</label><input name="text" id="exampleName" placeholder="Name here..." type="text" class="form-control"></div>
+                                            	성명</label><input name="name" id="name" placeholder="Name ..." type="text" class="form-control"></div>
                                         </div>                                        
                                         <div class="col-md-6">
                                             <div class="position-relative form-group">
                                             <label for="examplePosition" class=""><span class="text-danger">*</span>
-                                            	 직책</label><input name="text" id="examplePosition" placeholder="Position here..." type="text" class="form-control"></div>
+                                            	 직책</label><input name="userstatus" id="userstatus" placeholder="Position ..." type="text" class="form-control"></div>
                                         </div>                                        
                                         <div class="col-md-6">
                                             <div class="position-relative form-group">
                                             <label for="exampleDivision" class=""><span class="text-danger">*</span> 
-                                            	부서</label><input name="text" id="exampleDivision" placeholder="Division here..." type="text" class="form-control"></div>
+                                            	부서</label><input name="userdepartment" id="userdepartment" placeholder="Division ..." type="text" class="form-control"></div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="position-relative form-group">
                                             <label for="exampleAddress" class=""><span class="text-danger">*</span> 
-                                            	주소</label><input name="text" id="exampleAddress" placeholder="Address here..." type="text" class="form-control"></div>
+                                            	주소</label><input name="address" id="address" placeholder="Address ..." type="text" class="form-control"></div>
                                         </div>                                                
                                         <div class="col-md-6">
                                             <div class="position-relative form-group">
                                             <label for="examplePhone" class=""><span class="text-danger">*</span> 
-                                            	연락처</label><input name="number" id="examplePhone" placeholder="Phone here..." type="tel" class="form-control"></div>
+                                            	연락처</label><input name="phonenumber" id="phonenumber" placeholder="Phone ..." type="phonenumber" class="form-control"></div>
                                         </div>                                                                          
-  
-                                        
-                                        
-                                        
-                                    </div>
+                                     </div>
 
                                     <div class="mt-4 d-flex align-items-center"><h5 class="mb-0">
-                                    	이미 가입되어있으신가요? <a href="javascript:void(0);" class="text-primary">로그인</a></h5>
+                                    	이미 가입되어있으신가요? <a href="login" class="text-primary">로그인</a></h5>
                                         <div class="ml-auto">
-                                            <button class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg">계정 만들기</button>
+                                            <button class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg" id="signupButton" name="signupButton">계정 만들기</button>
                                         </div>
                                     </div>
                                 </form>

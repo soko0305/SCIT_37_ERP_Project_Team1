@@ -4,85 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.project.erp.dao.MemberMapper">
-
  
-
-	<select id="selectMember" parameterType="com.project.erp.vo.MemberVO" resultType="com.project.erp.vo.MemberVO">
-		SELECT  userid
-				, userpw
-				, userstatus
-				, userdepartment
-				, userstate
-				, name
-				, phonenumber
-				, email
-				, address
-		FROM erp_member
-		WHERE userid=#{userId}
-			  AND
-			  userpw=#{userPw}
-			  AND
-			  userstatus=#{userStatus}
-	</select>
-	
-	<select id="selectMemberByIdAndPw" parameterType="com.project.erp.vo.MemberVO" resultType="com.project.erp.vo.MemberVO">
-		SELECT  userid
-				, userpw
-				, userstatus
-				, userdepartment
-				, userstate
-				, name
-				, phonenumber
-				, email
-				, address
-		FROM erp_member
-		WHERE userid=#{userId}
-			  AND
-			  userid=#{userPw}
-	</select>
-	
-	<update id="deleteMember" parameterType="com.project.erp.vo.MemberVO">
-		UPDATE erp_member
-		SET userState='withdrawal'
-		WHERE userid=#{userId}
-	</update>
-	
-	<select id="selectMemberById" parameterType="com.project.erp.vo.MemberVO" resultType="com.project.erp.vo.MemberVO">
-		SELECT  userid
-				, userpw
-				, userstatus
-				, userState
-		FROM erp_member
-		WHERE userid=#{userId}
-	</select>
-
-
-<!-- 	<select id="selectClientById" parameterType="com.project.erp.vo.MemberVO" resultType="com.project.erp.vo.MemberVO">
-		SELECT  userId
-				, userName
-				, userEmail
-				, userPhoneNum
-				, userCarNum
-				, userCarType
-		FROM carparkclient
-		WHERE userid=#{userId}
-	</select> -->
-	
-<!-- 	<select id="selectRequestedMember" resultType="com.project.erp.vo.MemberVO">
-		SELECT  mem.userid as userId
-        		, mem.userpw as userPw
-        		, mem.userstate as userState
-        		, mem.userstatus as userStatus
-        		, em.username as userName
-        		, em.userphonenum as userPhoneNum
-        		, em.useremail as userEmail
-		FROM carparkmember mem JOIN carparkemployee em
-		ON mem.userid = em.userid
-		WHERE mem.userstate='pre_certificate'
-		ORDER BY userId DESC
-	</select> -->
-	
-	
+ 
 	<insert id="insertMember" parameterType="com.project.erp.vo.MemberVO">
 		INSERT INTO erp_member(
  				userid
@@ -108,49 +31,11 @@
  
 		)
 	</insert>
-	
-	
-	<!-- <insert id="insertWorkerOrClient" parameterType="com.carpark.project.vo.MemberVO">
-		<choose>
-			<when test="userStatus=='client'.toString()">
-				INSERT INTO carparkclient(
-					userId
-					, userName
-					, userEmail
-					, userPhoneNum
-					, userCarNum
-					, userCarType
-				)
-				VALUES(
-					#{userId}
-					, #{userName}
-					, #{userEmail}
-					, #{userPhoneNum}
-					, #{userCarNum}
-					, #{userCarType}
-				)
-			</when>
-			<otherwise>
-				INSERT INTO carparkemployee(
-					userId
-					, userName
-					, userEmail
-					, userPhoneNum
-				)
-				VALUES(
-					#{userId}
-					, #{userName}
-					, #{userEmail}
-					, #{userPhoneNum}
-				)
-			</otherwise>
-		</choose>
-	</insert> -->
-	
-	<update id="updateUserState" parameterType="com.project.erp.vo.MemberVO">
-		UPDATE erp_member
-		SET userState='alloewd'
-		WHERE userid=#{userId}
-	</update>
-	
+		<select id="selectMemberById" parameterType="com.project.erp.vo.MemberVO" resultType="com.project.erp.vo.MemberVO">
+		SELECT  userid
+				, userpw
+				, userstate
+		FROM erp_member
+		WHERE userid=#{userid}
+	</select>
 </mapper>

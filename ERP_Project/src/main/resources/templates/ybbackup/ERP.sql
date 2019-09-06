@@ -1,12 +1,14 @@
+drop table erp_member;
+
 create table erp_member(
-userid varchar(20) primary key,
-userpw varchar(20) not null,
-userstatus varchar(20),
-userdepartment varchar(20),
-userstate varchar(20),
-name varchar(20),
+userid varchar2(20) primary key,
+userpw varchar2(20) not null,
+userstatus varchar2(20),
+userdepartment varchar2(20),
+userstate varchar2(20) check(userstate in ('allowed',  'notallowed', 'withdrawal' , 'kickedout' )) ,
+name varchar2(20),
 phonenumber number,
-email varchar(20),
-address varchar(20)
+email varchar2(20),
+address varchar2(20)
 )
 commit;
