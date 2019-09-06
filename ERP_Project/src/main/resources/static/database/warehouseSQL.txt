@@ -1,0 +1,10 @@
+/** 창고 테이블 **/
+CREATE TABLE warehouse(
+warehouse_code VARCHAR2(100) PRIMARY KEY ,
+warehouse_name VARCHAR2(100) NOT NULL,
+warehouse_addr VARCHAR2(100) NOT NULL,
+warehouse_date DATE DEFAULT SYSDATE NOT NULL
+);
+
+/** 창고 시퀀스 **/
+CREATE SEQUENCE warehouse_seq;
