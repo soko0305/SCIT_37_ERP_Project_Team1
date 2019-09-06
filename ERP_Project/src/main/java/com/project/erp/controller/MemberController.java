@@ -1,4 +1,4 @@
-/*package com.project.erp.controller;
+package com.project.erp.controller;
 
 import java.util.ArrayList;
 
@@ -22,13 +22,13 @@ public class MemberController {
 	
 	@RequestMapping(value="/login", method = RequestMethod.POST)
 	public String login(MemberVO member, HttpSession session, Model model){
-		member.setUserid((String)session.getAttribute("loginStatus"));
+		member.setUserid((String)session.getAttribute("userState"));
 		MemberVO m = memberDao.selectMember(member);
 		if(m !=null){
-			if(m.getUserState().equals("using")){
-				session.setAttribute("loginId", m.getUserId());
+			if(m.getUserstate().equals("allowed")){
+				session.setAttribute("userId", m.getUserid());
 				return "index";
-			}else if(m.getUserState().equals("withdrawal")){
+			}else if(m.getUserstate().equals("withdrawal")){
 				model.addAttribute("message", "Å»ÅðÇÑ È¸¿øÀÔ´Ï´Ù");
 				return "member/login";	
 			}else{
@@ -43,7 +43,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/withdrawal", method = RequestMethod.POST)
 	public String withdrawal(MemberVO member, HttpSession session, Model model){
-		member.setUserId((String)session.getAttribute("loginId"));
+		member.setUserid((String)session.getAttribute("userId"));
 		MemberVO m = memberDao.selectMemberByIdAndPw(member);
 		if(m !=null){
 			int check = memberDao.deleteMember(m);
@@ -69,16 +69,10 @@ public class MemberController {
 	
 
 	@RequestMapping(value="/insertMember", method = RequestMethod.POST)
-	public String insertMember(MemberVO member, HttpSession session){ 
-		member.setUserid((String)session.getAttribute("loginStatus"));
-		if(session.getAttribute("loginStatus").toString().equals("client")){
-			member.setUserState("using");
-		}else{
-			member.setUserState("pre_certificate");
-		}
-		int check1 = memberDao.insertMember(member);
-		int check2 = memberDao.insertWorkerOrClient(member);
-		return "member/login";
+	public String insertMember(MemberVO member ){ 
+ 		 
+		 memberDao.insertMember(member);
+ 		return "member/login";
 	}
 	
 	@RequestMapping(value="/selectRequestedMember", method = RequestMethod.GET)
@@ -101,4 +95,3 @@ public class MemberController {
 	
 	
 }
-*/

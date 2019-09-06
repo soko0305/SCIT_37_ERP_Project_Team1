@@ -19,11 +19,10 @@
 <script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
 <link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
 
-<!-- <script>
+ <script>
 	$(function(){
 		var isChecked = false;
-		var userStatus = $("#getUserStatus").val();
-		
+ 		
 		$("#signupButton").click(function(){
 			
 			if(isChecked){
@@ -56,7 +55,7 @@
 					}
 				}else{
 					$("#errorMessage").html("입력하신 비밀번호와 확인 비밀번호가 다릅니다");
-				}
+				
 			}else{
 				$("#errorMessage").html("비밀번호는 3-10 글자 입력해주시기 바랍니다");
 			}
@@ -99,49 +98,8 @@
 		});
 			});
 
-</script> -->
-<!-- <script>
-   var isChecked = false;//중복확인버튼 누름여부
+</script>  
 
-   $(function() {
-
-      $("#signupButton").click(function() {
-
-         if (isChecked) {
-            $("#signupForm").submit();
-         }else{
-            alert("중복확인버튼을 먼저 누르세요.");
-         }
-
-      });
-      
-      $("#checkId").click(function(){
-         
-         $.ajax({
-            
-            url:"selectUser",
-            data:{
-            	userid:$("#id").val()},
-            type:"get",
-            success:function(dataFromServer){
-               if(dataFromServer=="ok"){
-                  $("#message").html("사용가능한 아이디 입니다.");
-                  isChecked=true;
-               }else{
-                  $("#message").html("중복된 아이디 입니다.");
-                  isChecked=false;
-               }
-            }
-         });
-         
-      });
-      
-      $("#id").on("change",function(){
-         isChecked=false;
-      });
-
-   });
-</script> -->
 
 <body>
 <div class="app-container app-theme-white body-tabs-shadow">
@@ -159,7 +117,7 @@
                                         <div class="col-md-4">
                                             <div class="position-relative form-group"><label for="exampleID" class="">
                                             <span class="text-danger">*</span>
-                                            	 아이디</label><input name="id" id="id" placeholder="id here..." type="id" class="form-control">
+                                            	 아이디</label><input name="userid" id="userid" placeholder="id here..." type="id" class="form-control">
                                             </div>
                                          </div>
                                         <div class="col-md-3"><br>
@@ -170,13 +128,13 @@
                                          <div class="col-md-6">
                                             <div class="position-relative form-group"><label for="examplePassword" class="">
                                             <span class="text-danger">*</span>
-                                            	 비밀번호</label><input name="password" id="password" placeholder="Password here..."
+                                            	 비밀번호</label><input name="userpassword" id="userpassword" placeholder="Password here..."
                                                type="password" class="form-control"></div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="position-relative form-group"><label for="examplePasswordRep" class="">
                                             <span class="text-danger">*</span> 
-                                            	비밀번호 확인</label><input name="passwordcheck" id="passwordcheck"
+                                            	비밀번호 확인</label><input name="userpasswordcheck" id="userpasswordcheck"
                                                 placeholder="Repeat Password here..." type="password" class="form-control"></div>
                                         </div>                                        
                                         <div class="col-md-6">
