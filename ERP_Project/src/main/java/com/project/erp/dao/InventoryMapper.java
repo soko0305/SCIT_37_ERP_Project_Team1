@@ -15,4 +15,6 @@ public interface InventoryMapper {
 
 	public int insertWarehouse(WarehouseVO warehouse);
 
+	public WarehouseVO selectLatestWarehouse();
+
 }

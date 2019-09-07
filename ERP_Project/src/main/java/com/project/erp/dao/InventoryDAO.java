@@ -35,5 +35,16 @@ public class InventoryDAO {
 		}
 		return check;
 	}
+
+	public WarehouseVO selectLatestWarehouse() {
+		WarehouseVO w = null;
+		try{
+		InventoryMapper mapper = sqlSession.getMapper(InventoryMapper.class);
+		w= mapper.selectLatestWarehouse();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return w;
+	}
 	
 }

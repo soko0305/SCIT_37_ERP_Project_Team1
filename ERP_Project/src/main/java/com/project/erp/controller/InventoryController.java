@@ -30,4 +30,10 @@ public class InventoryController {
 		check = inventoryService.insertWarehouse(warehouse);
 	}
 	
+	@RequestMapping(value="/selectLatestWarehouse", method = RequestMethod.GET)
+	public @ResponseBody WarehouseVO selectLatestWarehouse(){
+		WarehouseVO w = null;
+		w = inventoryService.selectLatestWarehouse();
+		return w;
+	}
 }

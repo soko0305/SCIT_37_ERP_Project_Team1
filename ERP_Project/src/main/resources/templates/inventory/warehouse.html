@@ -115,17 +115,29 @@
 		                window.clearInterval(g_oInterval);
 		                g_oWindow = null;
 		                selelctANDPrintAll();
+		           		selectLatestWarehouse();
 		            }
 		        } catch (e) { }
 		    }, 500);
 		});  
 		
+		//창고 추가 버튼 눌렀을 때 추가 된 warehouse정보를 가져와 firebase에 넣는 과정
+		function selectLatestWarehouse(){
+			$.ajax({
+				url: "selectLatestWarehouse",
+				type: "get",
+				success:function(serverData){
+					database.ref(serverData.warehouse_code+'/').set({"inventory": "empty"});
+				}
+			});
+		}
+		
 		//창고 정보 수정 버튼 눌렀을때
 		$(".btn-lg").click(function(){
-			type= $(this).attr("button-type");
-			storage_seq= $(this).attr("data-seq");
-			var g_oWindow = window.open("/goUpdateStorage", "Update Storage Information","width=400, height=500, location=no, toolbar=no, menubar=no, scrollbars=no, status=no, resizable=yes");
-			
+			//type= $(this).attr("button-type");
+			//storage_seq= $(this).attr("data-seq");
+			//var g_oWindow = window.open("/goUpdateStorage", "Update Storage Information","width=400, height=500, location=no, toolbar=no, menubar=no, scrollbars=no, status=no, resizable=yes");
+			alert("test");
 		});
 		
 		//창고 삭제 버튼 눌렀을 때
@@ -152,7 +164,8 @@
 			function printAllInventory(serverData){
 				$("#warehouseTable").html("");
 				var count = 0; 
-			for(var i = 0 ; i<serverData.length ; i++){
+				if(serverData.length!=0&&serverData!=null){
+				for(var i = 0 ; i<serverData.length ; i++){
 					if(i%3==0){
 						$("#warehouseTable").append('<tr id="warehouseTR'+count+'"></tr>');
 					}
@@ -176,7 +189,7 @@
 					str+='<p>개설일 : '+serverData[i].warehouse_date+'</p>';	
 					str+='</div>';
 					str+='<div class="d-block text-right card-footer">';
-					str+='<button class="btn-shadow-primary btn btn-primary btn-lg" button-type="update" data-seq="'+serverData[i].warehouse_code+'">Update</button>';
+					str+='<button class="btn-shadow-primary btn btn-primary btn-lg"  button-type="update" data-seq="'+serverData[i].warehouse_code+'">Update</button>';
 					str+='<button class="mr-2 btn btn-link btn-sm" button-type="delete" data-seq="'+serverData[i].warehouse_code+'">Delete</button>';
 					str+='</div>';
 					str+='</div>';  
@@ -185,6 +198,17 @@
 					if(i%3==2){
 						count ++;
 					}
+				}
+				}else{
+					var str2='';
+					str2+='<tr><td>';
+					str2+='<div class="main-card mb-3 card">';
+					str2+='<div class="card-header">';
+					str2+='<span>등록한 창고 정보가 없습니다.</span>';
+					str2+='</div>';
+					str2+='</div>';  
+					str2+='</td></tr>';
+					$("#warehouseTable").append(str2);
 				}
 		}
 			

@@ -26,4 +26,10 @@ public class InventoryService {
 		return check;
 	}
 
+	public WarehouseVO selectLatestWarehouse() {
+		WarehouseVO w = null;
+		w = inventoryDAO.selectLatestWarehouse();
+		return w;
+	}
+
 }

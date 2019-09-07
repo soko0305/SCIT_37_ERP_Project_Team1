@@ -30,4 +30,16 @@
  			,  TO_DATE(#{warehouse_date}, 'MM-DD-YYYY')
 		)
 	</insert>
+	
+	<select id="selectLatestWarehouse" resultType="com.project.erp.vo.WarehouseVO">
+		SELECT  warehouse_code
+				, warehouse_name
+				, warehouse_addr
+				, warehouse_size
+				, TO_CHAR(warehouse_date, 'YYYY-MM-DD') AS warehouse_date
+		FROM warehouse
+		WHERE warehouse_code= (SELECT MAX(warehouse_code)
+                                FROM warehouse
+                                )
+	</select>
 </mapper>
