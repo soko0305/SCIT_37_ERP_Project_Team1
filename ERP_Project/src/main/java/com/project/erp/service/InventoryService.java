@@ -32,4 +32,16 @@ public class InventoryService {
 		return w;
 	}
 
+	public WarehouseVO selectWarehouseByCode(String warehouse_code) {
+		WarehouseVO w = null;
+		w = inventoryDAO.selectWarehouseByCode(warehouse_code);
+		return w;
+	}
+
+	public int updateWarehouse(WarehouseVO warehouse) {
+		int check =0;
+		check = inventoryDAO.updateWarehouse(warehouse);
+		return check;
+	}
+
 }

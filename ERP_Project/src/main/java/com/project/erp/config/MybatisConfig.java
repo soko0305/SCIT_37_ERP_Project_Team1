@@ -1,7 +1,6 @@
 package com.project.erp.config;
 
 import javax.sql.DataSource;
-
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -24,4 +23,5 @@ public class MybatisConfig {
 	public SqlSessionTemplate sqlSession(SqlSessionFactory sqlSessionFactory) throws Exception{
 		return new SqlSessionTemplate(sqlSessionFactory);
 	}
+
 }

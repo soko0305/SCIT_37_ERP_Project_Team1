@@ -36,4 +36,11 @@ public class InventoryController {
 		w = inventoryService.selectLatestWarehouse();
 		return w;
 	}
+	
+	@RequestMapping(value="/updateWarehouse", method = RequestMethod.POST)
+	public @ResponseBody void updateWarehouse(WarehouseVO warehouse){
+		int check = 0;
+		System.out.println(warehouse);
+		check = inventoryService.updateWarehouse(warehouse);
+	}
 }

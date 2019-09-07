@@ -9,7 +9,7 @@
 				, warehouse_name
 				, warehouse_addr
 				, warehouse_size
-				, TO_CHAR(warehouse_date, 'YYYY-MM-DD') AS warehouse_date
+				, TO_CHAR(warehouse_date, 'MM/DD/YYYY') AS warehouse_date
 		FROM warehouse
 		ORDER BY warehouse_code ASC
 	</select>
@@ -27,7 +27,7 @@
  			, #{warehouse_name}
  			, #{warehouse_addr}
  			, #{warehouse_size}
- 			,  TO_DATE(#{warehouse_date}, 'MM-DD-YYYY')
+ 			,  TO_DATE(#{warehouse_date}, 'MM/DD/YYYY')
 		)
 	</insert>
 	
@@ -36,10 +36,29 @@
 				, warehouse_name
 				, warehouse_addr
 				, warehouse_size
-				, TO_CHAR(warehouse_date, 'YYYY-MM-DD') AS warehouse_date
+				, TO_CHAR(warehouse_date, 'MM/DD/YYYY') AS warehouse_date
 		FROM warehouse
 		WHERE warehouse_code= (SELECT MAX(warehouse_code)
                                 FROM warehouse
                                 )
 	</select>
+	
+	<select id="selectWarehouseByCode" resultType="com.project.erp.vo.WarehouseVO">
+		SELECT  warehouse_code
+				, warehouse_name
+				, warehouse_addr
+				, warehouse_size
+				, TO_CHAR(warehouse_date, 'MM/DD/YYYY') AS warehouse_date
+		FROM warehouse
+		WHERE warehouse_code = #{warehouse_code}
+	</select>
+	
+	<update id="updateWarehouse" parameterType="com.project.erp.vo.WarehouseVO">
+		UPDATE warehouse
+		SET warehouse_name = #{warehouse_name}
+			, warehouse_addr = #{warehouse_addr}
+			, warehouse_size = #{warehouse_size}
+			, warehouse_date = TO_DATE(#{warehouse_date}, 'MM/DD/YYYY')
+		WHERE warehouse_code = #{warehouse_code}
+	</update>
 </mapper>

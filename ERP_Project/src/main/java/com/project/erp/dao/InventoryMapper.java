@@ -17,4 +17,8 @@ public interface InventoryMapper {
 
 	public WarehouseVO selectLatestWarehouse();
 
+	public WarehouseVO selectWarehouseByCode(String warehouse_code);
+
+	public int updateWarehouse(WarehouseVO warehouse);
+
 }
