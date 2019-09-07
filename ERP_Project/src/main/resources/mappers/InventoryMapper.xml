@@ -9,8 +9,25 @@
 				, warehouse_name
 				, warehouse_addr
 				, warehouse_size
-				, warehouse_date  
+				, TO_CHAR(warehouse_date, 'YYYY-MM-DD') AS warehouse_date
 		FROM warehouse
 		ORDER BY warehouse_code ASC
 	</select>
+	
+	<insert id="insertWarehouse" parameterType="com.project.erp.vo.WarehouseVO">
+		INSERT INTO warehouse(
+			 	warehouse_code
+				, warehouse_name
+				, warehouse_addr
+				, warehouse_size
+				, warehouse_date  
+		)
+		VALUES(
+			 'w' || TO_CHAR(warehouse_seq.nextval)
+ 			, #{warehouse_name}
+ 			, #{warehouse_addr}
+ 			, #{warehouse_size}
+ 			,  TO_DATE(#{warehouse_date}, 'MM-DD-YYYY')
+		)
+	</insert>
 </mapper>

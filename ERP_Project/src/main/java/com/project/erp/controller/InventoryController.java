@@ -23,5 +23,11 @@ public class InventoryController {
 		wList = inventoryService.selectAllInventory();
 		return wList;
 	}
-
+	
+	@RequestMapping(value="/insertWarehouse", method = RequestMethod.POST)
+	public @ResponseBody void insertWarehouse(WarehouseVO warehouse){
+		int check = 0;
+		check = inventoryService.insertWarehouse(warehouse);
+	}
+	
 }

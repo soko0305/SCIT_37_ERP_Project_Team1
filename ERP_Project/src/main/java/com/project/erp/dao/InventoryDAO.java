@@ -24,5 +24,16 @@ public class InventoryDAO {
 		}
 		return wList;
 	}
+
+	public int insertWarehouse(WarehouseVO warehouse) {
+		int check =0;
+		try{
+		InventoryMapper mapper = sqlSession.getMapper(InventoryMapper.class);
+		check= mapper.insertWarehouse(warehouse);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return check;
+	}
 	
 }

@@ -13,4 +13,6 @@ public interface InventoryMapper {
 
 	public ArrayList<WarehouseVO> selectAllInventory();
 
+	public int insertWarehouse(WarehouseVO warehouse);
+
 }

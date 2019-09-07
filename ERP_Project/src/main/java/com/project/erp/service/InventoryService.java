@@ -20,4 +20,10 @@ public class InventoryService {
 		return wList;
 	}
 
+	public int insertWarehouse(WarehouseVO warehouse) {
+		int check =0;
+		check = inventoryDAO.insertWarehouse(warehouse);
+		return check;
+	}
+
 }
