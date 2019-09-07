@@ -26,4 +26,28 @@ public class InventoryService {
 		return check;
 	}
 
+	public WarehouseVO selectLatestWarehouse() {
+		WarehouseVO w = null;
+		w = inventoryDAO.selectLatestWarehouse();
+		return w;
+	}
+
+	public WarehouseVO selectWarehouseByCode(String warehouse_code) {
+		WarehouseVO w = null;
+		w = inventoryDAO.selectWarehouseByCode(warehouse_code);
+		return w;
+	}
+
+	public int updateWarehouse(WarehouseVO warehouse) {
+		int check =0;
+		check = inventoryDAO.updateWarehouse(warehouse);
+		return check;
+	}
+
+	public int deleteWarehouse(String warehouse_code) {
+		int check =0;
+		check = inventoryDAO.deleteWarehouse(warehouse_code);
+		return check;
+	}
+
 }

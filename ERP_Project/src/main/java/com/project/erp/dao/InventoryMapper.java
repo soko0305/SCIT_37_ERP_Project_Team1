@@ -15,4 +15,12 @@ public interface InventoryMapper {
 
 	public int insertWarehouse(WarehouseVO warehouse);
 
+	public WarehouseVO selectLatestWarehouse();
+
+	public WarehouseVO selectWarehouseByCode(String warehouse_code);
+
+	public int updateWarehouse(WarehouseVO warehouse);
+
+	public int deleteWarehouse(String warehouse_code);
+
 }
