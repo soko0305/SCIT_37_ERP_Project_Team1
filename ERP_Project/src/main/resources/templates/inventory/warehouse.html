@@ -108,7 +108,16 @@
 		//창고 추가 버튼 눌렀을때
 		$("#insertStorage").click(function(){ 
 			var g_oWindow = window.open("/goInsertStorage", "Input Storage Information","width=400, height=500, location=no, toolbar=no, menubar=no, scrollbars=no, status=no, resizable=yes");
-			
+			var g_oInterval = window.setInterval(function() {
+		        try {
+		            // 창이 꺼졌는지 판단
+		            if( g_oWindow == null || g_oWindow.closed ) {
+		                window.clearInterval(g_oInterval);
+		                g_oWindow = null;
+		                selelctANDPrintAll();
+		            }
+		        } catch (e) { }
+		    }, 500);
 		});  
 		
 		//창고 정보 수정 버튼 눌렀을때
