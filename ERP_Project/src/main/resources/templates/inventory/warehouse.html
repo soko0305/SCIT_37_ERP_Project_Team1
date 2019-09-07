@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="UTF-8" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -91,7 +91,6 @@
                 <!--  footer wrapper -->   
                  </div>
     </div>
-
 <!-- drawer wrapper -->
 <div class="app-drawer-overlay d-none animated fadeIn"></div>
 <script type="text/javascript" src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js">
@@ -103,6 +102,9 @@
 		selelctANDPrintAll();
 		updateButtonSetting();
 		deleteButtonSetting();
+		database.ref().on('value', function(snapshot){
+			selelctANDPrintAll();
+		});
 		//창고관리 버튼 타입 및 창고코드 변수
 		var type=null;
 		var storage_seq=null;
@@ -116,8 +118,18 @@
 		            if( g_oWindow == null || g_oWindow.closed ) {
 		                window.clearInterval(g_oInterval);
 		                g_oWindow = null;
-		                selelctANDPrintAll();
-		           		selectLatestWarehouse();
+		                $.ajax({
+		                	url:"checkSuccess",
+		                	type:"get",
+		                	success:function(serverData){
+		                		if(serverData!=0){
+		                			selelctANDPrintAll();
+		    		           		selectLatestWarehouse();
+		                		}else{
+				                	alert("창고 등록를 실패했습니다. 다시 시도해주시기 바랍니다");
+				                }
+		                	}
+		                });
 		            }
 		        } catch (e) { }
 		    }, 500);
@@ -129,8 +141,12 @@
 				url: "selectLatestWarehouse",
 				type: "get",
 				success:function(serverData){
-					database.ref(serverData.warehouse_code+'/').set({"inventory": "empty"});
-				}
+					database.ref(serverData.warehouse_code+'/').set({"warehouse_name": serverData.warehouse_name, 
+																	 "warehouse_addr": serverData.warehouse_addr, 
+																	 "warehouse_size": serverData.warehouse_size, 
+																	 "warehouse_date": serverData.warehouse_date, 
+																	 "inventory": "empty"});
+					}
 			});
 		}
 		
@@ -147,7 +163,18 @@
 		            if( g_oWindow == null || g_oWindow.closed ) {
 		                window.clearInterval(g_oInterval);
 		                g_oWindow = null;
-		                selelctANDPrintAll();
+		                $.ajax({
+		                	url:"checkSuccess",
+		                	type:"get",
+		                	success:function(serverData){
+		                		if(serverData!=0){
+		                			selelctANDPrintAll();
+		    		           		updateWarehouseFromFirebase(storage_seq);
+		                		}else{
+				                	alert("창고 등록를 실패했습니다. 다시 시도해주시기 바랍니다");
+				                }
+		                	}
+		                });
 		            }
 		        } catch (e) { }
 		    }, 500);
@@ -161,7 +188,10 @@
 			type= $(this).attr("button-type");
 			storage_seq= $(this).attr("data-seq");
 			if(type=="delete"){
-			confirm("정말 창고 정보를 삭제하시겠습니까?");
+			var buttonConfirm = confirm("정말 창고 정보를 삭제하시겠습니까?");
+				if(buttonConfirm){
+					deleteWarehouse(storage_seq);
+				}
 			}
 		});
 		}
@@ -231,12 +261,53 @@
 				updateButtonSetting();
 		}
 			
-			
+		//창고 삭제 함수
+		function deleteWarehouse(storage_seq){
+			$.ajax({
+				url: "deleteWarehouse",
+				type: "get",
+				data: {warehouse_code:storage_seq},
+				success:function(severData){
+					if(severData!=0){
+						 	selelctANDPrintAll();
+			                deleteWarehouseFromFirebase(storage_seq);
+		                }else{
+		                	alert("창고 삭제를 실패했습니다. 다시 시도해주시기 바랍니다");
+		                }
+					
+	               
+				}
+			});
+		}
+		
+		
+		//파이어베이스에서 해당 창고 테이블 수정 함수
+		function updateWarehouseFromFirebase(storage_seq){
+			$.ajax({
+				url: "selectWarehouseByCode",
+				type: "get",
+				data: {warehouse_code:storage_seq},
+				success:function(severData){
+					if(severData!=null){
+						database.ref(severData.warehouse_code+'/').update({warehouse_name:severData.warehouse_name});
+						database.ref(severData.warehouse_code+'/').update({warehouse_addr:severData.warehouse_addr});
+						database.ref(severData.warehouse_code+'/').update({warehouse_size:severData.warehouse_size});
+						database.ref(severData.warehouse_code+'/').update({warehouse_date:severData.warehouse_date});
+					}
+				}
+			});
+
+		}
+		
+		
+		//파이어베이스에서 해당 창고 테이블 삭제 함수
+		function deleteWarehouseFromFirebase(storage_seq){
+			database.ref(storage_seq+"/").remove();
+		}
+		
 			/*
 			파이어베이스 관련 코딩
-			database.ref("carpark/").on('value', function(snapshot){
-				selectStillParking();
-			});
+			
 			function putParkingDataToFirebase(serverData){
 				for(var i =0 ; i<serverData.length ; i++){
 					database.ref("carpark/"+"parkspaceNum"+serverData[i].parkspaceNum).update({
@@ -252,9 +323,7 @@
 				}
 			}
 			
-			function deleteDataFromFirebase(carparkNum){
-				database.ref("carpark/"+"parkspaceNum"+carparkNum).set("empty");
-			}*/
+			*/
 	
 	});
 </script>

@@ -32,6 +32,7 @@ public class InventoryDAO {
 		check= mapper.insertWarehouse(warehouse);
 		}catch(Exception e){
 			e.printStackTrace();
+			check = 0;
 		}
 		return check;
 	}
@@ -65,6 +66,19 @@ public class InventoryDAO {
 		check= mapper.updateWarehouse(warehouse);
 		}catch(Exception e){
 			e.printStackTrace();
+			check = 0;
+		}
+		return check;
+	}
+
+	public int deleteWarehouse(String warehouse_code) {
+		int check =0;
+		try{
+		InventoryMapper mapper = sqlSession.getMapper(InventoryMapper.class);
+		check= mapper.deleteWarehouse(warehouse_code);
+		}catch(Exception e){
+			e.printStackTrace();
+			check = 0;
 		}
 		return check;
 	}

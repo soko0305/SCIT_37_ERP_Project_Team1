@@ -16,6 +16,7 @@ public class InventoryController {
 	
 	@Autowired
 	InventoryService inventoryService;
+	int flag = 0;
 	
 	@RequestMapping(value="/selectAllInventory", method = RequestMethod.GET)
 	public @ResponseBody ArrayList<WarehouseVO> selectAllInventory(){
@@ -26,8 +27,13 @@ public class InventoryController {
 	
 	@RequestMapping(value="/insertWarehouse", method = RequestMethod.POST)
 	public @ResponseBody void insertWarehouse(WarehouseVO warehouse){
-		int check = 0;
-		check = inventoryService.insertWarehouse(warehouse);
+		flag=0;
+		flag = inventoryService.insertWarehouse(warehouse);
+	}
+	
+	@RequestMapping(value="/checkSuccess", method = RequestMethod.GET)
+	public @ResponseBody int checkSuccess(){
+		return flag;
 	}
 	
 	@RequestMapping(value="/selectLatestWarehouse", method = RequestMethod.GET)
@@ -39,8 +45,21 @@ public class InventoryController {
 	
 	@RequestMapping(value="/updateWarehouse", method = RequestMethod.POST)
 	public @ResponseBody void updateWarehouse(WarehouseVO warehouse){
-		int check = 0;
-		System.out.println(warehouse);
-		check = inventoryService.updateWarehouse(warehouse);
+		flag=0;
+		flag = inventoryService.updateWarehouse(warehouse);
+	}
+	
+	@RequestMapping(value="/deleteWarehouse", method = RequestMethod.GET)
+	public @ResponseBody int deleteWarehouse(String warehouse_code){
+		int check =0;
+		check = inventoryService.deleteWarehouse(warehouse_code);
+		return check;
+	}
+	
+	@RequestMapping(value="/selectWarehouseByCode", method = RequestMethod.GET)
+	public @ResponseBody WarehouseVO selectWarehouseByCode(String warehouse_code){
+		WarehouseVO w = null;
+		w = inventoryService.selectWarehouseByCode(warehouse_code);
+		return w;
 	}
 }

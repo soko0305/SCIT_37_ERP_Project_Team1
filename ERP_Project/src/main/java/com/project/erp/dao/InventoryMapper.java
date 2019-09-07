@@ -21,4 +21,6 @@ public interface InventoryMapper {
 
 	public int updateWarehouse(WarehouseVO warehouse);
 
+	public int deleteWarehouse(String warehouse_code);
+
 }

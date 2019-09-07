@@ -61,4 +61,9 @@
 			, warehouse_date = TO_DATE(#{warehouse_date}, 'MM/DD/YYYY')
 		WHERE warehouse_code = #{warehouse_code}
 	</update>
+	
+	<delete id="deleteWarehouse" parameterType="String">
+		DELETE warehouse
+		WHERE warehouse_code = #{warehouse_code}
+	</delete>
 </mapper>

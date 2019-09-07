@@ -44,4 +44,10 @@ public class InventoryService {
 		return check;
 	}
 
+	public int deleteWarehouse(String warehouse_code) {
+		int check =0;
+		check = inventoryDAO.deleteWarehouse(warehouse_code);
+		return check;
+	}
+
 }
