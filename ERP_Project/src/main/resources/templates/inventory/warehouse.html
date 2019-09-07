@@ -100,7 +100,7 @@
 	$(function(){
 		//파이어베이스 객체 호출
 		var database = firebase.database();
-		
+		selelctANDPrintAll();
 		//창고관리 버튼 타입 및 창고코드 변수
 		var type=null;
 		var storage_seq=null;
@@ -126,24 +126,28 @@
 			if(type=="delete"){
 			confirm("정말 창고 정보를 삭제하시겠습니까?");
 			}
-			
+		});
 		
 		//처음 들어왔을 때 창고 리스트 가져오기
+		function selelctANDPrintAll(){
 		$.ajax({
-			url: selectAllInventory,
-			type: get,
+			url: "selectAllInventory",
+			type: "get",
 			success:function(serverData){
 				printAllInventory(serverData);
 			}
 		});
+		}
 		
 		//UI에 창고 리스트 전체 출력
 			function printAllInventory(serverData){
-				for(var i = 0 ; i<serverData.length ; i++){
-					var str='';
-					if(serverData.length>=2&&i%3==0){
-						str+='<tr>';
+				$("#warehouseTable").html("");
+				var count = 0; 
+			for(var i = 0 ; i<serverData.length ; i++){
+					if(i%3==0){
+						$("#warehouseTable").append('<tr id="warehouseTR'+count+'"></tr>');
 					}
+					var str='';
 					str+='<td>';
 					str+='<div class="main-card mb-3 card">';
 					str+='<div class="card-header">';
@@ -168,10 +172,10 @@
 					str+='</div>';
 					str+='</div>';  
 					str+='</td>';
-					if(serverData.length>=2&&i%3==2){
-						str+='<tr>';
+					$("#warehouseTR"+count).append(str);
+					if(i%3==2){
+						count ++;
 					}
-					$("#warehouseTable").append(str);
 				}
 		}
 			
@@ -199,7 +203,7 @@
 			function deleteDataFromFirebase(carparkNum){
 				database.ref("carpark/"+"parkspaceNum"+carparkNum).set("empty");
 			}*/
-		});
+	
 	});
 </script>
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.erp.dao.InventoryMapper">
+	<select id="selectAllInventory" resultType="com.project.erp.vo.WarehouseVO">
+		SELECT  warehouse_code
+				, warehouse_name
+				, warehouse_addr
+				, warehouse_size
+				, warehouse_date  
+		FROM warehouse
+		ORDER BY warehouse_code ASC
+	</select>
+</mapper>
