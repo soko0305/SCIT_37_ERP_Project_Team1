@@ -29,7 +29,6 @@ public class MemberController {
 	
 	@RequestMapping(value="/insertMember", method = RequestMethod.POST)
 	public String insertMember(MemberVO member){ 
- 
 		 memberDao.insertMember(member);
  		return "member/login";
 	}

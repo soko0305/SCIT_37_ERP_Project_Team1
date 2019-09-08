@@ -4,8 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.project.erp.dao.MemberMapper">
-<<<<<<< HEAD
- 
+
  
 	<insert id="insertMember" parameterType="com.project.erp.vo.MemberVO">
 		INSERT INTO erp_member(
@@ -24,7 +23,7 @@
 				, #{userpw}
 				, #{userstatus}
 				, #{userdepartment}
-				, 'notalloewd'
+				, 'notallowed'
 				, #{name}
 				, #{phonenumber}
 				, #{email}
@@ -39,7 +38,5 @@
 		FROM erp_member
 		WHERE userid=#{userid}
 	</select>
-=======
 
->>>>>>> 4dda76466e554547e06e80ae06e8e1f4b2051fd2
 </mapper>
