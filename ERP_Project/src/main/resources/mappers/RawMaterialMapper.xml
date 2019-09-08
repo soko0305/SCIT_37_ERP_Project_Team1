@@ -65,4 +65,30 @@
 		where
 			rawm_code=#{rawm_code}
 	</select>
+	
+	<select id="rawMaterialDashSelect" resultType="com.project.erp.vo.RawMaterialVO">
+		select
+			rawm_code
+			,supplierseq
+			,rawm_name
+			,rawm_sort
+			,rawm_price
+			,rawm_autoorder
+			,rawm_minimum
+			,rawm_set
+		from
+			RAWMATERIAL
+		where
+			rownum&lt;=3
+		order by
+			rawm_code desc
+	</select>
+	
+	<delete id="rawMaterialDelete" parameterType="com.project.erp.vo.RawMaterialVO">
+		delete
+		from
+			RAWMATERIAL
+		where
+			rawm_code=#{rawm_code}
+	</delete>
 </mapper>

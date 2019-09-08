@@ -52,4 +52,30 @@ public class RawMaterialDAO {
 		}
 		return result;
 	}
+
+	public int rawMaterialDelete(RawMaterialVO rawmaterial) {
+		int result = 0;
+
+		RawMaterialMapper mapper = sqlSession.getMapper(RawMaterialMapper.class);
+		try {
+			result = mapper.rawMaterialDelete(rawmaterial);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return result;
+		}
+		return result;
+	}
+
+	public ArrayList<RawMaterialVO> rawMaterialDashSelect() {
+		ArrayList<RawMaterialVO> result = null;
+
+		RawMaterialMapper mapper = sqlSession.getMapper(RawMaterialMapper.class);
+		try {
+			result = mapper.rawMaterialDashSelect();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return result;
+		}
+		return result;
+	}
 }
