@@ -75,6 +75,8 @@ public class SalesController {
 		dao.insertSales(sales);
 		
 		
+		
+		
 
 		return "ok";
 	}
