@@ -1,0 +1,8 @@
+diff a/ERP_Project/.classpath b/ERP_Project/.classpath	(rejected hunks)
+@@ -28,5 +28,6 @@
+ 			<attribute name="maven.pomderived" value="true"/>
+ 		</attributes>
+ 	</classpathentry>
++	<classpathentry kind="lib" path="C:/Users/kita/Downloads/gson-2.8.5.jar"/>
+ 	<classpathentry kind="output" path="target/classes"/>
+ </classpath>
