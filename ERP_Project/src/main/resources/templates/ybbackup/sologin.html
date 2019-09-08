@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="utf-8" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- Bootstrap core JavaScript-->
+  <script src="bootstraptemplate2/vendor/jquery/jquery.min.js"></script>
+  <script src="bootstraptemplate2/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="bootstraptemplate2/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <title>Login</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="bootstraptemplate2/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template-->
+  <link href="bootstraptemplate2/css/sb-admin.css" rel="stylesheet">
+
+	
+
+</head>
+
+<body class="bg-dark">
+
+  <div class="container">
+    <div class="card card-login mx-auto mt-5">
+      <div class="card-header">Login</div>
+      <div class="card-body">
+        <form id="loginForm" action="/login" method="post">
+          <div class="form-group">
+            <div class="form-label-group">
+              <input type="text" id="inputUserId" class="form-control" placeholder="ID" required="required" autofocus="autofocus" name="userId">
+              <label for="inputUserId">ID</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-label-group">
+              <input type="password" id="inputUserPassword" class="form-control" placeholder="Password" required="required" autofocus="autofocus" name="userPw">
+              <label for="inputUserPassword">Password</label>
+            </div>
+          </div>
+          <a class="btn btn-primary btn-block" href="#" id="loginButton">Login</a>
+          <p th:text="${message}" align="center" style="color: red"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+<script>
+	$(function (){
+		
+		$("#loginButton").click(function(){
+			$("#loginForm").submit();
+		});
+	});
+</script>
+</body>
+</html>
