@@ -28,7 +28,7 @@ public class LinkController {
 	
 	@RequestMapping(value="/haraBasicTemplate", method = RequestMethod.GET)
 	public String basicTemplate(){
-		return "sales/haraBasicTemplate";
+		return "sales/test";
 	}
 	
 
