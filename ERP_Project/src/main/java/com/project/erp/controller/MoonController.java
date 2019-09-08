@@ -8,7 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.project.erp.dao.RawMaterialDAO;
 import com.project.erp.dao.SupplierDAO;
+import com.project.erp.vo.RawMaterialVO;
 import com.project.erp.vo.SupplierVO;
 
 @Controller
@@ -16,6 +18,9 @@ public class MoonController {
 
 	@Autowired
 	SupplierDAO sDAO;
+	
+	@Autowired
+	RawMaterialDAO rDAO;
 
 	@RequestMapping(value = "/goAllView", method = RequestMethod.GET)
 	public String goAllView(Model model) {
@@ -41,7 +46,7 @@ public class MoonController {
 
 	@RequestMapping(value = "/goSupplierUpdate", method = RequestMethod.GET)
 	public String goSupplierUpdate(SupplierVO supplier, Model model) {
-		System.out.println("goSupplierUpdateForm : " + supplier);
+		
 		SupplierVO result = sDAO.supplierOneSelect(supplier);
 		if (result == null) {
 			return "/rawMaterial/All_view";
@@ -52,18 +57,42 @@ public class MoonController {
 	}
 
 	@RequestMapping(value = "/goMaterials", method = RequestMethod.GET)
-	public String goMaterials() {
-		return "rawMaterial/materials_view";
+	public String goMaterials(Model model) {
+		ArrayList<RawMaterialVO> result = rDAO.rawMaterialAllSelect();
+		
+		if(result != null) {
+			model.addAttribute("rawMaterialList", result);
+			return "rawMaterial/materials_view";
+		}else {
+			return "/rawMaterial/All_view"; 
+		}
+		
 	}
 
 	@RequestMapping(value = "/goMaterialsInsert", method = RequestMethod.GET)
-	public String goMaterialsInsert() {
-		return "rawMaterial/materials_insert";
+	public String goMaterialsInsert(Model model) {
+		ArrayList<SupplierVO> result = sDAO.supplierAllSelect();
+
+		if (result != null) {
+			model.addAttribute("supplierList", result);
+			return "rawMaterial/materials_insert";
+		} else {
+			return "rawMaterial/All_view";
+		}
 	}
 
-	@RequestMapping(value = "/goMaterialsUpdate", method = RequestMethod.GET)
-	public String goMaterialsUpdate() {
-		return "rawMaterial/materials_update";
+	@RequestMapping(value = "/goMaterialsUpdate", method = RequestMethod.POST)
+	public String goMaterialsUpdate(RawMaterialVO rawmaterial,Model model) {
+		System.out.println("goMaterialsUpdate result : " + rawmaterial);
+		RawMaterialVO result = rDAO.rawMaterialOneSelect(rawmaterial);
+		
+		if(result != null) {
+			model.addAttribute("result", result);
+			return "rawMaterial/materials_update";
+		}else {
+			return "rawMaterial/All_view";
+		}
+		
 	}
 
 	@RequestMapping(value = "/goOrder", method = RequestMethod.GET)

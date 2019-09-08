@@ -7,27 +7,62 @@
 	<insert id="rawMaterialInsert" parameterType="com.project.erp.vo.RawMaterialVO">
 		INSERT INTO RAWMATERIAL
 		(
-			RAWM_CODE
-			,SUPPLIERSEQ
-			,RAWM_NAME
-			,RAWM_SORT
-			,RAWM_PRICE
-			,RAWM_MINIMUM
-			,RAWM_SET
-			,RAWM_AUTOORDER
+			rawm_code
+			,supplierseq
+			,rawm_name
+			,rawm_sort
+			,rawm_price
+			,rawm_autoorder
+			,rawm_minimum
+			,rawm_set
 		)
 		VALUES
 		(
-			RAWM_CODE.NEXTVAL
-			,#{SUPPLIERSEQ}
-			,#{RAWM_NAME}
-			,#{RAWM_SORT}
-			,#{RAWM_PRICE}
-			,#{RAWM_MINIMUM}
-			,#{RAWM_SET}
-			,#{RAWM_AUTOORDER}
+			rawm_code.nextval
+			,#{supplierseq}
+			,#{rawm_name}
+			,#{rawm_sort}
+			,#{rawm_price}
+			<choose>
+			<when test="rawm_autoorder!=null">
+			,'CHECKED'
+			</when>
+			<otherwise>
+			,'NOCHECK'
+			</otherwise>
+			</choose>
+			,#{rawm_minimum}
+			,#{rawm_set}
 		)
-
 	</insert>
 	
+	<select id="rawMaterialAllSelect" resultType="com.project.erp.vo.RawMaterialVO">
+		select
+			rawm_code
+			,supplierseq
+			,rawm_name
+			,rawm_sort
+			,rawm_price
+			,rawm_autoorder
+			,rawm_minimum
+			,rawm_set
+		from
+			RAWMATERIAL
+	</select>
+	
+	<select id="rawMaterialOneSelect" parameterType="com.project.erp.vo.RawMaterialVO" resultType="com.project.erp.vo.RawMaterialVO">
+		select
+			rawm_code
+			,supplierseq
+			,rawm_name
+			,rawm_sort
+			,rawm_price
+			,rawm_autoorder
+			,rawm_minimum
+			,rawm_set
+		from
+			RAWMATERIAL
+		where
+			rawm_code=#{rawm_code}
+	</select>
 </mapper>

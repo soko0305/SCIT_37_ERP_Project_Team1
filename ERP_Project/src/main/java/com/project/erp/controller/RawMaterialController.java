@@ -1,4 +1,4 @@
-package com.project.erp.controller;
+ package com.project.erp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,14 +16,14 @@ public class RawMaterialController {
 
 	@RequestMapping(value = "/rawMaterialInsert", method = RequestMethod.POST)
 	public String rawMaterialInsert(RawMaterialVO rawmaterial) {
-		System.out.println("rawMaterialInsert : " + rawmaterial);
+		
 		int result = rDAO.rawMaterialInsert(rawmaterial);
 
 		if (result == 0) {
-			return "";
+			return "/rawMaterial/all_view";
 		} else {
 			
-			return "";
+			return "/rawMaterial/materials_insert";
 		}
 	}
 }
