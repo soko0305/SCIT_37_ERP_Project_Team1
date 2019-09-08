@@ -434,14 +434,13 @@
 									<table class="mb-0 table table-bordered">
 										<thead>
 											<tr>
-												<th>상세보기</th>
 												<th>원자재명</th>
 												<th>원자재종류</th>
-												<th>수량</th>
+												<th>원자재단가</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
+											<!-- <tr>
 												<th scope="row"><a href="">1100</a></th>
 												<td>6528</td>
 												<td>아크봉</td>
@@ -458,6 +457,11 @@
 												<td>와이어</td>
 												<td>co2봉</td>
 												<td>5</td>
+											</tr> -->
+											<tr th:each="list : ${rawMaterialList}">
+												<td th:text="${list.rawm_name}"></td>
+												<td th:text="${list.rawm_sort}"></td>
+												<td th:text="${list.rawm_price}"></td>
 											</tr>
 										</tbody>
 									</table>

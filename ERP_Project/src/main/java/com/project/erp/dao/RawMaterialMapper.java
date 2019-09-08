@@ -16,4 +16,8 @@ public interface RawMaterialMapper {
 	public ArrayList<RawMaterialVO> rawMaterialAllSelect();
 	
 	public RawMaterialVO rawMaterialOneSelect(RawMaterialVO rawmaterial);
+	
+	public int rawMaterialDelete(RawMaterialVO rawmaterial);
+	
+	public ArrayList<RawMaterialVO> rawMaterialDashSelect();
 }

@@ -14,7 +14,7 @@ public class RawMaterialController {
 	@Autowired
 	RawMaterialDAO rDAO;
 	
-	//공급처 등록
+	//원자재 등록
 	@RequestMapping(value = "/rawMaterialInsert", method = RequestMethod.POST)
 	public String rawMaterialInsert(RawMaterialVO rawmaterial) {
 		
@@ -23,8 +23,20 @@ public class RawMaterialController {
 		if (result == 0) {
 			return "/rawMaterial/all_view";
 		} else {
-			
-			return "/rawMaterial/materials_insert";
+			return "redirect:/goMaterialsList";
 		}
 	}
+	
+	//원자재 삭제
+		@RequestMapping(value = "/rawMaterialDelete", method = RequestMethod.POST)
+		public String rawMaterialDelete(RawMaterialVO rawmaterial) {
+			
+			int result = rDAO.rawMaterialDelete(rawmaterial);
+
+			if (result == 0) {
+				return "/rawMaterial/all_view";
+			} else {
+				return "redirect:/goMaterialsList";
+			}
+		}
 }

@@ -9,7 +9,7 @@ import com.project.erp.dao.SupplierDAO;
 import com.project.erp.vo.SupplierVO;
 
 @Controller
-public class supplierController {
+public class SupplierController {
 
 	@Autowired
 	SupplierDAO sDAO;
