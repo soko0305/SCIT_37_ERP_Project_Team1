@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.project.erp.vo.Buyer;
 import com.project.erp.vo.Sales;
+import com.project.erp.vo.SalesDetail;
 
 @Repository
 public class SalesDAO {
@@ -32,6 +33,17 @@ public class SalesDAO {
 		try{
 		SalesMapper mapper = sqlSession.getMapper(SalesMapper.class);
 		result= mapper.insertSales(sales);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public int insertSalesDetail(SalesDetail salesDetail){
+		int result = 0;
+		try{
+		SalesMapper mapper = sqlSession.getMapper(SalesMapper.class);
+		result= mapper.insertSalesDetail(salesDetail);
 		}catch(Exception e){
 			e.printStackTrace();
 		}

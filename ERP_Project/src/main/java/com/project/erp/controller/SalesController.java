@@ -23,6 +23,8 @@ public class SalesController {
 	//엑셀을 직접 업로드 했을 때, SALES와 SALESDETAIL을 DB에 저장시키는 메소드.
 	@RequestMapping(value="/insertData", method = RequestMethod.POST)
 	public @ResponseBody String insertData(@RequestBody String excelJson){
+		int result1 = 0;
+		int result2 = 0;
 		
 		String sales_ordernum = null;
 		String company = null;
@@ -59,6 +61,21 @@ public class SalesController {
 			//totalPrice 계산.
 			totalPrice += Integer.parseInt(salesdetail_price);
 			
+			String price = Integer.toString(totalPrice);
+			
+			if(i==0){
+			//회사이름으로 바이어 시퀀스 불러오기.
+			Buyer buyer = new Buyer();
+			buyer.setBuyer_corp(company);
+			Buyer buyer1 = dao.SelectOneBuyer(buyer);
+			
+			//Sales 객체를 DB에 저장하는 메소드.
+			Sales sales = new Sales();
+			sales.setBuyerseq(buyer1.getBuyerseq());
+			sales.setSales_totalprice(price);
+			result1 = dao.insertSales(sales);
+			}
+			
 			//SalesDetail 객체를 DB에 저장하는 메소드.
 			SalesDetail salesDetail = new SalesDetail();
 			salesDetail.setSalesdetail_name(salesdetail_name);
@@ -66,31 +83,18 @@ public class SalesController {
 			salesDetail.setSalesdetail_price(salesdetail_price);
 			salesDetail.setSales_ordernum(sales_ordernum);
 			salesDetail.setPd_code(pd_code);
+			result2 = dao.insertSalesDetail(salesDetail);
+		
+			}
 			
-			
+			if(result1==1 && result2 ==1){return "ok";
+			}else{
+				return "no";
 			}
 		
-		String price = Integer.toString(totalPrice);
-		
-		//회사이름으로 바이어 시퀀스 불러오기.
-		Buyer buyer = new Buyer();
-		buyer.setBuyer_corp(company);
-		Buyer buyer1 = dao.SelectOneBuyer(buyer);
-		
-		//Sales 객체를 DB에 저장하는 메소드.
-		Sales sales = new Sales();
-		sales.setBuyerseq(buyer1.getBuyerseq());
-		sales.setSales_totalprice(price);
-		dao.insertSales(sales);
-		
-		
-		
-<<<<<<< HEAD
-		
-=======
->>>>>>> master
-
-		return "ok";
 	}
+	
+	
+	
 	
 }
