@@ -63,12 +63,12 @@ public class SalesController {
 		
 		String price = Integer.toString(totalPrice);
 		
-		//회사 이름으로 buyerseq 구하기
+
 		Buyer buyer = new Buyer();
 		buyer.setBuyer_corp(company);
 		Buyer buyer1 = dao.SelectOneBuyer(buyer);
 		
-		//sales 데이터 삽입하기
+
 		Sales sales = new Sales();
 		sales.setBuyerseq(buyer1.getBuyerseq());
 		sales.setSales_totalprice(price);
