@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.erp.dao.SupplierMapper">
+	<insert id="supplierInsert" parameterType="com.project.erp.vo.SupplierVO">
+		insert into supplier
+		(
+			supplierseq
+			,supplier_name
+			,supplier_owner
+			,supplier_addr
+			,supplier_tel
+			,supplier_pic
+			,supplier_email
+		)
+		values
+		(
+			supplierseq.nextval
+			,#{supplier_name}
+			,#{supplier_owner}
+			,#{supplier_addr}
+			,#{supplier_tel}
+			,#{supplier_pic}
+			,#{supplier_email}
+		)
+	</insert>
+	
+	<select id="supplierAllSelect" resultType="com.project.erp.vo.SupplierVO">
+		select
+			supplierseq
+			,supplier_name
+			,supplier_owner
+			,supplier_addr
+			,supplier_tel
+			,supplier_pic
+			,supplier_email
+		from
+			supplier
+	</select>
+	
+	<delete id="supplierDelete" parameterType="com.project.erp.vo.SupplierVO">
+		delete
+		from
+			supplier
+		where
+			supplierseq=#{supplierseq}
+	</delete>
+	
+	<update id="supplierUpdate" parameterType="com.project.erp.vo.SupplierVO">
+		update
+			supplier
+		set
+			supplier_name=#{supplier_name}
+			,supplier_owner=#{supplier_owner}
+			,supplier_addr=#{supplier_addr}
+			,supplier_tel=#{supplier_tel}
+			,supplier_pic=#{supplier_pic}
+			,supplier_email=#{supplier_email}
+		where
+			supplierseq=#{supplierseq}
+	</update>
+	
+	<select id="supplierOneSelect" parameterType="com.project.erp.vo.SupplierVO" resultType="com.project.erp.vo.SupplierVO">
+		select
+			supplierseq
+			,supplier_name
+			,supplier_owner
+			,supplier_addr
+			,supplier_tel
+			,supplier_pic
+			,supplier_email
+		from
+			supplier
+		where
+			supplierseq=#{supplierseq}
+	</select>
+	
+	<select id="supplierDashSelect" resultType="com.project.erp.vo.SupplierVO">
+		select
+			supplierseq
+			,supplier_name
+			,supplier_owner
+			,supplier_addr
+			,supplier_tel
+			,supplier_pic
+			,supplier_email
+		from
+			supplier
+		where
+			rownum&lt;=3
+		order by
+			supplierseq desc
+	</select>
+	
+</mapper>

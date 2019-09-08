@@ -26,32 +26,12 @@
 	
 <script>
 
-/*$(function(){
-	$("#addStaff").click(function(){
-		addRow();
-	});
-	$("#delStaff").click(function(){
-		deleteRow();
-	});
-});
-
-function addRow(){
-	var str ='<div><input type="text" placeholder="원자재명">'
-			+'<input type="text" placeholder="수량">'
-			+'<button type="button" id="delStaff">-</button>'
-			+'</div>';
-	$(".test1").append(str);
-}
-
-function deleteRow(){
-	var str = $(this).closest("div");
-} */
 $(function() {
 	 $("#addStaff").click(function () {
 	  var row = "<tr>";
 	   row += '<td><input name="pKind" id="pKind" placeholder="원자재명" type="text"class="form-control"></td>';
 	   row += '<td><input name="pAmount" id="pAmount" placeholder="수량" type="text"class="form-control"></td>';
-	   row += '<td><button type="button" class="mt-2 btn btn-primary">-</button></td>';
+	   row += '<td><button type="button" class="mt-2 btn btn-primary style="padding: 5em;>-</button></td>';
 	   row += '</tr>';
 	  $(".test1").append(row);
 	 });
@@ -427,7 +407,7 @@ $(function() {
 									</div>
 									<div class="position-relative form-group">
 										<label for="exampleAddress" class="">원자재 등록</label>
-										<button type="button" class="mt-2 btn btn-primary" id="addStaff">+</button>
+										<button type="button" class="mt-2 btn btn-primary btn-sm" id="addStaff" style="margin-bottom: 1em;">+</button>
 									<div class="test1">
        									 <!-- <input type="text" placeholder="원자재명">
        									 <input type="number" placeholder="수량">
