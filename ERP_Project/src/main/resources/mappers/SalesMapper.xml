@@ -24,6 +24,16 @@ sysdate,
 </insert>
 
 <insert id="insertSalesDetail" parameterType="com.project.erp.vo.SalesDetail">
+insert into salesdetail
+values(
+salesdetailseq.nextval,
+#{salesdetail_name},
+#{salesdetail_amount},
+#{salesdetail_price},
+#{sales_ordernum},
+#{pd_code}
+)
 
-</insert>
+
+</insert> 
 </mapper>

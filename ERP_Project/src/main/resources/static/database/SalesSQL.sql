@@ -14,7 +14,7 @@ create table sales(
 sales_ordernum varchar2(50) primary key,
 buyerseq number references buyer(buyerseq),
 sales_orderdate date default sysdate,
-sales_status varchar2(50) check(sales_status in('½ÂÀÎ´ë±â', '½ÂÀÎ¿Ï·á','»ı»ê¿äÃ»','»ı»êÁß','ÆÇ¸Å´ë±â','ÆÇ¸Å¿Ï·á')),
+sales_status varchar2(50) check(sales_status in('ìŠ¹ì¸ëŒ€ê¸°', 'ìŠ¹ì¸ì™„ë£Œ','ìƒì‚°ìš”ì²­','ìƒì‚°ì¤‘','íŒë§¤ëŒ€ê¸°','íŒë§¤ì™„ë£Œ')),
 sales_totalprice varchar2(50)
 )
 
@@ -24,7 +24,7 @@ salesdetail_name varchar2(100),
 salesdetail_amount varchar2(50),
 salesdetail_price varchar2(50),
 sales_ordernum varchar2(50) references sales(sales_ordernum),
-pd_code varchar2(50) references product(pd_code) --PRODUCT TABLE ¹Ì»ı¼º
+pd_code varchar2(50) -- references product(pd_code) --PRODUCT TABLE ì•„ì§ ì—†ì–´ì„œ
 )
 
 --create seq
