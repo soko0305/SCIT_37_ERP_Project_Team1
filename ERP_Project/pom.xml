@@ -69,7 +69,10 @@
 			<version>11.2.0.3</version> 
 			</dependency>
 
+<<<<<<< HEAD
 		
+=======
+>>>>>>> master
 	</dependencies>
 
 	<build>

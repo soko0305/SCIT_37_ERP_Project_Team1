@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 
 <head>
 <meta charset="utf-8">
@@ -23,74 +23,29 @@
 <link
 	href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css"
 	rel="stylesheet">
-<script>
-	$(function(){
-		$(".btn-primary").click(function(){
-			var seq = $("#supplierseq").val();
-			var name = $("#supplier_name").val();
-			var owner = $("#supplier_owner").val();
-			var addr = $("#supplier_addr").val();
-			var tel = $("#supplier_tel").val();
-			var pic = $("#supplier_pic").val();
-			var email = $("#supplier_email").val();
-			
-			$("#supplierseq1").val(seq);
-			$("#supplier_name1").val(name);
-			$("#supplier_owner1").val(owner);
-			$("#supplier_addr1").val(addr);
-			$("#supplier_tel1").val(tel);
-			$("#supplier_pic1").val(pic);
-			$("#supplier_email1").val(email);
-			
-			$("#supplierUpdateForm").submit();
-		});
-	});
-</script>
 </head>
 <body>
-	
+
 	<div class="col-md-3">
 		<div class="form-group">
-			<label for="showEasing">공급처seq</label> <input id="supplierseq" name="supplierseq"
-				type="text" readonly="readonly" th:value="${result.supplierseq}" class="form-control">
+			<label for="showEasing">거래처코드</label> <input id="showEasing"
+				type="text" readonly="readonly" placeholder="0001" class="form-control">
 		</div>
 		<div class="form-group">
-			<label for="showEasing">공급처명</label> <input id="supplier_name" name="supplier_name"
-				type="text" th:value="${result.supplier_name}" class="form-control">
+			<label for="showEasing">거래처명</label> <input id="showEasing"
+				type="text" placeholder="한국무역협회" class="form-control">
 		</div>
 		<div class="form-group">
-			<label for="hideEasing">공급처대표명</label> <input id="supplier_owner" name="supplier_owner"
-				type="text" th:value="${result.supplier_owner}" class="form-control">
+			<label for="hideEasing">전화번호</label> <input id="hideEasing"
+				type="tel" placeholder="8202-123-4567" class="form-control">
 		</div>
 		<div class="form-group">
-			<label for="showMethod">공급처주소</label> <input id="supplier_addr" name="supplier_addr"
-				type="text" th:value="${result.supplier_addr}" class="form-control">
+			<label for="showMethod">이메일</label> <input id="showMethod"
+				type="email" placeholder="www.kita.net"class="form-control">
 		</div>
-		<div class="form-group">
-			<label for="showMethod">공급처연락처</label> <input id="supplier_tel" name="supplier_tel"
-				type="tel" th:value="${result.supplier_tel}" class="form-control">
-		</div>
-		<div class="form-group">
-			<label for="showMethod">공급처담당자명</label> <input id="supplier_pic" name="supplier_pic"
-				type="text" th:value="${result.supplier_pic}" class="form-control">
-		</div>
-		<div class="form-group">
-			<label for="showMethod">공급처이메일</label> <input id="supplier_email" name="supplier_email"
-				type="email" th:value="${result.supplier_email}" class="form-control">
-		</div>
-		<div class="form-group">
-		<button type="submit" class="mb-2 mr-2 btn-square btn btn-primary">수정</button>
+		<div class="form-group"><button class="mb-2 mr-2 btn-square btn btn-primary">수정</button>
 		</div>
 	</div>
 	
-	<form action="supplierUpdate" method="post" id="supplierUpdateForm">
-		<input type="hidden" id="supplierseq1" name="supplierseq">
-		<input type="hidden" id="supplier_name1" name="supplier_name">
-		<input type="hidden" id="supplier_owner1" name="supplier_owner">
-		<input type="hidden" id="supplier_addr1" name="supplier_addr">
-		<input type="hidden" id="supplier_tel1" name="supplier_tel">
-		<input type="hidden" id="supplier_pic1" name="supplier_pic">
-		<input type="hidden" id="supplier_email1" name="supplier_email">
-	</form>
 </body>
 </html>

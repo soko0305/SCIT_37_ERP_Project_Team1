@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 
 <head>
 <meta charset="utf-8">
@@ -23,35 +23,7 @@
 <link
 	href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css"
 	rel="stylesheet">
-<script>
-		$(function(){
-			
-			$(".btn-primary").click(function(){
-				var type = $(this).attr("data-type");
-				var seq =  $(this).val();
-				if(type=='delete'){
-					$("#seq").val(seq);
-					$("#deleteForm").submit();
-				}else if(type=='update'){
-					$("#seq1").val(seq);
-					$("#updateForm").submit();
-				}else{
-					location.href="goSupplierInsert";
-				}
-			});
-		});
-	</script>
-</head>
 <body>
-
-	<form id="deleteForm" action="supplierDelete" method="post">
-		<input type="hidden" id="seq" name="supplierseq">
-	</form>
-	
-	<form id="updateForm" action="goSupplierUpdate" method="get">
-		<input type="hidden" id="seq1" name="supplierseq">
-	</form>
-
 	<div
 		class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
 		<!-- 헤더 부분 -->
@@ -372,49 +344,64 @@
 					<!-- app-page-title -->
 					<div class="main-card mb-3 card">
 						<button class="mb-2 mr-2 btn-square btn btn-primary"
-							data-type="insert">거래처추가</button>
+							onclick="location.href='goSupplierInsert'">거래처추가</button>
 						<div class="card-body">
 							<table style="width: 100%;" id="example"
 								class="table table-hover table-striped table-bordered">
 								<thead>
 									<tr>
-										<th>공급처seq</th>
-										<th>공급처명</th>
-										<th>공급처대표명</th>
-										<th>공급처주소</th>
-										<th>공급처연락처</th>
-										<th>공급처담당자명</th>
-										<th>공급처이메일</th>
+										<th>거래처코드</th>
+										<th>거래처명</th>
+										<th>전화번호</th>
+										<th>이메일</th>
 										<th>업데이트</th>
 									</tr>
 								</thead>
 								<tbody>
-
-									<tr th:each="list : ${supplierList}">
-										<td th:text="${list.supplierseq}"></td>
-										<td th:text="${list.supplier_name}"></td>
-										<td th:text="${list.supplier_owner}"></td>
-										<td th:text="${list.supplier_addr}"></td>
-										<td th:text="${list.supplier_tel}"></td>
-										<td th:text="${list.supplier_pic}"></td>
-										<td th:text="${list.supplier_email}"></td>
+									<tr>
+										<td>0001</td>
+										<td>기억회사</td>
+										<td>010.111.1234</td>
+										<td>a@go.com</td>
 										<td>
 											<button class="mb-2 mr-2 btn-square btn btn-primary"
-												data-type="update" th:value="${list.supplierseq}">수정</button>
+												onclick="window.open('goSupplierUpdate','window_name','width=430,height=500,location=no,status=no,scrollbars=yes');">수정</button>
 											<button class="mb-2 mr-2 btn-square btn btn-primary"
-												data-type="delete" th:value="${list.supplierseq}">삭제</button>
+												onclick="">삭제</button>
 										</td>
 									</tr>
+									<tr>
+										<td>0002</td>
+										<td>니은회사</td>
+										<td>011.222.1234</td>
+										<td>b@go.com</td>
+										<td>
+											<button class="mb-2 mr-2 btn-square btn btn-primary"
+												onclick="window.open('address','window_name','width=430,height=500,location=no,status=no,scrollbars=yes');">수정</button>
+											<button class="mb-2 mr-2 btn-square btn btn-primary"
+												onclick="">삭제</button>
+										</td>
+									</tr>
+									<tr>
+										<td>0003</td>
+										<td>디귿회사</td>
+										<td>017.333.1234</td>
+										<td>c@go.com</td>
+										<td>
+											<button class="mb-2 mr-2 btn-square btn btn-primary"
+												onclick="window.open('address','window_name','width=430,height=500,location=no,status=no,scrollbars=yes');">수정</button>
+											<button class="mb-2 mr-2 btn-square btn btn-primary"
+												onclick="">삭제</button>
+										</td>
+									</tr>
+
 								</tbody>
 								<tfoot>
 									<tr>
-										<th>공급처seq</th>
-										<th>공급처명</th>
-										<th>공급처대표명</th>
-										<th>공급처주소</th>
-										<th>공급처연락처</th>
-										<th>공급처담당자명</th>
-										<th>공급처이메일</th>
+										<th>거래처코드</th>
+										<th>거래처명</th>
+										<th>전화번호</th>
+										<th>이메일</th>
 										<th>업데이트</th>
 									</tr>
 								</tfoot>
@@ -893,7 +880,6 @@
 		</div>
 	</div>
 	<div class="app-drawer-overlay d-none animated fadeIn"></div>
-
 	<script type="text/javascript"
 		src="./assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
 </body>

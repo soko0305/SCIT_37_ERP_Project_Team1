@@ -13,9 +13,9 @@
 	</classpathentry>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
 		<attributes>
-			<attribute name="test" value="true"/>
 			<attribute name="optional" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
@@ -29,9 +29,12 @@
 		</attributes>
 	</classpathentry>
 <<<<<<< HEAD
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/Users/하라/Downloads/gson-2.8.5.jar"/>
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> master
 	<classpathentry kind="lib" path="C:/Users/하라/Desktop/poi-bin-4.1.0-20190412/poi-4.1.0/poi-examples-4.1.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/하라/Desktop/poi-bin-4.1.0-20190412/poi-4.1.0/poi-excelant-4.1.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/하라/Desktop/poi-bin-4.1.0-20190412/poi-4.1.0/poi-ooxml-4.1.0.jar"/>
@@ -44,6 +47,9 @@
 =======
 	<classpathentry kind="lib" path="C:/Users/kita/Downloads/gson-2.8.5.jar"/>
 >>>>>>> 9c9bb2d3ea04393c07a7b8c392235b9c1ee3d197
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
