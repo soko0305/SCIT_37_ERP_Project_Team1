@@ -27,5 +27,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/SCIT_37_ERP_Project_Team1/gson-2.8.5.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
