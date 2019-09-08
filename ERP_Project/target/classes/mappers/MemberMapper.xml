@@ -4,59 +4,5 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.project.erp.dao.MemberMapper">
-<<<<<<< HEAD
- 
- 
-	<insert id="insertMember" parameterType="com.project.erp.vo.MemberVO">
-		INSERT INTO erp_member(
- 				userid
-				, userpw
-				, userstatus
-				, userdepartment
-				, userstate
-				, name
-				, phonenumber
-				, email
-				, address
-				,loginstate
-		)
-		VALUES(
- 				#{userid}
-				, #{userpw}
-				, #{userstatus}
-				, #{userdepartment}
-				, 'notallowed'
-				, #{name}
-				, #{phonenumber}
-				, #{email}
-				, #{address}		
- 				, 'out'
-		)
-	</insert>
-		<select id="selectMemberById" parameterType="com.project.erp.vo.MemberVO" resultType="com.project.erp.vo.MemberVO">
-		SELECT  userid
-				, userpw
-				, loginstate
-				, userstate
-		FROM erp_member
-		WHERE userid=#{userid}
-	</select>
- 		<select id="selectMember" parameterType="com.project.erp.vo.MemberVO" resultType="com.project.erp.vo.MemberVO">
-		SELECT   userid
-				, userpw
-				, userstatus
-				, userdepartment
-				, userstate
-				, name
-				, phonenumber
-				, email
-				, address
-				,loginstate
-		FROM erp_member
- 	</select>
- 
- 
-=======
 
->>>>>>> hara
 </mapper>
