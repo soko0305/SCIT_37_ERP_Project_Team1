@@ -25,6 +25,7 @@
 	rel="stylesheet">
 <script>
 	$(function() {
+<<<<<<< HEAD
 		/* 자동구매 체크시 수량설정 출력 */
 		$("#rawm_autoorder").change(
 		function() {
@@ -42,6 +43,25 @@
 				$(".form-group2").html(str2);
 			}
 		});
+=======
+		$("#rawm_autoorder")
+				.change(
+						function() {
+							if ($("#rawm_autoorder").is(":checked")) {
+								var str1 = '<label for="rawm_minimum" class="">원자재최저수량</label>'
+										+ '<input name="rawm_minimum" id="rawm_minimum" type="number" class="form-control">'
+								var str2 = '<label for="rawm_set" class="">원자재설정수량</label>'
+										+ '<input name="rawm_set" id="rawm_set" type="number" class="form-control">'
+								$(".form-group1").html(str1);
+								$(".form-group2").html(str2);
+							} else {
+								var str1 = "";
+								var str2 = "";
+								$(".form-group1").html(str1);
+								$(".form-group2").html(str2);
+							}
+						});
+>>>>>>> hara
 	});
 </script>
 </head>

@@ -15,10 +15,9 @@ public class HomeController {
 	public String home(){
 		return "main/index";
 		}
+	
 	@RequestMapping(value="/header", method = RequestMethod.GET)
-	public String header(){
-		
-		
+	public String header(){	
 		
 		return "main/header";
 	}

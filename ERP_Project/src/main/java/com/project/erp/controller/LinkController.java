@@ -16,14 +16,9 @@ public class LinkController {
 		return "sales/buyerList";
 	}
 	
-	@RequestMapping(value="/offerManagement", method = RequestMethod.GET)
+	@RequestMapping(value="/realTimeOffer", method = RequestMethod.GET)
 	public String Management2(){
-		return "sales/offerManagement";
-	}
-
-	@RequestMapping(value="/realTimeTracing", method = RequestMethod.GET)
-	public String Management3(){
-		return "sales/realTimeTracing";
+		return "sales/realTimeOffer";
 	}
 
 	@RequestMapping(value="/salesHistory", method = RequestMethod.GET)
