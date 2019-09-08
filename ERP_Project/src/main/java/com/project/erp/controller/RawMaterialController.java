@@ -13,7 +13,8 @@ public class RawMaterialController {
 
 	@Autowired
 	RawMaterialDAO rDAO;
-
+	
+	//공급처 등록
 	@RequestMapping(value = "/rawMaterialInsert", method = RequestMethod.POST)
 	public String rawMaterialInsert(RawMaterialVO rawmaterial) {
 		
