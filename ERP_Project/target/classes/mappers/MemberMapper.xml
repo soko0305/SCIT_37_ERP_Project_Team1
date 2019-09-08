@@ -4,10 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.project.erp.dao.MemberMapper">
-<<<<<<< HEAD
-	
-	
-=======
  
  
 	<insert id="insertMember" parameterType="com.project.erp.vo.MemberVO">
@@ -59,5 +55,4 @@
  	</select>
  
  
->>>>>>> 5f26da8386ab868e940a0500ed983ae3114dfc41
 </mapper>

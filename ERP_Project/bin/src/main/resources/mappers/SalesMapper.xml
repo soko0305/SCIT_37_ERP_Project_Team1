@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.erp.dao.SalesMapper">
+
+
+<select id="SelectOneBuyer" parameterType="com.project.erp.vo.Buyer" resultType="com.project.erp.vo.Buyer">
+select buyerseq
+from buyer
+where buyer_corp = #{buyer_corp}
+</select>
+
+<insert id="insertSales" parameterType="com.project.erp.vo.Sales">
+Insert into Sales
+values(
+sales_ordernum.nextval,
+#{buyerseq},
+sysdate,
+'승인대기',
+#{sales_totalprice}
+)
+</insert>
+
+<insert id="insertSalesDetail" parameterType="com.project.erp.vo.SalesDetail">
+
+</insert>
+</mapper>

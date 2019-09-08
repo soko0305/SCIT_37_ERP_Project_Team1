@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path=""/>
+	<classpathentry kind="lib" path="C:/SCIT_37_ERP_Project_Team1/gson-2.8.5.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

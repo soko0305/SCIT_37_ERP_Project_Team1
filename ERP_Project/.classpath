@@ -15,7 +15,6 @@
 		<attributes>
 			<attribute name="optional" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
@@ -28,22 +27,5 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-<<<<<<< HEAD
-<<<<<<< HEAD
-	<classpathentry kind="lib" path="C:/Users/하라/Desktop/poi-bin-4.1.0-20190412/poi-4.1.0/poi-examples-4.1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/하라/Desktop/poi-bin-4.1.0-20190412/poi-4.1.0/poi-excelant-4.1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/하라/Desktop/poi-bin-4.1.0-20190412/poi-4.1.0/poi-ooxml-4.1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/하라/Desktop/poi-bin-4.1.0-20190412/poi-4.1.0/poi-ooxml-schemas-4.1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/하라/Desktop/poi-bin-4.1.0-20190412/poi-4.1.0/ooxml-lib/curvesapi-1.06.jar"/>
-	<classpathentry kind="lib" path="C:/Users/하라/Desktop/poi-bin-4.1.0-20190412/poi-4.1.0/ooxml-lib/xmlbeans-3.1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/하라/Desktop/poi-bin-3.0-FINAL-20070503/poi-3.0-rc4/poi-3.0-rc4-20070503.jar"/>
-	<classpathentry kind="lib" path="C:/Users/하라/Desktop/poi-bin-3.0-FINAL-20070503/poi-3.0-rc4/poi-contrib-3.0-rc4-20070503.jar"/>
-	<classpathentry kind="lib" path="C:/Users/하라/Desktop/poi-bin-3.0-FINAL-20070503/poi-3.0-rc4/poi-scratchpad-3.0-rc4-20070503.jar"/>
-=======
-	<classpathentry kind="lib" path="C:/Users/kita/Downloads/gson-2.8.5.jar"/>
->>>>>>> 9c9bb2d3ea04393c07a7b8c392235b9c1ee3d197
-=======
-	<classpathentry kind="lib" path="C:/SCIT_37_ERP_Project_Team1/gson-2.8.5.jar"/>
->>>>>>> bb34177b9c6aab5041b378a32bc639674f6e487e
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

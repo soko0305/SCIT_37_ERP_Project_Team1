@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Grid Tables - Basic example of a Bootstrap 4 table with sort, search and filter functionality.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"
+    />
+    <meta name="description" content="Basic example of a Bootstrap 4 table with sort, search and filter functionality.">
+
+    <!-- Disable tap highlight on IE -->
+    <meta name="msapplication-tap-highlight" content="no">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
+<link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
+<script>
+	$(function(){	
+		$("#header").load("/header");
+		$("#navbar").load("/navbar");
+		$("#setting").load("/setting");
+		
+	});
+</script>
+<body>
+<div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
+    <div id="header"></div>
+    <div id="setting"></div> 
+            <div class="app-main">
+            
+                     <div id="navbar"></div>
+                <div class="app-main__outer">
+                <div class="app-main__inner">
+                    <div class="app-page-title">
+                        <div class="page-title-wrapper">
+                            <div class="page-title-heading">
+                                <div class="page-title-icon">
+                                    <i class="pe-7s-notebook icon-gradient bg-mixed-hopes">
+                                    </i>
+                                </div>
+                                <div>생산품조회
+                                    <div class="page-title-subheading">
+                                    	생산품현황 검색, 수정, 삭제 기능
+                                    </div>
+                                </div>
+                            </div>    
+                          </div>
+                    </div>              <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <!-- search 코딩 -->
+                        <form>
+                           <select class="mb-2 form-control" style="display:inline ;width: 430px" >
+                                    <option>Default Select</option>
+                           </select>
+                            <select class="mb-2 form-control" style="display:inline ;width: 400px">
+                                    <option>Default Select</option>
+                           </select>
+<!--                            <select class="mb-2 form-control" style="display:inline ;width: 252px">
+                                    <option>Default Select</option>
+                           </select>
+                           <select class="mb-2 form-control" style="display:inline ;width: 252px">
+                                    <option>Default Select</option>
+                           </select> -->
+                       <div>
+                        <div class="input-group">
+                                      <div class="input-group-prepend datepicker-trigger">
+                                            <!-- <div class="input-group-text" style="height: 38px"> -->
+                        <input type="text" class="form-control" name="daterange" value="01/01/2018 - 01/15/2018" style="display:inline ;width: 435px">
+                                         <!--  </div> -->
+                                      </div>
+                               <!-- <input type="text" class="form-control" data-toggle="datepicker-icon"> -->
+                               <input placeholder="default" type="text" class="mb-2 form-control" style="display:inline ;width: 300px">        
+                                
+                                <button class="mb-2 mr-2 btn btn-primary" style="display:inline ;height: 37px;width: 95px">
+                                	Search
+                           </button>
+                        </div>
+                        </div>
+                           
+                      	
+                       
+                       </form>
+                        
+                            <table class="mb-0 table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th data-field="name1"
+                                        data-sortable="true">
+                                        	생산품 명 
+                                    </th>
+                                    <th data-field="name"
+                                        data-sortable="true">
+                                        	생산품 코드 
+                                    </th>
+                                    <th data-field="stargazers_count"
+                                        data-sortable="true">
+                                        	원재료 수 
+                                    </th>
+                                    <th data-field="company"
+                                        data-sortable="true">
+                                        	재료비  
+                                        	
+                                    </th>
+                                    <th data-field="forks_count"
+                                        data-sortable="true">
+                                        	생산비  
+                                    </th>
+                                    <th data-field="prorobuy"
+                                        data-sortable="true">
+                                        	기타   
+                                    </th>
+                                 
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td> 										
+                                <td>
+<<<<<<< HEAD
+											<button class="mb-2 mr-2 btn-square btn btn-primary"
+												onclick="window.open('goMaterialsUpdate','window_name','width=100,height=100,location=no,status=no,scrollbars=yes');">수정</button>
+											<button class="mb-2 mr-2 btn-square btn btn-primary"
+=======
+											<button class="mb-2 mr-2 btn btn-primary"
+												onclick="window.open('goMaterialsUpdate','window_name','width=100,height=100,location=no,status=no,scrollbars=yes');">수정</button>
+											<button class="mb-2 mr-2 btn btn-primary"
+>>>>>>> 785a9d5035649be42f230dadc8075fae33263d08
+												onclick="">삭제</button>
+										</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- footer 삽입 -->    </div>
+    </div>
+</div>
+<!-- drawer 삽입 -->
+<div class="app-drawer-overlay d-none animated fadeIn"></div><script type="text/javascript" src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script></body>
+</html>
