@@ -128,5 +128,10 @@ public class MoonController {
 	public String production_insert() {
 		return "production/production_insert";
 	}
+	
+	@RequestMapping(value = "/goMoonTest", method = RequestMethod.GET)
+	public String goMoonTest() {
+		return "rawMaterial/MoonTes";
+	}
 
 }
