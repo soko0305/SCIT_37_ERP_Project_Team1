@@ -23,7 +23,7 @@ sysdate,
 )
 </insert>
 
-<insert id="inserSalesDetail" parameterType="com.project.erp.vo.SalesDetail">
+<insert id="insertSalesDetail" parameterType="com.project.erp.vo.SalesDetail">
 
 </insert>
 </mapper>
