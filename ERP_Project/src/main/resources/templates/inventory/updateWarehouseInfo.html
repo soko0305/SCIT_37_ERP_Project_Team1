@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="utf-8">
+<html lang="UTF-8" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -26,30 +26,32 @@
                     <div class="mx-auto app-login-box col-md-8">
                         <div class="app-logo-inverse mx-auto mb-3"></div>
                         <div class="modal-dialog w-100">
+                        <form id="updateWarehouseForm" action="/updateWarehouse" method="POST">
                             <div class="modal-content">
                                 <div class="modal-body">
                                     <h5 class="modal-title">
                                         <h4 class="mt-2">
-                                        <!-- 수정 동시에 사용 -->
+                                       
                                             <div>창고 정보 수정</div>
                                             <span>수정하실 <span class="text-success">창고 정보</span> 를 기입해주세요</span></h4>
                                     </h5>
                                     <div class="divider row"></div>
                                     <div class="form-row">
-                                    
+                                  	
+                                  	<input type="hidden" name="warehouse_code" id="warehouse_code" th:value="${warehouse.warehouse_code}">
                                     <div class="col-md-12">
                                             <div class="position-relative form-group">
-                                            	<input name="text" id="storageName" placeholder="창고 이름" type="text" class="form-control">
+                                            	<input name="warehouse_name" id="warehouse_name" th:value="${warehouse.warehouse_name}" placeholder="창고 이름" type="text" class="form-control">
                                             </div>
                                       </div>
                                        <div class="col-md-12">
                                             <div class="position-relative form-group">
-                                            	<input name="text" id="storageAddress" placeholder="창고 주소" type="text" class="form-control">
+                                            	<input name="warehouse_addr" id="warehouse_addr" th:value="${warehouse.warehouse_addr}" placeholder="창고 주소" type="text" class="form-control">
                                             </div>
                                       </div>
                                       <div class="col-md-12">
                                             <div class="position-relative form-group">
-                                            	<input name="text" id="storageAddress" placeholder="창고 면적" type="number" class="form-control">
+                                            	<input name="warehouse_size" id="warehouse_size" th:value="${warehouse.warehouse_size}" placeholder="창고 면적" type="number" class="form-control">
                                             </div>
                                       </div>
                              <div class="col-md-12">
@@ -59,24 +61,58 @@
                                                         <i class="fa fa-calendar-alt"></i>
                                                     </div>
                                                 </div>
-                                                <input type="text" placeholder="창고 개설일" class="form-control" data-toggle="datepicker-icon">
+                                                <input type="text" name="warehouse_date" id="warehouse_date" th:value="${warehouse.warehouse_date}" placeholder="창고 개설일" class="form-control" data-toggle="datepicker-icon">
                                 </div>
                                </div>
                                
                                      </div>
                                    
                                     <div class="divider row"></div>
-                                   
+                                    	<div align="center">
+                                   		<p style="color: red" id="errorMessage"></p>
+                                   		</div>
                                     </div>
+                                    
                                 <div class="modal-footer d-block text-center">
-                                    <button class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg">창고 수정</button>
+                                    <button id="updateButton" class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg" type="button">창고 정보 수정</button>
                                 </div>
                             </div>
+                            </form>
                         </div>
                         <div class="text-center text-white opacity-8 mt-3">Copyright © ArchitectUI 2019</div>
                     </div>
                 </div>
             </div>
         </div>
-</div></body>
+</div>
+<script>
+	$(function(){
+		$("#updateButton").click(function(){
+			var warehouse_name = $("#warehouse_name").val();
+			var warehouse_addr = $("#warehouse_addr").val();
+			var warehouse_size = $("#warehouse_size").val();
+			var warehouse_date = $("#warehouse_date").val();
+			if(warehouse_name==null ||warehouse_name==""){
+				$("#errorMessage").html("창고 이름을 입력해주세요");
+			}else{
+				if(warehouse_addr==null ||warehouse_addr==""){
+					$("#errorMessage").html("창고 주소를 입력해주세요");
+				}else{
+					if(warehouse_size==null ||warehouse_size==""){
+						$("#errorMessage").html("창고 면적을 입력해주세요");
+					}else{
+						if(warehouse_date==null ||warehouse_date==""){
+							$("#errorMessage").html("창고 개설일을 입력해주세요");
+						}else{
+							$("#updateWarehouseForm").submit();
+							window.open("about:blank","_self").close();
+						}
+					}
+				}
+			}
+		});
+	});
+
+</script>
+</body>
 </html>

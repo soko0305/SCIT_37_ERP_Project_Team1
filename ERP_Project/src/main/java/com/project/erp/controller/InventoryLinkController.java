@@ -1,14 +1,22 @@
 package com.project.erp.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.project.erp.service.InventoryService;
+import com.project.erp.vo.WarehouseVO;
+
 @Controller
 public class InventoryLinkController {
+	@Autowired
+	InventoryService inventoryService;
+	
 	@RequestMapping(value="/goStorage", method = RequestMethod.GET)
 	public String goStorageManagement(){
-		return "inventory/storage";
+		return "inventory/warehouse";
 	}
 	
 	@RequestMapping(value="/goInventoryManagement", method = RequestMethod.GET)
@@ -28,11 +36,13 @@ public class InventoryLinkController {
 	
 	@RequestMapping(value="/goInsertStorage", method = RequestMethod.GET)
 	public String goInsertStorage(){
-		return "inventory/insertStorageInfo";
+		return "inventory/insertWarehouseInfo";
 	}
 	
 	@RequestMapping(value="/goUpdateStorage", method = RequestMethod.GET)
-	public String goUpdateStorage(){
-		return "inventory/updateStorageInfo";
+	public String goUpdateStorage(String warehouse_code, Model model){
+		WarehouseVO w = inventoryService.selectWarehouseByCode(warehouse_code);
+		model.addAttribute("warehouse", w);
+		return "inventory/updateWarehouseInfo";
 	}
 }
