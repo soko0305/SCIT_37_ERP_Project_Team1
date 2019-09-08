@@ -10,5 +10,6 @@ name varchar2(20),
 phonenumber number,
 email varchar2(20),
 address varchar2(20)
+loginstate varchar2(20) check(loginstate in ('in',  'out' )) 
 )
 commit;

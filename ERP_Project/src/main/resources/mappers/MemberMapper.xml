@@ -22,6 +22,7 @@
 				, phonenumber
 				, email
 				, address
+				,loginstate
 		)
 		VALUES(
  				#{userid}
@@ -33,7 +34,7 @@
 				, #{phonenumber}
 				, #{email}
 				, #{address}		
- 
+ 				, 'out'
 		)
 	</insert>
 		<select id="selectMemberById" parameterType="com.project.erp.vo.MemberVO" resultType="com.project.erp.vo.MemberVO">
@@ -43,11 +44,5 @@
 		FROM erp_member
 		WHERE userid=#{userid}
 	</select>
-<<<<<<< HEAD
-
-=======
-=======
-
->>>>>>> 4dda76466e554547e06e80ae06e8e1f4b2051fd2
->>>>>>> master
+ 
 </mapper>
