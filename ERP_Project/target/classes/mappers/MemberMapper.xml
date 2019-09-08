@@ -5,4 +5,44 @@
 
 <mapper namespace="com.project.erp.dao.MemberMapper">
 
+		<insert id="insertMember" parameterType="com.project.erp.vo.MemberVO">
+		INSERT INTO erp_member(
+		,USERID
+		,USERPW
+		,USERSTATUS
+		,USERDEPARTMENT
+		,USERSTATE
+		,NAME
+		,PHONENUMBER
+		,EMAIL
+		,ADDRESS
+		,LOGINSTATE
+
+		)
+		VALUES(
+					#{userid}
+					, #{userpw}
+					, #{userstatus}
+					, #{userdepartment}
+					, 'notallowed'
+					, #{name}
+					, #{phonenumber}
+					, #{email}
+					, #{address}
+					, 'out'
+		)
+	</insert>
+	
+ 
+
+	<select id="selectMemberById" parameterType="com.project.erp.vo.MemberVO" resultType="com.project.erp.vo.MemberVO">
+		SELECT  userid
+				, userpw
+ 				, userstate
+		FROM erp_member
+		WHERE userid=#{userid}
+	</select>
+
+
+
 </mapper>
