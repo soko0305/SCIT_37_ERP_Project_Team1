@@ -24,9 +24,9 @@ public class InventoryLinkController {
 		return "inventory/inventoryManagement";
 	}
 	
-	@RequestMapping(value="/goResearchInventory", method = RequestMethod.GET)
+	@RequestMapping(value="/goResearchConfirm", method = RequestMethod.GET)
 	public String goResearchInventory(){
-		return "inventory/researchInventory";
+		return "inventory/researchConfirm";
 	}
 	
 	@RequestMapping(value="/goConfirmInventory", method = RequestMethod.GET)
