@@ -11,15 +11,15 @@ import com.project.erp.vo.SupplierVO;
 @Repository
 public interface SupplierMapper {
 
-	public int supplierInsert(SupplierVO supplier);
+	public int supplierInsert(SupplierVO supplier);				//공급처 등록
 	
-	public ArrayList<SupplierVO> supplierAllSelect();
+	public ArrayList<SupplierVO> supplierAllSelect();			//공급처 전체 출력
 	
-	public SupplierVO supplierOneSelect(SupplierVO supplier);
+	public SupplierVO supplierOneSelect(SupplierVO supplier);	//공급처 선택 출력
 
-	public int supplierDelete(SupplierVO supplier);
+	public int supplierDelete(SupplierVO supplier);				//공급처 삭	제
 	
-	public int supplierUpdate(SupplierVO supplier);
+	public int supplierUpdate(SupplierVO supplier);				//공급처 수정
 	
-	public ArrayList<SupplierVO> supplierDashSelect();
+	public ArrayList<SupplierVO> supplierDashSelect();			//공급처 3개 출력
 }
