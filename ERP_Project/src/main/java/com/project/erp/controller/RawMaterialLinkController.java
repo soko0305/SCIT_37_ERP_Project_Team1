@@ -87,8 +87,8 @@ public class RawMaterialLinkController {
 	// 원자재 수정 Form
 	@RequestMapping(value = "/goMaterialsUpdate", method = RequestMethod.POST)
 	public String goMaterialsUpdate(RawMaterialVO rawmaterial, Model model) {
-		System.out.println("goMaterialsUpdate result : " + rawmaterial);
 		RawMaterialVO result = rDAO.rawMaterialOneSelect(rawmaterial);
+		System.out.println("rVO : " + result);
 		model.addAttribute("result", result);
 		return "rawMaterial/materials_update";
 	}

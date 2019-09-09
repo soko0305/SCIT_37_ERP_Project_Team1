@@ -67,13 +67,14 @@ public class SalesController {
 			//회사이름으로 바이어 시퀀스 불러오기.
 			Buyer buyer = new Buyer();
 			buyer.setBuyer_corp(company);
-			Buyer buyer1 = dao.SelectOneBuyer(buyer);
+			Buyer buyer1 = dao.selectOneBuyer(buyer);
 			
 			//Sales 객체를 DB에 저장하는 메소드.
 			Sales sales = new Sales();
 			sales.setSales_ordernum(sales_ordernum);
 			sales.setBuyerseq(buyer1.getBuyerseq());
 			sales.setSales_totalprice(price);
+			sales.setSales_title(salesdetail_name);
 			result1 = dao.insertSales(sales);
 			}
 			

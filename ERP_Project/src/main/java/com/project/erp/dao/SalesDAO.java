@@ -1,6 +1,7 @@
 package com.project.erp.dao;
 
-import java.util.ArrayList;
+
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +17,9 @@ public class SalesDAO {
 	@Autowired
 	SqlSessionTemplate sqlSession;
 	
-	public Buyer SelectOneBuyer(Buyer buyer){
-		Buyer buyer1 = null;
-		try{
-		SalesMapper mapper = sqlSession.getMapper(SalesMapper.class);
-		buyer1= mapper.SelectOneBuyer(buyer);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return buyer1;
-	}
+	/*
+	 * insert 
+	 */
 	
 	
 	public int insertSales(Sales sales){
@@ -49,4 +43,49 @@ public class SalesDAO {
 		}
 		return result;
 	}
+	
+	
+	
+	/*
+	 * select
+	 */
+
+	
+	
+	//BuyerSeq가 일치하는 Buyer를 select
+	public Buyer selectOneBuyer(Buyer buyer){
+		Buyer buyer1 = null;
+		try{
+		SalesMapper mapper = sqlSession.getMapper(SalesMapper.class);
+		buyer1= mapper.selectOneBuyer(buyer);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return buyer1;
+	}
+	
+	//Sales 목록 전체 select
+	public List<Sales> selectAllSales(){
+		List<Sales> list1 = null;
+		try{
+		SalesMapper mapper = sqlSession.getMapper(SalesMapper.class);
+		list1=mapper.selectAllSales();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return list1;
+	}
+
+	// OrderNumber를 통해 salesDetail을 select 
+	public List<SalesDetail> selectSalesDetail(SalesDetail salesDetail){
+		List<SalesDetail> list1 = null;
+		try{
+		SalesMapper mapper = sqlSession.getMapper(SalesMapper.class);
+		list1=mapper.selectSalesDetail(salesDetail);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return list1;
+	}
+
 }
