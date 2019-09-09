@@ -73,6 +73,7 @@ public class SalesController {
 			Sales sales = new Sales();
 			sales.setSales_ordernum(sales_ordernum);
 			sales.setBuyerseq(buyer1.getBuyerseq());
+			sales.setBuyer_corp(company);
 			sales.setSales_totalprice(price);
 			sales.setSales_title(salesdetail_name);
 			result1 = dao.insertSales(sales);

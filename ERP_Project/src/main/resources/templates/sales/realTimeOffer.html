@@ -33,6 +33,41 @@
 	
 <script>
 
+/*
+ * 
+ *	
+ *	Body 관련 메소드
+ *
+ */
+
+ 
+
+//엑셀 업로드 프로세스가 완료된 후, insert가 끝난 DB ajax로 새로 출력해주기.
+function selectAllSales(){
+	$.ajax({
+		url:'selectAllSales',
+		data:JSON.stringify(excelJson),
+		datatype:'json',
+		contentType: "application/json; charset=utf-8",
+		type:'post',
+		success:function(data){
+			if(data=='ok'){alert('성공')}
+			selectAllSales();
+		}
+		
+	})
+}
+
+
+/*
+ * 
+ *	
+ *	엑셀 문서 처리 관련 메소드
+ *
+ */
+
+ 
+ 
 //sheetJS를 사용한 Excel read 메소드.
 function excelExport(event){
 	excelExportCommon(event, handleExcelDataAll);
@@ -72,14 +107,14 @@ function insertData(sheet){
 			type:'post',
 			success:function(data){
 				if(data=='ok'){alert('성공')}
-				
+				selectAllSales();
 			}
 			
 		})
 } 
 
 //sheetJS를 사용한 Excel read 메소드.
-function handleExcelDataJson(sheet){
+/* function handleExcelDataJson(sheet){
 	var sheetJson = XLSX.utils.sheet_to_json (sheet);
 	$("#displayExcelJson").html(sheetJson);
 	str='';
@@ -101,12 +136,7 @@ function handleExcelDataJson(sheet){
 		$("#displayExcelJson").append(str1);
 	} 
 
-}
-
-function handleExcelDataHtml(sheet){
-    $("#displayExcelHtml").html(XLSX.utils.sheet_to_html (sheet));
-} 
-
+} */
 </script>
 </head>
 <body>
@@ -137,7 +167,7 @@ function handleExcelDataHtml(sheet){
                             </div>    
                           </div>
                     </div>         
-              
+            
                     <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@위에 달린 메뉴 -->
                     
                                       <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
@@ -179,39 +209,40 @@ function handleExcelDataHtml(sheet){
  				<label for="excelFile">직접 업로드하기</label>
   				<input type="file" id="excelFile" onchange="excelExport(event)"/> </div>
   				</div>
+      		   </div>
 
-
-				<h6>JSON 형태로 보기</h6>
-				<div id="displayExcelJson"></div></div>
-          
+				<!-- <h6>JSON 형태로 보기</h6>
+				<div id="displayExcelJson"></div> -->
+          		
  <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
  
                  <div class="page-title-actions">
-                               <div class="card mb-4">
+                 
+                               <div class="card mb-4"  style="margin-top: -500px">
                          	    <div class="card-header-tab card-header">
                                  <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i class="header-icon lnr-laptop-phone mr-3 text-muted opacity-6"> </i>실시간 주문 내역</div>
                                  </div>
                             
                             	<div class="card-body">
-                                <table style="width: 100%;" id="example" class="table table-hover table-striped table-bordered">
+                                <table style="width: 100%;" id="example" class="table table-hover table-bordered">
                                    <thead>
                                         <tr>
                                             <th>주문 번호</th>
                                             <th>거래처</th>
                                             <th>주문 내용</th>
                                             <th>금액</th>
+                                            <th>주문일자</th>
                                             <th>Status</th>
-                                            <th>주문날짜와 시간</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                             	<tr th:each="list : ${salesList}">
 												<td th:text="${list.sales_ordernum}"></td>
-												<td th:text="${list.buyerseq}"></td>
+												<td th:text="${list.buyer_corp}"></td>
 												<td th:text="${list.sales_title}"></td>
 												<td th:text="${list.sales_totalprice}"></td>
-												<td><button class="mb-2 mr-2 btn btn-primary" th:text="${list.sales_status}" ></button></td>
 												<td th:text="${list.sales_orderdate}"></td>
+												<td style="text-align: center;"><button class="mb-2 mr-2 btn btn-primary" th:text="${list.sales_status}" ></button></td>
 										</tr> 
                                   </tbody>
                                </table>
@@ -220,8 +251,9 @@ function handleExcelDataHtml(sheet){
                    </div> 
                 <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
                 <!-- footer 삽입 -->    
-      </div>
+	
    </div>
+ </div>
 </div>
 <!-- drawer 삽입 -->
 
