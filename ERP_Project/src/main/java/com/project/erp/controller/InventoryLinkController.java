@@ -45,4 +45,13 @@ public class InventoryLinkController {
 		model.addAttribute("warehouse", w);
 		return "inventory/updateWarehouseInfo";
 	}
+	
+	@RequestMapping(value="/goResearchInventory", method = RequestMethod.GET)
+	public String goResearchInventory(String warehouse_code, Model model){
+		WarehouseVO w = inventoryService.selectWarehouseByCode(warehouse_code);
+		model.addAttribute("warehouse", w);
+		return "inventory/researchInventory";
+	}
+	
+	
 }

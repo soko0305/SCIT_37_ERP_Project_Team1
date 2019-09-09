@@ -98,16 +98,18 @@
 <script>
 	$(function(){
 		//파이어베이스 객체 호출
-		var database = firebase.database();
+		var database = firebase.database();	
 		selelctANDPrintAll();
 		updateButtonSetting();
 		deleteButtonSetting();
+		detailButtonSetting();
 		database.ref().on('value', function(snapshot){
 			selelctANDPrintAll();
 		});
 		//창고관리 버튼 타입 및 창고코드 변수
 		var type=null;
 		var storage_seq=null;
+		
 		
 		//창고 추가 버튼 눌렀을때
 		$("#insertStorage").click(function(){ 
@@ -144,8 +146,7 @@
 					database.ref(serverData.warehouse_code+'/').set({"warehouse_name": serverData.warehouse_name, 
 																	 "warehouse_addr": serverData.warehouse_addr, 
 																	 "warehouse_size": serverData.warehouse_size, 
-																	 "warehouse_date": serverData.warehouse_date, 
-																	 "inventory": "empty"});
+																	 "warehouse_date": serverData.warehouse_date});
 					}
 			});
 		}
@@ -194,6 +195,17 @@
 				}
 			}
 		});
+		}
+		
+		//창고 detail 버튼 눌렀을 때
+		function detailButtonSetting(){
+			$(".btn-sm").click(function(){
+				type= $(this).attr("button-type");
+				storage_seq= $(this).attr("data-seq");
+				if(type=="detail"){
+					var g_oWindow = window.open("/goResearchInventory?warehouse_code="+storage_seq+"", "Input Storage Information","width=900, height=700, location=no, toolbar=no, menubar=no, scrollbars=no, status=no, resizable=yes");
+			}
+			});
 		}
 		
 		//처음 들어왔을 때 창고 리스트 가져오기
@@ -259,6 +271,7 @@
 				}
 				deleteButtonSetting();
 				updateButtonSetting();
+				detailButtonSetting();
 		}
 			
 		//창고 삭제 함수
