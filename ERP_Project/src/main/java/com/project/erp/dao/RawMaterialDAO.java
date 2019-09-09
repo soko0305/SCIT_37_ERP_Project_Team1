@@ -78,4 +78,17 @@ public class RawMaterialDAO {
 		}
 		return result;
 	}
+	
+	public int rawMaterialUpdate(RawMaterialVO rawmaterial) {
+		int result = 0;
+
+		RawMaterialMapper mapper = sqlSession.getMapper(RawMaterialMapper.class);
+		try {
+			result = mapper.rawMaterialUpdate(rawmaterial);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return result;
+		}
+		return result;
+	}
 }
