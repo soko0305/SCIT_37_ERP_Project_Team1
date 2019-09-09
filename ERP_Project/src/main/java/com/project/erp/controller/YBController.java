@@ -11,7 +11,10 @@ public class YBController {
 	public String signup(){
 		return "member/signup";
 	}
-	
+	@RequestMapping(value="/signup2", method = RequestMethod.GET)
+	public String signup2(){
+		return "member/signup2";
+	}
 	@RequestMapping(value="/login", method = RequestMethod.GET)
 	public String login(){
 		return "member/login";
