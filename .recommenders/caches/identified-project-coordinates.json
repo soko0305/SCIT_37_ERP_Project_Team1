@@ -1,16 +1,1 @@
-<<<<<<< HEAD
 {}
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-[[{"location":"C:\\SCIT_37_ERP_Project_Team1\\ERP_Project","type":"PROJECT","hints":{"PROJECT_NAME":"ERP_Project"}},"com.project.erp:com.project.erp:0.0.1"],[{"location":"C:\\Program Files\\Java\\jre1.8.0_221","type":"JRE","hints":{"EXECUTION_ENVIRONMENT":"JavaSE-1.8"}},"jre:jre:1.8.0"],[{"location":"C:\\Users\\하라\\Downloads\\gson-2.8.5.jar","type":"JAR","hints":{}},"com.google.code.gson:gson:2.8.5"]]
-=======
-[[{"location":"C:\\Program Files\\Java\\jre1.8.0_221","type":"JRE","hints":{"EXECUTION_ENVIRONMENT":"JavaSE-1.8"}},"jre:jre:1.8.0"],[{"location":"C:\\Users\\하라\\Downloads\\gson-2.8.5.jar","type":"JAR","hints":{}},"com.google.code.gson:gson:2.8.5"],[{"location":"C:\\SCIT_37_ERP_Project_Team1\\ERP_Project","type":"PROJECT","hints":{"PROJECT_NAME":"ERP_Project"}},"com.project.erp:com.project.erp:0.0.1"]]
->>>>>>> fe1038bfe2e71a06b1aef37a28af50963960eab2
-=======
-{}
-=======
-[[{"location":"C:\\Program Files\\Java\\jre1.8.0_221","type":"JRE","hints":{"EXECUTION_ENVIRONMENT":"JavaSE-1.8"}},"jre:jre:1.8.0"],[{"location":"C:\\Users\\하라\\Downloads\\gson-2.8.5.jar","type":"JAR","hints":{}},"com.google.code.gson:gson:2.8.5"],[{"location":"C:\\SCIT_37_ERP_Project_Team1\\ERP_Project","type":"PROJECT","hints":{"PROJECT_NAME":"ERP_Project"}},"com.project.erp:com.project.erp:0.0.1"]]
->>>>>>> master
->>>>>>> 6b94ba7c94cbd3f1808a27c5c525eab84fc1e732
->>>>>>> f21fc66b26e6a791ca8528230aab06a7f8200636

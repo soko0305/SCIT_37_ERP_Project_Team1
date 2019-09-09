@@ -1,5 +1,7 @@
 package com.project.erp.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,6 +37,8 @@ public class SalesController {
 		
 		int totalPrice = 0;
 		
+		Sales sales = new Sales();
+		
 		JsonParser jsonParser = new JsonParser();
 		JsonArray jsonArray = (JsonArray) jsonParser.parse(excelJson);
 		
@@ -57,11 +61,13 @@ public class SalesController {
 			pd_code = object.get("pd_code").getAsString();
 			salesdetail_amount = object.get("salesdetail_amount").getAsString();
 			salesdetail_price = object.get("salesdetail_price").getAsString();
-			
+				
+				
 			//totalPrice 계산.
 			totalPrice += Integer.parseInt(salesdetail_price);
-			
 			String price = Integer.toString(totalPrice);
+			
+			
 			
 			if(i==0){
 			//회사이름으로 바이어 시퀀스 불러오기.
@@ -70,12 +76,15 @@ public class SalesController {
 			Buyer buyer1 = dao.selectOneBuyer(buyer);
 			
 			//Sales 객체를 DB에 저장하는 메소드.
-			Sales sales = new Sales();
+			
 			sales.setSales_ordernum(sales_ordernum);
 			sales.setBuyerseq(buyer1.getBuyerseq());
 			sales.setBuyer_corp(company);
-			sales.setSales_totalprice(price);
 			sales.setSales_title(salesdetail_name);
+			}
+			
+			if(i==jsonArray.size()-1){
+			sales.setSales_totalprice(price);
 			result1 = dao.insertSales(sales);
 			}
 			
@@ -94,10 +103,15 @@ public class SalesController {
 			}else{
 				return "no";
 			}
-		
 	}
 	
 	
+	@RequestMapping(value="/selectAllSales", method = RequestMethod.GET)
+	public @ResponseBody List<Sales> selectAllSales(){
+		List<Sales> list1 = dao.selectAllSales();
+		System.out.println(list1);
+		return list1;
+	}
 	
 	
 }

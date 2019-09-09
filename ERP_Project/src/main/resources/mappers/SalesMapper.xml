@@ -6,12 +6,13 @@
 <mapper namespace="com.project.erp.dao.SalesMapper">
 
 
+
 <insert id="insertSales" parameterType="com.project.erp.vo.Sales">
 Insert into Sales
 values(
 #{sales_ordernum},
 #{buyerseq},
-to_char(sysdate,'yyyy.mm.dd hh24:mi'),
+to_char(sysdate,'yyyy/mm/dd hh24:mi'),
 '승인대기',
 #{sales_totalprice},
 #{sales_title},
@@ -36,6 +37,7 @@ salesdetailseq.nextval,
 <select id="selectAllSales" resultType="com.project.erp.vo.Sales">
 select *
 from sales
+order by sales_ordernum desc
 </select> 
 
 <select id="selectSalesDetail" parameterType="com.project.erp.vo.SalesDetail" resultType="com.project.erp.vo.SalesDetail">
@@ -43,7 +45,7 @@ select *
 from salesdetail
 where sales_ordernum=#{sales_ordernum}
 </select>
-</mapper>
+
 
 <select id="selectOneBuyer" parameterType="com.project.erp.vo.Buyer" resultType="com.project.erp.vo.Buyer">
 select buyerseq
@@ -62,3 +64,5 @@ status='승인완료'
 where
 sales_ordernum=#{sales_ordernum}
 </update>
+
+</mapper>

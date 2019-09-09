@@ -46,16 +46,31 @@
 function selectAllSales(){
 	$.ajax({
 		url:'selectAllSales',
-		data:JSON.stringify(excelJson),
-		datatype:'json',
-		contentType: "application/json; charset=utf-8",
-		type:'post',
 		success:function(data){
-			if(data=='ok'){alert('성공')}
-			selectAllSales();
+			alert('!')
+			str = '';
+			$('.tbody').html(str);
+				
+			
+			for(var i = 0; i<data.length; i++ ){
+				alert(data[i].sales_ordernum)
+				str1 = '';
+				str1+='<tr>';
+				str1+='<td>'+data[i].sales_ordernum+'</td>';
+				str1+='<td>'+data[i].buyer_corp+'</td>';
+				str1+='<td><a href="a">'+data[i].sales_title+'</a></td>';
+				str1+='<td>'+data[i].sales_totalprice+'</td>';
+				str1+='<td>'+data[i].sales_orderdate+'</td>';
+				str1+='<td style="text-align: center;"><button class="mb-2 mr-2 btn btn-primary">'+data[i].sales_status+'</button></td>';
+				str1+='</tr>'
+				$('.tbody').append(str1);
+			}
 		}
-		
 	})
+}
+
+function goDetail(num){
+	alert(num);
 }
 
 
@@ -202,14 +217,12 @@ function insertData(sheet){
                             </a>
                         </li>
                     </ul>
-                    <hr />
-                    
               <div>
 				<div class="filebox">
  				<label for="excelFile">직접 업로드하기</label>
   				<input type="file" id="excelFile" onchange="excelExport(event)"/> </div>
   				</div>
-      		   </div>
+      		   </div><hr />
 
 				<!-- <h6>JSON 형태로 보기</h6>
 				<div id="displayExcelJson"></div> -->
@@ -217,8 +230,7 @@ function insertData(sheet){
  <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
  
                  <div class="page-title-actions">
-                 
-                               <div class="card mb-4"  style="margin-top: -500px">
+                               <div class="card mb-4">
                          	    <div class="card-header-tab card-header">
                                  <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i class="header-icon lnr-laptop-phone mr-3 text-muted opacity-6"> </i>실시간 주문 내역</div>
                                  </div>
@@ -235,11 +247,11 @@ function insertData(sheet){
                                             <th>Status</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody class="tbody">
                                             	<tr th:each="list : ${salesList}">
 												<td th:text="${list.sales_ordernum}"></td>
 												<td th:text="${list.buyer_corp}"></td>
-												<td th:text="${list.sales_title}"></td>
+												<td><a href="javaScript:goDetail();" th:text="${list.sales_title}"></a></td>
 												<td th:text="${list.sales_totalprice}"></td>
 												<td th:text="${list.sales_orderdate}"></td>
 												<td style="text-align: center;"><button class="mb-2 mr-2 btn btn-primary" th:text="${list.sales_status}" ></button></td>
@@ -249,6 +261,8 @@ function insertData(sheet){
                             </div>
                         </div>
                    </div> 
+                   
+
                 <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
                 <!-- footer 삽입 -->    
 	
