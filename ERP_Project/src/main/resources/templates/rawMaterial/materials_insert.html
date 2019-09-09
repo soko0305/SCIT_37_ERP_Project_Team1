@@ -421,7 +421,7 @@
 											<div class="col-md-6">
 												<div class="position-relative form-group">
 													<label for="supplierseq" class="select">공급처명</label>
-													<input name="supplierseq" id="supplierseq" list="test" autocomplete="off">
+													<input name="supplierseq" id="supplierseq" list="test" class="form-control" autocomplete="off">
 													<datalist class="select" id="test">
 														<option class="sList" th:each="list : ${supplierList}"
 																th:text="${list.supplier_name}"
@@ -443,14 +443,12 @@
 										<div class="form-row">
 											<div class="col-md-6">
 												<div class="position-relative form-group1">
-													<!-- <label for="rawm_minimum" class="">원자재최저수량</label><input
-														name="rawm_minimum" id="rawm_minimum" type="number" class="form-control"> -->
+
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="position-relative form-group2">
-													<!-- <label for="rawm_set" class="">원자재설정수량</label><input
-														name="rawm_set" id="rawm_set" type="number" class="form-control"> -->
+
 												</div>
 											</div>
 										</div>
