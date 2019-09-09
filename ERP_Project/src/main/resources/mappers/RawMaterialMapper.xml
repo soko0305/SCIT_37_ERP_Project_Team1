@@ -28,7 +28,7 @@
 			,'CHECKED'
 			</when>
 			<otherwise>
-			,'NOCHECK'
+			,'UNCHECKED'
 			</otherwise>
 			</choose>
 			,#{rawm_minimum}

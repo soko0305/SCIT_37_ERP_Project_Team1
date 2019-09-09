@@ -45,7 +45,7 @@ public class RawMaterialController {
 	@ExceptionHandler
 	@RequestMapping(value = "/rawMaterialUpdate", method = RequestMethod.POST)
 	public String rawMaterialUpdate(RawMaterialVO rawmaterial) {
-		System.out.println("rMUpdate : " + rawmaterial);
+
 		int result = rDAO.rawMaterialUpdate(rawmaterial);
 
 		if (result == 0) {
