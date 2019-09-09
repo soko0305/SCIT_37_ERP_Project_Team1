@@ -113,23 +113,23 @@ function repeatButton(){
 				readonly="readonly" class="form-control">
 		</div>
 		<div class="form-group">
-			<label for="hideEasing">원재료명</label> <input id="rawm_name"
+			<label for="rawm_name">원재료명</label> <input id="rawm_name"
 				name="rawm_name" type="text" th:value="${result.rawm_name}"
 				class="form-control">
 		</div>
 		<div class="form-group">
-			<label for="showMethod">원재료종류</label> <input id="rawm_sort"
+			<label for="rawm_sort">원재료종류</label> <input id="rawm_sort"
 				name="rawm_sort" type="text" th:value="${result.rawm_sort}"
 				class="form-control">
 		</div>
 		<div class="form-group">
-			<label for="showMethod">단가</label> <input id="rawm_price" type="text"
+			<label for="rawm_price">단가</label> <input id="rawm_price" type="text"
 				name="rawm_price" th:value="${result.rawm_price}"
 				class="form-control">
 		</div>
 		<div class="form-group">
 			<label for="supplierseq" class="select">공급처명</label> <input
-				name="supplierseq" id="supplierseq" list="test" autocomplete="off">
+				name="supplierseq" id="supplierseq" list="test" class="form-control" autocomplete="off">
 			<datalist class="select" id="test">
 				<option class="sList" th:each="list : ${supplierList}"
 					th:text="${list.supplier_name}" th:value="${list.supplierseq}">
@@ -149,14 +149,12 @@ function repeatButton(){
 		<div class="form-row">
 			<div class="col-md-6">
 				<div class="position-relative form-group1">
-					<!-- <label for="rawm_minimum" class="">원자재최저수량</label><input
-														name="rawm_minimum" id="rawm_minimum" type="number" class="form-control"> -->
+
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="position-relative form-group2">
-					<!-- <label for="rawm_set" class="">원자재설정수량</label><input
-														name="rawm_set" id="rawm_set" type="number" class="form-control"> -->
+
 				</div>
 			</div>
 		</div>
