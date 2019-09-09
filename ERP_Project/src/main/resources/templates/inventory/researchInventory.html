@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="UTF-8" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="Content-Language" content="en">
+    <meta http-equiv="Content-Language" content="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Grid Tables - Basic example of a Bootstrap 4 table with sort, search and filter functionality.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"
@@ -16,21 +16,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
 <link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
-<script>
-	$(function(){	
-		$("#header").load("/header");
-		$("#navbar").load("/navbar");
-		$("#setting").load("/setting");
-	});
-</script>
 <body>
 <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
-    <div id="header"></div>
-    <div id="setting"></div> 
             <div class="app-main">
             
-                     <div id="navbar"></div>
-                <div class="app-main__outer">
+
+               
                 <div class="app-main__inner">
                      <div class="app-page-title">
                         <div class="page-title-wrapper">
@@ -39,9 +30,9 @@
                                     <i class="pe-7s-notebook icon-gradient bg-mixed-hopes">
                                     </i>
                                 </div>
-                                <div>재고검수기록 조회
+                                <div><span th:text="${warehouse.warehouse_name}"></span> 창고 재고 정보
                                     <div class="page-title-subheading">
-                                    	재고검수에 대한 결과 및 처리 등에 대한 기록 조회
+                                    	특정 창고 내 재고 정보 검색 및 조회
                                     </div>
                                 </div>
                             </div> 
@@ -120,7 +111,7 @@
                     </div>
                 </div>
                 <!-- footer 삽입 -->    </div>
-    </div>
+  
 </div>
 <!-- drawer 삽입 -->
 <div class="app-drawer-overlay d-none animated fadeIn"></div><script type="text/javascript" src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script></body>
