@@ -13,7 +13,7 @@ buyer_memo varchar2(50)
 create table sales(
 sales_ordernum varchar2(50) primary key,
 buyerseq number references buyer(buyerseq),
-sales_orderdate date default sysdate,
+SALES_ORDERDATE VARCHAR2(50),
 sales_status varchar2(50) check(sales_status in('승인대기', '승인완료','생산요청','생산중','판매대기','판매완료')),
 sales_totalprice varchar2(50)
 )

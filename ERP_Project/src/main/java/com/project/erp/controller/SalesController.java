@@ -71,6 +71,7 @@ public class SalesController {
 			
 			//Sales 객체를 DB에 저장하는 메소드.
 			Sales sales = new Sales();
+			sales.setSales_ordernum(sales_ordernum);
 			sales.setBuyerseq(buyer1.getBuyerseq());
 			sales.setSales_totalprice(price);
 			result1 = dao.insertSales(sales);

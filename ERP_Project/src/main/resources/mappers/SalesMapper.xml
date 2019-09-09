@@ -15,9 +15,9 @@ where buyer_corp = #{buyer_corp}
 <insert id="insertSales" parameterType="com.project.erp.vo.Sales">
 Insert into Sales
 values(
-sales_ordernum.nextval,
+#{sales_ordernum},
 #{buyerseq},
-sysdate,
+to_char(sysdate,'yyyy.mm.dd hh24:mi'),
 '승인대기',
 #{sales_totalprice}
 )
