@@ -27,10 +27,10 @@ public class RawMaterialLinkController {
 	public String goAllView(Model model) {
 		ArrayList<SupplierVO> result = sDAO.supplierDashSelect();
 		model.addAttribute("supplierList", result);
-		
+
 		ArrayList<RawMaterialVO> result1 = rDAO.rawMaterialDashSelect();
 		model.addAttribute("rawMaterialList", result1);
-		
+
 		return "rawMaterial/All_view";
 	}
 
@@ -41,7 +41,7 @@ public class RawMaterialLinkController {
 		model.addAttribute("supplierList", result);
 		return "rawMaterial/supplier_view";
 	}
-	
+
 	// 공급처 전체 출력화면 Form
 	@RequestMapping(value = "/goSupplier", method = RequestMethod.GET)
 	public String goSupplier(Model model) {
@@ -61,6 +61,7 @@ public class RawMaterialLinkController {
 		model.addAttribute("result", result);
 		return "rawMaterial/supplier_update";
 	}
+
 	//
 	//
 	// 원자재 출력을 위한 redirect(List출력)
@@ -70,12 +71,13 @@ public class RawMaterialLinkController {
 		model.addAttribute("rawMaterialList", result);
 		return "rawMaterial/materials_view";
 	}
+
 	// 원자재 전체 출력화면 Form
 	@RequestMapping(value = "/goMaterials", method = RequestMethod.GET)
 	public String goMaterials(Model model) {
 		return "redirect:/goMaterialsList";
 	}
-	
+
 	// 원자재 등록 Form
 	@RequestMapping(value = "/goMaterialsInsert", method = RequestMethod.GET)
 	public String goMaterialsInsert(Model model) {
@@ -88,8 +90,9 @@ public class RawMaterialLinkController {
 	@RequestMapping(value = "/goMaterialsUpdate", method = RequestMethod.POST)
 	public String goMaterialsUpdate(RawMaterialVO rawmaterial, Model model) {
 		RawMaterialVO result = rDAO.rawMaterialOneSelect(rawmaterial);
-		System.out.println("rVO : " + result);
 		model.addAttribute("result", result);
+		ArrayList<SupplierVO> result1 = sDAO.supplierAllSelect();
+		model.addAttribute("supplierList", result1);
 		return "rawMaterial/materials_update";
 	}
 
@@ -109,7 +112,6 @@ public class RawMaterialLinkController {
 	public String goBuy() {
 		return "rawMaterial/buy";
 	}
-
 
 	@RequestMapping(value = "/production_insert", method = RequestMethod.GET)
 	public String production_insert() {
