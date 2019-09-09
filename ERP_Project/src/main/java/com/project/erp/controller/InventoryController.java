@@ -69,5 +69,5 @@ public class InventoryController {
 		w = inventoryService.selectWarehouseByCode(warehouse_code);
 		return w;
 	}
-
+	
 }
