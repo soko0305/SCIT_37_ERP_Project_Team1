@@ -22,8 +22,9 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script
 	src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
-<script>
+<script th:inline="javascript">
 $(function() {
+	/*<![CDATA[*/
 	/* $("#rawm_autoorder").change(
 		function() {
 		if ($("#rawm_autoorder").is(":checked")) {
@@ -40,18 +41,30 @@ $(function() {
 			$(".form-group2").html(str2);
 		}
 	}); */
+	
 	if($("#rawm_autoorder").val()=='CHECKED'){
 		alert("!");
-		$("#rawm_autoorder").is(":checked");
+		
+		var minimum = /*[[${result.rawm_minimum}]]*/;
+		var set = /*[[${result.rawm_set}]]*/;
+		
+		$("#rawm_minimum").val(minimum);
+		$("#rawm_set")val(set);
+		
+		$("#rawm_autoorder").prop('checked', true) ;
 		var str1 = '<label for="rawm_minimum" class="">원자재최저수량</label>'
-			+ '<input name="rawm_minimum" id="rawm_minimum" type="number" th:value="${result.rawm_minimum}" class="form-control">'
+			+'<input name="rawm_minimum" id="rawm_minimum" type="number"'
+			+'class="form-control">'
 		var str2 = '<label for="rawm_set" class="">원자재설정수량</label>'
-			+ '<input name="rawm_set" id="rawm_set" type="number" th:value="${result.rawm_set}" class="form-control">'
+			+ '<input name="rawm_set" id="rawm_set" type="number"'
+			+'class="form-control">'
+			
 		$(".form-group1").html(str1);
 		$(".form-group2").html(str2);
 		
 	}
 });
+/*]]>*/
 </script>
 </head>
 
