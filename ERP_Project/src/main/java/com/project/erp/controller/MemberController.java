@@ -41,7 +41,7 @@ public class MemberController {
 	public String login(MemberVO member, HttpSession session, Model model){
 		MemberVO m = memberDao.selectMemberById(member);
  		if(m !=null){
-			if(m.getUserstate().equals("allowed")){
+			if(m.getUserstate ().equals("allowed")){
 				System.out.println("allowed");
 				session.setAttribute("userid", m.getUserid());
 				return "member/notice";

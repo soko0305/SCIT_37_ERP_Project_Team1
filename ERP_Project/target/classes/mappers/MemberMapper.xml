@@ -7,16 +7,16 @@
 
 		<insert id="insertMember" parameterType="com.project.erp.vo.MemberVO">
 		INSERT INTO erp_member(
-		,USERID
-		,USERPW
-		,USERSTATUS
-		,USERDEPARTMENT
-		,USERSTATE
-		,NAME
-		,PHONENUMBER
-		,EMAIL
-		,ADDRESS
-		,LOGINSTATE
+		userid
+		,userpw
+		,userstatus
+		,userdepartment
+		,userstate
+		,name
+		,phonenumber
+		,email
+		,address
+		,loginstate
 
 		)
 		VALUES(

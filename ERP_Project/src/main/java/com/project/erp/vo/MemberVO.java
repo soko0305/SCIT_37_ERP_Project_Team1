@@ -13,5 +13,5 @@ public class MemberVO {
 	private String phonenumber; 
 	private String email; 
 	private String address; 
-
+	private String loginstate; 
 }
