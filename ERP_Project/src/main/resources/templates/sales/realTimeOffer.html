@@ -33,6 +33,56 @@
 	
 <script>
 
+/*
+ * 
+ *	
+ *	Body 관련 메소드
+ *
+ */
+
+ 
+
+//엑셀 업로드 프로세스가 완료된 후, insert가 끝난 DB ajax로 새로 출력해주기.
+function selectAllSales(){
+	$.ajax({
+		url:'selectAllSales',
+		success:function(data){
+			alert('!')
+			str = '';
+			$('.tbody').html(str);
+				
+			
+			for(var i = 0; i<data.length; i++ ){
+				alert(data[i].sales_ordernum)
+				str1 = '';
+				str1+='<tr>';
+				str1+='<td>'+data[i].sales_ordernum+'</td>';
+				str1+='<td>'+data[i].buyer_corp+'</td>';
+				str1+='<td><a href="a">'+data[i].sales_title+'</a></td>';
+				str1+='<td>'+data[i].sales_totalprice+'</td>';
+				str1+='<td>'+data[i].sales_orderdate+'</td>';
+				str1+='<td style="text-align: center;"><button class="mb-2 mr-2 btn btn-primary">'+data[i].sales_status+'</button></td>';
+				str1+='</tr>'
+				$('.tbody').append(str1);
+			}
+		}
+	})
+}
+
+function goDetail(num){
+	alert(num);
+}
+
+
+/*
+ * 
+ *	
+ *	엑셀 문서 처리 관련 메소드
+ *
+ */
+
+ 
+ 
 //sheetJS를 사용한 Excel read 메소드.
 function excelExport(event){
 	excelExportCommon(event, handleExcelDataAll);
@@ -72,14 +122,14 @@ function insertData(sheet){
 			type:'post',
 			success:function(data){
 				if(data=='ok'){alert('성공')}
-				
+				selectAllSales();
 			}
 			
 		})
 } 
 
 //sheetJS를 사용한 Excel read 메소드.
-function handleExcelDataJson(sheet){
+/* function handleExcelDataJson(sheet){
 	var sheetJson = XLSX.utils.sheet_to_json (sheet);
 	$("#displayExcelJson").html(sheetJson);
 	str='';
@@ -101,12 +151,7 @@ function handleExcelDataJson(sheet){
 		$("#displayExcelJson").append(str1);
 	} 
 
-}
-
-function handleExcelDataHtml(sheet){
-    $("#displayExcelHtml").html(XLSX.utils.sheet_to_html (sheet));
-} 
-
+} */
 </script>
 </head>
 <body>
@@ -137,7 +182,7 @@ function handleExcelDataHtml(sheet){
                             </div>    
                           </div>
                     </div>         
-              
+            
                     <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@위에 달린 메뉴 -->
                     
                                       <ul class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">
@@ -172,18 +217,16 @@ function handleExcelDataHtml(sheet){
                             </a>
                         </li>
                     </ul>
-                    <hr />
-                    
               <div>
 				<div class="filebox">
  				<label for="excelFile">직접 업로드하기</label>
   				<input type="file" id="excelFile" onchange="excelExport(event)"/> </div>
   				</div>
+      		   </div><hr />
 
-
-				<h6>JSON 형태로 보기</h6>
-				<div id="displayExcelJson"></div></div>
-          
+				<!-- <h6>JSON 형태로 보기</h6>
+				<div id="displayExcelJson"></div> -->
+          		
  <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
  
                  <div class="page-title-actions">
@@ -193,49 +236,39 @@ function handleExcelDataHtml(sheet){
                                  </div>
                             
                             	<div class="card-body">
-                                <table style="width: 100%;" id="example" class="table table-hover table-striped table-bordered">
+                                <table style="width: 100%;" id="example" class="table table-hover table-bordered">
                                    <thead>
                                         <tr>
                                             <th>주문 번호</th>
                                             <th>거래처</th>
-                                            <th>주문 (클릭시 주문 상세)</th>
+                                            <th>주문 내용</th>
+                                            <th>금액</th>
+                                            <th>주문일자</th>
                                             <th>Status</th>
-                                            <th>주문날짜와 시간</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        <tr>
-                                            <th scope="row">20190812-0001</th>
-                                            <td>DaumKakao</td>
-                                            <td>초콜릿</td>
-                                            <td><button class="mb-2 mr-2 btn btn-primary">승인대기</button></td>
-                                            <th>2019/08/12 12:12:12</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">20190812-0002</th>
-                                            <td>Naver</td>
-                                            <td>풀떼기</td>
-                                            <td><button class="mb-2 mr-2 btn btn-primary">승인대기</button></td>
-                                            <th>2019/08/12 12:12:12</th>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">20190812-0003</th>
-                                            <td>Google</td>
-                                            <td>쥐</td>
-                                            <td><button class="mb-2 mr-2 btn btn-primary">승인대기</button></td>
-                                            <th>2019/08/12 12:12:12</th>
-                                        </tr>
+                                        <tbody class="tbody">
+                                            	<tr th:each="list : ${salesList}">
+												<td th:text="${list.sales_ordernum}"></td>
+												<td th:text="${list.buyer_corp}"></td>
+												<td><a href="javaScript:goDetail();" th:text="${list.sales_title}"></a></td>
+												<td th:text="${list.sales_totalprice}"></td>
+												<td th:text="${list.sales_orderdate}"></td>
+												<td style="text-align: center;"><button class="mb-2 mr-2 btn btn-primary" th:text="${list.sales_status}" ></button></td>
+										</tr> 
                                   </tbody>
                                </table>
                             </div>
                         </div>
                    </div> 
+                   
+
                 <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
                 <!-- footer 삽입 -->    
-      </div>
+	
    </div>
+ </div>
 </div>
-
 <!-- drawer 삽입 -->
 
 <div class="app-drawer-overlay d-none animated fadeIn"></div>
