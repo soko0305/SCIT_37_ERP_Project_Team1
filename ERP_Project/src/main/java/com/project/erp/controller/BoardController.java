@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.project.erp.dao.BoardDAO;
  import com.project.erp.vo.BoardVO;
+import com.project.erp.vo.RawMaterialVO;
 import com.project.erp.vo.SupplierVO;
  
 @Controller
@@ -26,9 +27,9 @@ public class BoardController {
 		int result = bDAO.boardInsert(board);
 
 		if (result == 0) {
-			return "/member/board";
+			return "member/boardinsert";
 		} else {
-			return "/member/board";
+			return "member/board";
 		}
 	}
 
@@ -39,9 +40,9 @@ public class BoardController {
 		int result = bDAO.boardDelete(board);
 
 		if (result == 0) {
-			return "/member/board";
+			return "member/board";
 		} else {
-			return "/member/board";
+			return "member/board";
 		}
 	}
 
@@ -53,9 +54,9 @@ public class BoardController {
 		int result = bDAO.boardUpdate(board);
 
 		if (result == 0) {
-			return "/member/board";
+			return "member/board";
 		} else {
-			return "/member/board";
+			return "member/board";
 		}
 	}
 	// 게시물 출력을 위한 redirect(List출력)
@@ -64,12 +65,9 @@ public class BoardController {
 			ArrayList<BoardVO> result = bDAO.boardAllSelect();
 			model.addAttribute("boardlist", result);
 			return "member/board";
-		}
-		@RequestMapping(value = "/goBoardList2", method = RequestMethod.GET)
-		public String goSupplierList2(Model model) {
-			ArrayList<BoardVO> result = bDAO.boardAllSelect();
-			model.addAttribute("boardlist", result);
-			return "member/board2";
+		
+ 
+		
 		}
 }
 
