@@ -15,7 +15,7 @@ public class BoardController {
 	@Autowired
 	BoardDAO bDAO;
 
-	// 원자재 등록
+	// 게시물 등록
 	@RequestMapping(value = "/boardInsert", method = RequestMethod.POST)
 	public String boardInsert(BoardVO board) {
 
@@ -28,7 +28,7 @@ public class BoardController {
 		}
 	}
 
-	// 원자재 삭제
+	// 게시물 삭제
 	@RequestMapping(value = "/boardDelete", method = RequestMethod.POST)
 	public String boardDelete(BoardVO board) {
 		
@@ -41,7 +41,7 @@ public class BoardController {
 		}
 	}
 
-	// 원자재 수정
+	// 게시물 수정
 	@ExceptionHandler
 	@RequestMapping(value = "/boardUpdate", method = RequestMethod.POST)
 	public String boardUpdate(BoardVO board) {

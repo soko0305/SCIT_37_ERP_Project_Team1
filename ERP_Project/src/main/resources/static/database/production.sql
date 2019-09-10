@@ -5,7 +5,8 @@ create table PRODUCT(
 PD_CODE  varchar2(100) primary key,
 PD_NAME varchar2(100) not null,
 PD_RMCOST   number not null,
-PD_MANUFCOST   number not null
+PD_MANUFCOST   number not null,
+PD_SORT varchar2(100) not null
 )
  
 drop table MANUFACTURE;
@@ -16,7 +17,7 @@ PD_CODE varchar2(100) references PRODUCT(PD_CODE) not null,
 MANUF_STARTDATE date not null,
 MANUF_ENDDATE  date not null,
 MANUF_STATUS varchar2(100) not null,
-MANUF_WAREHOUSE varchar2(100) not null,
+warehouse_code varchar2(100) not null,
 MANUF_AMOUNT number not null,
 SALES_ORDERNUM varchar2(100) not null,
 MANUF_REQUSERID varchar2(100) not null,
