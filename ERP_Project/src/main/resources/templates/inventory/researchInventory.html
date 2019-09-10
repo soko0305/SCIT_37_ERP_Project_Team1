@@ -107,9 +107,6 @@
                                 </tr>
                                 </thead>
                                 <tbody id="tBody">
-                                <tr>
-                                <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td>
-                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -123,33 +120,106 @@
 <script th:inline="javascript">
 /*<![CDATA[*/
 	$(function(){
-		var database = firebase.database();	
-		selelctInventoryINWarehouse();
-		var warehouse_code = /*[[${warehouse.warehouse_code}]]*/;
 		
+		var database = firebase.database();	
+		var warehouse_code = /*[[${warehouse.warehouse_code}]]*/;
+		selelctInventoryINWarehouse(warehouse_code);
+		var material= serverData1;
+	  	var	product = serverData2;
 		function selelctInventoryINWarehouse(){
 			
 			$.ajax({
-				url: "selelctInventoryINWarehouse",
+				url: "selectMaterialINWarehouse",
 				type: "get",
 				data:{warehouse_code:warehouse_code},
-				success:function(serverData){
-					printInventoryINWarehouse(serverData);
+				success:function(serverData1){
+					$.ajax({
+						url: "selectProductINWarehouse",
+						type: "get",
+						data:{warehouse_code:warehouse_code},
+						success:function(serverData2){
+							material= serverData1;
+						  	product = serverData2;
+						  	if((material==null&&product==null)||(material==null&&product.length==0)||(material.length==0&&product==null)||(material.length==0&&product.length==0)){
+								$("#tBody").html('<tr><td colspan="7" align="center"><span>창고에 재고가 없습니다</span></td><tr>');
+							}else{
+								$("#tBody").html("");
+								setMaterial(material);
+								setProduction(product);
+							}
+						}
+					});
 				}
+			});
+
+		}
+		
+		function setMaterial(material){
+			for(var i = 0 ; i<material.length ; i++){
+				 var m =material[i];
+				 getMaterialAmount(m);			
+			}
+		}
+		
+		function getMaterialAmount(m){
+			database.ref(warehouse_code+'/').child("inventory").child(m.rawm_code).once('child_added').then(function(snapshot){
+				amount = snapshot.val();
+				selectSupplier(m, amount); 
+			});
+		}
+			
+		function selectSupplier(m, amount){
+			$.ajax({
+				url: "selectSupplierBySeq",
+				type: "get",
+				data:{supplierseq:m.supplierseq},
+				success:function(serverData){
+					var str='';
+					str+='<tr>';
+					str+='<td>'+m.rawm_code+'</td>';
+					str+='<td>'+m.rawm_name+'</td>';
+					str+='<td>'+serverData.supplier_name+'</td>';
+					str+='<td>원자재</td>';
+					str+='<td>'+m.rawm_sort+'</td>';
+					str+='<td>'+amount+'</td>';
+					str+='<td>'+m.rawm_price+'</td>';
+					str+='</tr>';
+					$("#tBody").append(str);
+					}
+				});
+		}
+		
+		function setProduction(product){
+			for(var i = 0 ; i<product.length ; i++){
+				 var p =product[i];
+				 getProductAmount(p);			
+			}
+		}
+		
+		function  getProductAmount(p){
+			database.ref(warehouse_code+'/').child("inventory").child(p.pd_code).once('child_added').then(function(snapshot){
+				amount = snapshot.val();
+				printProduct(p, amount); 
 			});
 		}
 		
-		function printInventoryINWarehouse(serverData){
-			$("#tBody").html("");
-			if(serverData.length!=0&&serverData!=null){
-			for(var i = 0 ; i<serverData.length ; i++){		
-				var str='';
-				$("#tBody").append(str);
-				}
-			}else{
-				$("#tBody").append('<tr>창고에 재고가 없습니다<tr>');
-			}
+		function printProduct(p, amount){
+			var str='';
+			str+='<tr>';
+			str+='<td>'+p.pd_code+'</td>';
+			str+='<td>'+p.pd_name+'</td>';
+			str+='<td>자사</td>';
+			str+='<td>생산품</td>';
+			str+='<td>'+p.pd_sort+'</td>';
+			str+='<td>'+amount+'</td>';
+			str+='<td>'+(parseInt(p.pd_rmcost)+parseInt(p.pd_manufcost))+'</td>';
+			str+='</tr>';
+			$("#tBody").append(str);
 		}
+			
+	
+		
+		
 		
 	});
 	/*]]>*/
