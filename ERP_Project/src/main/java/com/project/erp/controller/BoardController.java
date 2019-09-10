@@ -65,7 +65,12 @@ public class BoardController {
 			model.addAttribute("boardlist", result);
 			return "member/board";
 		}
-	
+		@RequestMapping(value = "/goBoardList2", method = RequestMethod.GET)
+		public String goSupplierList2(Model model) {
+			ArrayList<BoardVO> result = bDAO.boardAllSelect();
+			model.addAttribute("boardlist", result);
+			return "member/board2";
+		}
 }
 
 
