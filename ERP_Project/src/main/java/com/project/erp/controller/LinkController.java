@@ -35,7 +35,12 @@ public class LinkController {
 	}
 
 	@RequestMapping(value="/salesHistory", method = RequestMethod.GET)
-	public String Management4(){
+	public String Management4(Model model){
+		
+		List<Sales> list1 = null;
+		list1 = dao.selectSalesStatusIsDone();
+		model.addAttribute("salesList", list1);
+		
 		return "sales/salesHistory";
 	}
 	
