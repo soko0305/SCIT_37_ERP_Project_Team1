@@ -13,9 +13,11 @@
 
     <!-- Disable tap highlight on IE -->
     <meta name="msapplication-tap-highlight" content="no">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- <script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script> -->
-<link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<!-- <script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script> -->
+	<link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
+</head>
+
 <script>
 	$(function(){	
 		$("#header").load("/header");
@@ -23,6 +25,17 @@
 		$("#setting").load("/setting");
 	});
 </script>
+<script th:inline="javascript">
+
+function goDetail(){
+	/*<![CDATA[*/
+		
+		var num = $(this).('.getordernum').attr('data-ordernum');
+		alert(num);
+}
+/*]]>*/
+</script>
+
 <body>
 <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
     <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Header삽입@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
@@ -51,36 +64,8 @@
                     </div> 
                     
                     <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@위에 달린 메뉴 -->
-                      <div class="main-card mb-3 card">
-                         <div class="card-body"><h5 class="card-title">Search</h5>
-							 <div class="position-relative form-group">
-                                 <h5 class="card-title">판매 구분   </h5>
-                                   <div style="display:flex">
-                                       <div style="margin-right:10px" class="custom-radio custom-control"><input type="radio" id="exampleCustomRadio" name="customRadio" class="custom-control-input"><label class="custom-control-label" for="exampleCustomRadio">전체</label></div>
-                 					   <div style="margin-right:10px" class="custom-radio custom-control"><input type="radio" id="exampleCustomRadio2" name="customRadio" class="custom-control-input"><label class="custom-control-label" for="exampleCustomRadio2">일반</label></div>
-                                       <div style="margin-right:10px" class="custom-radio custom-control"><input type="radio" id="exampleCustomRadio3" name="customRadio" class="custom-control-input"><label class="custom-control-label" for="exampleCustomRadio3">반품</label></div>
-                              		</div>
-                              	</div>
-            				     <select class="mb-2 form-control" style="display:inline ;width: 173px" >
-                                    <option>판매번호</option>
-                                    <option>출하창고</option>
-                                    <option>거래처</option>
-                                    <option>품목코드</option>
-                    	       </select>
-                       
-             
-                        <input type="text" class="form-control" name="daterange" value="01/01/2018 - 01/15/2018" style="display:inline ;width: 300px">
-                        <input placeholder="default" type="text" class="mb-2 form-control" style="display:inline ;width: 300px">        
-                                
-                                <button class="mb-2 mr-2 btn btn-primary" style="display:inline ;height: 37px;width: 95px">
-                                	Search
-                           </button>
-			           </div>
-                    </div>
-	
-                                    
-                   
-                       <div class="main-card mb-3 card">
+
+                   <div class="main-card mb-3 card">
                               <div class="card-body">
                                 <table style="width: 100%;" id="example" class="table table-hover table-bordered">
                                         <thead>
@@ -94,9 +79,9 @@
                                         </thead>
                                         <tbody>
                                           <tr th:each="list : ${salesList}">
-												<td th:text="${list.sales_ordernum}"></td>
+												<td th:text="${list.sales_ordernum}"  ></td>
 												<td th:text="${list.buyer_corp}"></td>
-												<td><a href="javaScript:goDetail();" th:text="${list.sales_title}"></a></td>
+												<td><a href="javaScript:goDetail();" class="getordernum" th:text="${list.sales_title}" th:attr="data-ordernum=${list.sales_ordernum}"></a></td>
 												<td th:text="${list.sales_totalprice}"></td>
 												<td th:text="${list.sales_orderdate}"></td>
 										  </tr> 
@@ -107,8 +92,7 @@
                                 </table>
                             </div>
                         </div>    
-                    </div>
-      
+      				</div>
                 <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
              
                 <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@footer 삽입@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->   
