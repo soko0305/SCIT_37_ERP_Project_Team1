@@ -87,5 +87,36 @@ public class SalesDAO {
 		}
 		return list1;
 	}
+	
+	public List<Sales> selectSalesStatusIsDone(){
+		List<Sales> list1 = null;
+		try{
+		SalesMapper mapper = sqlSession.getMapper(SalesMapper.class);
+		list1=mapper.selectSalesStatusIsDone();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return list1;
+		
+	}
+	
+	
+	
+	/*
+	 * update
+	 */
 
+	
+	
+	public int setSalesPrice(Sales sales){
+		int result = 0;
+		try{
+		SalesMapper mapper = sqlSession.getMapper(SalesMapper.class);
+		result= mapper.setSalesPrice(sales);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return result;
+		
+	}
 }

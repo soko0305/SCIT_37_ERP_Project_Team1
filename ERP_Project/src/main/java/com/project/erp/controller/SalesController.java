@@ -39,12 +39,15 @@ public class SalesController {
 		
 		Sales sales = new Sales();
 		
+		String salestitle = null;
+		
 		JsonParser jsonParser = new JsonParser();
 		JsonArray jsonArray = (JsonArray) jsonParser.parse(excelJson);
 		
 		for (int i = 0; i < jsonArray.size(); i++) {
 			JsonObject object = (JsonObject) jsonArray.get(i);
 			
+			// ordernumber는 맨 위에 셀에만 정보가 기재되어있기 때문에, 0번째 루프 돌때의 정보만 삽입되어야함.
 			try{
 			if(object.get("sales_ordernum").getAsString() == null){
 				JsonObject object1 = (JsonObject) jsonArray.get(0);
@@ -68,7 +71,6 @@ public class SalesController {
 			String price = Integer.toString(totalPrice);
 			
 			
-			
 			if(i==0){
 			//회사이름으로 바이어 시퀀스 불러오기.
 			Buyer buyer = new Buyer();
@@ -80,12 +82,16 @@ public class SalesController {
 			sales.setSales_ordernum(sales_ordernum);
 			sales.setBuyerseq(buyer1.getBuyerseq());
 			sales.setBuyer_corp(company);
-			sales.setSales_title(salesdetail_name);
+			sales.setSales_title("0");
+			sales.setSales_totalprice("0");
+			dao.insertSales(sales);
 			}
 			
 			if(i==jsonArray.size()-1){
+			salestitle=salesdetail_name+" 외 "+Integer.toString(jsonArray.size()-1)+" 건";
 			sales.setSales_totalprice(price);
-			result1 = dao.insertSales(sales);
+			sales.setSales_title(salestitle);
+			result1 = dao.setSalesPrice(sales);
 			}
 			
 			//SalesDetail 객체를 DB에 저장하는 메소드.
