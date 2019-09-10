@@ -14,7 +14,7 @@
     <!-- Disable tap highlight on IE -->
     <meta name="msapplication-tap-highlight" content="no">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
+<!-- <script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script> -->
 <link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
 <script>
 	$(function(){	
@@ -30,7 +30,7 @@
     <div id="setting"></div> 
             <div class="app-main">
             <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@왼쪽 메뉴@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-                     <div id="navbar"></div>
+                <div id="navbar"></div>
                 <div class="app-main__outer">
                 <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
                 <div class="app-main__inner">
@@ -48,7 +48,7 @@
                                 </div>
                             </div>    
                           </div>
-                    </div>         
+                    </div> 
                     
                     <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@위에 달린 메뉴 -->
                       <div class="main-card mb-3 card">
@@ -75,72 +75,47 @@
                                 <button class="mb-2 mr-2 btn btn-primary" style="display:inline ;height: 37px;width: 95px">
                                 	Search
                            </button>
-                        
-                                        
-                                            </div>
-                                        </div>
-                           
-                       
-                                  
-               -
-                                   
-                    
-                      	
+			           </div>
+                    </div>
+	
                                     
                    
-                            <div class="main-card mb-3 card">
-                                <div class="card-body"><h5 class="card-title">Simple table</h5>
-                                    <table class="mb-0 table">
+                       <div class="main-card mb-3 card">
+                              <div class="card-body">
+                                <table style="width: 100%;" id="example" class="table table-hover table-bordered">
                                         <thead>
-                                        <tr>
+                                           <tr>
                                             <th>주문 번호</th>
                                             <th>거래처</th>
-                                            <th>주문 (클릭시 주문 상세)</th>
+                                            <th>주문 내용</th>
                                             <th>대금</th>
-                                            <th>주문날짜와 시간</th>
-                                        </tr>
+                                            <th>주문일자</th>
+                                       		</tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <th scope="row">20190812-0001</th>
-                                            <td>DaumKakao</td>
-                                            <td>초콜릿 외 2건</td>
-                                            <td>5조5억원</td>
-                                            <td>2019/08/12 12:12:12</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">20190812-0002</th>
-                                            <td>Naver</td>
-                                            <td>풀떼기 외 5건</td>
-                                            <td>5조5억원</td>
-                                            <td>2019/08/12 12:12:12</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">20190812-0003</th>
-                                            <td>Google</td>
-                                            <td>쥐</td>
-                                             <td>5조5억원</td>
-                                            <td>2019/08/12 12:12:12</td>
-                                        </tr>
+                                          <tr th:each="list : ${salesList}">
+												<td th:text="${list.sales_ordernum}"></td>
+												<td th:text="${list.buyer_corp}"></td>
+												<td><a href="javaScript:goDetail();" th:text="${list.sales_title}"></a></td>
+												<td th:text="${list.sales_totalprice}"></td>
+												<td th:text="${list.sales_orderdate}"></td>
+										  </tr> 
                                         </tbody>
-                                    </table>
-                                </div>
+                                        
+                                        <!-- th:text="${list.sales_title}"  -->
+                                        <!-- ${#lists.size(salesList)} -->
+                                </table>
                             </div>
-                        </div>
+                        </div>    
                     </div>
-        
-                             </div>
-                             </div>
+      
                 <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-                
-                
-                
-                
-                
+             
                 <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@footer 삽입@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->   
-                 </div>
+        </div>
     </div>
 </div>
 <!-- drawer 삽입 -->
-<div class="app-drawer-overlay d-none animated fadeIn"></div><script type="text/javascript" src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script></body>
+<div class="app-drawer-overlay d-none animated fadeIn"></div>
+</body>
 </html>
