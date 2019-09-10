@@ -88,8 +88,8 @@ public class RawMaterialLinkController {
 
 	// 원자재 수정 Form
 	@RequestMapping(value = "/goMaterialsUpdate", method = RequestMethod.POST)
-	public String goMaterialsUpdate(RawMaterialVO rawmaterial, Model model) {
-		RawMaterialVO result = rDAO.rawMaterialOneSelect(rawmaterial);
+	public String goMaterialsUpdate(String rawm_code, Model model) {
+		RawMaterialVO result = rDAO.rawMaterialOneSelect(rawm_code);
 		model.addAttribute("result", result);
 		ArrayList<SupplierVO> result1 = sDAO.supplierAllSelect();
 		model.addAttribute("supplierList", result1);
@@ -105,7 +105,9 @@ public class RawMaterialLinkController {
 
 	// 발주 등록 Form
 	@RequestMapping(value = "/goOrderInsert", method = RequestMethod.GET)
-	public String goOrderInsert() {
+	public String goOrderInsert(Model model) {
+		ArrayList<RawMaterialVO> result = rDAO.rawMaterialAllSelect();
+		model.addAttribute("rList", result);
 		return "rawMaterial/order_insert";
 	}
 
