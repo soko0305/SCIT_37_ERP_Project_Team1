@@ -36,6 +36,10 @@ public class YBController {
 	public String notice(){
 		return "member/notice";
 	} 
+	@RequestMapping(value="/board", method = RequestMethod.GET)
+	public String board(){
+		return "member/board";
+	} 
 	@RequestMapping(value="/producecheck", method = RequestMethod.GET)
 	public String producecheck(){
 		return "production/producecheck";
