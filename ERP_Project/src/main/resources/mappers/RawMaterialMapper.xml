@@ -18,7 +18,7 @@
 		)
 		VALUES
 		(
-			rawm_code.nextval
+			 'm' || TO_CHAR(supplierseq.nextval)
 			,#{supplierseq}
 			,#{rawm_name}
 			,#{rawm_sort}
