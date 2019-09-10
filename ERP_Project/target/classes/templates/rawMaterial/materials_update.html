@@ -25,24 +25,6 @@
 <script th:inline="javascript">
 $(function() {
 	/*<![CDATA[*/
-		
-	/* $("#rawm_autoorder").change(
-		function() {
-		if ($("#rawm_autoorder").is(":checked")) {
-			var str1 = '<label for="rawm_minimum" class="">원자재최저수량</label>'
-					+ '<input name="rawm_minimum" id="rawm_minimum" type="number" th:value="${result.rawm_minimum}" class="form-control">'
-			var str2 = '<label for="rawm_set" class="">원자재설정수량</label>'
-					+ '<input name="rawm_set" id="rawm_set" type="number" th:value="${result.rawm_set}" class="form-control">'
-			$(".form-group1").html(str1);
-			$(".form-group2").html(str2);
-		} else {
-			var str1 = "";
-			var str2 = "";
-			$(".form-group1").html(str1);
-			$(".form-group2").html(str2);
-		}
-	}); */
-	
 	if($("#rawm_autoorder").val()=='CHECKED'){
 
 		var minimum = /*[[${result.rawm_minimum}]]*/;
@@ -56,12 +38,68 @@ $(function() {
 			+ '<input name="rawm_set" id="rawm_set" type="number"'
 			+'value='+set+' class="form-control">';
 			
-			
 		$(".form-group1").html(str1);
 		$(".form-group2").html(str2);
 		
+		repeatButton();
+	}else{
+		repeatButton();
 	}
-});
+	
+	$(".btn-primary").click(function(){
+		var code = $("#rawm_code").val();
+		var name = $("#rawm_name").val();
+		var sort = $("#rawm_sort").val();
+		var price = $("#rawm_price").val();
+		var seq = $("#supplierseq").val();
+		var order = $("#rawm_autoorder").val();
+		var minimum = $("#rawm_minimum").val();
+		var set = $("#rawm_set").val();
+
+		alert(order);
+		alert(minimum);
+		alert(set);
+		$("#rawm_code1").val(code);
+		$("#rawm_name1").val(name);
+		$("#rawm_sort1").val(sort);
+		$("#rawm_price1").val(price);
+		$("#supplierseq1").val(seq);
+		$("#rawm_autoorder1").val(order);
+		$("#rawm_minimum1").val(minimum);
+		$("#rawm_set1").val(set);
+		
+		$("#rawMaterialUpdateForm").submit();
+	})
+})
+
+function repeatButton(){
+	var checked = 'CHECKED';
+	var nocheck = 'NOCHECK';
+	var mini = 0;
+	var se = 0;
+	$("#rawm_autoorder").change(function() {
+		if ($("#rawm_autoorder").is(":checked")) {
+			$("#rawm_autoorder").val(checked);
+			var str1 = '<label for="rawm_minimum" class="">원자재최저수량</label>'
+					+ '<input name="rawm_minimum" id="rawm_minimum" type="number" class="form-control">'
+			var str2 = '<label for="rawm_set" class="">원자재설정수량</label>'
+					+ '<input name="rawm_set" id="rawm_set" type="number" class="form-control">'
+			$(".form-group1").html(str1);
+			$(".form-group2").html(str2);
+		} else {
+			
+			$("#rawm_autoorder").val(nocheck);
+			$("#rawm_minimum").val(mini);
+			$("#rawm_set").val(se);
+			var str1 = '<input name="rawm_minimum" id="rawm_minimum" type="hidden"'
+				+'value=0 class="form-control">';
+			var str2 = '<input name="rawm_set" id="rawm_set" type="hidden"'
+				+'value=0 class="form-control">';
+			$(".form-group1").html(str1);
+			$(".form-group2").html(str2);
+		}
+	});
+}
 /*]]>*/
 </script>
 </head>
@@ -70,33 +108,41 @@ $(function() {
 
 	<div class="col-md-3">
 		<div class="form-group">
-			<label for="rawm_code">원자재코드</label> <input id="rawm_code" name="rawm_code"
-				type="text" th:value="${result.rawm_code}" readonly="readonly"
+			<label for="rawm_code">원자재코드</label> <input id="rawm_code"
+				name="rawm_code" type="text" th:value="${result.rawm_code}"
+				readonly="readonly" class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="hideEasing">원재료명</label> <input id="rawm_name"
+				name="rawm_name" type="text" th:value="${result.rawm_name}"
 				class="form-control">
 		</div>
 		<div class="form-group">
-			<label for="hideEasing">원재료명</label> <input id="rawm_name" name="rawm_name"
-				type="text" th:value="${result.rawm_name}" class="form-control">
-		</div>
-		<div class="form-group">
-			<label for="showMethod">원재료종류</label> <input id="rawm_sort" name="rawm_sort"
-				type="text" th:value="${result.rawm_sort}" class="form-control">
-		</div>
-		<div class="form-group">
-			<label for="showMethod">단가</label> <input id="rawm_price" type="text" name="rawm_price"
-				th:value="${result.rawm_price}" class="form-control">
-		</div>
-		<div class="form-group">
-			<label for="showMethod">공급처코드</label> <input id="supplierseq" name="supplierseq"
-				type="text" th:value="${result.supplierseq}" readonly="readonly"
+			<label for="showMethod">원재료종류</label> <input id="rawm_sort"
+				name="rawm_sort" type="text" th:value="${result.rawm_sort}"
 				class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="showMethod">단가</label> <input id="rawm_price" type="text"
+				name="rawm_price" th:value="${result.rawm_price}"
+				class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="supplierseq" class="select">공급처명</label> <input
+				name="supplierseq" id="supplierseq" list="test" autocomplete="off">
+			<datalist class="select" id="test">
+				<option class="sList" th:each="list : ${supplierList}"
+					th:text="${list.supplier_name}" th:value="${list.supplierseq}">
+				</option>
+			</datalist>
+
+
 		</div>
 		<div class="position-relative form-group">
 			<div class="custom-checkbox custom-control">
 				<input type="checkbox" id="rawm_autoorder" name="rawm_autoorder"
-					th:value="${result.rawm_autoorder}"
-					class="custom-control-input"> <label
-					class="custom-control-label" for="rawm_autoorder">&nbsp;자동구매</label>
+					th:value="${result.rawm_autoorder}" class="custom-control-input">
+				<label class="custom-control-label" for="rawm_autoorder">&nbsp;자동구매</label>
 			</div>
 		</div>
 		<!-- if check -->
@@ -120,5 +166,16 @@ $(function() {
 
 	</div>
 
+	<form action="rawMaterialUpdate" method="post"
+		id="rawMaterialUpdateForm">
+		<input type="hidden" id="rawm_code1" name="rawm_code"> <input
+			type="hidden" id="rawm_name1" name="rawm_name"> <input
+			type="hidden" id="rawm_sort1" name="rawm_sort"> <input
+			type="hidden" id="rawm_price1" name="rawm_price"> <input
+			type="hidden" id="supplierseq1" name="supplierseq"> <input
+			type="hidden" id="rawm_autoorder1" name="rawm_autoorder"> <input
+			type="hidden" id="rawm_minimum1" name="rawm_minimum"> <input
+			type="hidden" id="rawm_set1" name="rawm_set">
+	</form>
 </body>
 </html>
