@@ -82,6 +82,14 @@ public class InventoryController {
 		return mList;
 	}
 	
+	
+	@RequestMapping(value="/selectDistinctMaterialINWarehouse", method = RequestMethod.GET)
+	public @ResponseBody ArrayList<RawMaterialVO> selectDistinctMaterialINWarehouse(String warehouse_code){
+		ArrayList<RawMaterialVO> sList = null;
+		sList = inventoryService.selectDistinctMaterialINWarehouse(warehouse_code);
+		return sList;
+	}
+	
 	//warehouse_code를 통해 창고 내 생산품재고 자료 메소드
 	@RequestMapping(value="/selectProductINWarehouse", method = RequestMethod.GET)
 	public @ResponseBody ArrayList<ProductVO> selectProductINWarehouse(String warehouse_code){
@@ -89,13 +97,41 @@ public class InventoryController {
 		pList = inventoryService.selectProductINWarehouse(warehouse_code);
 		return pList;
 	}
+	@RequestMapping(value="/selectDistinctMaterialSortINWarehouse", method = RequestMethod.GET)
+	public @ResponseBody ArrayList<RawMaterialVO> selectDistinctMaterialSortINWarehouse(String warehouse_code){
+		ArrayList<RawMaterialVO> mList = null;
+		mList = inventoryService.selectDistinctMaterialSortINWarehouse(warehouse_code);
+		return mList;
+	}
 	
+	@RequestMapping(value="/selectDistinctProductSortINWarehouse", method = RequestMethod.GET)
+	public @ResponseBody ArrayList<ProductVO> selectDistinctProductSortINWarehouse(String warehouse_code){
+		ArrayList<ProductVO> pList = null;
+		pList = inventoryService.selectDistinctProductSortINWarehouse(warehouse_code);
+		return pList;
+	}
+
 	
 	@RequestMapping(value="/selectSupplierBySeq", method = RequestMethod.GET)
 	public @ResponseBody SupplierVO selectSupplierBySeq(String supplierseq){
 		SupplierVO s = null;
 		s = inventoryService.selectSupplierBySeq(supplierseq);
 		return s;
+	}
+	
+
+	@RequestMapping(value="/selectMaterialINWarehouseWizCondition", method = RequestMethod.GET)
+	public @ResponseBody ArrayList<RawMaterialVO> selectMaterialINWarehouseWizCondition(RawMaterialVO material){
+		ArrayList<RawMaterialVO> mList = null;
+		mList = inventoryService.selectMaterialINWarehouseWizCondition(material);
+		return mList;
+	}
+	
+	@RequestMapping(value="/selectProductINWarehouseWizCondition", method = RequestMethod.GET)
+	public @ResponseBody ArrayList<ProductVO> selectProductINWarehouseWizCondition(ProductVO product){
+		ArrayList<ProductVO> pList = null;
+		pList = inventoryService.selectProductINWarehouseWizCondition(product);
+		return pList;
 	}
 
 	

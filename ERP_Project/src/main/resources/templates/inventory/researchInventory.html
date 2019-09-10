@@ -53,26 +53,24 @@
                     <div class="main-card mb-3 card">
                         <div class="card-body">
                             <!-- search 코딩 -->
-                        <form>
-                           <select class="mb-2 form-control" style="display:inline ;width: 150px" >
-                                    <option>재고분류</option>
+                        
+                           <select class="mb-2 form-control" id="inventoryType" style="display:inline ;width: 150px" >
+                                    <option value="">재고분류</option>
+                                    <option value="product">생산품</option>
+                                    <option value="material">원자재</option>
                            </select>
-                            <select class="mb-2 form-control" style="display:inline ;width: 150px">
-                                    <option>재고출처</option>
+                            <select class="mb-2 form-control" id="inventroySupplier" style="display:inline ;width: 150px">
+                                    <option value="">재고출처</option>
                            </select>
-                           <select class="mb-2 form-control" style="display:inline ;width: 150px">
-                                    <option>재고종류</option>
+                           <select class="mb-2 form-control" id="inventroySort" style="display:inline ;width: 150px">
+                                    <option value="">재고종류</option>
                            </select>
-                          <input placeholder="default" type="text" class="mb-2 form-control" style="display:inline ;width: 300px">        
+                          <input placeholder="default" type="text" id="searchText" class="mb-2 form-control" style="display:inline ;width: 300px">        
                                 
-                           <button class="mb-2 mr-2 btn btn-primary" style="display:inline ;height: 37px;width: 95px">
+                           <button class="mb-2 mr-2 btn btn-primary" id="searchButton" style="display:inline ;height: 37px;width: 95px">
                                 	Search
                            </button>
-                           
-                      	
-                       
-                       </form>
-                        
+
                             <table  class="mb-0 table table-bordered">
                                 <thead>
                                 <tr>
@@ -124,10 +122,11 @@
 		var database = firebase.database();	
 		var warehouse_code = /*[[${warehouse.warehouse_code}]]*/;
 		selelctInventoryINWarehouse(warehouse_code);
-		var material= serverData1;
-	  	var	product = serverData2;
+		printInventorySupplier();
+		printInventorySort();
+	  	
+	  	//창고 내 생산품, 원자재 정보 가져오기
 		function selelctInventoryINWarehouse(){
-			
 			$.ajax({
 				url: "selectMaterialINWarehouse",
 				type: "get",
@@ -138,8 +137,8 @@
 						type: "get",
 						data:{warehouse_code:warehouse_code},
 						success:function(serverData2){
-							material= serverData1;
-						  	product = serverData2;
+							var material= serverData1;
+						    var product = serverData2;
 						  	if((material==null&&product==null)||(material==null&&product.length==0)||(material.length==0&&product==null)||(material.length==0&&product.length==0)){
 								$("#tBody").html('<tr><td colspan="7" align="center"><span>창고에 재고가 없습니다</span></td><tr>');
 							}else{
@@ -154,6 +153,8 @@
 
 		}
 		
+	  	// -> 밑에 함수별로 작게 나눈 이유-> 그렇지 않으면 순서가 섞여서 발생
+	  	//원자재 프린트 세팅
 		function setMaterial(material){
 			for(var i = 0 ; i<material.length ; i++){
 				 var m =material[i];
@@ -161,6 +162,7 @@
 			}
 		}
 		
+	  	//파이어베이스로 실시간 재고 가져오는 함수 
 		function getMaterialAmount(m){
 			database.ref(warehouse_code+'/').child("inventory").child(m.rawm_code).once('child_added').then(function(snapshot){
 				amount = snapshot.val();
@@ -168,6 +170,8 @@
 			});
 		}
 			
+	  	
+	  	//공급자 search해 최종 프린트 함수
 		function selectSupplier(m, amount){
 			$.ajax({
 				url: "selectSupplierBySeq",
@@ -189,6 +193,7 @@
 				});
 		}
 		
+	  	//생산품 프린트 세팅
 		function setProduction(product){
 			for(var i = 0 ; i<product.length ; i++){
 				 var p =product[i];
@@ -196,6 +201,7 @@
 			}
 		}
 		
+	  	//생산품 실시간 재고
 		function  getProductAmount(p){
 			database.ref(warehouse_code+'/').child("inventory").child(p.pd_code).once('child_added').then(function(snapshot){
 				amount = snapshot.val();
@@ -203,6 +209,7 @@
 			});
 		}
 		
+	  	//생산품 프린트
 		function printProduct(p, amount){
 			var str='';
 			str+='<tr>';
@@ -217,10 +224,174 @@
 			$("#tBody").append(str);
 		}
 			
-	
+
+		//재고 출처 세팅
+		function printInventorySupplier(){
+			$.ajax({
+			url: "selectDistinctMaterialINWarehouse",
+			type: "get",
+			data:{warehouse_code:warehouse_code},
+			success:function(serverData1){
+				$.ajax({
+					url: "selectProductINWarehouse",
+					type: "get",
+					data:{warehouse_code:warehouse_code},
+					success:function(serverData2){
+						var material= serverData1;
+					    var product = serverData2;
+					if(material!=null&&material!=0){
+						for(var i = 0 ; i<material.length ; i++){
+							$.ajax({
+								url: "selectSupplierBySeq",
+								type: "get",
+								data:{supplierseq:material[i].supplierseq},
+								success:function(serverData){
+									var str='';
+									str+='<option value="'+serverData.supplierseq+'">';
+									str+=serverData.supplier_name;
+									str+='</option>';
+									$("#inventroySupplier").append(str);
+									}
+								});
+						}
+						
+					}
+					
+					if(product!=null&&product!=0){
+						$("#inventroySupplier").append("<option value='자사'>자사</option>");
+					}
+		}
+		});
+		}
+		});
+		}
+		//재고 종류 세팅
+		function printInventorySort(){
+			$.ajax({
+				url: "selectDistinctMaterialSortINWarehouse",
+				type: "get",
+				data:{warehouse_code:warehouse_code},
+				success:function(serverData1){
+					$.ajax({
+						url: "selectDistinctProductSortINWarehouse",
+						type: "get",
+						data:{warehouse_code:warehouse_code},
+						success:function(serverData2){
+							var material= serverData1;
+						    var product = serverData2;
+							if(material!=null&&material!=0){
+								for(var i = 0 ; i<material.length ; i++){
+									var str='';
+									str+='<option value="'+material[i].rawm_sort+'">';
+									str+=material[i].rawm_sort;
+									str+='</option>';
+									$("#inventroySort").append(str);
+								}
+							}
+							
+							if(product!=null&&product!=0){
+								for(var i = 0 ; i<product.length ; i++){
+									var str='';
+									str+='<option value="'+product[i].pd_sort+'">';
+									str+=product[i].pd_sort;
+									str+='</option>';
+									$("#inventroySort").append(str);
+								}
+							}
+						}
+					});
+				}
+			});
+		}
 		
 		
-		
+		//검색 기능 구현
+		$("#searchButton").click(function(){
+			var inventoryType = $("#inventoryType").val();
+			var inventroySupplier= $("#inventroySupplier").val();
+			var inventroySort= $("#inventroySort").val();
+			var searchText= $("#searchText").val();
+			if(inventoryType==null||inventoryType==""){
+				$.ajax({
+					url: "selectMaterialINWarehouseWizCondition",
+					type: "get",
+					data:{warehouse_code:warehouse_code
+						  , rawm_sort:inventroySort
+						  , rawm_name:searchText
+						  , supplierseq:inventroySupplier
+						  , rawm_code:searchText},
+					success:function(serverData1){
+						
+						$.ajax({
+							url: "selectProductINWarehouseWizCondition",
+							type: "get",
+							data:{warehouse_code:warehouse_code
+								  , pd_sort:inventroySort
+								  , pd_name:searchText
+								  , pd_code:searchText},
+							success:function(serverData2){
+								var material = serverData1;
+								var product = serverData2;
+							  	if((material==null&&product==null)||(material==null&&product.length==0)||(material.length==0&&product==null)||(material.length==0&&product.length==0)){
+									$("#tBody").html('<tr><td colspan="7" align="center"><span>창고에 재고가 없습니다</span></td><tr>');
+								}else{
+									$("#tBody").html("");
+									setMaterial(material);
+									if(inventroySupplier==''||inventroySupplier=='자사'){
+									setProduction(product);
+									}
+								}
+							}
+						});
+						
+					}
+				});	
+				
+			}else{
+				if(inventoryType=="material"){
+					$.ajax({
+						url: "selectMaterialINWarehouseWizCondition",
+						type: "get",
+						data:{warehouse_code:warehouse_code
+							  , rawm_sort:inventroySort
+							  , rawm_name:searchText
+							  , supplierseq:inventroySupplier
+							  , rawm_code:searchText},
+						success:function(serverData){
+							var material = serverData;
+							if(material==null||material.length==0){
+								$("#tBody").html('<tr><td colspan="7" align="center"><span>창고에 재고가 없습니다</span></td><tr>');
+							}else{
+								$("#tBody").html("");
+								setMaterial(material);
+							}
+						}
+					});
+				}
+			
+
+				if(inventoryType=="product"){
+					$.ajax({
+						url: "selectProductINWarehouseWizCondition",
+						type: "get",
+						data:{warehouse_code:warehouse_code
+							  , pd_sort:inventroySort
+							  , pd_name:searchText
+							  , pd_code:searchText},
+						success:function(serverData){
+							var product = serverData;
+							if(product==null||product.length==0){
+								$("#tBody").html('<tr><td colspan="7" align="center"><span>창고에 재고가 없습니다</span></td><tr>');
+							}else{
+								$("#tBody").html("");
+								setProduction(product);
+							}
+						}
+					});
+				}
+			}	
+			
+		});
 	});
 	/*]]>*/
 </script>

@@ -53,20 +53,6 @@
 		WHERE warehouse_code = #{warehouse_code}
 	</select>
 	
-	<!--  
-	<select id="selectProductINWarehouse" parameterType="String" resultType="com.project.erp.vo.ProductVO">
-		SELECT p.pd_code, p.pd_name, p.pd_rmcost, p.pd_manufcost, p.pd_sort, m.warehouse_code
-		FROM product  p JOIN manufacture  m 
-		ON p.pd_code = m.pd_code
-		WHERE m.warehouse_code=#{warehouse_code}
-	</select>
-
-	<select id="selectMaterialINWarehouse" parameterType="String" resultType="com.project.erp.vo.RawMaterialVO">
-		SELECT r.rawm_code, r.rawm_name, r.supplierseq, r.rawm_sort, r.rawm_price, o.warehouse_code
-		FROM rawmaterial  r JOIN order_rawmaterial  o 
-		ON r.rawm_code = o.rawm_code
-		WHERE o.warehouse_code=#{warehouse_code}
-	</select>-->
 	
 	<select id="selectProductINWarehouse" parameterType="String" resultType="com.project.erp.vo.ProductVO">
 		SELECT p.pd_code
@@ -118,4 +104,54 @@
 		DELETE warehouse
 		WHERE warehouse_code = #{warehouse_code}
 	</delete>
+	
+	<select id="selectDistinctMaterialINWarehouse" parameterType="String" resultType="com.project.erp.vo.RawMaterialVO">
+    	SELECT DISTINCT supplierseq
+    	FROM order_rawmaterial
+    	WHERE warehouse_code = #{warehouse_code}
+	</select>
+	
+	<select id="selectDistinctMaterialSortINWarehouse" parameterType="String" resultType="com.project.erp.vo.RawMaterialVO">	  
+    	SELECT DISTINCT m.rawm_sort
+    	FROM rawmaterial m JOIN order_rawmaterial o
+    	ON m.rawm_code = o.rawm_code
+   		WHERE warehouse_code = #{warehouse_code}
+	</select>
+	
+	<select id="selectDistinctProductSortINWarehouse" parameterType="String" resultType="com.project.erp.vo.ProductVO">
+    	SELECT DISTINCT p.pd_sort
+    	FROM product  p JOIN manufacture  m 
+    	ON p.pd_code = m.pd_code
+    	WHERE warehouse_code = #{warehouse_code}
+	</select>
+	
+		
+	<select id="selectMaterialINWarehouseWizCondition" parameterType="String" resultType="com.project.erp.vo.RawMaterialVO">
+		SELECT r.rawm_code
+				, r.rawm_name
+				, r.supplierseq
+				, r.rawm_sort
+				, r.rawm_price
+				, o.warehouse_code
+		FROM rawmaterial  r JOIN order_rawmaterial  o 
+		ON r.rawm_code = o.rawm_code
+		WHERE o.warehouse_code=#{warehouse_code}
+		<if test="rawm_name!=''"> AND (r.rawm_name LIKE '%'||#{rawm_name}||'%' OR r.rawm_code LIKE '%'||#{rawm_code}||'%')</if>
+		<if test="rawm_sort!=''"> AND r.rawm_sort=#{rawm_sort}</if>
+		<if test="supplierseq!=''"> AND r.supplierseq=#{supplierseq}</if>
+	</select>
+	
+	<select id="selectProductINWarehouseWizCondition" parameterType="String" resultType="com.project.erp.vo.ProductVO">
+		SELECT p.pd_code
+				, p.pd_name
+				, p.pd_rmcost
+				, p.pd_manufcost
+				, p.pd_sort
+				, m.warehouse_code
+		FROM product  p JOIN manufacture  m 
+		ON p.pd_code = m.pd_code
+		WHERE m.warehouse_code=#{warehouse_code}
+		<if test="pd_name!=''"> AND (p.pd_name LIKE '%'||#{pd_name}||'%' OR p.pd_code LIKE '%'||#{pd_code}||'%')</if>
+		<if test="pd_sort!=''"> AND p.pd_sort=#{pd_sort}</if>
+	</select>
 </mapper>
