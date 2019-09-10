@@ -121,5 +121,60 @@ public class InventoryDAO {
 		}
 		return s;
 	}
+
+	public ArrayList<RawMaterialVO> selectDistinctMaterialINWarehouse(String warehouse_code) {
+		ArrayList<RawMaterialVO> sList = null;
+		try{
+		InventoryMapper mapper = sqlSession.getMapper(InventoryMapper.class);
+		sList= mapper.selectDistinctMaterialINWarehouse(warehouse_code);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return sList;
+	}
+
+	public ArrayList<RawMaterialVO> selectDistinctMaterialSortINWarehouse(String warehouse_code) {
+		ArrayList<RawMaterialVO> mList = null;
+		try{
+		InventoryMapper mapper = sqlSession.getMapper(InventoryMapper.class);
+		mList= mapper.selectDistinctMaterialSortINWarehouse(warehouse_code);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return mList;
+	}
+
+	public ArrayList<ProductVO> selectDistinctProductSortINWarehouse(String warehouse_code) {
+		ArrayList<ProductVO> pList = null;
+		try{
+		InventoryMapper mapper = sqlSession.getMapper(InventoryMapper.class);
+		pList= mapper.selectDistinctProductSortINWarehouse(warehouse_code);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return pList;
+	}
+
+	public ArrayList<ProductVO> selectProductINWarehouseWizCondition(ProductVO product) {
+		ArrayList<ProductVO> pList = null;
+		try{
+		InventoryMapper mapper = sqlSession.getMapper(InventoryMapper.class);
+		pList= mapper.selectProductINWarehouseWizCondition(product);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return pList;
+	}
+
+	public ArrayList<RawMaterialVO> selectMaterialINWarehouseWizCondition(RawMaterialVO material) {
+		ArrayList<RawMaterialVO> mList = null;
+		try{
+		InventoryMapper mapper = sqlSession.getMapper(InventoryMapper.class);
+		mList= mapper.selectMaterialINWarehouseWizCondition(material);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return mList;
+	}
 	
 }
