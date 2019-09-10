@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.erp.service.InventoryService;
+import com.project.erp.vo.InventoryVO;
+import com.project.erp.vo.ProductVO;
+import com.project.erp.vo.RawMaterialVO;
+import com.project.erp.vo.SupplierVO;
 import com.project.erp.vo.WarehouseVO;
 
 @Controller
@@ -69,5 +73,30 @@ public class InventoryController {
 		w = inventoryService.selectWarehouseByCode(warehouse_code);
 		return w;
 	}
+	
+	//warehouse_code를 통해 창고 내 원자재재고 자료 메소드
+	@RequestMapping(value="/selectMaterialINWarehouse", method = RequestMethod.GET)
+	public @ResponseBody ArrayList<RawMaterialVO> selectMaterialINWarehouse(String warehouse_code){
+		ArrayList<RawMaterialVO> mList = null;
+		mList = inventoryService.selectMaterialINWarehouse(warehouse_code);
+		return mList;
+	}
+	
+	//warehouse_code를 통해 창고 내 생산품재고 자료 메소드
+	@RequestMapping(value="/selectProductINWarehouse", method = RequestMethod.GET)
+	public @ResponseBody ArrayList<ProductVO> selectProductINWarehouse(String warehouse_code){
+		ArrayList<ProductVO> pList = null;
+		pList = inventoryService.selectProductINWarehouse(warehouse_code);
+		return pList;
+	}
+	
+	
+	@RequestMapping(value="/selectSupplierBySeq", method = RequestMethod.GET)
+	public @ResponseBody SupplierVO selectSupplierBySeq(String supplierseq){
+		SupplierVO s = null;
+		s = inventoryService.selectSupplierBySeq(supplierseq);
+		return s;
+	}
+
 	
 }
