@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.erp.dao.InventoryDAO;
+import com.project.erp.vo.InventoryVO;
+import com.project.erp.vo.ProductVO;
+import com.project.erp.vo.RawMaterialVO;
+import com.project.erp.vo.SupplierVO;
 import com.project.erp.vo.WarehouseVO;
 
 @Service
@@ -49,5 +53,26 @@ public class InventoryService {
 		check = inventoryDAO.deleteWarehouse(warehouse_code);
 		return check;
 	}
+	
+	public ArrayList<RawMaterialVO> selectMaterialINWarehouse(String warehouse_code) {
+		ArrayList<RawMaterialVO> mList = null;
+		mList = inventoryDAO.selectMaterialINWarehouse(warehouse_code);
+		return mList;
+	}
+
+	public ArrayList<ProductVO> selectProductINWarehouse(String warehouse_code) {
+		ArrayList<ProductVO> pList = null;
+		pList = inventoryDAO.selectProductINWarehouse(warehouse_code);
+		return pList;
+	}
+
+	public SupplierVO selectSupplierBySeq(String supplierseq) {
+		SupplierVO s = null;
+		s = inventoryDAO.selectSupplierBySeq(supplierseq);
+		return s;
+	}
+
+
+
 
 }
