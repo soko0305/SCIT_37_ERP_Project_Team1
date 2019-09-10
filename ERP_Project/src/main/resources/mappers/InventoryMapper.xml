@@ -53,6 +53,58 @@
 		WHERE warehouse_code = #{warehouse_code}
 	</select>
 	
+	<!--  
+	<select id="selectProductINWarehouse" parameterType="String" resultType="com.project.erp.vo.ProductVO">
+		SELECT p.pd_code, p.pd_name, p.pd_rmcost, p.pd_manufcost, p.pd_sort, m.warehouse_code
+		FROM product  p JOIN manufacture  m 
+		ON p.pd_code = m.pd_code
+		WHERE m.warehouse_code=#{warehouse_code}
+	</select>
+
+	<select id="selectMaterialINWarehouse" parameterType="String" resultType="com.project.erp.vo.RawMaterialVO">
+		SELECT r.rawm_code, r.rawm_name, r.supplierseq, r.rawm_sort, r.rawm_price, o.warehouse_code
+		FROM rawmaterial  r JOIN order_rawmaterial  o 
+		ON r.rawm_code = o.rawm_code
+		WHERE o.warehouse_code=#{warehouse_code}
+	</select>-->
+	
+	<select id="selectProductINWarehouse" parameterType="String" resultType="com.project.erp.vo.ProductVO">
+		SELECT p.pd_code
+				, p.pd_name
+				, p.pd_rmcost
+				, p.pd_manufcost
+				, p.pd_sort
+				, m.warehouse_code
+		FROM product  p JOIN manufacture  m 
+		ON p.pd_code = m.pd_code
+		WHERE m.warehouse_code=#{warehouse_code}
+	</select>
+
+	<select id="selectMaterialINWarehouse" parameterType="String" resultType="com.project.erp.vo.RawMaterialVO">
+		SELECT r.rawm_code
+				, r.rawm_name
+				, r.supplierseq
+				, r.rawm_sort
+				, r.rawm_price
+				, o.warehouse_code
+		FROM rawmaterial  r JOIN order_rawmaterial  o 
+		ON r.rawm_code = o.rawm_code
+		WHERE o.warehouse_code=#{warehouse_code}
+	</select>
+	
+	
+	<select id="selectSupplierBySeq" parameterType="String" resultType="com.project.erp.vo.SupplierVO">
+		SELECT supplierseq
+				, supplier_name
+				, supplier_owner
+				, supplier_addr
+				, supplier_tel
+				, supplier_pic
+				, supplier_email
+		FROM supplier 
+		WHERE supplierseq=#{supplierseq}
+	</select>
+	
 	<update id="updateWarehouse" parameterType="com.project.erp.vo.WarehouseVO">
 		UPDATE warehouse
 		SET warehouse_name = #{warehouse_name}

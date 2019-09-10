@@ -53,6 +53,12 @@ from buyer
 where buyer_corp = #{buyer_corp}
 </select>
 
+<select id="selectSalesStatusIsDone" resultType="com.project.erp.vo.Sales">
+select *
+from sales
+where sales_status='판매완료'
+</select>
+
 
 
 <update id="updateSalesStatus" parameterType="com.project.erp.vo.Sales">
@@ -65,4 +71,12 @@ where
 sales_ordernum=#{sales_ordernum}
 </update>
 
+<update id="setSalesPrice" parameterType="com.project.erp.vo.Sales">
+update sales
+set
+sales_totalprice=#{sales_totalprice},
+sales_title=#{sales_title}
+where
+sales_ordernum=#{sales_ordernum}
+</update>
 </mapper>
