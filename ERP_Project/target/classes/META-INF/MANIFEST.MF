@@ -9,9 +9,9 @@ Built-By: user
 >>>>>>> dec0e1124cd4b698af66e3fe3f7d5ff3bf89c1f1
 =======
 Built-By: jyb
->>>>>>> f21fc66b26e6a791ca8528230aab06a7f8200636
+>>>>>>> 1532accffd1810dcfc9fa89ced13de4c6dc25b88
 Implementation-Vendor-Id: com.project.erp
-Build-Jdk: 1.8.0_221
+Build-Jdk: 1.8.0_202
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
  ot-starter-parent/com.project.erp
 Created-By: Maven Integration for Eclipse

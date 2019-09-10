@@ -421,9 +421,9 @@
 											<div class="col-md-6">
 												<div class="position-relative form-group">
 													<label for="supplierseq" class="select">공급처명</label>
-													<input name="supplierseq" id="supplierseq" list="test">
+													<input name="supplierseq" id="supplierseq" list="test" autocomplete="off">
 													<datalist class="select" id="test">
-														<option th:each="list : ${supplierList}"
+														<option class="sList" th:each="list : ${supplierList}"
 																th:text="${list.supplier_name}"
 																th:value="${list.supplierseq}">
 														</option>

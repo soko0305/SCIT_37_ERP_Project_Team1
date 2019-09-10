@@ -1,0 +1,177 @@
+
+<mapper namespace="com.project.erp.dao.BoardMapper">
+
+<!-- 	<insert id="insertBoard" parameterType="Board">
+	
+		INSERT INTO BOARD
+		(
+			BOARD_SEQ
+			,TITLE
+			,CONTENT
+			,ID
+			,INDATE
+		
+		)
+		VALUES
+		(
+			BOARD_SEQ.NEXTVAL
+			,#{title}
+			,#{content}
+			,#{id}
+			,sysdate
+		
+		)
+	</insert>
+	
+	<insert id="insertFile" parameterType="File">
+	
+	INSERT INTO FILEINFO
+	(
+		FILESEQ,
+		BOARD_SEQ,
+		ORG_NAME,
+		SAV_NAME
+	)
+	VALUES
+	(
+		FILESEQ.NEXTVAL,
+		(SELECT MAX(BOARD_SEQ) FROM BOARD),
+		#{orgName},
+		#{savName}
+	)
+	</insert>
+	
+	
+	<update id="updateFile" parameterType="File">
+	
+	UPDATE FILEINFO SET
+	
+		ORG_NAME=#{orgName},
+		SAV_NAME=#{savName}
+		
+	WHERE
+		BOARD_SEQ=#{boardSeq}
+	
+	</update>
+	
+	<select id="selectFile" resultType="File" parameterType="String">
+	
+		SELECT 
+			FILESEQ fileSeq,
+			BOARD_SEQ boardSeq,
+			ORG_NAME orgName,
+			SAV_NAME savName
+		FROM
+			FILEINFO 
+		WHERE 
+			BOARD_SEQ = #{boardSeq}
+	
+	</select>
+	
+	<select id="selectFileBySeq" parameterType="String" resultType="File">
+	
+		SELECT 
+			FILESEQ fileSeq,
+			BOARD_SEQ boardSeq,
+			ORG_NAME orgName,
+			SAV_NAME savName
+		FROM
+			FILEINFO
+		WHERE 
+			FILESEQ = #{fileSeq}
+	
+	</select>
+	
+	<select id="selectAllBoard" resultType="Board" parameterType="String">
+	
+	SELECT 
+			BOARD_SEQ boardSeq
+			,TITLE
+			,CONTENT
+			,ID
+			,INDATE
+	FROM
+		BOARD
+	<if test="_parameter!=null">
+		
+		WHERE
+			TITLE LIKE '%'||#{searchWord}||'%'
+		
+		</if>
+	order by indate desc
+	</select>
+	
+	<select id="selectBoard" resultType="Board" parameterType="String">
+	
+	SELECT 
+			BOARD_SEQ boardSeq
+			,TITLE
+			,CONTENT
+			,ID
+			,INDATE
+	FROM
+		BOARD
+	WHERE
+		BOARD_SEQ=#{boardSeq}
+	</select>
+	
+	<delete id="deleteBoard" parameterType="String">
+	
+		DELETE FROM BOARD
+		WHERE 
+			BOARD_SEQ=#{boardSeq}
+	
+	
+	</delete>
+	댓글삭제
+	<delete id="deleteReply" parameterType="String">
+	
+		DELETE FROM REPLY
+		WHERE 
+			BOARD_SEQ=#{boardSeq}
+	</delete>
+	파일정보삭제
+	<delete id="deleteFile" parameterType="String">
+	
+		DELETE FROM FILEINFO
+		WHERE 
+			BOARD_SEQ=#{boardSeq}
+	</delete>
+	
+	
+	<update id="updateBoard" parameterType="Board">
+	
+		UPDATE BOARD SET
+			TITLE=#{title}
+			,CONTENT=#{content}
+		WHERE
+			BOARD_SEQ=#{boardSeq}
+	
+	</update>
+	
+	<delete id="deleteAllBoard" parameterType="String">
+	
+		DELETE 
+			BOARD
+		WHERE 
+			ID=#{id}
+	
+	</delete>
+	
+	
+	<select id="selectCount" resultType="int" parameterType="String">
+	
+		SELECT COUNT(BOARD_SEQ) FROM BOARD
+		
+		<if test="_parameter!=null">
+		
+		WHERE
+			TITLE LIKE '%'||#{searchWord}||'%'
+		
+		</if>
+	
+	</select>
+	
+ -->
+
+</mapper> 

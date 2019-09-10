@@ -11,13 +11,15 @@ import com.project.erp.vo.RawMaterialVO;
 @Repository
 public interface RawMaterialMapper {
 
-	public int rawMaterialInsert(RawMaterialVO rawmaterial);
+	public int rawMaterialInsert(RawMaterialVO rawmaterial);				//원자재 등록
 	
-	public ArrayList<RawMaterialVO> rawMaterialAllSelect();
+	public ArrayList<RawMaterialVO> rawMaterialAllSelect();					//원자재 전체 출력
 	
-	public RawMaterialVO rawMaterialOneSelect(RawMaterialVO rawmaterial);
+	public RawMaterialVO rawMaterialOneSelect(RawMaterialVO rawmaterial);	//원자재 선택 출력
 	
-	public int rawMaterialDelete(RawMaterialVO rawmaterial);
+	public int rawMaterialDelete(RawMaterialVO rawmaterial);				//원자재 삭제
 	
-	public ArrayList<RawMaterialVO> rawMaterialDashSelect();
+	public ArrayList<RawMaterialVO> rawMaterialDashSelect();				//원자재 3개 출력
+	
+	public int rawMaterialUpdate(RawMaterialVO rawmaterial);		//원자재 수정
 }

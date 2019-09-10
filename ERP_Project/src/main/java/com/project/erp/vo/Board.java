@@ -3,7 +3,7 @@ package com.project.erp.vo;
 import lombok.Data;
 
 @Data
-public class NoticeVO {
+public class Board {
  private String board_seq;
  private String userid; 
  private String title;
