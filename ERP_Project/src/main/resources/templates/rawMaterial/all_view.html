@@ -440,24 +440,6 @@
 											</tr>
 										</thead>
 										<tbody>
-											<!-- <tr>
-												<th scope="row"><a href="">1100</a></th>
-												<td>6528</td>
-												<td>아크봉</td>
-												<td>300</td>
-											</tr>
-											<tr>
-												<th scope="row"><a href="">1110</a></th>
-												<td>0001</td>
-												<td>티그봉</td>
-												<td>250</td>
-											</tr>
-											<tr>
-												<th scope="row"><a href="">1111</a></th>
-												<td>와이어</td>
-												<td>co2봉</td>
-												<td>5</td>
-											</tr> -->
 											<tr th:each="list : ${rawMaterialList}">
 												<td th:text="${list.rawm_name}"></td>
 												<td th:text="${list.rawm_sort}"></td>
@@ -474,7 +456,7 @@
 
 									<!-- order -->
 									<h5 class="card-title">
-										발주요청확인란
+										발주 관리
 										<button
 											class="mb-2 mr-2 btn-pill btn-transition btn btn-outline-primary btn-sm"
 											type="button" style="float: right;"

@@ -3,7 +3,7 @@ package com.project.erp.vo;
 import lombok.Data;
 
 @Data
-public class Order_rawMaterial {
+public class Order_rawMaterialVO {
 
 	private String rmorder_code;
 	private String rawm_code;
@@ -14,5 +14,5 @@ public class Order_rawMaterial {
 	private String warehouse_code;
 	private String rmorder_requserid;
 	private String rmorder_reqdate;
-	private String mfseq;
+	//추후 생산코드는 입력할 예정
 }
