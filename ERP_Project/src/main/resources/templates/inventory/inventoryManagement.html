@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="en">
+<html lang="UTF-8" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="Content-Language" content="en">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Language" content="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Grid Tables - Basic example of a Bootstrap 4 table with sort, search and filter functionality.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"
     />
@@ -16,6 +16,17 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
 <link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
+<!-- firebase -->
+	<script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-auth.js"></script>
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#config-web-app -->
+  <!-- firebaseUI -->
+  <script src="https://cdn.firebase.com/libs/firebaseui/4.0.0/firebaseui.js"></script>
+  <!-- firebase -->
+  <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
+  <!-- firebase Config and initialize -->	
+  <script src="firebase/firebase-config.js"></script>
 <script>
 	$(function(){	
 		$("#header").load("/header");
@@ -87,35 +98,35 @@
                                 <thead>
                                 <tr>
                                     <th data-field="name"
-                                        data-sortable="true">
-                                        	품목코드
+                                        data-sortable="true" width="100em">
+                                        	재고코드
                                     </th>
                                     <th data-field="stargazers_count"
-                                        data-sortable="true">
-                                        	품명
+                                        data-sortable="true" width="250em">
+                                        	재고명
                                     </th>
                                     <th data-field="company"
-                                        data-sortable="true">
+                                        data-sortable="true" width="250em">
                                         	출처
                                     </th>
                                     <th data-field="forks_count"
-                                        data-sortable="true">
+                                        data-sortable="true" width="150em">
                                         	관리창고
                                     </th>
                                     <th data-field="prorobuy"
-                                        data-sortable="true">
-                                        	재고종류
+                                        data-sortable="true" width="175em">
+                                        	재고분류
                                     </th>
                                     <th data-field="kind"
-                                        data-sortable="true">
-                                        	재고품목
+                                        data-sortable="true" width="175em">
+                                        	재고종류
                                     </th>
                                     <th data-field="etc"
-                                        data-sortable="true">
+                                        data-sortable="true" width="200em">
                                         	재고수량
                                     </th>
                                     <th data-field="dd"
-                                        data-sortable="true">
+                                        data-sortable="true" width="200em">
                                         	단가
                                     </th>
                                    <th data-field="ff"
@@ -124,10 +135,7 @@
                                     </th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td>
-                                </tr>
+                                <tbody id="tBody">
                                 </tbody>
                             </table>
                         </div>
@@ -137,5 +145,123 @@
     </div>
 </div>
 <!-- drawer 삽입 -->
-<div class="app-drawer-overlay d-none animated fadeIn"></div><script type="text/javascript" src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script></body>
+<div class="app-drawer-overlay d-none animated fadeIn"></div><script type="text/javascript" src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
+<script th:inline="javascript">
+	$(function(){
+		
+		var database = firebase.database();	
+		selelctInventoryAll();
+		//printInventorySupplier();
+		//printInventorySort();
+	  	
+	  	//창고 내 생산품, 원자재 정보 가져오기
+		function selelctInventoryAll(){
+			$.ajax({
+				url: "selectMaterialINWarehouse",
+				type: "get",
+				success:function(serverData1){
+					$.ajax({
+						url: "selectProductINWarehouse",
+						type: "get",
+						success:function(serverData2){
+							var material= serverData1;
+						    var product = serverData2;
+						  	if((material==null&&product==null)||(material==null&&product.length==0)||(material.length==0&&product==null)||(material.length==0&&product.length==0)){
+								$("#tBody").html('<tr><td colspan="7" align="center"><span>창고에 재고가 없습니다</span></td><tr>');
+							}else{
+								$("#tBody").html("");
+								setMaterial(material);
+								setProduction(product);
+							}
+						}
+					});
+				}
+			});
+
+		}
+		
+	  	// -> 밑에 함수별로 작게 나눈 이유-> 그렇지 않으면 순서가 섞여서 발생
+	  	//원자재 프린트 세팅
+		function setMaterial(material){
+			for(var i = 0 ; i<material.length ; i++){
+				 var m =material[i];
+				 getMaterialAmount(m);			
+			}
+		}
+		
+	  	//파이어베이스로 실시간 재고 가져오는 함수 
+		function getMaterialAmount(m){
+			database.ref(m.warehouse_code+'/').child("inventory").child(m.rawm_code).once('child_added').then(function(snapshot){
+				amount = snapshot.val();
+				selectSupplier(m, amount); 
+			});
+		}
+			
+	  	
+	  	//공급자 search해 최종 프린트 함수
+		function selectSupplier(m, amount){
+			$.ajax({
+				url: "selectSupplierBySeq",
+				type: "get",
+				data:{supplierseq:m.supplierseq},
+				success:function(serverData){
+					var str='';
+					str+='<tr>';
+					str+='<td>'+m.rawm_code+'</td>';
+					str+='<td>'+m.rawm_name+'</td>';
+					str+='<td>'+serverData.supplier_name+'</td>';
+					str+='<td>'+m.warehouse_code+'</td>';
+					str+='<td>원자재</td>';
+					str+='<td>'+m.rawm_sort+'</td>';
+					str+='<td>'+amount+'</td>';
+					str+='<td>'+m.rawm_price+'</td>';
+					str+='<td><button class="mb-2 mr-2 btn btn-primary" button-type="update" data-code="'+m.rawm_code+'">Update</button>';
+					str+='<button class="mb-2 mr-2 btn btn-primary" button-type="delete" data-code="'+m.rawm_code+'">Delete</button></td>';
+					str+='</tr>';
+					$("#tBody").append(str);
+					}
+				});
+		}
+		
+	  	//생산품 프린트 세팅
+		function setProduction(product){
+			for(var i = 0 ; i<product.length ; i++){
+				 var p =product[i];
+				 getProductAmount(p);			
+			}
+		}
+		
+	  	//생산품 실시간 재고
+		function  getProductAmount(p){
+			database.ref(p.warehouse_code+'/').child("inventory").child(p.pd_code).once('child_added').then(function(snapshot){
+				amount = snapshot.val();
+				printProduct(p, amount); 
+			});
+		}
+		
+	  	//생산품 프린트
+		function printProduct(p, amount){
+			var str='';
+			str+='<tr>';
+			str+='<td>'+p.pd_code+'</td>';
+			str+='<td>'+p.pd_name+'</td>';
+			str+='<td>자사</td>';
+			str+='<td>'+p.warehouse_code+'</td>';
+			str+='<td>생산품</td>';
+			str+='<td>'+p.pd_sort+'</td>';
+			str+='<td>'+amount+'</td>';
+			str+='<td>'+(parseInt(p.pd_rmcost)+parseInt(p.pd_manufcost))+'</td>';
+			str+='<td><button class="mb-2 mr-2 btn btn-primary" button-type="update" data-code="'+p.pd_code+'">Update</button>';
+			str+='<button class="mb-2 mr-2 btn btn-primary" button-type="delete" data-code="'+p.pd_code+'">Delete</button></td>';
+			str+='</tr>';
+			$("#tBody").append(str);
+		}
+			
+
+		
+		
+		
+	});
+</script>
+</body>
 </html>

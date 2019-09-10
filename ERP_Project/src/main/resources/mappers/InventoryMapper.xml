@@ -63,7 +63,9 @@
 				, m.warehouse_code
 		FROM product  p JOIN manufacture  m 
 		ON p.pd_code = m.pd_code
+		<if test="warehouse_code!=null"> 
 		WHERE m.warehouse_code=#{warehouse_code}
+		</if>
 	</select>
 
 	<select id="selectMaterialINWarehouse" parameterType="String" resultType="com.project.erp.vo.RawMaterialVO">
@@ -75,7 +77,10 @@
 				, o.warehouse_code
 		FROM rawmaterial  r JOIN order_rawmaterial  o 
 		ON r.rawm_code = o.rawm_code
+		<if test="warehouse_code!=null"> 
 		WHERE o.warehouse_code=#{warehouse_code}
+		</if>
+		
 	</select>
 	
 	
