@@ -154,5 +154,27 @@ public class InventoryDAO {
 		}
 		return pList;
 	}
+
+	public ArrayList<ProductVO> selectProductINWarehouseWizCondition(ProductVO product) {
+		ArrayList<ProductVO> pList = null;
+		try{
+		InventoryMapper mapper = sqlSession.getMapper(InventoryMapper.class);
+		pList= mapper.selectProductINWarehouseWizCondition(product);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return pList;
+	}
+
+	public ArrayList<RawMaterialVO> selectMaterialINWarehouseWizCondition(RawMaterialVO material) {
+		ArrayList<RawMaterialVO> mList = null;
+		try{
+		InventoryMapper mapper = sqlSession.getMapper(InventoryMapper.class);
+		mList= mapper.selectMaterialINWarehouseWizCondition(material);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return mList;
+	}
 	
 }

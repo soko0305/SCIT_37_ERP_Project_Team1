@@ -90,6 +90,18 @@ public class InventoryService {
 		return pList;
 	}
 
+	public ArrayList<RawMaterialVO> selectMaterialINWarehouseWizCondition(RawMaterialVO material) {
+		ArrayList<RawMaterialVO> mList = null;
+		mList = inventoryDAO.selectMaterialINWarehouseWizCondition(material);
+		return mList;
+	}
+
+	public ArrayList<ProductVO> selectProductINWarehouseWizCondition(ProductVO product) {
+		ArrayList<ProductVO> pList = null;
+		pList = inventoryDAO.selectProductINWarehouseWizCondition(product);
+		return pList;
+	}
+
 
 
 

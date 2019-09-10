@@ -38,4 +38,9 @@ public interface InventoryMapper {
 	public ArrayList<RawMaterialVO> selectDistinctMaterialSortINWarehouse(String warehouse_code);
 
 	public ArrayList<ProductVO> selectDistinctProductSortINWarehouse(String warehouse_code);
+
+	public ArrayList<RawMaterialVO> selectMaterialINWarehouseWizCondition(RawMaterialVO material);
+
+	public ArrayList<ProductVO> selectProductINWarehouseWizCondition(ProductVO product);
+
 }

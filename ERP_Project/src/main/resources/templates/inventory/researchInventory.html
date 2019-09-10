@@ -54,7 +54,7 @@
                         <div class="card-body">
                             <!-- search 코딩 -->
                         
-                           <select class="mb-2 form-control" id="inventoryKind" style="display:inline ;width: 150px" >
+                           <select class="mb-2 form-control" id="inventoryType" style="display:inline ;width: 150px" >
                                     <option value="">재고분류</option>
                                     <option value="product">생산품</option>
                                     <option value="material">원자재</option>
@@ -70,8 +70,7 @@
                            <button class="mb-2 mr-2 btn btn-primary" id="searchButton" style="display:inline ;height: 37px;width: 95px">
                                 	Search
                            </button>
-                           
-                      	
+
                             <table  class="mb-0 table table-bordered">
                                 <thead>
                                 <tr>
@@ -248,7 +247,7 @@
 								data:{supplierseq:material[i].supplierseq},
 								success:function(serverData){
 									var str='';
-									str+='<option value="'+serverData.supplier_name+'">';
+									str+='<option value="'+serverData.supplierseq+'">';
 									str+=serverData.supplier_name;
 									str+='</option>';
 									$("#inventroySupplier").append(str);
@@ -303,7 +302,96 @@
 					});
 				}
 			});
-		}		
+		}
+		
+		
+		//검색 기능 구현
+		$("#searchButton").click(function(){
+			var inventoryType = $("#inventoryType").val();
+			var inventroySupplier= $("#inventroySupplier").val();
+			var inventroySort= $("#inventroySort").val();
+			var searchText= $("#searchText").val();
+			if(inventoryType==null||inventoryType==""){
+				$.ajax({
+					url: "selectMaterialINWarehouseWizCondition",
+					type: "get",
+					data:{warehouse_code:warehouse_code
+						  , rawm_sort:inventroySort
+						  , rawm_name:searchText
+						  , supplierseq:inventroySupplier
+						  , rawm_code:searchText},
+					success:function(serverData1){
+						
+						$.ajax({
+							url: "selectProductINWarehouseWizCondition",
+							type: "get",
+							data:{warehouse_code:warehouse_code
+								  , pd_sort:inventroySort
+								  , pd_name:searchText
+								  , pd_code:searchText},
+							success:function(serverData2){
+								var material = serverData1;
+								var product = serverData2;
+							  	if((material==null&&product==null)||(material==null&&product.length==0)||(material.length==0&&product==null)||(material.length==0&&product.length==0)){
+									$("#tBody").html('<tr><td colspan="7" align="center"><span>창고에 재고가 없습니다</span></td><tr>');
+								}else{
+									$("#tBody").html("");
+									setMaterial(material);
+									if(inventroySupplier==''||inventroySupplier=='자사'){
+									setProduction(product);
+									}
+								}
+							}
+						});
+						
+					}
+				});	
+				
+			}else{
+				if(inventoryType=="material"){
+					$.ajax({
+						url: "selectMaterialINWarehouseWizCondition",
+						type: "get",
+						data:{warehouse_code:warehouse_code
+							  , rawm_sort:inventroySort
+							  , rawm_name:searchText
+							  , supplierseq:inventroySupplier
+							  , rawm_code:searchText},
+						success:function(serverData){
+							var material = serverData;
+							if(material==null||material.length==0){
+								$("#tBody").html('<tr><td colspan="7" align="center"><span>창고에 재고가 없습니다</span></td><tr>');
+							}else{
+								$("#tBody").html("");
+								setMaterial(material);
+							}
+						}
+					});
+				}
+			
+
+				if(inventoryType=="product"){
+					$.ajax({
+						url: "selectProductINWarehouseWizCondition",
+						type: "get",
+						data:{warehouse_code:warehouse_code
+							  , pd_sort:inventroySort
+							  , pd_name:searchText
+							  , pd_code:searchText},
+						success:function(serverData){
+							var product = serverData;
+							if(product==null||product.length==0){
+								$("#tBody").html('<tr><td colspan="7" align="center"><span>창고에 재고가 없습니다</span></td><tr>');
+							}else{
+								$("#tBody").html("");
+								setProduction(product);
+							}
+						}
+					});
+				}
+			}	
+			
+		});
 	});
 	/*]]>*/
 </script>

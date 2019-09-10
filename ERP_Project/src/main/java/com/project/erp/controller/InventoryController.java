@@ -118,6 +118,21 @@ public class InventoryController {
 		s = inventoryService.selectSupplierBySeq(supplierseq);
 		return s;
 	}
+	
+
+	@RequestMapping(value="/selectMaterialINWarehouseWizCondition", method = RequestMethod.GET)
+	public @ResponseBody ArrayList<RawMaterialVO> selectMaterialINWarehouseWizCondition(RawMaterialVO material){
+		ArrayList<RawMaterialVO> mList = null;
+		mList = inventoryService.selectMaterialINWarehouseWizCondition(material);
+		return mList;
+	}
+	
+	@RequestMapping(value="/selectProductINWarehouseWizCondition", method = RequestMethod.GET)
+	public @ResponseBody ArrayList<ProductVO> selectProductINWarehouseWizCondition(ProductVO product){
+		ArrayList<ProductVO> pList = null;
+		pList = inventoryService.selectProductINWarehouseWizCondition(product);
+		return pList;
+	}
 
 	
 }
