@@ -68,18 +68,7 @@ public class BoardDAO {
 		return result;
 	}
 
-	public ArrayList<BoardVO> boardDashSelect() {
-		ArrayList<BoardVO> result = null;
-
-		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
-		try {
-			result = mapper.boardDashSelect();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return result;
-		}
-		return result;
-	}
+ 
 	
 	public int boardUpdate(BoardVO board) {
 		int result = 0;

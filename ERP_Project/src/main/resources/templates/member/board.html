@@ -1856,10 +1856,10 @@
                                     <td>System Architect</td>
                                       <td>2011/04/25</td>
                                  </tr>
- 								<tr th:each="list : ${supplierList}">
-									<td th:text="${list.supplier_name}"></td>
-									<td th:text="${list.supplier_tel}"></td>
-									<td th:text="${list.supplier_email}"></td>
+ 								<tr th:each="list : ${boardList}">
+									<td th:text="${list.title}"></td>
+									<td th:text="${list.content}"></td>
+									<td th:text="${list.time}"></td>
 								</tr>
 							  </tbody>
                              </table>

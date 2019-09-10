@@ -19,7 +19,5 @@ public interface BoardMapper {
 	
 	public int boardDelete(BoardVO board);				//게시판 삭제
 	
-	public ArrayList<BoardVO> boardDashSelect();	 //원자재 3개 출력
-	
 	public int boardUpdate(BoardVO boardl);			//게시판 수정
 }
