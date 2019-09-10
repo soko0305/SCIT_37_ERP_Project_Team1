@@ -42,16 +42,6 @@
 		FROM erp_member
 		WHERE userid=#{userid}
 	</select>
-
-	<select id="BoardAllSelect" resultType="com.project.erp.vo.MemberVO">
-		select
-			board_seq
-			,userid
-			,title
-			,content
-			,time
-		from
-			erp_notice
-	</select>
+ 
 
 </mapper>

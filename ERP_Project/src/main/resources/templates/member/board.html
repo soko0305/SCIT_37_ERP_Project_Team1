@@ -1846,26 +1846,28 @@
                                 <tr>
                                     <th>제목</th>
                                     <th>내용</th>
+                                    <th>작성자</th>
                                     <th>등록일</th>
  
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
+                        <!--         <tr>
                                     <td>Tiger Nixon</td>
                                     <td>System Architect</td>
                                       <td>2011/04/25</td>
-                                 </tr>
- 								<tr th:each="list : ${boardList}">
+                                 </tr> -->
+ 								<tr th:each="list : ${boardlist}">
 									<td th:text="${list.title}"></td>
 									<td th:text="${list.content}"></td>
-									<td th:text="${list.time}"></td>
+									<td th:text="${list.userid}"></td>
+ 									<td th:text="${list.time}"></td>
 								</tr>
 							  </tbody>
                              </table>
-                        </div>
+                        </div>	
                     </div>
-                </div>\
+                </div>
                 <div class="app-wrapper-footer">
                     <div class="app-footer">
                         <div class="app-footer__inner">
