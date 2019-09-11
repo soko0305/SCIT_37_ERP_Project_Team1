@@ -43,11 +43,4 @@ public class LinkController {
 		
 		return "sales/salesHistory";
 	}
-	
-	@RequestMapping(value="/haraBasicTemplate", method = RequestMethod.GET)
-	public String basicTemplate(){
-		return "sales/test";
-	}
-	
-
 }
