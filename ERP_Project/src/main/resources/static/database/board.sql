@@ -18,7 +18,8 @@ file_seq varchar2(100) primary key,
 boared_seq not null references erp_notice(board_seq),
 org_name varchar2(100) not null,
 sav_name varchar2(100) not null,
-time date default sysdate not null
+time date default sysdate not null,
+file_url varchar2(1000) not null
 )
 drop  sequence file_seq;
  create sequence file_seq;

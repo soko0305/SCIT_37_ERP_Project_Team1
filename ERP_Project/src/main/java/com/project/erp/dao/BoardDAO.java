@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.erp.vo.BoardVO;
+import com.project.erp.vo.FileVO;
 import com.project.erp.vo.RawMaterialVO;
 @Repository
 public class BoardDAO {
@@ -18,8 +19,6 @@ public class BoardDAO {
 
 	public int boardInsert(BoardVO board) {
 		int result = 0;
-		System.out.println("2");
-		System.out.println(board);
 		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
 		try {
 			result = mapper.boardInsert(board);
@@ -83,4 +82,81 @@ public class BoardDAO {
 		}
 		return result;
 	}
+	public int insertFile(FileVO fvo) {
+
+		int result = 0;
+
+		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+
+		try {
+			result = mapper.insertFile(fvo);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return result;
+		}
+		return result;
+	}
+
+	public FileVO selectFile(String boardSeq) {
+
+		FileVO result = null;
+
+		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+
+		try {
+			result = mapper.selectFile(boardSeq);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return result;
+		}
+		return result;
+	}
+
+	public FileVO selectFileBySeq(String file_seq) {
+		FileVO result = null;
+		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+
+		try {
+			result = mapper.selectFileBySeq(file_seq);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return result;
+		}
+		return result;
+	}
+
+	public int deleteFile(String board_seq) {
+		int result = 0;
+
+		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+		try {
+			result = mapper.deleteFile(board_seq);
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			return result;
+		}
+		return result;
+	}
+
+	 
+
+	public int updateFile(FileVO fvo) {
+		int result = 0;
+
+		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+		try {
+			result = mapper.updateFile(fvo);
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			return result;
+		}
+		return result;
+	}
+
+
 }

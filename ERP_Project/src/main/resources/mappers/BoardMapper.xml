@@ -12,7 +12,8 @@
 			, userid 
 			, title 
 			, content 
-			, time )
+			, time 
+		)
 		VALUES
 		(
 			board_seq.nextval

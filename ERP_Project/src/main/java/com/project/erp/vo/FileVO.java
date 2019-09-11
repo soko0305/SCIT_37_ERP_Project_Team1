@@ -9,5 +9,5 @@ public class FileVO {
  private String org_name;
  private String sav_name;
  private String time;
-	
+ private String fileUrl;
 }
