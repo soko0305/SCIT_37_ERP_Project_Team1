@@ -1,73 +1,80 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>js excel example 03</title>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
-<script>
-function excelExport(event){
-	excelExportCommon(event, handleExcelDataAll);
-}
-function excelExportCommon(event, callback){
-    var input = event.target;
-    var reader = new FileReader();
-    reader.onload = function(){
-        var fileData = reader.result;
-        var wb = XLSX.read(fileData, {type : 'binary'});
-        var sheetNameList = wb.SheetNames; // 시트 이름 목록 가져오기 
-        var firstSheetName = sheetNameList[0]; // 첫번째 시트명
-        var firstSheet = wb.Sheets[firstSheetName]; // 첫번째 시트 
-        callback(firstSheet);      
-    };
-    reader.readAsBinaryString(input.files[0]);
-}
-function handleExcelDataAll(sheet){
-	handleExcelDataHeader(sheet); // header 정보 
-	handleExcelDataJson(sheet); // json 형태
-	handleExcelDataCsv(sheet); // csv 형태
-	handleExcelDataHtml(sheet); // html 형태
-}
-function handleExcelDataHeader(sheet){
-    var headers = get_header_row(sheet);
-    $("#displayHeaders").html(JSON.stringify(headers));
-}
-function handleExcelDataJson(sheet){
-    $("#displayExcelJson").html(JSON.stringify(XLSX.utils.sheet_to_json (sheet)));
-}
-function handleExcelDataCsv(sheet){
-    $("#displayExcelCsv").html(XLSX.utils.sheet_to_csv (sheet));
-}
-function handleExcelDataHtml(sheet){
-    $("#displayExcelHtml").html(XLSX.utils.sheet_to_html (sheet));
-}
-// 출처 : https://github.com/SheetJS/js-xlsx/issues/214
-function get_header_row(sheet) {
-    var headers = [];
-    var range = XLSX.utils.decode_range(sheet['!ref']);
-    var C, R = range.s.r; /* start in the first row */
-    /* walk every column in the range */
-    for(C = range.s.c; C <= range.e.c; ++C) {
-        var cell = sheet[XLSX.utils.encode_cell({c:C, r:R})] /* find the cell in the first row */
-
-        var hdr = "UNKNOWN " + C; // <-- replace with your desired default 
-        if(cell && cell.t) hdr = XLSX.utils.format_cell(cell);
-
-        headers.push(hdr);
-    }
-    return headers;
-}
-</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Document</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="database/jquery.table2excel.js"></script>
 </head>
 <body>
-파일 선택 : <input type="file" id="excelFile" onchange="excelExport(event)"/>
-<h1>Header 정보 보기</h1>
-<div id="displayHeaders"></div>
-<h1>JSON 형태로 보기</h1>
-<div id="displayExcelJson"></div>
-<h1>CSV 형태로 보기</h1>
-<div id="displayExcelCsv"></div>
-<h1>HTML 형태로 보기</h1>
-<div id="displayExcelHtml"></div>
+	<table id="TableToExcel" border=2 width=710 cellpadding=0 cellspacing=0
+		class='table table-bordered' align=center
+		style='border-collapse: collapse;'>
+		<tr>
+			<td>원자재명</td>
+			<td><input id="rawm_code" name="rawm_code" list="test"
+				class="form-control" autocomplete="off"> <datalist
+					class="select" id="test">
+					<option class="rList" th:each="list : ${rList}"
+						th:text="${list.rawm_name}" th:value="${list.rawm_code}">
+					</option>
+				</datalist></td>
+		</tr>
+		<tr>
+			<td>원자재수량</td>
+			<td><input id="rmorder_amount" name="rmorder_amount" type="text"
+				class="form-control"></td>
+		</tr>
+		<tr>
+			<td>공급처코드(명)</td>
+			<td><input id="supplierseq" name="supplierseq"
+				readonly="readonly" type="text" class="form-control"></td>
+		</tr>
+		<tr>
+			<td>창고코드</td>
+			<td><input id="warehouse_code" name="warehouse_code" type="text"
+				class="form-control"></td>
+		</tr>
+
+	</table>
+	<iframe id="txtArea1" style="display: none"></iframe>
+
+	<input type='button' class='btn btn-inverse' value='excel 다운'
+		style='width: 100px; height: 36px; font-weight: bold;'
+		onclick="ReportToExcelConverter()">
 </body>
+<script>
+	function ReportToExcelConverter() {
+		$("#TableToExcel").table2excel({
+			exclude : ".noExl",
+			name : "Excel Document Name",
+			filename : "report" + '.xls',
+			fileext : ".xls",
+			exclude_img : true,
+			exclude_links : true,
+			exclude_inputs : true
+		});
+	};
+$(function() {
+		
+		$("#rawm_code").change(function() {
+			 $.ajax({
+				url : "autoSelect",
+				data : {rawm_code : $("#rawm_code").val()},
+				type : 'get',
+				success : function(result) {
+					$("#supplierseq").empty();
+					$("#supplierseq").val(result.supplierseq);
+				}
+			}); 
+		});
+		/* $(".btn-primary").click(function(){
+			$("#orderInsertForm").submit();
+			opener.location.href='goAllView'
+			window.open("about:blank","_self").close();
+		}); */
+</script>
 </html>

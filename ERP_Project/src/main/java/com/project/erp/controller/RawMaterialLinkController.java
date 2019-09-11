@@ -123,8 +123,8 @@ public class RawMaterialLinkController {
 
 	@RequestMapping(value = "/goMoonTest", method = RequestMethod.GET)
 	public String goMoonTest(Model model) {
-		ArrayList<SupplierVO> result = sDAO.supplierAllSelect();
-		model.addAttribute("supplierList", result);
+		ArrayList<RawMaterialVO> result = rDAO.rawMaterialAllSelect();
+		model.addAttribute("rList", result);
 		return "rawMaterial/MoonTes";
 	}
 
