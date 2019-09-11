@@ -18,7 +18,8 @@ public class BoardDAO {
 
 	public int boardInsert(BoardVO board) {
 		int result = 0;
-
+		System.out.println("2");
+		System.out.println(board);
 		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
 		try {
 			result = mapper.boardInsert(board);

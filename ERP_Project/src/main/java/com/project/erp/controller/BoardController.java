@@ -2,6 +2,8 @@ package com.project.erp.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,15 +25,16 @@ public class BoardController {
 	// 게시물 등록
 	@RequestMapping(value = "/boardInsert", method = RequestMethod.POST)
 	public String boardInsert(BoardVO board) {
-
+		System.out.println("1");
+		System.out.println(board);
 		int result = bDAO.boardInsert(board);
-
 		if (result == 0) {
 			return "member/boardinsert";
 		} else {
-			return "member/board";
+			return "redirect:/goBoardList";
 		}
 	}
+
 
 	// 게시물 삭제
 	@RequestMapping(value = "/boardDelete", method = RequestMethod.POST)
@@ -65,6 +68,17 @@ public class BoardController {
 			ArrayList<BoardVO> result = bDAO.boardAllSelect();
 			model.addAttribute("boardlist", result);
 			return "member/board";
+		}
+		
+		@RequestMapping(value = "/goBoardInsert", method = RequestMethod.GET)
+		public String goBoardInsert(BoardVO board,HttpSession session) {
+			
+			    if (session.getAttribute("userid") != null) {
+	        String userid = (String) session.getAttribute("userid");
+	        board.setUserid(userid);
+	        /*bDAO.boardInsert(board);*/
+	     }
+			return "member/boardinsert";
 		}
 }
 

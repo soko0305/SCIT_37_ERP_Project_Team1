@@ -9,10 +9,10 @@
 		INSERT INTO erp_notice
 		(
 			board_seq 
-			userid 
-			title 
-			content 
-			time 
+			, userid 
+			, title 
+			, content 
+			, time )
 		VALUES
 		(
 			board_seq.nextval
