@@ -5,7 +5,25 @@
 
 <mapper namespace="com.project.erp.dao.BoardMapper">
 
-		 
+		<insert id="boardInsert" parameterType="com.project.erp.vo.BoardVO">
+		INSERT INTO erp_notice
+		(
+			board_seq 
+			userid 
+			title 
+			content 
+			time 
+		VALUES
+		(
+			board_seq.nextval
+			,#{userid}
+			,#{title}
+			,#{content}
+			,sysdate
+  
+		)
+ 
+	</insert>	 
 
 	<select id="boardAllSelect" resultType="com.project.erp.vo.BoardVO">
 		select
@@ -17,5 +35,25 @@
 		from
 			erp_notice
 	</select>
+
+	<delete id="boardDelete" parameterType="com.project.erp.vo.BoardVO">
+		delete
+		from
+			erp_notice
+		where
+			board_seq=#{board_seq}
+	</delete>
+	
+	<update id="boardUpdate" parameterType="com.project.erp.vo.BoardVO">
+		update
+			erp_notice
+		set
+ 
+			title=#{title}
+			,content=#{content}
+ 
+		where
+			board_seq=#{board_seq}
+	</update>
 
 </mapper>

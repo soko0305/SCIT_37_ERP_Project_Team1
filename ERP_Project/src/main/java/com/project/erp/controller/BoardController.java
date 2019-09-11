@@ -40,7 +40,7 @@ public class BoardController {
 		int result = bDAO.boardDelete(board);
 
 		if (result == 0) {
-			return "member/board";
+			return "member/boarddelete";
 		} else {
 			return "member/board";
 		}
@@ -54,7 +54,7 @@ public class BoardController {
 		int result = bDAO.boardUpdate(board);
 
 		if (result == 0) {
-			return "member/board";
+			return "member/boardupdate";
 		} else {
 			return "member/board";
 		}
@@ -65,9 +65,6 @@ public class BoardController {
 			ArrayList<BoardVO> result = bDAO.boardAllSelect();
 			model.addAttribute("boardlist", result);
 			return "member/board";
-		
- 
-		
 		}
 }
 

@@ -27,17 +27,13 @@
 </head>
 
 <body>
-
+<form id="insertBoardForm" action="/insertBoard" method="POST">
 	<div class="col-md-3">
-		<!-- 원자재주문일자 -->
-		<input id="rmorder_date" name="rmorder_date" type="hidden"
-			class="form-control">
-		<!-- 원자재요청userid -->
-		<input id="rmorder_requserid" name="rmorder_requserid" type="hidden"
-			value="user" class="form-control">
-		<!-- 원자재구매코드 -->
-		<input id="rmorder_code" name="rmorder_code" type="hidden"
-			class="form-control">
+ 
+		<!--  요청userid -->
+<!-- 		<input id="rmorder_requserid" name="rmorder_requserid" type="hidden"
+			value="user" class="form-control"> -->
+ 
 
 		<div class="form-group">
 			<label for="rawm_code">제목</label><input id="title"
@@ -46,12 +42,23 @@
 		<div class="form-group">
 			내용<textarea class="form-control" rows="10" name="content" id="content"></textarea>
  		</div>
+ 		
+ 		                               	
  		<div class="form-group">
-			<button class="mb-2 mr-2 btn-square btn btn-primary">등록</button>
- 			<button class="mb-2 mr-2 btn-square btn btn-primary">수정</button>
- 			<button class="mb-2 mr-2 btn-square btn btn-primary">삭제</button>
+			<button  id="insertButton"class="mb-2 mr-2 btn-square btn btn-primary">등록</button>
+ 			<button  id="updateButton"class="mb-2 mr-2 btn-square btn btn-primary">수정</button>
+ 			<button  id="deleteButton"class="mb-2 mr-2 btn-square btn btn-primary">삭제</button>
 		</div>
 	</div>
+</form>
+<script>
+	$(function(){
+		
+		$("#insertButton").click(function(){
+			$("#insertBoardForm").submit();
+		});
+		
 
+</script>
 </body>
 </html>
