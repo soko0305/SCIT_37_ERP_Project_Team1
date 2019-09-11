@@ -11,7 +11,6 @@ public class ProductVO {
 	private String pd_manufcost; 
 	private String pd_sort;
 	private String warehouse_code;
-	private String systemamount;
-	
+
 }
  
