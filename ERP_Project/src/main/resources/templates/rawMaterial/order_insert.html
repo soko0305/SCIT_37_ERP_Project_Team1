@@ -31,11 +31,16 @@
 				data : {rawm_code : $("#rawm_code").val()},
 				type : 'get',
 				success : function(result) {
-					var str = "";
-					
+					$("#supplierseq").empty();
+					$("#supplierseq").val(result.supplierseq);
 				}
 			}); 
 		});
+		$(".btn-primary").click(function(){
+			$("#orderInsertForm").submit();
+			window.open("about:blank","_self").close();
+		});
+		
 	});
 </script>
 </head>
@@ -43,6 +48,7 @@
 <body>
 
 	<div class="col-md-3">
+		<form action="orderInsert" method="post" id="orderInsertForm">
 		<!-- 원자재주문일자 -->
 		<input id="rmorder_date" name="rmorder_date" type="hidden"
 			class="form-control">
@@ -78,6 +84,7 @@
 		<div class="form-group">
 			<button class="mb-2 mr-2 btn-square btn btn-primary">요청하기</button>
 		</div>
+		</form>
 	</div>
 
 </body>
