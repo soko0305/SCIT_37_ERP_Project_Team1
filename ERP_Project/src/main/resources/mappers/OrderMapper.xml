@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.erp.dao.OrderMapper">
+	<insert id="orderInsert" parameterType="com.project.erp.vo.Order_rawMaterialVO">
+	insert into ORDER_RAWMATERIAL
+	(
+		rmorder_code,
+		rawm_code,
+		supplierseq,
+		rmorder_date,
+		rmorder_amount,
+		warehouse_code,
+		rmorder_requserid
+	)
+	values
+	(
+		'o' || TO_CHAR(rmorder_code.nextval),
+		#{rawm_code},
+		#{supplierseq},
+		sysdate,
+		#{rmorder_amount},
+		#{warehouse_code},
+		#{rmorder_requserid}
+	)
+	</insert>
+</mapper>
