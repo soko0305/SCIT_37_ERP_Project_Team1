@@ -40,12 +40,12 @@ public class RawMaterialDAO {
 		return result;
 	}
 
-	public RawMaterialVO rawMaterialOneSelect(RawMaterialVO rawmaterial) {
+	public RawMaterialVO rawMaterialOneSelect(String rawm_code) {
 		RawMaterialVO result = null;
 
 		RawMaterialMapper mapper = sqlSession.getMapper(RawMaterialMapper.class);
 		try {
-			result = mapper.rawMaterialOneSelect(rawmaterial);
+			result = mapper.rawMaterialOneSelect(rawm_code);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return result;

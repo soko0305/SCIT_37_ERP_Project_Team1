@@ -72,6 +72,36 @@ public class InventoryService {
 		return s;
 	}
 
+	public ArrayList<RawMaterialVO> selectDistinctMaterialINWarehouse(String warehouse_code) {
+		ArrayList<RawMaterialVO> sList = null;
+		sList = inventoryDAO.selectDistinctMaterialINWarehouse(warehouse_code);
+		return sList;
+	}
+
+	public ArrayList<RawMaterialVO> selectDistinctMaterialSortINWarehouse(String warehouse_code) {
+		ArrayList<RawMaterialVO> mList = null;
+		mList = inventoryDAO.selectDistinctMaterialSortINWarehouse(warehouse_code);
+		return mList;
+	}
+
+	public ArrayList<ProductVO> selectDistinctProductSortINWarehouse(String warehouse_code) {
+		ArrayList<ProductVO> pList = null;
+		pList = inventoryDAO.selectDistinctProductSortINWarehouse(warehouse_code);
+		return pList;
+	}
+
+	public ArrayList<RawMaterialVO> selectMaterialINWarehouseWizCondition(RawMaterialVO material) {
+		ArrayList<RawMaterialVO> mList = null;
+		mList = inventoryDAO.selectMaterialINWarehouseWizCondition(material);
+		return mList;
+	}
+
+	public ArrayList<ProductVO> selectProductINWarehouseWizCondition(ProductVO product) {
+		ArrayList<ProductVO> pList = null;
+		pList = inventoryDAO.selectProductINWarehouseWizCondition(product);
+		return pList;
+	}
+
 
 
 

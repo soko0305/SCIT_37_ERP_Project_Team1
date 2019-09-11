@@ -32,4 +32,15 @@ public interface InventoryMapper {
 	public ArrayList<ProductVO> selectProductINWarehouse(String warehouse_code);
 
 	public SupplierVO selectSupplierBySeq(String supplierseq);
+
+	public ArrayList<RawMaterialVO> selectDistinctMaterialINWarehouse(String warehouse_code);
+
+	public ArrayList<RawMaterialVO> selectDistinctMaterialSortINWarehouse(String warehouse_code);
+
+	public ArrayList<ProductVO> selectDistinctProductSortINWarehouse(String warehouse_code);
+
+	public ArrayList<RawMaterialVO> selectMaterialINWarehouseWizCondition(RawMaterialVO material);
+
+	public ArrayList<ProductVO> selectProductINWarehouseWizCondition(ProductVO product);
+
 }
