@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="utf-8">
+<html lang="UTF-8" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -17,7 +17,17 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
 <link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
-
+  	<!-- firebase -->
+	<script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-auth.js"></script>
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#config-web-app -->
+  <!-- firebaseUI -->
+  <script src="https://cdn.firebase.com/libs/firebaseui/4.0.0/firebaseui.js"></script>
+  <!-- firebase -->
+  <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
+  <!-- firebase Config and initialize -->	
+  <script src="firebase/firebase-config.js"></script>
 </head>
 <body>
 <div class="app-container app-theme-white body-tabs-shadow">
@@ -31,34 +41,33 @@
                                 <div class="modal-body">
                                     <h5 class="modal-title">
                                         <h4 class="mt-2">
-                                            <div>재고 수량 착오 확인</div>
-                                            <span>전산상 재고수량과 실질재고수량의 <span class="text-success">차이 원인</span> 기재</span></h4>
+                                       
+                                            <div>재고 정보 수정</div>
+                                            <span>수정하실 <span class="text-success">재고 정보</span> 를 기입해주세요</span></h4>
                                     </h5>
                                     <div class="divider row"></div>
                                     <div class="form-row">
-                                    <!-- 사유 적을 부분 -->
-                                     
-                     
-                               
-                                    <select class="mb-2 form-control">
-                                    				<option>재고 수량 오류 이유</option>
-                                    				<option>전산 기입 오류</option>
-                                                    <option>사고에 의한 손실</option>
-                                                    <option>분실</option>
-                                                    <option>말소</option>
-                                                    <option>도난</option>
-                                                    <option>기타</option>
-                                                    <option></option>
-                                                </select>
-                            
-                                     
-                                     </div>
-                                   
+                                  	
+                                  	<input type="hidden" name="warehouse_code" id="warehouse_code" >
+                                    <div class="col-md-12">
+                                            <div class="position-relative form-group">
+                                            	<input id="warehouse_name" placeholder="재고이동 창고" type="text" class="form-control">
+                                            </div>
+                                      </div>
+                                       <div class="col-md-12">
+                                            <div class="position-relative form-group">
+                                            	<input id="amount" placeholder="수량" type="text" class="form-control">
+                                            </div>
+                                      </div>
+                                     </div> 
                                     <div class="divider row"></div>
-                                   <!-- 재고가 몇개에서 몇개로 수정되는지 쓰기 -->
+                                    	<div align="center">
+                                   		<p style="color: red" id="errorMessage"></p>
+                                   		</div>
                                     </div>
+                                    
                                 <div class="modal-footer d-block text-center">
-                                    <button class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg">재고 수정</button>
+                                    <button id="updateButton" class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg" type="button">창고 정보 수정</button>
                                 </div>
                             </div>
                         </div>
@@ -67,5 +76,51 @@
                 </div>
             </div>
         </div>
-</div></body>
+</div>
+<script th:inline="javascript">
+/*<![CDATA[*/
+	$(function(){
+		var database = firebase.database();	
+		var warehouse_code = /*[[${warehouse.warehouse_code}]]*/;
+		var warehouse_name= /*[[${warehouse.warehouse_name}]]*/;
+		var pd_code = /*[[${pd_code}]]*/;
+		var rawm_code = /*[[${rawm_code}]]*/;
+		$("#warehouse_name").val(warehouse_name);
+		if(pd_code!=null){
+
+			$("#amount").val();
+		}else if(rawm_code != null){
+
+			$("#amount").val();	
+		}
+		/*
+		$("#updateButton").click(function(){
+			var warehouse_name = $("#warehouse_name").val();
+			var warehouse_addr = $("#warehouse_addr").val();
+			var warehouse_size = $("#warehouse_size").val();
+			var warehouse_date = $("#warehouse_date").val();
+			if(warehouse_name==null ||warehouse_name==""){
+				$("#errorMessage").html("창고 이름을 입력해주세요");
+			}else{
+				if(warehouse_addr==null ||warehouse_addr==""){
+					$("#errorMessage").html("창고 주소를 입력해주세요");
+				}else{
+					if(warehouse_size==null ||warehouse_size==""){
+						$("#errorMessage").html("창고 면적을 입력해주세요");
+					}else{
+						if(warehouse_date==null ||warehouse_date==""){
+							$("#errorMessage").html("창고 개설일을 입력해주세요");
+						}else{
+							$("#updateWarehouseForm").submit();
+							window.open("about:blank","_self").close();
+						}
+					}
+				}
+			}
+		});
+		*/
+	});
+	/*]]>*/
+</script>
+</body>
 </html>
