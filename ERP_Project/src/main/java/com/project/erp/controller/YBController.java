@@ -19,10 +19,7 @@ public class YBController {
 	public String login(){
 		return "member/login";
 	}
-	@RequestMapping(value="/boarddetail", method = RequestMethod.GET)
-	public String boarddetail(){
-		return "member/boarddetail";
-	}
+
 	@RequestMapping(value="/inventoryManagement123", method = RequestMethod.GET)
 	public String inventoryManagement123(){
 		return "inventory/inventoryManagement123";

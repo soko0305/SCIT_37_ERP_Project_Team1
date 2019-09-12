@@ -30,15 +30,7 @@
 	<div class="col-md-3">
  <form id="insertBoardForm" action="/boardInsert" method="POST">
  
- 
- 
- 
-                                <tbody>
-  								<tr th:each="list : ${boarddetail}">
-									<td><p th:text="${list.title}"></p></td>
-									<td>111</td>
-								</tr>
-                                </tbody> 
+                                 
  
 		<!--  요청userid -->
   		<input id="userid" name="userid" type="hidden"
@@ -47,7 +39,13 @@
 
 		<div class="form-group">
 			<label for="rawm_code">제목</label>
-			<input id="title" name="title" type="text" class="form-control"></input>
+			<input id="title" name="title" type="text" class="form-control">
+ 								<tbody>
+  								<tr th:each="list : ${boarddetail}">
+									<td><p th:text="${list.title}"></p></td>
+								</tr>
+                                </tbody>			
+			</input>
 			
 
 		</div>

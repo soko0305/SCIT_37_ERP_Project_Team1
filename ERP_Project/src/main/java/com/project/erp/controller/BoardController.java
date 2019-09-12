@@ -99,11 +99,15 @@ public class BoardController {
 		public String boardDetail(String boardSeq, Model model) {
 
 			
-			ArrayList<BoardVO> result = bDAO.selectBoard(boardSeq);
+		ArrayList<BoardVO> result = bDAO.selectBoard(boardSeq);
 			model.addAttribute("boarddetail", result);			
-			System.out.println("제목 : " + result.get(0).getTitle());
-			return "boardDetail";
+//			System.out.println("제목 : " + result.get(0).getTitle());
+			return "member/boarddetail";
 		}
+/*		@RequestMapping(value="/boarddetail", method = RequestMethod.GET)
+		public String boarddetail(){
+			return "member/boarddetail";
+		}*/
 	}
 
 
