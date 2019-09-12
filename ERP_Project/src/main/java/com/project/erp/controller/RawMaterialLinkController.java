@@ -8,8 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.project.erp.dao.OrderDAO;
 import com.project.erp.dao.RawMaterialDAO;
 import com.project.erp.dao.SupplierDAO;
+import com.project.erp.vo.Order_rawMaterialVO;
 import com.project.erp.vo.RawMaterialVO;
 import com.project.erp.vo.SupplierVO;
 
@@ -21,6 +23,9 @@ public class RawMaterialLinkController {
 
 	@Autowired
 	RawMaterialDAO rDAO;
+	
+	@Autowired
+	OrderDAO oDAO;
 
 	// 대쉬보드 메인 화면 Form
 	@RequestMapping(value = "/goAllView", method = RequestMethod.GET)
@@ -30,7 +35,10 @@ public class RawMaterialLinkController {
 
 		ArrayList<RawMaterialVO> result1 = rDAO.rawMaterialDashSelect();
 		model.addAttribute("rawMaterialList", result1);
-
+		
+		ArrayList<Order_rawMaterialVO> result2 =  oDAO.orderDashSelect();
+		model.addAttribute("orderList", result2);
+		
 		return "rawMaterial/All_view";
 	}
 
@@ -110,22 +118,19 @@ public class RawMaterialLinkController {
 		model.addAttribute("rList", result);
 		return "rawMaterial/order_insert";
 	}
-
-	@RequestMapping(value = "/goBuy", method = RequestMethod.GET)
-	public String goBuy() {
-		return "rawMaterial/buy";
+	//
+	//
+	// 구매 관리 전체 출력 Form
+	@RequestMapping(value = "/goArrive", method = RequestMethod.GET)
+	public String goArrive(Model model) {
+		ArrayList<Order_rawMaterialVO> result = oDAO.orderAllselect();
+		model.addAttribute("oList", result);
+		return "rawMaterial/arrive";
 	}
 
 	@RequestMapping(value = "/production_insert", method = RequestMethod.GET)
 	public String production_insert() {
 		return "production/production_insert";
-	}
-
-	@RequestMapping(value = "/goMoonTest", method = RequestMethod.GET)
-	public String goMoonTest(Model model) {
-		ArrayList<SupplierVO> result = sDAO.supplierAllSelect();
-		model.addAttribute("supplierList", result);
-		return "rawMaterial/MoonTes";
 	}
 
 }

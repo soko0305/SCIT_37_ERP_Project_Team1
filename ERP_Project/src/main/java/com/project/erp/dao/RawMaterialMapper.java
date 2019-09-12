@@ -15,11 +15,11 @@ public interface RawMaterialMapper {
 	
 	public ArrayList<RawMaterialVO> rawMaterialAllSelect();					//원자재 전체 출력
 	
-	public RawMaterialVO rawMaterialOneSelect(String rawm_code);	//원자재 선택 출력
+	public RawMaterialVO rawMaterialOneSelect(String rawm_code);			//원자재 선택 출력
 	
 	public int rawMaterialDelete(RawMaterialVO rawmaterial);				//원자재 삭제
 	
 	public ArrayList<RawMaterialVO> rawMaterialDashSelect();				//원자재 3개 출력
 	
-	public int rawMaterialUpdate(RawMaterialVO rawmaterial);		//원자재 수정
+	public int rawMaterialUpdate(RawMaterialVO rawmaterial);				//원자재 수정
 }

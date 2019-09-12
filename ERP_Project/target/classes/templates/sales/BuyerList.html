@@ -67,12 +67,19 @@
                          	    <div class="card-header-tab card-header" >
                                  <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i class="header-icon lnr-laptop-phone mr-3 text-muted opacity-6"> </i>실시간 주문 내역</div>
                                  </div>
+<<<<<<< HEAD
                             	<div class="card-body">
                             	
 						<button class="mb-2 mr-2 btn-square btn btn-primary" id="idAddBuyer" style="width:100%"
 							data-type="insert">거래처추가</button><br /><br />
 			
                                 <table style="width: 100%;" id="example" class="table table-hover table-bordered insertWithAjax">
+=======
+       
+                            
+                            	<div class="card-body">
+                                <table style="width: 100%;" id="example" class="table table-hover table-bordered">
+>>>>>>> master
                                    <thead>
                                         <tr>
                                             <th>번호</th>
@@ -80,26 +87,42 @@
                                             <th>대표자명</th>
                                             <th>담당자</th>
                                             <th>담당자연락처</th>
+<<<<<<< HEAD
                                             <th>이메일</th>
                                             <th>주소</th>
+=======
+                                            <th>주소</th>
+                                            <th></th>
+>>>>>>> master
                                         </tr>
                                         </thead>
                                         <tbody class="tbody">
                                             	<tr th:each="list : ${buyerList}">
 												<td th:text="${list.buyerseq}"></td>
 												<td th:text="${list.buyer_corp}"></td>
+<<<<<<< HEAD
 												<td th:text="${list.buyer_owner}"></td>
 												<td th:text="${list.buyer_pic}"></td>
 												<td th:text="${list.buyer_pictel}"></td>
 												<td th:text="${list.buyer_email}"></td>
 												<td th:text="${list.buyer_addr}"></td>
+=======
+												<td><a href="#" th:text="${list.sales_title}"></a></td>
+												<td th:text="${list.sales_totalprice}"></td>
+												<td th:text="${list.sales_orderdate}"></td>
+												<td style="text-align: center;"><button class="mb-2 mr-2 btn btn-primary" th:text="${list.sales_status}" ></button></td>
+>>>>>>> master
 										</tr> 
                                   </tbody>
                                </table>
                             </div>
                         </div>
                    </div>
+<<<<<<< HEAD
 
+=======
+                  
+>>>>>>> master
                 <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
                 
                 

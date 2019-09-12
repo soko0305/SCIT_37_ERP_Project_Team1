@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.project.erp.service.InventoryService;
-import com.project.erp.vo.WarehouseVO;
 
 @Controller
 public class InventoryLinkController {
@@ -21,7 +20,7 @@ public class InventoryLinkController {
 	
 	@RequestMapping(value="/goInventoryManagement", method = RequestMethod.GET)
 	public String goInventoryManagement(){
-		return "inventory/inventoryManagement";
+		return "inventory/inventoryManagement2";
 	}
 	
 	@RequestMapping(value="/goResearchConfirm", method = RequestMethod.GET)
@@ -41,17 +40,24 @@ public class InventoryLinkController {
 	
 	@RequestMapping(value="/goUpdateStorage", method = RequestMethod.GET)
 	public String goUpdateStorage(String warehouse_code, Model model){
-		WarehouseVO w = inventoryService.selectWarehouseByCode(warehouse_code);
-		model.addAttribute("warehouse", w);
+		model.addAttribute("warehouse_code", warehouse_code);
 		return "inventory/updateWarehouseInfo";
 	}
 	
 	@RequestMapping(value="/goResearchInventory", method = RequestMethod.GET)
-	public String goResearchInventory(String warehouse_code, Model model){
-		WarehouseVO w = inventoryService.selectWarehouseByCode(warehouse_code);
-		model.addAttribute("warehouse", w);
+	public String goResearchInventory(String warehouse_code, String p_count, String m_count, Model model){
+		model.addAttribute("warehouse_code", warehouse_code);
+		model.addAttribute("p_count", p_count);
+		model.addAttribute("m_count", m_count);
 		return "inventory/researchInventory";
 	}
 	
+	@RequestMapping(value="/goUpdateInventory", method = RequestMethod.GET)
+	public String goUpdateInventory(String warehouse_code, String rawm_code, String pd_code, Model model){
+		model.addAttribute("warehouse_code", warehouse_code);
+		model.addAttribute("rawm_code", rawm_code);
+		model.addAttribute("pd_code", pd_code);
+		return "inventory/updateInventory";
+	}
 	
 }

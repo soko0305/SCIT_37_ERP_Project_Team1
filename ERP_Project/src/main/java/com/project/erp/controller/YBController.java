@@ -55,7 +55,7 @@ public class YBController {
 	} 
 	@RequestMapping(value="/productioncheck", method = RequestMethod.GET)
 	public String productioncheck(){
-		return "production/productioncheck2";
+		return "production/productioncheck";
 	} 
 	@RequestMapping(value="/sample", method = RequestMethod.GET)
 	public String sample(){
@@ -72,7 +72,15 @@ public class YBController {
 	@RequestMapping(value="/confirmproductionrequest", method = RequestMethod.GET)
 	public String confirmproductionrequest(){
 		return "production/confirmproductionrequest";
-	} 	
+	} 
+	
+	
+	//
+	//생산품 등록 이동 Form
+	@RequestMapping(value = "/gopRegistration", method = RequestMethod.GET)
+	public String gopRegistration() {
+		return "production/pRegistration";
+	}
 
 }
 
