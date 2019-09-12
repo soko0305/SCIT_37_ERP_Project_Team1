@@ -391,24 +391,6 @@
 											</tr>
 										</thead>
 										<tbody>
-											<!-- <tr>
-												<th scope="row"><a href="">0001</a></th>
-												<td>기억회사</td>
-												<td>a@go.com</td>
-												<td>010.123.4567</td>
-											</tr>
-											<tr>
-												<th scope="row"><a href="">0002</a></th>
-												<td>니은회사</td>
-												<td>b@go.com</td>
-												<td>011.123.4567</td>
-											</tr>
-											<tr>
-												<th scope="row"><a href="">0003</a></th>
-												<td>디귿회사</td>
-												<td>c@go.com</td>
-												<td>017.123.4567</td>
-											</tr> -->
 											<tr th:each="list : ${supplierList}">
 												<td th:text="${list.supplier_name}"></td>
 												<td th:text="${list.supplier_tel}"></td>
@@ -505,35 +487,23 @@
 										<button
 											class="mb-2 mr-2 btn-pill btn-transition btn btn-outline-primary btn-sm"
 											type="button" style="float: right;"
-											onclick="location.href='goBuy'">detail</button>
+											onclick="location.href='goArrive'">detail</button>
 									</h5>
 									<table class="mb-0 table table-hover">
 										<thead>
 											<tr>
-												<th>상세보기</th>
 												<th>일자</th>
 												<th>원자재명</th>
-												<th>구매상태</th>
+												<th>수량</th>
+												<th>진행상태</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<th scope="row"><a href="">0001</a></th>
-												<td>19.04.01</td>
-												<td>카카오</td>
-												<td>도착</td>
-											</tr>
-											<tr>
-												<th scope="row"><a href="">0002</a></th>
-												<td>19.05.04</td>
-												<td>설탕</td>
-												<td>도착</td>
-											</tr>
-											<tr>
-												<th scope="row"><a href="">0003</a></th>
-												<td>19.09.01</td>
-												<td>녹차파우더</td>
-												<td>미도착</td>
+											<tr th:each="list : ${orderList}">
+												<td th:text="${list.rmorder_date}"></td>
+												<td th:text="${list.rawm_name}"></td>
+												<td th:text="${list.rmorder_amount}"></td>
+												<td th:text="${list.rmorder_status}"></td>
 											</tr>
 										</tbody>
 									</table>

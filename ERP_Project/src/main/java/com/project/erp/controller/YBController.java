@@ -78,7 +78,15 @@ public class YBController {
 	@RequestMapping(value="/confirmproductionrequest", method = RequestMethod.GET)
 	public String confirmproductionrequest(){
 		return "production/confirmproductionrequest";
-	} 	
+	} 
+	
+	
+	//
+	//생산품 등록 이동 Form
+	@RequestMapping(value = "/gopRegistration", method = RequestMethod.GET)
+	public String gopRegistration() {
+		return "production/pRegistration";
+	}
 
 }
 
