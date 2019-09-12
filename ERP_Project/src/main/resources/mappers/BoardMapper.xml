@@ -28,13 +28,16 @@
 
 	<select id="boardAllSelect" resultType="com.project.erp.vo.BoardVO">
 		select
-			board_seq
+		    row_number() over(order by time desc) as rn
+			,board_seq
 			,userid
 			,title
 			,content
 			,time
 		from
 			erp_notice
+		order by
+			time desc
 	</select>
 
 	<delete id="boardDelete" parameterType="com.project.erp.vo.BoardVO">
@@ -56,5 +59,8 @@
 		where
 			board_seq=#{board_seq}
 	</update>
+ 	
+    
 
-</mapper>
+
+ </mapper>

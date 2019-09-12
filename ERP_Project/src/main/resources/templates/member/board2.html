@@ -1851,12 +1851,14 @@
                             </div>    </div>
                     </div>            <div class="main-card mb-3 card">
                         <div class="card-body">
+                           
+                           
+                           
                             <table style="width: 100%;" id="example" class="table table-hover table-striped table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>번호</th>
                                     <th>제목</th>
-<!--                                      <th>내용</th>-->
+                                    <th>내용</th>
                                     <th>작성자</th>
                                     <th>등록일</th>
  
@@ -1864,17 +1866,14 @@
                                 </thead>
                                 
                                 <tbody>
-								<c:forEach items="${boardlist}" var="list">
-								<tr>
-								<td>${list.rn}</td>
-								
-								<td><a href="boardDetail?boardSeq=${list.board_seq}">${list.title}</a></td>
-								<td>${list.userid}</td>
-								<td>${list.time}</td>
-								
+  								<tr th:each="list : ${boardlist}">
+   									<!-- <td><a href="insertboard?board_seq=${board.board_seq}">${list.title}</a></td> -->
+ 								
+									 <td th:text="${list.title}"></td> 
+									<td th:text="${list.content}"></td>
+									<td th:text="${list.userid}"></td>
+ 									<td th:text="${list.time}"></td>
 								</tr>
-								</c:forEach>
-                                
                                 </tbody>
                                <!--  <tfoot>
                                 <tr>

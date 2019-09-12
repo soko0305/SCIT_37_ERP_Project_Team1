@@ -17,23 +17,6 @@ public class BoardService {
 
  
  
-  
-	public int insertFile(FileVO fvo) {
-
-		return bdao.insertFile(fvo);
-	}
-
-	public FileVO selectFile(String boardSeq) {
-		return bdao.selectFile(boardSeq);
-	}
-	
-	public FileVO selectFileBySeq(String fileSeq) {
-		return bdao.selectFileBySeq(fileSeq);
-	}
-	
-	public int updateFile(FileVO fvo) {
-		return bdao.updateFile(fvo);
-	}
  
 }
 

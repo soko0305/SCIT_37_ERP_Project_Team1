@@ -11,5 +11,7 @@ import com.project.erp.vo.MemberVO;
 public interface MemberMapper {
 	public int insertMember(MemberVO member);
 	public MemberVO selectMemberById(MemberVO member);
- 
-}
+ 	public MemberVO updateLogin(MemberVO member);
+ 	public MemberVO updateLogout(MemberVO member);
+
+  }

@@ -44,7 +44,10 @@ public class YBController {
 	public String producecheck(){
 		return "production/producecheck";
 	} 
-	 
+	@RequestMapping(value="/main", method = RequestMethod.GET)
+	public String home(){
+		return "main/index";
+		}
 	@RequestMapping(value="/produceinsert", method = RequestMethod.GET)
 	public String produceinsert(){
 		return "production/produceinsert";
@@ -55,7 +58,7 @@ public class YBController {
 	} 
 	@RequestMapping(value="/productioncheck", method = RequestMethod.GET)
 	public String productioncheck(){
-		return "production/productioncheck2";
+		return "production/productioncheck";
 	} 
 	@RequestMapping(value="/sample", method = RequestMethod.GET)
 	public String sample(){

@@ -1,16 +1,24 @@
 package com.project.erp.controller;
 
+import java.io.FileInputStream;
+import java.sql.Date;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.tomcat.jni.File;
+import org.hibernate.validator.internal.util.logging.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,8 +27,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.project.erp.dao.BoardDAO;
  import com.project.erp.vo.BoardVO;
+import com.project.erp.vo.FileVO;
 import com.project.erp.vo.RawMaterialVO;
 import com.project.erp.vo.SupplierVO;
+
+import ch.qos.logback.classic.Logger;
  
 @Controller
 public class BoardController {
@@ -83,36 +94,14 @@ public class BoardController {
  	     }
 			return "member/boardinsert";
 		}
-		@RequestMapping("/insertProc")
-	    private String boardInsertProc(HttpServletRequest request, @RequestPart MultipartFile files) throws Exception{
-	        
-	        BoardVO board = new BoardVO();
-	        
-	        board.setSubject(request.getParameter("subject"));
-	        board.setContent(request.getParameter("content"));
-	        board.setWriter(request.getParameter("writer"));
-	        
-	        String sourceFileName = files.getOriginalFilename(); 
-	        String sourceFileNameExtension = FilenameUtils.getExtension(sourceFileName).toLowerCase(); 
-	        File destinationFile; 
-	        String destinationFileName;
-	        String fileUrl = "uploadFiles 폴더 위치";
-	 
-	        
-	        do { 
-	            destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + sourceFileNameExtension; 
-	            destinationFile = new File(fileUrl + destinationFileName); 
-	        } while (destinationFile.exists()); 
-	        
-	        destinationFile.getParentFile().mkdirs(); 
-	        files.transferTo(destinationFile); 
-	        
-	        bDAO.boardInsertService(board);
-	        
-	        return "redirect:/list";
-	    }
 
 
- }
+	}
+
+
+
+
+
+ 
 
 
