@@ -83,6 +83,21 @@ public class BoardDAO {
 		return result;
 	}
 
+	public ArrayList<BoardVO> selectBoard(String board_seq) {
+		ArrayList<BoardVO> result = null;
+
+		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+		try {
+			result = mapper.selectBoard(board_seq);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return result;
+		}
+		return result;
+	
+ 
+}}
 
 
-}
+
+

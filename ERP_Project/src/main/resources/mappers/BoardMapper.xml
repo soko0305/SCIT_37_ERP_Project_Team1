@@ -59,7 +59,18 @@
 		where
 			board_seq=#{board_seq}
 	</update>
- 	
+ 		<select id="selectBoard" resultType="com.project.erp.vo.BoardVO" parameterType="String">
+	
+	SELECT 
+			BOARD_SEQ
+			,TITLE
+			,CONTENT
+			,USERID
+ 	FROM
+		erp_notice
+	WHERE
+		BOARD_SEQ=#{board_seq}
+	</select>
     
 
 
