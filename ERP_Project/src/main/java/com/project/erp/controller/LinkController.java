@@ -43,4 +43,9 @@ public class LinkController {
 		
 		return "sales/salesHistory";
 	}
+	@RequestMapping(value="/offersheet", method = RequestMethod.GET)
+	public String offersheet(Model model){
+		
+		return "sales/offersheet";
+	}
 }
