@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="UTF-8" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Language" content="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Data Tables - Choose between regular React Bootstrap
+	tables or advanced dynamic ones.</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+<meta name="description"
+	content="Choose between regular React Bootstrap tables or advanced dynamic ones.">
+
+<!-- Disable tap highlight on IE -->
+<meta name="msapplication-tap-highlight" content="no">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
+<link
+	href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css"
+	rel="stylesheet">
+
+</head>
+
+<body>
+	<div class="col-md-3">
+ <form id="insertBoardForm" action="/boardInsert" method="POST">
+ 
+		<!--  요청userid -->
+  		<input id="userid" name="userid" type="hidden"
+			th:value="${session.loginid}" class="form-control">  
+ 
+
+		<div class="form-group">
+			<label for="rawm_code">제목</label>
+			<input id="title" name="title" type="text" class="form-control">
+		</div>
+		<div class="form-group">
+			내용<textarea class="form-control" rows="10" name="content" id="content"></textarea>
+ 		</div>
+ 		
+ 		                               	
+ 		<div class="form-group">
+			<button  id="insertButton"class="mb-2 mr-2 btn-square btn btn-primary">등록</button>
+ 			<button  id="updateButton"class="mb-2 mr-2 btn-square btn btn-primary">수정</button>
+ 			<button  id="deleteButton"class="mb-2 mr-2 btn-square btn btn-primary">삭제</button>
+		</div>
+		</form>
+	</div>
+<script>
+	$(function(){
+		
+		$("#insertButton").click(function(){
+			$("#insertBoardForm").submit(); 
+		});
+		
+
+</script>
+</body>
+</html>

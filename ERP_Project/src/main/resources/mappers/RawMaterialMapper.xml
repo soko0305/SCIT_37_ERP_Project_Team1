@@ -50,7 +50,7 @@
 			RAWMATERIAL
 	</select>
 	
-	<select id="rawMaterialOneSelect" parameterType="com.project.erp.vo.RawMaterialVO" resultType="com.project.erp.vo.RawMaterialVO">
+	<select id="rawMaterialOneSelect" parameterType="String" resultType="com.project.erp.vo.RawMaterialVO">
 		select
 			rawm_code
 			,supplierseq

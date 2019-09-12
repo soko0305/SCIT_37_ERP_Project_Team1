@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.erp.dao.ProductionMapper">
+	<insert id="productionInsert" parameterType="com.project.erp.vo.ProductVO">
+	insert into PRODUCT
+	(
+		pd_code,
+		pd_name,
+		pd_rmcost,
+		pd_manufcost,
+		pd_sort
+	)
+	values
+	(
+		'p' || TO_CHAR(pd_code.nextval),
+		#{pd_name},
+		#{pd_rmcost},
+		#{pd_manufcost},
+		#{pd_sort}
+	)
+	</insert>
+</mapper>

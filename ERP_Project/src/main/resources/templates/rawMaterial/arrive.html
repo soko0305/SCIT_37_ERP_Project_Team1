@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta http-equiv="Content-Language" content="en">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Data Tables - Choose between regular React Bootstrap
-	tables or advanced dynamic ones.</title>
+<title>arrive</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
 <meta name="description"
@@ -23,10 +22,25 @@
 <link
 	href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css"
 	rel="stylesheet">
+<script>
+$(function(){
+	var status = 'ARRIVE';
+	$(".btn-primary").click(function(){
+		var code = $(this).val();
+		$("#rmorder_code1").val(code);
+		$("#rmorder_status1").val(status);
+		$("#orderUpdateForm").submit();
+	});
+});
+</script>
 </head>
 <body>
+<form action="orderUpdate" method="post" id="orderUpdateForm">
+<input type="hidden" name="rmorder_code" id="rmorder_code1">
+<input type="hidden" name="rmorder_status" id="rmorder_status1">
+</form>
 	<div
-		class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar closed-sidebar-mobile closed-sidebar">
+		class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
 		<!-- 헤더 부분 -->
 		<!-- 세팅 부분 -->
 		<div class="app-main">
@@ -64,15 +78,15 @@
 						</button>
 					</span>
 				</div>
-				<div class="scrollbar-sidebar ps ps--active-y">
+				<div class="scrollbar-sidebar">
 					<div class="app-sidebar__inner">
-						<ul class="vertical-nav-menu metismenu">
+						<ul class="vertical-nav-menu">
 							<li class="app-sidebar__heading">Menu</li>
 							<li><a href="#"> <i class="metismenu-icon pe-7s-rocket"></i>
 									Dashboards <i
 									class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
 							</a>
-								<ul class="mm-collapse">
+								<ul>
 									<li><a href="index.html"> <i class="metismenu-icon">
 										</i>Analytics
 									</a></li>
@@ -86,7 +100,7 @@
 											Minimal <i
 											class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
 									</a>
-										<ul class="mm-collapse">
+										<ul>
 											<li><a href="dashboards-minimal-1.html"> <i
 													class="metismenu-icon"> </i>Variation 1
 											</a></li>
@@ -102,7 +116,7 @@
 									Pages <i
 									class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
 							</a>
-								<ul class="mm-collapse">
+								<ul>
 									<li><a href="pages-login.html"> <i
 											class="metismenu-icon"></i> Login
 									</a></li>
@@ -126,7 +140,7 @@
 									Applications <i
 									class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
 							</a>
-								<ul class="mm-collapse">
+								<ul>
 									<li><a href="apps-mailbox.html"> <i
 											class="metismenu-icon"> </i>Mailbox
 									</a></li>
@@ -136,32 +150,18 @@
 									<li><a href="apps-faq-section.html"> <i
 											class="metismenu-icon"> </i>FAQ Section
 									</a></li>
-									<li><a href="#"> <i class="metismenu-icon"></i> Forums
-											<i class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
-									</a>
-										<ul class="mm-collapse">
-											<li><a href="apps-forum-list.html"> <i
-													class="metismenu-icon"> </i>Forum Listing
-											</a></li>
-											<li><a href="apps-forum-threads.html"> <i
-													class="metismenu-icon"> </i>Forum Threads
-											</a></li>
-											<li><a href="apps-forum-discussion.html"> <i
-													class="metismenu-icon"> </i>Forum Discussion
-											</a></li>
-										</ul></li>
 								</ul></li>
 							<li class="app-sidebar__heading">UI Components</li>
 							<li><a href="#"> <i class="metismenu-icon pe-7s-diamond"></i>
 									Elements <i
 									class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
 							</a>
-								<ul class="mm-collapse">
+								<ul>
 									<li><a href="#"> <i class="metismenu-icon"></i>
 											Buttons <i
 											class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
 									</a>
-										<ul class="mm-collapse">
+										<ul>
 											<li><a href="elements-buttons-standard.html"> <i
 													class="metismenu-icon"> </i>Standard
 											</a></li>
@@ -210,7 +210,7 @@
 									Components <i
 									class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
 							</a>
-								<ul class="mm-collapse">
+								<ul>
 									<li><a href="components-tabs.html"> <i
 											class="metismenu-icon"> </i>Tabs
 									</a></li>
@@ -263,15 +263,15 @@
 											class="metismenu-icon"> </i>Guided Tours
 									</a></li>
 								</ul></li>
-							<li class="mm-active"><a href="#" aria-expanded="true">
-									<i class="metismenu-icon pe-7s-display2"></i> Tables <i
+							<li class="mm-active"><a href="#"> <i
+									class="metismenu-icon pe-7s-display2"></i> Tables <i
 									class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
 							</a>
-								<ul class="mm-show mm-collapse">
-									<li><a href="tables-data-tables.html"> <i
-											class="metismenu-icon"> </i>Data Tables
+								<ul class="mm-show">
+									<li><a href="tables-data-tables.html" class="mm-active">
+											<i class="metismenu-icon"> </i>Data Tables
 									</a></li>
-									<li><a href="tables-regular.html" class="mm-active"> <i
+									<li><a href="tables-regular.html"> <i
 											class="metismenu-icon"> </i>Regular Tables
 									</a></li>
 									<li><a href="tables-grid.html"> <i
@@ -296,7 +296,7 @@
 									Elements <i
 									class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
 							</a>
-								<ul class="mm-collapse">
+								<ul>
 									<li><a href="forms-controls.html"> <i
 											class="metismenu-icon"> </i>Controls
 									</a></li>
@@ -314,7 +314,7 @@
 									Widgets <i
 									class="metismenu-state-icon pe-7s-angle-down caret-left"></i>
 							</a>
-								<ul class="mm-collapse">
+								<ul>
 									<li><a href="forms-datepicker.html"> <i
 											class="metismenu-icon"> </i>Datepicker
 									</a></li>
@@ -352,167 +352,57 @@
 							</a></li>
 						</ul>
 					</div>
-					<div class="ps__rail-x" style="left: 0px; bottom: 0px;">
-						<div class="ps__thumb-x" tabindex="0"
-							style="left: 0px; width: 0px;"></div>
-					</div>
-					<div class="ps__rail-y"
-						style="top: 0px; height: 695px; right: 0px;">
-						<div class="ps__thumb-y" tabindex="0"
-							style="top: 0px; height: 511px;"></div>
-					</div>
 				</div>
 			</div>
 			<div class="app-main__outer">
 				<div class="app-main__inner">
-
 					<!-- app-page-title -->
-
-					<!-- all_view -->
-					<div class="row">
-						<div class="col-lg-6">
-							<div class="main-card mb-3 card">
-								<div class="card-body">
-
-									<!-- supplier -->
-									<h5 class="card-title">
-										공급처 관리
-										<button
-											class="mb-2 mr-2 btn-pill btn-transition btn btn-outline-primary btn-sm"
-											type="button" style="float: right;"
-											onclick="location.href='goSupplier'">detail</button>
-									</h5>
-									<table class="mb-0 table">
-										<thead>
-											<tr>
-												<th>공급처명</th>
-												<th>공급처연락처</th>
-												<th>이메일</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr th:each="list : ${supplierList}">
-												<td th:text="${list.supplier_name}"></td>
-												<td th:text="${list.supplier_tel}"></td>
-												<td th:text="${list.supplier_email}"></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="main-card mb-3 card">
-								<div class="card-body">
-
-									<!-- materials -->
-									<h5 class="card-title">
-										원자재 관리
-										<button
-											class="mb-2 mr-2 btn-pill btn-transition btn btn-outline-primary btn-sm"
-											type="button" style="float: right;"
-											onclick="location.href='goMaterials'">detail</button>
-									</h5>
-									<table class="mb-0 table">
-										<thead>
-											<tr>
-												<th>원자재명</th>
-												<th>원자재종류</th>
-												<th>원자재단가</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr th:each="list : ${rawMaterialList}">
-												<td th:text="${list.rawm_name}"></td>
-												<td th:text="${list.rawm_sort}"></td>
-												<td th:text="${list.rawm_price}"></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="main-card mb-3 card">
-								<div class="card-body">
-
-									<!-- order -->
-									<h5 class="card-title">
-										발주 관리
-										<button
-											class="mb-2 mr-2 btn-pill btn-transition btn btn-outline-primary btn-sm"
-											type="button" style="float: right;"
-											onclick="location.href='goOrder'">detail</button>
-									</h5>
-									<table class="mb-0 table">
-										<thead>
-											<tr>
-												<th>상세보기</th>
-												<th>일자</th>
-												<th>제품</th>
-												<th>요청확인</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<th scope="row"><a href="">0001</a></th>
-												<td>19.07.01</td>
-												<td>장롱</td>
-												<td>미확인</td>
-											</tr>
-											<tr>
-												<th scope="row"><a href="">0002</a></th>
-												<td>19.08.05</td>
-												<td>탁자</td>
-												<td>미확인</td>
-											</tr>
-											<tr>
-												<th scope="row"><a href="">0003</a></th>
-												<td>19.09.01</td>
-												<td>의자</td>
-												<td>미확인</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="main-card mb-3 card">
-								<div class="card-body">
-
-									<!-- buy -->
-									<h5 class="card-title">
-										구매 관리
-										<button
-											class="mb-2 mr-2 btn-pill btn-transition btn btn-outline-primary btn-sm"
-											type="button" style="float: right;"
-											onclick="location.href='goArrive'">detail</button>
-									</h5>
-									<table class="mb-0 table table-hover">
-										<thead>
-											<tr>
-												<th>일자</th>
-												<th>원자재명</th>
-												<th>수량</th>
-												<th>진행상태</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr th:each="list : ${orderList}">
-												<td th:text="${list.rmorder_date}"></td>
-												<td th:text="${list.rawm_name}"></td>
-												<td th:text="${list.rmorder_amount}"></td>
-												<td th:text="${list.rmorder_status}"></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
+					<div class="main-card mb-3 card">
+						<div class="card-body">
+							<table style="width: 100%;" id="example"
+								class="table table-hover table-striped table-bordered">
+								<thead>
+									<tr>
+										<th>일자</th>
+										<th>원자재구매코드</th>
+										<th>원자재코드</th>
+										<th>원자재명</th>
+										<th>수량</th>
+										<th>구매상태</th>
+										<th>도착확인</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="list : ${oList}">
+										<td th:text="${list.rmorder_date}"></td>
+										<td th:text="${list.rmorder_code}"></td>
+										<td th:text="${list.rawm_code}"></td>
+										<td th:text="${list.rawm_name}"></td>
+										<td th:text="${list.rmorder_amount}"></td>
+										<td th:text="${list.rmorder_status}"></td>
+										<td>
+										<!-- <span th:if="${account.getAccountStatus().toString().equals('ACTIVE')}">재직중</span> -->
+											<button class="mb-2 mr-2 btn-square btn btn-primary"
+												data-type="update" th:value="${list.rmorder_code}">도착</button>
+										</td>
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr>
+										<th>일자</th>
+										<th>원자재구매코드</th>
+										<th>원자재코드</th>
+										<th>원자재명</th>
+										<th>수량</th>
+										<th>구매상태</th>
+										<th>도착확인</th>
+									</tr>
+								</tfoot>
+							</table>
 						</div>
 					</div>
 				</div>
-				<!-- 풋터 부분 -->
+				<!-- app-wrapper-footer -->
 			</div>
 		</div>
 	</div>
@@ -523,7 +413,7 @@
 			</button>
 		</div>
 		<div class="drawer-content-wrapper">
-			<div class="scrollbar-container ps ps--active-y">
+			<div class="scrollbar-container">
 				<h3 class="drawer-heading">Servers Status</h3>
 				<div class="drawer-section">
 					<div class="row">
@@ -531,9 +421,7 @@
 							<div class="progress-box">
 								<h4>Server Load 1</h4>
 								<div class="circle-progress circle-progress-gradient-xl mx-auto">
-									<canvas width="142" height="142"
-										style="height: 114px; width: 114px;"></canvas>
-									<small><span class="fsize-2">51%<span></span></span></small>
+									<small></small>
 								</div>
 							</div>
 						</div>
@@ -541,9 +429,7 @@
 							<div class="progress-box">
 								<h4>Server Load 2</h4>
 								<div class="circle-progress circle-progress-success-xl mx-auto">
-									<canvas width="142" height="142"
-										style="height: 114px; width: 114px;"></canvas>
-									<small><span class="fsize-2">16%<span></span></span></small>
+									<small></small>
 								</div>
 							</div>
 						</div>
@@ -551,80 +437,15 @@
 							<div class="progress-box">
 								<h4>Server Load 3</h4>
 								<div class="circle-progress circle-progress-danger-xl mx-auto">
-									<canvas width="142" height="142"
-										style="height: 114px; width: 114px;"></canvas>
-									<small><span class="fsize-2">51%<span></span></span></small>
+									<small></small>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="divider"></div>
-					<div class="mt-3" style="position: relative;">
+					<div class="mt-3">
 						<h5 class="text-center card-title">Live Statistics</h5>
-						<div id="sparkline-carousel-3" style="min-height: 120px;">
-							<div id="apexcharts4eevveb8k"
-								class="apexcharts-canvas apexcharts4eevveb8k"
-								style="width: 402px; height: 120px;">
-								<svg id="SvgjsSvg1195" width="402" height="120"
-									xmlns="http://www.w3.org/2000/svg" version="1.1"
-									xmlns:xlink="http://www.w3.org/1999/xlink"
-									xmlns:svgjs="http://svgjs.com/svgjs" class="apexcharts-svg"
-									xmlns:data="ApexChartsNS" transform="translate(0, 0)"
-									style="background: transparent;">
-									<g id="SvgjsG1197"
-										class="apexcharts-inner apexcharts-graphical"
-										transform="translate(0, 0)">
-									<defs id="SvgjsDefs1196">
-									<clipPath id="gridRectMask4eevveb8k">
-									<rect id="SvgjsRect1200" width="405" height="123" x="-1.5"
-										y="-1.5" rx="0" ry="0" fill="#ffffff" opacity="1"
-										stroke-width="0" stroke="none" stroke-dasharray="0"></rect></clipPath>
-									<clipPath id="gridRectMarkerMask4eevveb8k">
-									<rect id="SvgjsRect1201" width="410" height="128" x="-4" y="-4"
-										rx="0" ry="0" fill="#ffffff" opacity="1" stroke-width="0"
-										stroke="none" stroke-dasharray="0"></rect></clipPath></defs>
-									<rect id="SvgjsRect1199" width="0" height="120" x="0" y="0"
-										rx="0" ry="0" fill="#b1b9c4" opacity="1" stroke-width="0"
-										stroke-dasharray="0" class="apexcharts-xcrosshairs"
-										filter="none" fill-opacity="0.9"></rect>
-									<g id="SvgjsG1208" class="apexcharts-xaxis"
-										transform="translate(0, 0)">
-									<g id="SvgjsG1209" class="apexcharts-xaxis-texts-g"
-										transform="translate(0, -4)"></g></g>
-									<g id="SvgjsG1212" class="apexcharts-grid">
-									<line id="SvgjsLine1214" x1="0" y1="120" x2="402" y2="120"
-										stroke="transparent" stroke-dasharray="0"></line>
-									<line id="SvgjsLine1213" x1="0" y1="1" x2="0" y2="120"
-										stroke="transparent" stroke-dasharray="0"></line></g>
-									<g id="SvgjsG1203"
-										class="apexcharts-line-series apexcharts-plot-series">
-									<g id="SvgjsG1204" class="apexcharts-series series-1"
-										data:longestSeries="true" rel="1" data:realIndex="0">
-									<path id="apexcharts-line-0"
-										d="M 8.375 74.36793422404932C 14.2375 74.36793422404932 19.2625 64.50154162384378 25.125 64.50154162384378C 30.9875 64.50154162384378 36.0125 81.76772867420348 41.875 81.76772867420348C 47.7375 81.76772867420348 52.7625 86.70092497430628 58.625 86.70092497430628C 64.4875 86.70092497430628 69.5125 39.8355601233299 75.375 39.8355601233299C 81.2375 39.8355601233299 86.2625 57.10174717368962 92.125 57.10174717368962C 97.9875 57.10174717368962 103.0125 44.76875642343268 108.875 44.76875642343268C 114.7375 44.76875642343268 119.7625 63.26824254881809 125.625 63.26824254881809C 131.4875 63.26824254881809 136.5125 54.635149023638235 142.375 54.635149023638235C 148.2375 54.635149023638235 153.2625 53.401849948612536 159.125 53.401849948612536C 164.9875 53.401849948612536 170.0125 90.40082219938336 175.875 90.40082219938336C 181.7375 90.40082219938336 186.7625 96.56731757451182 192.625 96.56731757451182C 198.4875 96.56731757451182 203.5125 73.13463514902364 209.375 73.13463514902364C 215.2375 73.13463514902364 220.2625 53.401849948612536 226.125 53.401849948612536C 231.9875 53.401849948612536 237.0125 71.90133607399794 242.875 71.90133607399794C 248.7375 71.90133607399794 253.7625 43.53545734840698 259.625 43.53545734840698C 265.4875 43.53545734840698 270.5125 66.96813977389516 276.375 66.96813977389516C 282.2375 66.96813977389516 287.2625 76.83453237410072 293.125 76.83453237410072C 298.9875 76.83453237410072 304.0125 69.43473792394656 309.875 69.43473792394656C 315.7375 69.43473792394656 320.7625 50.935251798561154 326.625 50.935251798561154C 332.4875 50.935251798561154 337.5125 5.3031860226104754 343.375 5.3031860226104754C 349.2375 5.3031860226104754 354.2625 62.03494347379239 360.125 62.03494347379239C 365.9875 62.03494347379239 371.0125 86.70092497430628 376.875 86.70092497430628C 382.7375 86.70092497430628 387.7625 76.83453237410072 393.625 76.83453237410072"
-										fill="none" fill-opacity="1" stroke="rgba(58,196,125,0.85)"
-										stroke-opacity="1" stroke-linecap="butt" stroke-width="3"
-										stroke-dasharray="0" class="apexcharts-line" index="0"
-										clip-path="url(#gridRectMask4eevveb8k)"
-										pathTo="M 8.375 74.36793422404932C 14.2375 74.36793422404932 19.2625 64.50154162384378 25.125 64.50154162384378C 30.9875 64.50154162384378 36.0125 81.76772867420348 41.875 81.76772867420348C 47.7375 81.76772867420348 52.7625 86.70092497430628 58.625 86.70092497430628C 64.4875 86.70092497430628 69.5125 39.8355601233299 75.375 39.8355601233299C 81.2375 39.8355601233299 86.2625 57.10174717368962 92.125 57.10174717368962C 97.9875 57.10174717368962 103.0125 44.76875642343268 108.875 44.76875642343268C 114.7375 44.76875642343268 119.7625 63.26824254881809 125.625 63.26824254881809C 131.4875 63.26824254881809 136.5125 54.635149023638235 142.375 54.635149023638235C 148.2375 54.635149023638235 153.2625 53.401849948612536 159.125 53.401849948612536C 164.9875 53.401849948612536 170.0125 90.40082219938336 175.875 90.40082219938336C 181.7375 90.40082219938336 186.7625 96.56731757451182 192.625 96.56731757451182C 198.4875 96.56731757451182 203.5125 73.13463514902364 209.375 73.13463514902364C 215.2375 73.13463514902364 220.2625 53.401849948612536 226.125 53.401849948612536C 231.9875 53.401849948612536 237.0125 71.90133607399794 242.875 71.90133607399794C 248.7375 71.90133607399794 253.7625 43.53545734840698 259.625 43.53545734840698C 265.4875 43.53545734840698 270.5125 66.96813977389516 276.375 66.96813977389516C 282.2375 66.96813977389516 287.2625 76.83453237410072 293.125 76.83453237410072C 298.9875 76.83453237410072 304.0125 69.43473792394656 309.875 69.43473792394656C 315.7375 69.43473792394656 320.7625 50.935251798561154 326.625 50.935251798561154C 332.4875 50.935251798561154 337.5125 5.3031860226104754 343.375 5.3031860226104754C 349.2375 5.3031860226104754 354.2625 62.03494347379239 360.125 62.03494347379239C 365.9875 62.03494347379239 371.0125 86.70092497430628 376.875 86.70092497430628C 382.7375 86.70092497430628 387.7625 76.83453237410072 393.625 76.83453237410072"
-										pathFrom="M -1 120L -1 120L 25.125 120L 41.875 120L 58.625 120L 75.375 120L 92.125 120L 108.875 120L 125.625 120L 142.375 120L 159.125 120L 175.875 120L 192.625 120L 209.375 120L 226.125 120L 242.875 120L 259.625 120L 276.375 120L 293.125 120L 309.875 120L 326.625 120L 343.375 120L 360.125 120L 376.875 120L 393.625 120"></path>
-									<g id="SvgjsG1205" class="apexcharts-series-markers-wrap"></g>
-									<g id="SvgjsG1206" class="apexcharts-datalabels"></g></g></g>
-									<line id="SvgjsLine1215" x1="0" y1="0" x2="402" y2="0"
-										stroke="#b6b6b6" stroke-dasharray="0" stroke-width="1"
-										class="apexcharts-ycrosshairs"></line>
-									<line id="SvgjsLine1216" x1="0" y1="0" x2="402" y2="0"
-										stroke-dasharray="0" stroke-width="0"
-										class="apexcharts-ycrosshairs-hidden"></line>
-									<g id="SvgjsG1217" class="apexcharts-yaxis-annotations"></g>
-									<g id="SvgjsG1218" class="apexcharts-xaxis-annotations"></g>
-									<g id="SvgjsG1219" class="apexcharts-point-annotations"></g></g>
-									<g id="SvgjsG1210" class="apexcharts-yaxis" rel="0"
-										transform="translate(-35, 0)">
-									<g id="SvgjsG1211" class="apexcharts-yaxis-texts-g"></g></g></svg>
-								<div class="apexcharts-legend"></div>
-							</div>
-						</div>
+						<div id="sparkline-carousel-3"></div>
 						<div class="row">
 							<div class="col">
 								<div class="widget-chart p-0">
@@ -658,12 +479,6 @@
 								Issue</button>
 							<button class="border-0 btn-transition btn btn-outline-success">Support
 								Center</button>
-						</div>
-						<div class="resize-triggers">
-							<div class="expand-trigger">
-								<div style="width: 403px; height: 288px;"></div>
-							</div>
-							<div class="contract-trigger"></div>
 						</div>
 					</div>
 				</div>
@@ -874,7 +689,7 @@
 										<div class="widget-content-left mr-3">
 											<div class="widget-content-left">
 												<img width="42" class="rounded"
-													src="assets/images/avatars/1.jpg" alt="">
+													src="assets/images/avatars/1.jpg" alt="" />
 											</div>
 										</div>
 										<div class="widget-content-left">
@@ -1054,29 +869,11 @@
 						</div>
 					</div>
 				</div>
-				<div class="ps__rail-x" style="left: 0px; bottom: 0px;">
-					<div class="ps__thumb-x" tabindex="0"
-						style="left: 0px; width: 0px;"></div>
-				</div>
-				<div class="ps__rail-y" style="top: 0px; height: 755px; right: 0px;">
-					<div class="ps__thumb-y" tabindex="0"
-						style="top: 0px; height: 401px;"></div>
-				</div>
 			</div>
 		</div>
 	</div>
 	<div class="app-drawer-overlay d-none animated fadeIn"></div>
 	<script type="text/javascript"
-		src="./assets/scripts/main.cba69814a806ecc7945a.js"></script>
-
-	<svg id="SvgjsSvg1001" width="2" height="0"
-		xmlns="http://www.w3.org/2000/svg" version="1.1"
-		xmlns:xlink="http://www.w3.org/1999/xlink"
-		xmlns:svgjs="http://svgjs.com/svgjs"
-		style="overflow: hidden; top: -100%; left: -100%; position: absolute; opacity: 0;">
-		<defs id="SvgjsDefs1002"></defs>
-		<polyline id="SvgjsPolyline1003" points="0,0"></polyline>
-		<path id="SvgjsPath1004" d="M0 0 "></path></svg>
-	<div class="jvectormap-tip"></div>
+		src="./assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
 </body>
 </html>

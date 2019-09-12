@@ -42,7 +42,6 @@
 		FROM erp_member
 		WHERE userid=#{userid}
 	</select>
-
-
+ 
 
 </mapper>

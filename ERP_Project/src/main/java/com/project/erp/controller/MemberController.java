@@ -43,8 +43,8 @@ public class MemberController {
  		if(m !=null){
 			if(m.getUserstate ().equals("allowed")){
 				System.out.println("allowed");
-				session.setAttribute("userid", m.getUserid());
-				return "member/notice";
+				session.setAttribute("loginid", m.getUserid());
+				return "redirect:/";
 			}else if(m.getUserstate().equals("withdrawal")){
 				model.addAttribute("message", "탈퇴한 회원입니다");
 				return "member/login";	

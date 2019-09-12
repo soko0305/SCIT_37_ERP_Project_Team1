@@ -23,17 +23,41 @@
 		$("#header").load("/header");
 		$("#navbar").load("/navbar");
 		$("#setting").load("/setting");
-	});
-</script>
-<script th:inline="javascript">
-
-function goDetail(){
-	/*<![CDATA[*/
 		
-		var num = $(this).('.getordernum').attr('data-ordernum');
-		alert(num);
-}
-/*]]>*/
+		goDetail();
+	});
+	
+	function goDetail(){
+		$('.getordernum').click(function(){
+			var num = $(this).attr('data-ordernum');
+			
+				$.ajax({
+					url:'getDetails',
+					data:{
+						sales_ordernum : num
+					},
+					success:function(data){
+						alert('!');
+					/* 	str = '';
+						$('#getdetails').html(str);
+							
+						
+						for(var i = 0; i<data.length; i++ ){
+							str1 = '';
+							str1+='<tr>';
+							str1+='<td>'+data[i].sales_ordernum+'</td>';
+							str1+='<td>'+data[i].buyer_corp+'</td>';
+							str1+='<td><a href="a">'+data[i].sales_title+'</a></td>';
+							str1+='<td>'+data[i].sales_totalprice+'</td>';
+							str1+='<td>'+data[i].sales_orderdate+'</td>';
+							str1+='<td style="text-align: center;"><button class="mb-2 mr-2 btn btn-primary">'+data[i].sales_status+'</button></td>';
+							str1+='</tr>'
+							$('.tbody').append(str1);
+						} */
+					}
+			})
+		})
+	}
 </script>
 
 <body>
@@ -66,7 +90,7 @@ function goDetail(){
                     <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@위에 달린 메뉴 -->
 
                    <div class="main-card mb-3 card">
-                              <div class="card-body">
+                              <div class="card-body" id="getdetails">
                                 <table style="width: 100%;" id="example" class="table table-hover table-bordered">
                                         <thead>
                                            <tr>
@@ -81,7 +105,7 @@ function goDetail(){
                                           <tr th:each="list : ${salesList}">
 												<td th:text="${list.sales_ordernum}"  ></td>
 												<td th:text="${list.buyer_corp}"></td>
-												<td><a href="javaScript:goDetail();" class="getordernum" th:text="${list.sales_title}" th:attr="data-ordernum=${list.sales_ordernum}"></a></td>
+												<td><a href="#" class="getordernum" th:text="${list.sales_title}" th:attr="data-ordernum=${list.sales_ordernum}"></a></td>
 												<td th:text="${list.sales_totalprice}"></td>
 												<td th:text="${list.sales_orderdate}"></td>
 										  </tr> 
