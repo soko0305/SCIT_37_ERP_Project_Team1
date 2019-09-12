@@ -8,9 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.project.erp.dao.SalesDAO;
+import com.project.erp.service.SalesService;
+import com.project.erp.vo.Buyer;
 import com.project.erp.vo.Sales;
-import com.project.erp.vo.SalesDetail;
 
 
 
@@ -18,29 +18,29 @@ import com.project.erp.vo.SalesDetail;
 @Controller
 public class LinkController {
 
-	@Autowired SalesDAO dao;
+	@Autowired SalesService service;
 	
 	@RequestMapping(value="/buyerList", method = RequestMethod.GET)
-	public String Management1(){
+	public String Management1(Model model){
+		List<Buyer> list1 = null;
+		list1 = service.selectAllBuyer();
+		model.addAttribute("buyerList", list1);
 		return "sales/buyerList";
 	}
 	
 	@RequestMapping(value="/realTimeOffer", method = RequestMethod.GET)
 	public String Management2(Model model){
 		List<Sales> list1 = null;
-		list1 = dao.selectAllSales();
-		
+		list1 = service.selectAllSales();
 		model.addAttribute("salesList", list1);
 		return "sales/realTimeOffer";
 	}
 
 	@RequestMapping(value="/salesHistory", method = RequestMethod.GET)
 	public String Management4(Model model){
-		
 		List<Sales> list1 = null;
-		list1 = dao.selectSalesStatusIsDone();
+		list1 = service.selectSalesStatusIsDone();
 		model.addAttribute("salesList", list1);
-		
 		return "sales/salesHistory";
 	}
 	@RequestMapping(value="/offersheet", method = RequestMethod.GET)

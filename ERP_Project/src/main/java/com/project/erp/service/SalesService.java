@@ -116,4 +116,14 @@ public class SalesService {
 		List<SalesDetail> list = dao.selectSalesDetail(salesDetail);
 		return list;
 	}
+	
+	public List<Buyer> selectAllBuyer(){
+		List<Buyer> list = dao.selectAllBuyer();
+		return list;
+	}
+	
+	public List<Sales> selectSalesStatusIsDone(){
+		List<Sales> list = dao.selectSalesStatusIsDone();
+		return list;
+	}
 }

@@ -21,16 +21,23 @@
 		$("#header").load("/header");
 		$("#navbar").load("/navbar");
 		$("#setting").load("/setting");
+		printAddBuyer();
 	});
 
 	function printAddBuyer(){
-		$('#idAddbuyer').Click(function(){
+		$('#idAddbuyer').click(function(){
 			str = '';
-			str+=
-			$('.insertWithAjax').HTML(str);
+			str += '거래처명 : <input type="text" name ="buyercorp"><br />';
+			str +='대표자명 : <input type="text" name="buyerowner"><br />';
+			str +='주소 : <input type="text" name="buyeraddr"><br />';
+			str +='연락처 : <input type="text" name="buyertel"><br />';
+			str +='담당자 : <input type="text" name="buyerpic"><br />';
+			str +='담당자연락처 : <input type="text" name="buyerpictel"><br />';
+			str +='이메일 : <input type="text" name="buyeremail"><br />'
+			
+			$('#insertWithAjax').HTML(str);
 			})
-		})
-	}
+	} 
 </script>
 <body>
 <div class="app-container app-theme-white body-tabs-shadow f
@@ -68,12 +75,9 @@ ixed-header fixed-sidebar">
                          	    <div class="card-header-tab card-header" >
                                  <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i class="header-icon lnr-laptop-phone mr-3 text-muted opacity-6"> </i>실시간 주문 내역</div>
                                  </div>
-                            	<div class="card-body">
-                            	
-						<button class="mb-2 mr-2 btn-square btn btn-primary" id="idAddBuyer" style="width:100%"
-							data-type="insert">거래처추가</button><br /><br />
-			
-                                <table style="width: 100%;" id="example" class="table table-hover table-bordered insertWithAjax">
+                            	<div class="card-body" id="insertWithAjax">
+						<button class="mb-2 mr-2 btn-square btn btn-primary" id="idAddBuyer" style="width:100%">거래처추가</button><br /><br />
+                                <table style="width: 100%;" id="example" class="table table-hover table-bordered">
                                    <thead>
                                         <tr>
                                             <th>번호</th>
@@ -83,6 +87,7 @@ ixed-header fixed-sidebar">
                                             <th>담당자연락처</th>
                                             <th>이메일</th>
                                             <th>주소</th>
+                                            <th>검색키워드</th>
                                         </tr>
                                         </thead>
                                         <tbody class="tbody">
@@ -94,12 +99,22 @@ ixed-header fixed-sidebar">
 												<td th:text="${list.buyer_pictel}"></td>
 												<td th:text="${list.buyer_email}"></td>
 												<td th:text="${list.buyer_addr}"></td>
+												<td th:text="${list.buyer_memo}"></td>
 										</tr> 
                                   </tbody>
                                </table>
                             </div>
                         </div>
                    </div>
+                   
+                 거래처명 : <input type="text" name ="buyercorp">
+           대표자명 : <input type="text" name="buyerowner">
+        주소 : <input type="text" name="buyeraddr">
+          연락처 : <input type="text" name="buyertel">
+           담당자 : <input type="text" name="buyerpic">
+           담당자연락처 : <input type="text" name="buyerpictel">
+                이메일 : <input type="text" name="buyeremail">
+              검색키워드 : <input type="text" name="buyermemo"> 
 
                 <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
                 

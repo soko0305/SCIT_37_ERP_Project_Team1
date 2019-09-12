@@ -44,7 +44,16 @@ public class SalesDAO {
 		return result;
 	}
 	
-	
+	public int insertBuyer(Buyer buyer){
+		int result = 0;
+		try{
+		SalesMapper mapper = sqlSession.getMapper(SalesMapper.class);
+		result= mapper.insertBuyer(buyer);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 	/*
 	 * select
@@ -100,6 +109,18 @@ public class SalesDAO {
 		
 	}
 	
+	public List<Buyer> selectAllBuyer(){
+		List<Buyer> list1 = null;
+		try{
+		SalesMapper mapper = sqlSession.getMapper(SalesMapper.class);
+		list1=mapper.selectAllBuyer();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return list1;
+		
+	}
+
 	
 	
 	/*

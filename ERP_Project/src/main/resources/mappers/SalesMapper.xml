@@ -32,6 +32,21 @@ salesdetailseq.nextval,
 )
 </insert>
 
+<insert id="insertBuyer" parameterType="com.project.erp.vo.Buyer">
+insert into buyer
+values(
+buyerseq.nextval,
+#{buyer_corp},
+#{buyer_owner},
+#{buyer_addr},
+#{buyer_tel},
+#{buyer_pic},
+#{buyer_pictel},
+#{buyer_email},
+#{buyer_memo}
+)
+</insert>
+
 
 
 <select id="selectAllSales" resultType="com.project.erp.vo.Sales">
@@ -59,6 +74,11 @@ from sales
 where sales_status='판매완료'
 </select>
 
+<select id="selectAllBuyer" resultType="com.project.erp.vo.Buyer">
+select *
+from buyer
+order by buyerseq asc
+</select>
 
 
 <update id="updateSalesStatus" parameterType="com.project.erp.vo.Sales">
