@@ -4,86 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.project.erp.dao.InventoryMapper">
-	<select id="selectAllInventory" resultType="com.project.erp.vo.WarehouseVO">
-		SELECT  warehouse_code
-				, warehouse_name
-				, warehouse_addr
-				, warehouse_size
-				, TO_CHAR(warehouse_date, 'MM/DD/YYYY') AS warehouse_date
-		FROM warehouse
-		ORDER BY warehouse_code ASC
-	</select>
-	
-	<insert id="insertWarehouse" parameterType="com.project.erp.vo.WarehouseVO">
-		INSERT INTO warehouse(
-			 	warehouse_code
-				, warehouse_name
-				, warehouse_addr
-				, warehouse_size
-				, warehouse_date  
-		)
-		VALUES(
-			 'w' || TO_CHAR(warehouse_seq.nextval)
- 			, #{warehouse_name}
- 			, #{warehouse_addr}
- 			, #{warehouse_size}
- 			,  TO_DATE(#{warehouse_date}, 'MM/DD/YYYY')
-		)
-	</insert>
-	
-	<select id="selectLatestWarehouse" resultType="com.project.erp.vo.WarehouseVO">
-		SELECT  warehouse_code
-				, warehouse_name
-				, warehouse_addr
-				, warehouse_size
-				, TO_CHAR(warehouse_date, 'MM/DD/YYYY') AS warehouse_date
-		FROM warehouse
-		WHERE warehouse_code= (SELECT MAX(warehouse_code)
-                                FROM warehouse
-                                )
-	</select>
-	
-	<select id="selectWarehouseByCode" resultType="com.project.erp.vo.WarehouseVO">
-		SELECT  warehouse_code
-				, warehouse_name
-				, warehouse_addr
-				, warehouse_size
-				, TO_CHAR(warehouse_date, 'MM/DD/YYYY') AS warehouse_date
-		FROM warehouse
-		WHERE warehouse_code = #{warehouse_code}
-	</select>
-	
-	
-	<select id="selectProductINWarehouse" parameterType="String" resultType="com.project.erp.vo.ProductVO">
-		SELECT p.pd_code
-				, p.pd_name
-				, p.pd_rmcost
-				, p.pd_manufcost
-				, p.pd_sort
-				, m.warehouse_code
-		FROM product  p JOIN manufacture  m 
-		ON p.pd_code = m.pd_code
-		<if test="warehouse_code!=null"> 
-		WHERE m.warehouse_code=#{warehouse_code}
-		</if>
-	</select>
 
-	<select id="selectMaterialINWarehouse" parameterType="String" resultType="com.project.erp.vo.RawMaterialVO">
-		SELECT r.rawm_code
-				, r.rawm_name
-				, r.supplierseq
-				, r.rawm_sort
-				, r.rawm_price
-				, o.warehouse_code
-		FROM rawmaterial  r JOIN order_rawmaterial  o 
-		ON r.rawm_code = o.rawm_code
-		<if test="warehouse_code!=null"> 
-		WHERE o.warehouse_code=#{warehouse_code}
-		</if>
-		
-	</select>
-	
-	
 	<select id="selectSupplierBySeq" parameterType="String" resultType="com.project.erp.vo.SupplierVO">
 		SELECT supplierseq
 				, supplier_name
@@ -96,67 +17,15 @@
 		WHERE supplierseq=#{supplierseq}
 	</select>
 	
-	<update id="updateWarehouse" parameterType="com.project.erp.vo.WarehouseVO">
-		UPDATE warehouse
-		SET warehouse_name = #{warehouse_name}
-			, warehouse_addr = #{warehouse_addr}
-			, warehouse_size = #{warehouse_size}
-			, warehouse_date = TO_DATE(#{warehouse_date}, 'MM/DD/YYYY')
-		WHERE warehouse_code = #{warehouse_code}
-	</update>
 	
-	<delete id="deleteWarehouse" parameterType="String">
-		DELETE warehouse
-		WHERE warehouse_code = #{warehouse_code}
-	</delete>
 	
-	<select id="selectDistinctMaterialINWarehouse" parameterType="String" resultType="com.project.erp.vo.RawMaterialVO">
-    	SELECT DISTINCT supplierseq
-    	FROM order_rawmaterial
-    	WHERE warehouse_code = #{warehouse_code}
-	</select>
-	
-	<select id="selectDistinctMaterialSortINWarehouse" parameterType="String" resultType="com.project.erp.vo.RawMaterialVO">	  
-    	SELECT DISTINCT m.rawm_sort
-    	FROM rawmaterial m JOIN order_rawmaterial o
-    	ON m.rawm_code = o.rawm_code
-   		WHERE warehouse_code = #{warehouse_code}
-	</select>
-	
-	<select id="selectDistinctProductSortINWarehouse" parameterType="String" resultType="com.project.erp.vo.ProductVO">
-    	SELECT DISTINCT p.pd_sort
-    	FROM product  p JOIN manufacture  m 
-    	ON p.pd_code = m.pd_code
-    	WHERE warehouse_code = #{warehouse_code}
-	</select>
-	
-		
-	<select id="selectMaterialINWarehouseWizCondition" parameterType="String" resultType="com.project.erp.vo.RawMaterialVO">
-		SELECT r.rawm_code
-				, r.rawm_name
-				, r.supplierseq
-				, r.rawm_sort
-				, r.rawm_price
-				, o.warehouse_code
-		FROM rawmaterial  r JOIN order_rawmaterial  o 
-		ON r.rawm_code = o.rawm_code
-		WHERE o.warehouse_code=#{warehouse_code}
-		<if test="rawm_name!=''"> AND (r.rawm_name LIKE '%'||#{rawm_name}||'%' OR r.rawm_code LIKE '%'||#{rawm_code}||'%')</if>
-		<if test="rawm_sort!=''"> AND r.rawm_sort=#{rawm_sort}</if>
-		<if test="supplierseq!=''"> AND r.supplierseq=#{supplierseq}</if>
-	</select>
-	
-	<select id="selectProductINWarehouseWizCondition" parameterType="String" resultType="com.project.erp.vo.ProductVO">
-		SELECT p.pd_code
-				, p.pd_name
-				, p.pd_rmcost
-				, p.pd_manufcost
-				, p.pd_sort
-				, m.warehouse_code
-		FROM product  p JOIN manufacture  m 
-		ON p.pd_code = m.pd_code
-		WHERE m.warehouse_code=#{warehouse_code}
-		<if test="pd_name!=''"> AND (p.pd_name LIKE '%'||#{pd_name}||'%' OR p.pd_code LIKE '%'||#{pd_code}||'%')</if>
-		<if test="pd_sort!=''"> AND p.pd_sort=#{pd_sort}</if>
+	<select id="selectProductByCode" parameterType="String" resultType="com.project.erp.vo.ProductVO">
+		SELECT  pd_code
+				, pd_name
+				, pd_rmcost
+				, pd_manufcost
+				, pd_sort
+		FROM product 
+		WHERE pd_code=#{pd_code}
 	</select>
 </mapper>
