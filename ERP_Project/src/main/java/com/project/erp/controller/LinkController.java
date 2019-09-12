@@ -43,9 +43,9 @@ public class LinkController {
 		model.addAttribute("salesList", list1);
 		return "sales/salesHistory";
 	}
-	@RequestMapping(value="/offersheet", method = RequestMethod.GET)
-	public String offersheet(Model model){
+	@RequestMapping(value="/insertBuyer", method = RequestMethod.GET)
+	public String inserBuyer(Model model){
 		
-		return "sales/offersheet";
+		return "sales/insertBuyer";
 	}
 }
