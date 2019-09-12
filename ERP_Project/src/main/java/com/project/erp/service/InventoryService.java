@@ -30,9 +30,8 @@ public class InventoryService {
 
 	
 	public RawMaterialVO selectMaterialByCode(String rawm_code) {
-		RawMaterialVO m = new RawMaterialVO();
-		m.setRawm_code(rawm_code);
-		m = rawMaterialDAO.rawMaterialOneSelect(m);
+		RawMaterialVO m = null;
+		m = rawMaterialDAO.rawMaterialOneSelect(rawm_code);
 		return m;
 	}
 
