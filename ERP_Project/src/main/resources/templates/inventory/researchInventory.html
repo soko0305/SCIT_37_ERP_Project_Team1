@@ -121,7 +121,7 @@
 		var database = firebase.database();	
 		var warehouse_code = /*[[${warehouse_code}]]*/;
 		
-		database.ref(warehouse_code+'/').once('value', function(snapshot){
+		database.ref('warehouse/'+warehouse_code).once('value', function(snapshot){
 			$("#putWarehouseName").html(snapshot.val().warehouse_name);
 		});
 		
@@ -142,7 +142,7 @@
 	  	//창고 내 생산품, 원자재 정보 가져오기
 		function selelctInventoryINWarehouse(){
 			$("#tBody").html('');
-			database.ref(warehouse_code+'/').child("inventory").on('child_added', function(snapshot){
+			database.ref('warehouse/'+warehouse_code).child("inventory").on('child_added', function(snapshot){
 				if(snapshot.key.charAt(0)=='p'){
 					var pd_code = snapshot.key;	
 					getProductAmount(pd_code);
@@ -155,7 +155,7 @@
 				}
 	    	});
 			
-			database.ref(warehouse_code+'/').once('value').then(function(snapshot1){
+			database.ref('warehouse/'+warehouse_code).once('value').then(function(snapshot1){
 				if(snapshot1.val().inventory=='empty'){
 					$("#tBody").html('<tr><td colspan="7" align="center"><span>창고에 재고가 없습니다</span></td><tr>');
 				}
@@ -165,7 +165,7 @@
 		
 	  	//파이어베이스로 실시간 원자재 재고 가져오는 함수 
 		function getMaterialAmount(rawm_code){
-			database.ref(warehouse_code+'/').child("inventory").child(rawm_code).once('value').then(function(snapshot){
+			database.ref('warehouse/'+warehouse_code).child("inventory").child(rawm_code).once('value').then(function(snapshot){
 				var amount = snapshot.val().systemamount;
 				$.ajax({
 					url: "selectMaterialByCode",
@@ -205,7 +205,7 @@
 
 	  	//생산품 실시간 재고 가져오는 함수
 		function  getProductAmount(pd_code){
-			database.ref(warehouse_code+'/').child("inventory").child(pd_code).once('value').then(function(snapshot){
+			database.ref('warehouse/'+warehouse_code).child("inventory").child(pd_code).once('value').then(function(snapshot){
 				var amount = snapshot.val().systemamount;
 				$.ajax({
 					url: "selectProductByCode",
@@ -377,7 +377,7 @@
 			var inventorySort= $("#inventorySort").val();
 			var searchText= $("#searchText").val();	
 			
-				database.ref(warehouse_code+'/').child("inventory").on('child_added', function(snapshot){
+				database.ref('warehouse/'+warehouse_code).child("inventory").on('child_added', function(snapshot){
 				if(snapshot.key.charAt(0)=='p'){
 				var pd_code = snapshot.key;	
 				$.ajax({

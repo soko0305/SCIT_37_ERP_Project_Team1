@@ -109,12 +109,12 @@
 		}
 		
 		//창고 이름 가져오는 함수
-		database.ref(warehouse_code+'/').once('value', function(snapshot){
+		database.ref('warehouse/'+warehouse_code).once('value', function(snapshot){
 			$("#warehouseName").html(snapshot.val().warehouse_name);
 		});
 		
 		//수량 가져오는 함수	
-		database.ref(warehouse_code+'/').child('inventory').child(data_code).once('child_added', function(snapshot){
+		database.ref('warehouse/'+warehouse_code).child('inventory').child(data_code).once('child_added', function(snapshot){
 			$("#amount").val(snapshot.val());
 			amount = snapshot.val();
 		});
@@ -122,7 +122,7 @@
 		
 		//창고 드롭박스 세팅 함수
 		if(button_type=='move'){
-		database.ref().on('child_added', function(data){
+		database.ref('warehouse/').on('child_added', function(data){
 			var warehouse_code1 = data.key;
 			var warehouse_name = data.val().warehouse_name;
 			if(warehouse_code1!=warehouse_code){
@@ -145,8 +145,8 @@
 			if($("#amount").val()>=0){
 			if(button_type=='update'){
 				var u_amount = $("#amount").val();
-				database.ref(warehouse_code+'/').child('inventory').child(data_code).remove();
-				database.ref(warehouse_code+'/').child('inventory').child(data_code).set({"systemamount": u_amount});
+				database.ref('warehouse/'+warehouse_code).child('inventory').child(data_code).remove();
+				database.ref('warehouse/'+warehouse_code).child('inventory').child(data_code).set({"systemamount": u_amount});
 				alert("재고 수량 변경을 완료했습니다.");
 				window.open("about:blank","_self").close();
 			}
@@ -158,15 +158,15 @@
 					alert("이동시킬 재고가 부족합니다.");
 				}else{
 					var count = 0;
-					database.ref(u_warehouse_code+'/').child('inventory').child(data_code).once('child_added', function(snapshot){
+					database.ref('warehouse/'+u_warehouse_code).child('inventory').child(data_code).once('child_added', function(snapshot){
 						count = snapshot.val();
 					});
 					
 					var mAmount = (parseInt(count)+parseInt(u_amount)).toString();
 					var dAmount =  (parseInt(amount)-parseInt(u_amount)).toString();
 
-					database.ref(u_warehouse_code+'/').child('inventory').child(data_code).update({"systemamount":mAmount});
-					database.ref(warehouse_code+'/').child('inventory').child(data_code).update({"systemamount":dAmount});
+					database.ref('warehouse/'+u_warehouse_code).child('inventory').child(data_code).update({"systemamount":mAmount});
+					database.ref('warehouse/'+warehouse_code).child('inventory').child(data_code).update({"systemamount":dAmount});
 					alert("재고 이동을 완료했습니다");
 					window.open("about:blank","_self").close();
 				}

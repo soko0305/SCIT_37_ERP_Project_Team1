@@ -104,7 +104,7 @@
 		var database = firebase.database();	
 		//변경시 리스트 실시간 최신화
 		//최신화 부분 수정 필요
-		database.ref().on('value', function(snapshot){
+		database.ref("warehouse/").on('value', function(snapshot){
 				if(snapshot.val()==null){
 					var str='';
 					str+='<tr><td>';
@@ -135,7 +135,7 @@
 			//창고 코드 가져오는 메소드
 			$("#warehouseTable").html("");
 					count = 0; 	
-					database.ref().on('child_added', function(data){
+					database.ref("warehouse/").on('child_added', function(data){	
 						printAllInventory(data);
 					});
 					deleteButtonSetting();
@@ -151,16 +151,16 @@
 					var count1 = 0;
 					var count2 = 0;
 					var count3 = 0;
-					database.ref(data.key+'/').child("inventory").on('child_added', function(data1){
+					database.ref("warehouse/"+data.key).child("inventory").on('child_added', function(data1){
 						count1++;
 					});
-					database.ref(data.key+'/').child("inventory").on('child_added', function(data1){
+					database.ref("warehouse/"+data.key).child("inventory").on('child_added', function(data1){
 						var pKey = data1.key;
 						if(pKey.charAt(0)=='p'){
 						count2++;
 						}
 					});
-					database.ref(data.key+'/').child("inventory").on('child_added', function(data1){
+					database.ref("warehouse/"+data.key).child("inventory").on('child_added', function(data1){
 						var mKey = data1.key;
 						if(mKey.charAt(0)=='m'){
 							count3++;
@@ -252,7 +252,7 @@
 
 		//파이어베이스에서 해당 창고 테이블 삭제 함수
 		function deleteWarehouseFromFirebase(warehouse_code){
-			database.ref(warehouse_code+"/").remove();
+			database.ref("warehouse/"+warehouse_code).remove();
 		}
 
 	});
