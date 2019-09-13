@@ -7,19 +7,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.project.erp.dao.RawMaterialDAO;
+import com.project.erp.service.RawMaterialService;
 import com.project.erp.vo.RawMaterialVO;
 
 @Controller
 public class RawMaterialController {
 
 	@Autowired
-	RawMaterialDAO rDAO;
+	RawMaterialService rService;
 
 	// 원자재 등록
 	@RequestMapping(value = "/rawMaterialInsert", method = RequestMethod.POST)
 	public String rawMaterialInsert(RawMaterialVO rawmaterial) {
 
-		int result = rDAO.rawMaterialInsert(rawmaterial);
+		int result = rService.rawMaterialInsert(rawmaterial);
 
 		if (result == 0) {
 			return "/rawMaterial/all_view";
@@ -31,8 +32,8 @@ public class RawMaterialController {
 	// 원자재 삭제
 	@RequestMapping(value = "/rawMaterialDelete", method = RequestMethod.POST)
 	public String rawMaterialDelete(RawMaterialVO rawmaterial) {
-		
-		int result = rDAO.rawMaterialDelete(rawmaterial);
+		System.out.println("rdelete : " + rawmaterial);
+		int result = rService.rawMaterialDelete(rawmaterial);
 
 		if (result == 0) {
 			return "/rawMaterial/all_view";
@@ -46,7 +47,7 @@ public class RawMaterialController {
 	@RequestMapping(value = "/rawMaterialUpdate", method = RequestMethod.POST)
 	public String rawMaterialUpdate(RawMaterialVO rawmaterial) {
 
-		int result = rDAO.rawMaterialUpdate(rawmaterial);
+		int result = rService.rawMaterialUpdate(rawmaterial);
 
 		if (result == 0) {
 			return "/rawMaterial/all_view";
