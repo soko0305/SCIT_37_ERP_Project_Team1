@@ -1861,6 +1861,7 @@
  
                                 </tr>
                                 </thead>
+
                                 
                                 <tbody>
   								<tr th:each="list : ${boardlist}">
@@ -1888,11 +1889,22 @@
                                 </span>
                                	새글쓰기
                             </button></a>
-						<a href="/logout"><button type="button" class="btn btn-shadow btn-wide btn-primary" id="logout">
-                                <span class="btn-icon-wrapper pr-2 opacity-7">
-                                    <i class="fa fa-plus fa-w-20"></i>
-                                </span>
-                                	로그아웃
+<!--                             <a href="/logout">
+                              <a th:text="${session.loginid}"></a>
+
+<!--                                  	 <input id="userid" name="userid" type="hidden"	th:value="${session.loginid}">  
+ -->                                	 
+  <td><a href="/logout" class="getordernum" th:text="로그아웃" th:attr="userid=${session.loginid}"></a></td>
+ 
+ 									 <!-- <form id="logout" action="/logout" method="GET">
+										<button type="submit" class="btn btn-shadow btn-wide btn-primary"  id="userid" th:text = "로그아웃" th:value="${session.loginid}"></button></a>
+									</form>   -->
+<!-- <!-- 										<a href="/logout"><button type="submit" class="btn btn-shadow btn-wide btn-primary"  id="logout" th:text = "로그아웃" th:value="#{session.loginid}"></button></a>
+ -->									
+<!-- 						<a href="/logout"><button type="submit" class="btn btn-shadow btn-wide btn-primary" id="logout" th:value="${session.loginid}">
+ --><!-- 						          			<input id="userid" name="userid" type="hidden"	th:value="${session.loginid}">  
+ --><!-- 								  		<input id="userid" name="userid" type="hidden" th:value="${session.loginid}" class="form-control">  
+ --><!-- 	                                	로그아웃 -->
                             </button></a>
                         </div>
                     </div>

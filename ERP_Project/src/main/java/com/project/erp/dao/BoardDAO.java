@@ -83,8 +83,8 @@ public class BoardDAO {
 		return result;
 	}
 
-	public ArrayList<BoardVO> selectBoard(String board_seq) {
-		ArrayList<BoardVO> result = null;
+	public BoardVO selectBoard(String board_seq) {
+		 BoardVO result = null;
 
 		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
 		try {
@@ -94,9 +94,48 @@ public class BoardDAO {
 			return result;
 		}
 		return result;
+}
 	
+
+	public int deleteBoard(String boardSeq) {
+		int result = 0;
  
-}}
+		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+		try {
+			result = mapper.deleteBoard(boardSeq);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return result;
+		}
+		return result;
+	}
+
+	public int updateBoard(BoardVO board) {
+		int result = 0;
+ 
+		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+		try {
+			result = mapper.updateBoard(board);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return result;
+		}
+		return result;
+	}
+
+	public int deleteAllBoard(String id) {
+		int result = 0;
+ 
+		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+		try {
+			result = mapper.deleteAllBoard(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return result;
+		}
+		return result;
+	}
+}
 
 
 

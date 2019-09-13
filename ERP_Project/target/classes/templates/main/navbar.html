@@ -447,9 +447,21 @@
                                 </a>
                             </li>
                             <li>
+                            
+                            
                                 <a href="/logout">
-                                    <i class="metismenu-icon pe-7s-id">
-                                    </i>logout
+<!--                                 <a th:text="${session.loginid}"></a>
+ -->
+<!--                                  	 <input id="userid" name="userid" type="hidden"	th:value="${session.loginid}">  
+ -->                                 	 
+ 
+									 <form id="boardform" action="/logout" method="POST">
+									  		<input id="userid" name="userid" type="hidden" th:value="${session.loginid}" class="form-control">  
+										</form> 
+                                 	 
+                                 	 
+                                     <i class="metismenu-icon pe-7s-id">
+                                     </i>logout
                                 </a>
                             </li>
                             <li class="app-sidebar__heading">�옱怨�</li>

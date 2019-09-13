@@ -1,20 +1,13 @@
 package com.project.erp.controller;
 
 import java.io.FileInputStream;
-import java.sql.Date;
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 
 import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.tomcat.jni.File;
-import org.hibernate.validator.internal.util.logging.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,16 +15,11 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.erp.dao.BoardDAO;
- import com.project.erp.vo.BoardVO;
-import com.project.erp.vo.FileVO;
-import com.project.erp.vo.RawMaterialVO;
-import com.project.erp.vo.SupplierVO;
-
-import ch.qos.logback.classic.Logger;
+import com.project.erp.vo.BoardVO;
  
 @Controller
 public class BoardController {
@@ -52,7 +40,7 @@ public class BoardController {
 
 
 	// 게시물 삭제
-	@RequestMapping(value = "/boardDelete", method = RequestMethod.POST)
+	@RequestMapping(value = "/deleteBoard", method = RequestMethod.POST)
 	public String boardDelete(BoardVO board) {
 		
 		int result = bDAO.boardDelete(board);
@@ -60,7 +48,7 @@ public class BoardController {
 		if (result == 0) {
 			return "member/boarddelete";
 		} else {
-			return "member/board";
+			return "redirect:/goBoardList";
 		}
 	}
 
@@ -79,7 +67,8 @@ public class BoardController {
 	}
 	// 게시물 출력을 위한 redirect(List출력)
 		@RequestMapping(value = "/goBoardList", method = RequestMethod.GET)
-		public String goSupplierList(Model model) {
+		public String goSupplierList(Model model,HttpSession session) {
+//			System.out.println("상세화면 세션 : " + session.getAttribute("loginid"));
 			ArrayList<BoardVO> result = bDAO.boardAllSelect();
 			model.addAttribute("boardlist", result);
 			return "member/board";
@@ -95,7 +84,7 @@ public class BoardController {
 			return "member/boardinsert";
 		}
 
-		@RequestMapping(value = "/boarddetail", method = RequestMethod.GET)
+	/*	@RequestMapping(value = "/boarddetail", method = RequestMethod.GET)
 		public String boardDetail(String boardSeq, Model model) {
 
 			
@@ -103,12 +92,87 @@ public class BoardController {
 			model.addAttribute("boarddetail", result);			
 //			System.out.println("제목 : " + result.get(0).getTitle());
 			return "member/boarddetail";
-		}
+		}*/
 /*		@RequestMapping(value="/boarddetail", method = RequestMethod.GET)
 		public String boarddetail(){
 			return "member/boarddetail";
 		}*/
-	}
+
+		@RequestMapping(value = "/boarddetail", method = RequestMethod.GET)
+		public String boardDetail(String boardSeq, Model model, HttpSession session) {
+//		System.out.println("상세화면 세션 : " + session.getAttribute("loginid"));
+
+			
+		BoardVO result = bDAO.selectBoard(boardSeq);
+			model.addAttribute("boarddetail", result);			
+//			System.out.println("제목 : " + result.get(0).getTitle());
+			return "member/boarddetail";
+		}
+/*		@RequestMapping(value = "/goUpdateBoard", method = RequestMethod.GET)
+		public String goUpdateBoard(String boardSeq, Model model) {
+
+			model.addAttribute("board", bDAO.selectBoard(boardSeq));
+
+			return "boardWrite";
+		}
+		*/
+		@RequestMapping(value = "/goUpdateBoard", method = RequestMethod.POST)
+		public String boardUpdate(BoardVO board, HttpSession session) {
+
+			if (session.getAttribute("loginid") == null) {
+				return "member/login";
+			} else {
+				String loginid = (String) session.getAttribute("loginid");
+				
+				String id = bDAO.selectBoard(board.getBoard_seq()).getUserid();
+/*				System.out.println("세션id : " + loginid );
+				System.out.println("현재 글쓴이 : " + id );
+*/				if (loginid.equals(id)) {
+					
+					bDAO.updateBoard(board);
+					
+				} else {
+					return "redirect:/goBoardList";
+				}
+			}
+
+			return "redirect:/goBoardList";
+		}		
+
+/*		@RequestMapping(value = "/fileTest", method = RequestMethod.POST)
+		public @ResponseBody String fileTest(MultipartFile uploadFile) {
+			
+			try{
+				
+			uploadFile.transferTo(new File("C:/File/"+uploadFile.getOriginalFilename()));
+			
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			return "home";
+		}
+		
+		
+		@RequestMapping(value = "/downloadFile", method = RequestMethod.GET)
+		public String downloadFile(HttpServletResponse response) {
+			
+			response.setHeader("Content-Disposition", "attachment;filename=Mybatis.zip");
+			
+			try {
+				FileInputStream fis=new FileInputStream(new File("D:/File/Mybatis.zip"));
+				ServletOutputStream sos=response.getOutputStream();
+				
+				FileCopyUtils.copy(fis, sos);
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return "home";
+		}*/
+		
+}
 
 
 

@@ -28,67 +28,47 @@
 
 <body>
 	<div class="col-md-3">
- <form id="insertBoardForm" action="/boardInsert" method="POST">
- 
-                                 
+ <form id="boardform" action="/goUpdateBoard" method="POST"  style='display:inline'>
  
 		<!--  요청userid -->
   		<input id="userid" name="userid" type="hidden"
 			th:value="${session.loginid}" class="form-control">  
  
-
 		<div class="form-group">
 			<label for="rawm_code">제목</label>
-			<input id="title" name="title" type="text" class="form-control">
- 								<tbody>
-  								<tr th:each="list : ${boarddetail}">
-									<td><p th:text="${list.title}"></p></td>
-								</tr>
-                                </tbody>			
-			</input>
+ 			<input id="title" name="title" type="text" class="form-control" th:value="${boarddetail.title}"></input>
 			
 
 		</div>
 		<div class="form-group">
-			내용<textarea class="form-control" rows="10" name="content" id="content"></textarea>
+			내용<textarea class="form-control" rows="10" name="content" id="content" th:field="${boarddetail.content}"></textarea>
  		</div>
- 		
- 		                               	
- 		<div class="form-group">
-			<button  id="insertButton"class="mb-2 mr-2 btn-square btn btn-primary">등록</button>
- 			<button  id="updateButton"class="mb-2 mr-2 btn-square btn btn-primary">수정</button>
- 			<button  id="deleteButton"class="mb-2 mr-2 btn-square btn btn-primary">삭제</button>
-		</div>
+ 				
+ 	<span th:if="${session.loginid.toString().equals(boarddetail.userid.toString())}">
+ 	
+ 	<tr>
+	<td>
+	 	<input type="hidden" name="board_seq" th:value="${boarddetail.board_seq}">
+	 	<button type="submit" class="mb-2 mr-2 btn-square btn btn-primary">수정</button>
+	 	
+	</form>
+	</td>
+	
+	
+	</span>
+	<td>
+ 	<span th:if="${session.loginid.toString().equals(boarddetail.userid.toString())}">
+ 	<form action="deleteBoard" method="post" style='display:inline' >
+	 	<input type="hidden" name="board_seq"  th:value="${boarddetail.board_seq}">
+	 	<button type="submit" class="mb-2 mr-2 btn-square btn btn-primary">삭제</button>
+	</form>
+	</span>
+	
+	
 		</form>
-		<form th:action="@{/api/image/upload}" method="post"
-    enctype="multipart/form-data" class="col m8 s12 offset-m2">
-     
-    <div class="input-field col s6">
-        <input multiple="multiple" type="file" name="files"/>
-    </div>
-     
-    <div class="input-field col s6">
-        <button class="btn indigo waves-effect waves-light"
-            type="submit" name="save">
-             
-            Submit<i class="mdi-content-send right"></i>
-        </button>
-    </div>
-</form>
+
 
 
  	</div>
-<script>
-	$(function(){
-		
-		$("#insertButton").click(function(){
-			$("#insertBoardForm").submit(); 
-		});
-		$("#deleteButton").click(function(){
-			$("#insertBoardForm").submit(); 
-		});
-
-		
-</script>
 </body>
 </html>

@@ -63,10 +63,6 @@ public class MemberController {
 	}
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(MemberVO member, Model model, HttpSession session) {
-		MemberVO m = memberDao.selectMemberById(member);
-
-			session.setAttribute("loginid", m.getUserid());
-				
 			memberDao.updateLogout(member);
 			session.invalidate();
 		

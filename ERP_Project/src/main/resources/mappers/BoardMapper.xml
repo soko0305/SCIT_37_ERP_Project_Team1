@@ -48,7 +48,7 @@
 			board_seq=#{board_seq}
 	</delete>
 	
-	<update id="boardUpdate" parameterType="com.project.erp.vo.BoardVO">
+	<update id="updateBoard" parameterType="com.project.erp.vo.BoardVO">
 		update
 			erp_notice
 		set
@@ -62,7 +62,7 @@
  		<select id="selectBoard" resultType="com.project.erp.vo.BoardVO" parameterType="String">
 	
 	SELECT 
-			BOARD_SEQ
+			board_seq
 			,TITLE
 			,CONTENT
 			,USERID
@@ -71,7 +71,13 @@
 	WHERE
 		BOARD_SEQ=#{board_seq}
 	</select>
-    
-
-
+ 
+ 
+ <insert id="fileTest" parameterType="com.project.erp.vo.FileVO">
+       INSERT INTO
+       FILES ( FILE_SEQ, BOARED_SEQ, ORG_NAME, SAV_NAME ,TIME)
+    VALUES (#{file_seq},#{board_seq},#{org_name},#{sav_name},sysdate)
+</insert>
+  
+ 
  </mapper>
