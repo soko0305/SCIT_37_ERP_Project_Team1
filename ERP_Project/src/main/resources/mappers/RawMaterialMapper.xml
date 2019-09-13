@@ -15,6 +15,7 @@
 			,rawm_autoorder
 			,rawm_minimum
 			,rawm_set
+			,rawm_delete
 		)
 		VALUES
 		(
@@ -33,6 +34,7 @@
 			</choose>
 			,#{rawm_minimum}
 			,#{rawm_set}
+			,#{rawm_delete}
 		)
 	</insert>
 	
@@ -46,8 +48,11 @@
 			,rawm_autoorder
 			,rawm_minimum
 			,rawm_set
+			,rawm_delete
 		from
 			RAWMATERIAL
+		where
+			rawm_delete='N'
 	</select>
 	
 	<select id="rawMaterialOneSelect" parameterType="String" resultType="com.project.erp.vo.RawMaterialVO">
@@ -60,6 +65,7 @@
 			,rawm_autoorder
 			,rawm_minimum
 			,rawm_set
+			,rawm_delete
 		from
 			RAWMATERIAL
 		where
@@ -76,21 +82,24 @@
 			,rawm_autoorder
 			,rawm_minimum
 			,rawm_set
+			,rawm_delete
 		from
 			RAWMATERIAL
 		where
+			rawm_delete='N' AND
 			rownum&lt;=3
 		order by
 			rawm_code desc
 	</select>
 	
-	<delete id="rawMaterialDelete" parameterType="com.project.erp.vo.RawMaterialVO">
-		delete
-		from
+	<update id="rawMaterialDelete" parameterType="com.project.erp.vo.RawMaterialVO">
+		update
 			RAWMATERIAL
+		set
+			rawm_delete=#{rawm_delete}
 		where
 			rawm_code=#{rawm_code}
-	</delete>
+	</update>
 	
 	<update id="rawMaterialUpdate" parameterType="com.project.erp.vo.RawMaterialVO">
 		update

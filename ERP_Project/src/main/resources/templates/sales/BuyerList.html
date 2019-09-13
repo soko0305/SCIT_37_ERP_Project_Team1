@@ -14,25 +14,38 @@
     <!-- Disable tap highlight on IE -->
     <meta name="msapplication-tap-highlight" content="no">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
+<!-- <script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script> -->
 <link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
 <script>
 	$(function(){	
 		$("#header").load("/header");
 		$("#navbar").load("/navbar");
 		$("#setting").load("/setting");
+		printAddBuyer();
+		goDetail();
 	});
-
+	
+	
 	function printAddBuyer(){
-		$('#idAddbuyer').Click(function(){
-			str = '';
-			str+=
-			$('.insertWithAjax').HTML(str);
-			})
-		})
+	 $('.idAddbuyer').click(function(){
+			var g_oWindow = window.open("/insertBuyer", "Input Storage Information","width=700, height=700, location=no, toolbar=no, menubar=no, scrollbars=no, status=no, resizable=yes");
+	})
 	}
+	
+	function goDetail(){
+		 $('.goDetail').click(function(){
+			 var seq = $(this).attr('data-buyerseq');
+			 var form = $('#formTry');
+			 $('#sales_ordernum').val(seq);
+			 form.submit();
+		 })
+	 }
 </script>
 <body>
+
+<form action="detailLink" id="formTry">
+<input type="hidden" id="sales_ordernum" name="sales_ordernum">
+</form>
 <div class="app-container app-theme-white body-tabs-shadow f
 ixed-header fixed-sidebar">
     <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Header삽입@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
@@ -68,12 +81,9 @@ ixed-header fixed-sidebar">
                          	    <div class="card-header-tab card-header" >
                                  <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i class="header-icon lnr-laptop-phone mr-3 text-muted opacity-6"> </i>실시간 주문 내역</div>
                                  </div>
-                            	<div class="card-body">
-                            	
-						<button class="mb-2 mr-2 btn-square btn btn-primary" id="idAddBuyer" style="width:100%"
-							data-type="insert">거래처추가</button><br /><br />
-			
-                                <table style="width: 100%;" id="example" class="table table-hover table-bordered insertWithAjax">
+                            	<div class="card-body" id="insertWithAjax">
+						<button class="mb-2 mr-2 btn-square btn btn-primary idAddbuyer" style="width:100%">거래처추가</button><br /><br />
+                                <table style="width: 100%;" id="example" class="table table-hover table-bordered">
                                    <thead>
                                         <tr>
                                             <th>번호</th>
@@ -83,29 +93,26 @@ ixed-header fixed-sidebar">
                                             <th>담당자연락처</th>
                                             <th>이메일</th>
                                             <th>주소</th>
+                                            <th>검색키워드</th>
                                         </tr>
                                         </thead>
                                         <tbody class="tbody">
                                             	<tr th:each="list : ${buyerList}">
 												<td th:text="${list.buyerseq}"></td>
-												<td th:text="${list.buyer_corp}"></td>
+												<td><a href="#" class="goDetail" th:text="${list.buyer_corp}" th:attr="data-buyerseq=${list.buyerseq}"></a></td>
 												<td th:text="${list.buyer_owner}"></td>
 												<td th:text="${list.buyer_pic}"></td>
 												<td th:text="${list.buyer_pictel}"></td>
 												<td th:text="${list.buyer_email}"></td>
 												<td th:text="${list.buyer_addr}"></td>
+												<td th:text="${list.buyer_memo}"></td>
 										</tr> 
                                   </tbody>
                                </table>
                             </div>
                         </div>
                    </div>
-
                 <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-                
-                
-                
-                
                 
                 <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@footer 삽입@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->  
        </div>
@@ -113,5 +120,5 @@ ixed-header fixed-sidebar">
   </div>
 </div>
 <!-- drawer 삽입 -->
-<div class="app-drawer-overlay d-none animated fadeIn"></div><script type="text/javascript" src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script></body>
+<div class="app-drawer-overlay d-none animated fadeIn"></div></body>
 </html>

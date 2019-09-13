@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.project.erp.dao.OrderDAO;
 import com.project.erp.dao.RawMaterialDAO;
 import com.project.erp.dao.SupplierDAO;
+import com.project.erp.service.RawMaterialService;
+import com.project.erp.service.SupplierService;
 import com.project.erp.vo.Order_rawMaterialVO;
 import com.project.erp.vo.RawMaterialVO;
 import com.project.erp.vo.SupplierVO;
@@ -19,10 +21,10 @@ import com.project.erp.vo.SupplierVO;
 public class RawMaterialLinkController {
 
 	@Autowired
-	SupplierDAO sDAO;
+	SupplierService sService;
 
 	@Autowired
-	RawMaterialDAO rDAO;
+	RawMaterialService rService;
 	
 	@Autowired
 	OrderDAO oDAO;
@@ -30,10 +32,10 @@ public class RawMaterialLinkController {
 	// 대쉬보드 메인 화면 Form
 	@RequestMapping(value = "/goAllView", method = RequestMethod.GET)
 	public String goAllView(Model model) {
-		ArrayList<SupplierVO> result = sDAO.supplierDashSelect();
+		ArrayList<SupplierVO> result = sService.supplierDashSelect();
 		model.addAttribute("supplierList", result);
 
-		ArrayList<RawMaterialVO> result1 = rDAO.rawMaterialDashSelect();
+		ArrayList<RawMaterialVO> result1 = rService.rawMaterialDashSelect();
 		model.addAttribute("rawMaterialList", result1);
 		
 		ArrayList<Order_rawMaterialVO> result2 =  oDAO.orderDashSelect();
@@ -45,14 +47,14 @@ public class RawMaterialLinkController {
 	// 공급처 출력을 위한 redirect(List출력)
 	@RequestMapping(value = "/goSupplierList", method = RequestMethod.GET)
 	public String goSupplierList(Model model) {
-		ArrayList<SupplierVO> result = sDAO.supplierAllSelect();
+		ArrayList<SupplierVO> result = sService.supplierAllSelect();
 		model.addAttribute("supplierList", result);
 		return "rawMaterial/supplier_view";
 	}
 
 	// 공급처 전체 출력화면 Form
 	@RequestMapping(value = "/goSupplier", method = RequestMethod.GET)
-	public String goSupplier(Model model) {
+	public String goSupplier() {
 		return "redirect:/goSupplierList";
 	}
 
@@ -65,7 +67,7 @@ public class RawMaterialLinkController {
 	// 공급처 수정 Form
 	@RequestMapping(value = "/goSupplierUpdate", method = RequestMethod.GET)
 	public String goSupplierUpdate(SupplierVO supplier, Model model) {
-		SupplierVO result = sDAO.supplierOneSelect(supplier);
+		SupplierVO result = sService.supplierOneSelect(supplier);
 		model.addAttribute("result", result);
 		return "rawMaterial/supplier_update";
 	}
@@ -75,7 +77,7 @@ public class RawMaterialLinkController {
 	// 원자재 출력을 위한 redirect(List출력)
 	@RequestMapping(value = "/goMaterialsList", method = RequestMethod.GET)
 	public String goMaterialsList(Model model) {
-		ArrayList<RawMaterialVO> result = rDAO.rawMaterialAllSelect();
+		ArrayList<RawMaterialVO> result = rService.rawMaterialAllSelect();
 		model.addAttribute("rawMaterialList", result);
 		return "rawMaterial/materials_view";
 	}
@@ -89,7 +91,7 @@ public class RawMaterialLinkController {
 	// 원자재 등록 Form
 	@RequestMapping(value = "/goMaterialsInsert", method = RequestMethod.GET)
 	public String goMaterialsInsert(Model model) {
-		ArrayList<SupplierVO> result = sDAO.supplierAllSelect();
+		ArrayList<SupplierVO> result = sService.supplierAllSelect();
 		model.addAttribute("supplierList", result);
 		return "rawMaterial/materials_insert";
 	}
@@ -97,9 +99,9 @@ public class RawMaterialLinkController {
 	// 원자재 수정 Form
 	@RequestMapping(value = "/goMaterialsUpdate", method = RequestMethod.POST)
 	public String goMaterialsUpdate(String rawm_code, Model model) {
-		RawMaterialVO result = rDAO.rawMaterialOneSelect(rawm_code);
+		RawMaterialVO result = rService.rawMaterialOneSelect(rawm_code);
 		model.addAttribute("result", result);
-		ArrayList<SupplierVO> result1 = sDAO.supplierAllSelect();
+		ArrayList<SupplierVO> result1 = sService.supplierAllSelect();
 		model.addAttribute("supplierList", result1);
 		return "rawMaterial/materials_update";
 	}
@@ -114,7 +116,7 @@ public class RawMaterialLinkController {
 	// 발주 등록 Form
 	@RequestMapping(value = "/goOrderInsert", method = RequestMethod.GET)
 	public String goOrderInsert(Model model) {
-		ArrayList<RawMaterialVO> result = rDAO.rawMaterialAllSelect();
+		ArrayList<RawMaterialVO> result = rService.rawMaterialAllSelect();
 		model.addAttribute("rList", result);
 		return "rawMaterial/order_insert";
 	}
