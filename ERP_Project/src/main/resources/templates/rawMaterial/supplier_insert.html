@@ -23,6 +23,45 @@
 <link
 	href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css"
 	rel="stylesheet">
+<script>
+$(function(){
+	var check = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/
+	$(".btn-primary").click(function(){
+		var tel = $("#supplier_tel").val();
+		var name = $("#supplier_name").val();
+		var owner = $("#supplier_owner").val();
+		var addr = $("#supplier_addr").val();
+		var pic = $("#supplier_pic").val();
+		var email = $("#supplier_emai").val();
+		
+		if(!tel.match(check)){
+			alert("전화번호 형식은 000-0000-0000");
+			return false;
+		}
+		if(!name){
+			alert("공급처명을 입력해주세요")
+			return false;
+		}
+		if(!owner){
+			alert("공급처대표명을 입력해주세요")
+			return false;
+		}
+		if(!addr){
+			alert("공급처주소를 입력해주세요")
+			return false;
+		}
+		if(!pic){
+			alert("공급처담장자명을 입력해주세요")
+			return false;
+		}
+		if(!email){
+			alert("공급처이메일을 입력해주세요")
+			return false;
+		}
+		$("#supplierInsertForm").submit();
+	});
+});
+</script>
 </head>
 <body>
 	<div
@@ -368,13 +407,13 @@
 						<div class="main-card mb-3 card">
 							<div class="card-body">
 								<h5 class="card-title">공급처 등록</h5>
-								<form class="" action="supplierInsert" method="post">
+								<form class="" action="supplierInsert" method="post" id="supplierInsertForm">
 									<div class="form-row">
 										<div class="col-md-6">
 											<div class="position-relative form-group">
 												<label for="supplier_name" class="">공급처명</label><input
 													name="supplier_name" id="supplier_name"
-													placeholder="OO회사" type="text"
+													type="text" autocomplete="off"
 													class="form-control">
 											</div>
 										</div>
@@ -382,35 +421,35 @@
 											<div class="position-relative form-group">
 												<label for="supplier_owner" class="">공급처대표명</label><input
 													name="supplier_owner" id="supplier_owner"
-													placeholder="OOO회장" type="text"
+													type="text" autocomplete="off"
 													class="form-control">
 											</div>
 										</div>
 									</div>
 									<div class="position-relative form-group">
 										<label for="supplier_addr" class="">공급처주소</label><input
-											name="supplier_addr" id="supplier_addr" placeholder="서울특별시강남구대치동"
-											type="text" class="form-control">
+											name="supplier_addr" id="supplier_addr"
+											type="text" autocomplete="off" class="form-control">
 									</div>
 									<div class="position-relative form-group">
 										<label for="supplier_tel" class="">공급처연락처</label><input
 											name="supplier_tel" id="supplier_tel"
-											placeholder="01011114444" type="number"
+											type="text" autocomplete="off"
 											class="form-control">
 									</div>
 									<div class="position-relative form-group">
 										<label for="supplier_pic" class="">공급처담당자명</label><input
 											name="supplier_pic" id="supplier_pic"
-											placeholder="나인뮤지스 경리" type="text"
+											 type="text" autocomplete="off"
 											class="form-control">
 									</div>
 									<div class="position-relative form-group">
 										<label for="supplier_email" class="">공급처이메일</label><input
 											name="supplier_email" id="supplier_emai"
-											placeholder="a@a.com" type="email"
+											type="email" autocomplete="off"
 											class="form-control">
 									</div>
-									<button class="mt-2 btn btn-primary">등록</button>
+									<button type="button" class="mt-2 btn btn-primary">등록</button>
 								</form>
 							</div>
 						</div>

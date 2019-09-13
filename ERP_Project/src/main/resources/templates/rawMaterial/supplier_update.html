@@ -25,8 +25,10 @@
 	rel="stylesheet">
 <script>
 	$(function(){
+		
 		/* 버튼 Action */
 		$(".btn-primary").click(function(){
+			var check = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/
 			var seq = $("#supplierseq").val();
 			var name = $("#supplier_name").val();
 			var owner = $("#supplier_owner").val();
@@ -35,13 +37,46 @@
 			var pic = $("#supplier_pic").val();
 			var email = $("#supplier_email").val();
 			
-			$("#supplierseq1").val(seq);
-			$("#supplier_name1").val(name);
-			$("#supplier_owner1").val(owner);
-			$("#supplier_addr1").val(addr);
-			$("#supplier_tel1").val(tel);
-			$("#supplier_pic1").val(pic);
-			$("#supplier_email1").val(email);
+			var seq1 = $("#supplierseq1").val(seq);
+			var name1 = $("#supplier_name1").val(name);
+			var owner1 = $("#supplier_owner1").val(owner);
+			var addr1 = $("#supplier_addr1").val(addr);
+			var tel1 = $("#supplier_tel1").val(tel);
+			var pic1 = $("#supplier_pic1").val(pic);
+			var email1 = $("#supplier_email1").val(email);
+			
+			var seq2 = $("#supplierseq1").val();
+			var name2 = $("#supplier_name1").val();
+			var owner2 = $("#supplier_owner1").val();
+			var addr2 = $("#supplier_addr1").val();
+			var tel2 = $("#supplier_tel1").val();
+			var pic2 = $("#supplier_pic1").val();
+			var email2 = $("#supplier_email1").val();
+			
+			if(!tel2.match(check)){
+				alert("전화번호 형식은 000-0000-0000");
+				return false;
+			}
+			if(!name2){
+				alert("공급처명을 입력해주세요")
+				return false;
+			}
+			if(!owner2){
+				alert("공급처대표명을 입력해주세요")
+				return false;
+			}
+			if(!addr2){
+				alert("공급처주소를 입력해주세요")
+				return false;
+			}
+			if(!pic2){
+				alert("공급처담장자명을 입력해주세요")
+				return false;
+			}
+			if(!email2){
+				alert("공급처이메일을 입력해주세요")
+				return false;
+			}
 			
 			$("#supplierUpdateForm").submit();
 		});
