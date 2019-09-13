@@ -35,11 +35,17 @@
 	function goDetail(){
 		 $('.goDetail').click(function(){
 			 var seq = $(this).attr('data-buyerseq');
-			 alert(seq);
+			 var form = $('#formTry');
+			 $('#buyerseq').val(seq);
+			 form.submit();
 		 })
 	 }
 </script>
 <body>
+
+<form action="detailLink" id="formTry">
+<input type="hidden" id="buyerseq" name="buyerseq">
+</form>
 <div class="app-container app-theme-white body-tabs-shadow f
 ixed-header fixed-sidebar">
     <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Header삽입@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->

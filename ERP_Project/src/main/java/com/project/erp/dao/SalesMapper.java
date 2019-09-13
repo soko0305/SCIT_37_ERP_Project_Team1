@@ -30,6 +30,7 @@ public interface SalesMapper {
 	public List<SalesDetail> selectSalesDetail(SalesDetail salesDetail); // OrderNumber를 통해 salesDetail을 select 
 	public List<Sales> selectSalesStatusIsDone();
 	public List<Buyer> selectAllBuyer();
+	public Buyer selectBuyer(Buyer buyer);
 	
 	
 	/*

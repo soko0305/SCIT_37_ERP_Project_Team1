@@ -73,6 +73,19 @@ public class SalesDAO {
 		return buyer1;
 	}
 	
+	public Buyer selectBuyer(Buyer buyer){
+		Buyer buyer1 = null;
+		try{
+		SalesMapper mapper = sqlSession.getMapper(SalesMapper.class);
+		buyer1= mapper.selectBuyer(buyer);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return buyer1;
+		
+	}
+
+	
 	//Sales 목록 전체 select
 	public List<Sales> selectAllSales(){
 		List<Sales> list1 = null;

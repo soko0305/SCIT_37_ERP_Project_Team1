@@ -21,9 +21,17 @@
 		$("#header").load("/header");
 		$("#navbar").load("/navbar");
 		$("#setting").load("/setting");
-
+		deleteBuyer();
+		updateBuyer();
+		
 	});
 
+function deleteBuyer(){
+	
+}
+
+function updateBuyer(){
+	
 }
 </script>
 <body>
@@ -38,22 +46,6 @@ ixed-header fixed-sidebar">
                 <div class="app-main__outer">
                 <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
                 <div class="app-main__inner">
-                    <div class="app-page-title">
-                        <div class="page-title-wrapper">
-                            <div class="page-title-heading">
-                                <div class="page-title-icon">
-                                    <i class="pe-7s-notebook icon-gradient bg-mixed-hopes">
-                                    </i>
-                                </div>
-                                <div>판매처 관리
-                                    <div class="page-title-subheading">
-                                    	판매처에 대한 정보 열람 및 검색
-                                    </div>
-                                </div>
-                            </div>    
-                          </div>
-                    </div>         
-                    
                     <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@위에 달린 메뉴 -->
                        
                     <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@위에 네비메뉴 -->
@@ -63,32 +55,9 @@ ixed-header fixed-sidebar">
                                  <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i class="header-icon lnr-laptop-phone mr-3 text-muted opacity-6"> </i>실시간 주문 내역</div>
                                  </div>
                             	<div class="card-body" id="insertWithAjax">
-						<button class="mb-2 mr-2 btn-square btn btn-primary idAddbuyer" style="width:100%">거래처추가</button><br /><br />
+                                		거래처정보
                                 <table style="width: 100%;" id="example" class="table table-hover table-bordered">
-                                   <thead>
-                                        <tr>
-                                            <th>번호</th>
-                                            <th>거래처명</th>
-                                            <th>대표자명</th>
-                                            <th>담당자</th>
-                                            <th>담당자연락처</th>
-                                            <th>이메일</th>
-                                            <th>주소</th>
-                                            <th>검색키워드</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody class="tbody">
-                                            	<tr th:each="list : ${buyerList}">
-												<td th:text="${list.buyerseq}"></td>
-												<td th:text="${list.buyer_corp}"></td>
-												<td th:text="${list.buyer_owner}"></td>
-												<td th:text="${list.buyer_pic}"></td>
-												<td th:text="${list.buyer_pictel}"></td>
-												<td th:text="${list.buyer_email}"></td>
-												<td th:text="${list.buyer_addr}"></td>
-												<td th:text="${list.buyer_memo}"></td>
-										</tr> 
-                                  </tbody>
+                                  
                                </table>
                             </div>
                         </div>

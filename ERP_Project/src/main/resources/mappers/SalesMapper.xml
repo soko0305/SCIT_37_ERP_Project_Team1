@@ -68,6 +68,12 @@ from buyer
 where buyer_corp = #{buyer_corp}
 </select>
 
+<select id="selectBuyer" parameterType ="com.project.erp.vo.Buyer" resultType="com.project.erp.vo.Buyer">
+select *
+from buyer
+where buyerseq =#{buyerseq}
+</select>
+
 <select id="selectSalesStatusIsDone" resultType="com.project.erp.vo.Sales">
 select *
 from sales
