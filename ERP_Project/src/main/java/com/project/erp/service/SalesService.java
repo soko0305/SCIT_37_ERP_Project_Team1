@@ -126,4 +126,9 @@ public class SalesService {
 		List<Sales> list = dao.selectSalesStatusIsDone();
 		return list;
 	}
+	
+	public int insertBuyer(Buyer buyer){
+		int result = dao.insertBuyer(buyer);
+		return result;
+	}
 }

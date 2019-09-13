@@ -33,18 +33,20 @@
                      <div class="modal-body">
                          <h5 class="modal-title" style="text-align: center;">거래처 등록 </h5>
                             <div class="divider row"></div>
-                              <div class="form-row">
-                                 <form action="insertBuyer" method="post">
-                                    <div class="col-md-12">
+                     
+                                 <form action="insertBuyerToDb" method="post" id ="insertBuyerToDb">
+                                  		<div class="col-md-12">
                                             <div class="position-relative form-group">
                                             	<input name="buyer_corp" id="buyer_corp" placeholder="거래처명" type="text" class="form-control">
                                             </div>
-                                      </div>
+                                            </div>
                                    
+                                    <div class="col-md-12">
                                             <div class="position-relative form-group">
                                             	<input name="buyer_owner" id="buyer_owner" placeholder="대표자명" type="text" class="form-control">
                                             </div>
-                                      
+                                             </div>
+                                
                                       <div class="col-md-12">
                                             <div class="position-relative form-group">
                                             	<input name="buyer_addr" id="buyer_addr" placeholder="주소" type="text" class="form-control">
@@ -76,7 +78,6 @@
                                             </div>
                                       </div>
                                         </form>
-                                 </div>
                                
                                    
                                     <div class="divider row"></div>
@@ -86,7 +87,7 @@
                                     </div>
                                     
                                 <div class="modal-footer d-block text-center">
-                                    <button id="insertButton" class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg" type="button">창고 등록</button>
+                                    <button id="insertButton" class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg" type="button">거래처 등록</button>
                                 </div>
                             </div>
                         </div>
@@ -98,7 +99,7 @@
 </div>
 <script>
 	$(function(){
-		var database = firebase.database();	
+
 		$("#insertButton").click(function(){
 			var buyer_corp = $("#buyer_corp").val();
 			var buyer_owner = $("#buyer_owner").val();
@@ -111,7 +112,7 @@
 			
 			
 			if(buyer_corp==null ||buyer_corp==""){
-				$("#errorMessage").html("거래처명을 입력해주세요");
+				$("#errorMessage").html("거래처명을 입력해주세요.");
 				}else{
 					if(buyer_owner==null ||buyer_owner==""){
 					$("#errorMessage").html("대표명을 입력해주세요");
@@ -131,17 +132,19 @@
 					if(buyer_email==null ||buyer_email==""){
 					$("#errorMessage").html("이메일을 입력해주세요");
 				}else{	
-					
-				}
-							
+					$('#insertBuyerToDb').submit();
+					opener.document.location.href="/buyerList";
+					self.close();
 
-							window.open("about:blank","_self").close();
+							}
 						}
 					}
 				}
-			}
-		});
+			}	
+		}
+				}
 	});
+});
 
 </script>
 </body>

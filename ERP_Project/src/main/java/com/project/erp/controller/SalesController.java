@@ -44,5 +44,11 @@ public class SalesController {
 		return list;
 	}
 	
+	@RequestMapping(value="/insertBuyerToDb", method=RequestMethod.POST)
+	public int insertBuyer(Buyer buyer){
+		int result = service.insertBuyer(buyer);
+		return result;
+	}
+	
 	
 }
