@@ -50,5 +50,17 @@ public class SalesController {
 		return result;
 	}
 	
+	@RequestMapping(value="/deleteBuyer", method=RequestMethod.POST)
+	public String deleteBuyer(Buyer buyer){
+		service.deleteBuyer(buyer);
+		return "redirect:/buyerList";
+	}
+	
+	@RequestMapping(value="/updateBuyer", method=RequestMethod.POST)
+	public String updateBuyer(Buyer buyer){
+		service.updateBuyer(buyer);
+		return "redirect:/buyerList";
+	}
+	
 	
 }

@@ -141,4 +141,9 @@ public class SalesService {
 		Buyer buyer1 = dao.selectBuyer(buyer);
 		return buyer1;
 	}
+	
+	public int updateBuyer(Buyer buyer){
+		int result = dao.updateBuyer(buyer);
+		return result;
+	}
 }

@@ -38,7 +38,7 @@ public interface SalesMapper {
 	 */
 	
 	public int setSalesPrice(Sales sales);
-	
+	public int updateBuyer(Buyer buyer);	
 	/*
 	 * delete
 	 */

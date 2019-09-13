@@ -154,6 +154,19 @@ public class SalesDAO {
 		
 	}
 	
+
+	public int updateBuyer(Buyer buyer){
+		int result = 0;
+		try{
+		SalesMapper mapper = sqlSession.getMapper(SalesMapper.class);
+		result= mapper.updateBuyer(buyer);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return result;
+		
+	}
+	
 	
 	/*
 	 * delete

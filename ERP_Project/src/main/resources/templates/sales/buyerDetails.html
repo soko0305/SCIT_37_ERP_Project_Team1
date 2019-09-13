@@ -16,27 +16,75 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- <script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script> -->
 <link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
-<script>
+<script type="text/javascript" th:inline="javascript">
+/*<![CDATA[*/
 	$(function(){	
 		$("#header").load("/header");
 		$("#navbar").load("/navbar");
 		$("#setting").load("/setting");
-		deleteBuyer();
-		updateBuyer();
-		
+		printUpdateBuyer();
 	});
 
 function deleteBuyer(){
+	confirm("정말 삭제하시겠습니까?");
+	if(confirm){
+		var seq = /*[[ ${buyer.buyerseq} ]]*/;
+		var form = $('#formTry');
+		$('#buyerseq').val(seq);
+		form.submit();
+	}else{
+		return false;
+	}
+}
+
+function printUpdateBuyer(){
+	
+
+	$('#drawHTML').click(function(){
+		str='';
+		str+='<div><br />';
+		str+='<form action="updateBuyer" method="post" id="updatebuyer">'
+		str+='<button class="mb-2 mr-2 btn btn-primary">수정하기</button><br /><br />';
+		str+='<div class="col-md-12"><div class="position-relative form-group">';
+		str+='거래처명 : <input type="text" class="form-control" name="buyer_corp"></div></div>';
+		str+='<div class="col-md-12"><div class="position-relative form-group">';
+		str+='대표명 : <input type="text" class="form-control" name="buyer_owner"></div></div>';
+		str+='<div class="col-md-12"><div class="position-relative form-group">';
+		str+='주소 : <input type="text"  class="form-control" name="buyer_addr"></div></div>';
+		str+='<div class="col-md-12"><div class="position-relative form-group">';
+		str+='연락처 : <input type="text" class="form-control" name="buyer_tel"></div></div>';
+		str+='<div class="col-md-12"><div class="position-relative form-group">';
+		str+='담당자 : <input type="text" class="form-control" name="buyer_pic"></div></div>';
+		str+='<div class="col-md-12"><div class="position-relative form-group">';
+		str+='담당자 연락처 : <input type="text" class="form-control" name="buyer_pictel"></div></div>';
+		str+='<div class="col-md-12"><div class="position-relative form-group">';
+		str+='이메일 : <input type="text" class="form-control" name="buyer_email"></div></div>';
+		str+='<div class="col-md-12"><div class="position-relative form-group">';
+		str+='메모 (검색키워드) : <input type="text" class="form-control" name="buyer_memo"></div></div>';
+		str+='<input type="hidden" name="buyerseq" id="buyerseqforupdate">';
+		str+='</form>';
+		
+		
+		$('#insertWithAjax').html(str);
+	
+		var seq = /*[[ ${buyer.buyerseq} ]]*/;
+		$('#buyerseqforupdate').val(seq);
+	})
+
 	
 }
 
-function updateBuyer(){
-	
-}
+/*]]>*/
 </script>
 <body>
-<div class="app-container app-theme-white body-tabs-shadow f
-ixed-header fixed-sidebar">
+
+<form action="deleteBuyer" id="formTry" method="post">
+<input type="hidden" id="buyerseq" name="buyerseq">
+</form>
+
+
+
+<div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
     <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Header삽입@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
     <div id="header"></div>
     <div id="setting"></div> 
@@ -54,20 +102,19 @@ ixed-header fixed-sidebar">
                         	  <div class="card-header-tab card-header" >
                                 <div class="card-header-title font-size-lg  text-capitalize font-weight-normal"><i class="header-icon lnr-laptop-phone mr-3 text-muted opacity-6"> </i><h4 th:text="${buyer.buyer_corp}+'의 거래처정보'"></h4></div></div>
                             	<div class="card-body" id="insertWithAjax">
-                            	<div>
-                            	   <button class="mb-2 mr-2 btn btn-primary" onclick="return deleteBuyer()">거래처 삭제</button>
-							   <button class="mb-2 mr-2 btn btn-primary">거래처 업데이트</button><br /><br />
+                            	<div><br />
+                               <button class="mb-2 mr-2 btn btn-primary" onclick="deleteBuyer()">거래처 삭제</button>
+							   <button class="mb-2 mr-2 btn btn-primary" id="drawHTML"onclick="printUpdateBuyer()">거래처 업데이트</button><br /><br />
                                <h6 th:text="'거래처명 : '+${buyer.buyer_corp}"></h6>
                                <h6 th:text="'대표자명  : '+${buyer.buyer_owner}"></h6>
                                <h6 th:text="'주소 : '+${buyer.buyer_addr}"></h6>
                                <h6 th:text="'연락처 : '+${buyer.buyer_tel}"></h6>
                                <h6 th:text="'담당자 : '+${buyer.buyer_pic}"></h6>
                                <h6 th:text="'담당자 연락처 : '+${buyer.buyer_pictel}"></h6>
-                               <h6 th:text="'이메일: '+${buyer.buyer_email}"></h6>
-							   <h6 th:text="'메모 (검색키워드): '+${buyer.buyer_memo}"></h6>
+                               <h6 th:text="'이메일 : '+${buyer.buyer_email}"></h6>
+							   <h6 th:text="'메모 (검색키워드) : '+${buyer.buyer_memo}"></h6>
 							    <div class="card mb-4" style="float: right">
-							   <div class="card-body" ><h6>나중에 chart넣고싶은곳. 주거래품 / 판매금액</h6></div></div>           
-							   </div>  <br />
+							   <div class="card-body" ><h6>나중에 chart넣고싶은곳. 주거래품 / 판매금액</h6></div></div></div><br />
 							
 							   </div>  
 							  
