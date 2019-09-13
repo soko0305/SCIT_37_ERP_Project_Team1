@@ -42,9 +42,10 @@ public class MemberController {
 		MemberVO m = memberDao.selectMemberById(member);
  		if(m !=null){
 			if(m.getUserstate ().equals("allowed")){
-				System.out.println("allowed");
-				session.setAttribute("loginid", m.getUserid());
-				return "redirect:/";
+ 				session.setAttribute("loginid", m.getUserid());
+ 				
+ 				memberDao.updateLogin(member);
+ 				return "redirect:/goBoardList";
 			}else if(m.getUserstate().equals("withdrawal")){
 				model.addAttribute("message", "탈퇴한 회원입니다");
 				return "member/login";	
@@ -59,5 +60,12 @@ public class MemberController {
 			model.addAttribute("message", "아이디, 비밀번호 입력이 잘못되었습니다");
 			return "member/login";	
 		}
+	}
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(MemberVO member, Model model, HttpSession session) {
+			memberDao.updateLogout(member);
+			session.invalidate();
+		
+		return "member/login";
 	}
 }

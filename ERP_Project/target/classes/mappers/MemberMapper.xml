@@ -42,6 +42,20 @@
 		FROM erp_member
 		WHERE userid=#{userid}
 	</select>
- 
-
+ <update id="updateLogin" parameterType="com.project.erp.vo.MemberVO">
+	
+		UPDATE erp_member set
+			loginstate='in'
+ 		WHERE
+			userid=#{userid}
+	
+	</update>
+ <update id="updateLogout" parameterType="com.project.erp.vo.MemberVO">
+	
+		UPDATE erp_member set
+			loginstate='out'
+ 		WHERE
+			userid=#{userid}
+	
+	</update>
 </mapper>

@@ -19,7 +19,7 @@ public class YBController {
 	public String login(){
 		return "member/login";
 	}
-	
+
 	@RequestMapping(value="/inventoryManagement123", method = RequestMethod.GET)
 	public String inventoryManagement123(){
 		return "inventory/inventoryManagement123";
@@ -44,7 +44,10 @@ public class YBController {
 	public String producecheck(){
 		return "production/producecheck";
 	} 
-	 
+	@RequestMapping(value="/main", method = RequestMethod.GET)
+	public String home(){
+		return "main/index";
+		}
 	@RequestMapping(value="/produceinsert", method = RequestMethod.GET)
 	public String produceinsert(){
 		return "production/produceinsert";

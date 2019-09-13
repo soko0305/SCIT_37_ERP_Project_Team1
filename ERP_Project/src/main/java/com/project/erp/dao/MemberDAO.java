@@ -35,6 +35,28 @@ public class MemberDAO {
 		}
 		return m;
 	}
- 
+
+	public MemberVO updateLogin(MemberVO member) {
+		// TODO Auto-generated method stub
+		MemberVO m = null;
+		try{
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		m = mapper.updateLogin(member);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return m;
+	}
+ 	public MemberVO updateLogout(MemberVO member){
+		MemberVO m = null;
+		try{
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		m = mapper.updateLogout(member);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+ 		return m;	
+ 	}
+
 
  }
