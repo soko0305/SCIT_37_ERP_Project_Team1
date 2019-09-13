@@ -27,6 +27,22 @@
   <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
   <!-- firebase Config and initialize -->	
   <script src="firebase/firebase-config.js"></script>
+  <script>
+	function updateANDdelete(data){
+		var database = firebase.database();	
+		var button_type = $(data).attr("button-type");
+		var data_code = $(data).attr("data-code");
+		var warehouse_code = $(data).attr("wh-code");
+		if(button_type=='update'||button_type=='move'){
+			var g_oWindow = window.open("/goUpdateInventory?warehouse_code="+warehouse_code+"&data_code="+data_code+"&button_type="+button_type+"", "Input Storage Information","width=400, height=500, location=no, toolbar=no, menubar=no, scrollbars=no, status=no, resizable=yes");
+		}else if(button_type=='delete'){
+			var checkDelete = confirm("정말로 재고 정보를 삭제하시겠습니까?");
+			if(checkDelete){
+				database.ref(warehouse_code+'/').child('inventory').child(data_code).remove();
+			}
+		}
+	}
+  </script>
 <script>
 	$(function(){	
 		$("#header").load("/header");
@@ -53,7 +69,8 @@
                                 </div>
                                 <div>실시간 재고관리
                                     <div class="page-title-subheading">
-                                    	실시간 재고 상황 검색, 수정 기능
+                                    	실시간 재고 상황 검색, 수정 기능 
+
                                     </div>
                                 </div>
                             </div>    
@@ -126,11 +143,15 @@
                                     </th>
                                    <th data-field="ff"
                                         data-sortable="true" width="100px">
-                                        	수정
+                                        	재고수정
                                     </th>
                                     <th data-field="ff"
                                         data-sortable="true" width="100px">
-                                        	삭제
+                                        	재고이전
+                                    </th>
+                                    <th data-field="ff"
+                                        data-sortable="true" width="100px">
+                                        	재고삭제
                                     </th>
                                 </tr>
                                 </thead>
@@ -143,6 +164,7 @@
                 <!-- footer 삽입 -->    </div>
     </div>
 </div>
+
 <!-- drawer 삽입 -->
 <div class="app-drawer-overlay d-none animated fadeIn"></div><script type="text/javascript" src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
 <script>
@@ -155,7 +177,7 @@
 			selelctInventoryINWarehouse();
 		});*/
 		selelctInventoryINWarehouse();
-
+		
 		function selelctInventoryINWarehouse(){
 			$("#tBody").html('');
 			database.ref().on('child_added', function(data){
@@ -211,10 +233,12 @@
 					str+='<td>'+serverData.rawm_sort+'</td>';
 					str+='<td>'+amount+'</td>';
 					str+='<td>'+serverData.rawm_price+'</td>';
-					str+='<td><button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary"  button-type="update" data-code="'+serverData.rawm_code+'" wh-code="'+warehouse_code+'" style="margin-top: 0.7em;margin-left: 1.2em">Update</button></td>';
-					str+='<td><button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary"  button-type="delete" data-code="'+serverData.rawm_code+'" wh-code="'+warehouse_code+'" style="margin-top: 0.7em;margin-left: 1.2em">Delete</button></button></td>';
+					str+='<td><button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary" onclick="updateANDdelete(this);" button-type="update" data-code="'+serverData.rawm_code+'" wh-code="'+warehouse_code+'" style="margin-top: 0.7em;margin-left: 1.2em">Update</button></td>';
+					str+='<td><button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary" onclick="updateANDdelete(this);" button-type="move" data-code="'+serverData.rawm_code+'" wh-code="'+warehouse_code+'" style="margin-top: 0.7em;margin-left: 1.2em">Move</button></button></td>';
+					str+='<td><button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary" onclick="updateANDdelete(this);" button-type="delete" data-code="'+serverData.rawm_code+'" wh-code="'+warehouse_code+'" style="margin-top: 0.7em;margin-left: 1.2em">Delete</button></button></td>';
 					str+='</tr>';
 					$("#tBody").append(str);	
+					
 					}
 				});
 		}
@@ -249,8 +273,9 @@
 			str+='<td>'+serverData.pd_sort+'</td>';
 			str+='<td>'+amount+'</td>';
 			str+='<td>'+(parseInt(serverData.pd_rmcost)+parseInt(serverData.pd_manufcost))+'</td>';
-			str+='<td><button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary"  button-type="update" data-code="'+serverData.pd_code+'" wh-code="'+warehouse_code+'" style="margin-top: 0.7em;margin-left: 1.2em">Update</button></td>';
-			str+='<td><button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary"  button-type="delete" data-code="'+serverData.pd_code+'" wh-code="'+warehouse_code+'" style="margin-top: 0.7em;margin-left: 1.2em">Delete</button></button></td>';
+			str+='<td><button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary"   onclick="updateANDdelete(this);" button-type="update" data-code="'+serverData.pd_code+'" wh-code="'+warehouse_code+'" style="margin-top: 0.7em;margin-left: 1.2em">Update</button></td>';
+			str+='<td><button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary"  onclick="updateANDdelete(this);"  button-type="move" data-code="'+serverData.pd_code+'" wh-code="'+warehouse_code+'" style="margin-top: 0.7em;margin-left: 1.2em">Move</button></button></td>';
+			str+='<td><button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary"  onclick="updateANDdelete(this);"  button-type="delete" data-code="'+serverData.pd_code+'" wh-code="'+warehouse_code+'" style="margin-top: 0.7em;margin-left: 1.2em">Delete</button></button></td>';
 			str+='</tr>';
 			$("#tBody").append(str);
 		}
@@ -419,19 +444,9 @@
 		});
 		});
 		
-		
 		//수정 기능
 		//삭제 기능
-		function updateANDdelete(){
-			$(".btn-outline-primary").click(function(){	
-				var button_type = $(this).attr("button-type");
-				var data_code = $(this).attr("data-code");
-				var warehouse_code = $(this).attr("wh-code");
-				alert(button_type);
-				alert(data_code);
-				alert(warehouse_code);
-			});
-		}
+
 		
 	});
 </script>

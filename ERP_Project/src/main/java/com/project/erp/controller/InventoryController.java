@@ -67,4 +67,6 @@ public class InventoryController {
 		pList = inventoryService.selectDistinctProductSort();
 		return pList;
 	}
+	
+	
 }

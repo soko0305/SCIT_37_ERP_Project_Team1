@@ -53,10 +53,10 @@ public class InventoryLinkController {
 	}
 	
 	@RequestMapping(value="/goUpdateInventory", method = RequestMethod.GET)
-	public String goUpdateInventory(String warehouse_code, String rawm_code, String pd_code, Model model){
+	public String goUpdateInventory(String warehouse_code, String data_code, String button_type, Model model){
 		model.addAttribute("warehouse_code", warehouse_code);
-		model.addAttribute("rawm_code", rawm_code);
-		model.addAttribute("pd_code", pd_code);
+		model.addAttribute("data_code", data_code);
+		model.addAttribute("button_type", button_type);
 		return "inventory/updateInventory";
 	}
 	
@@ -64,8 +64,5 @@ public class InventoryLinkController {
 	public String goResearchInventoryHistory(){
 		return "inventory/researchInventoryHistory";
 	}
-	
-
-	
 	
 }

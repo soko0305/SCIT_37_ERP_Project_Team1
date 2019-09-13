@@ -202,7 +202,7 @@
 				});
 		}
 		
-		
+
 	  	//생산품 실시간 재고 가져오는 함수
 		function  getProductAmount(pd_code){
 			database.ref(warehouse_code+'/').child("inventory").child(pd_code).once('value').then(function(snapshot){
