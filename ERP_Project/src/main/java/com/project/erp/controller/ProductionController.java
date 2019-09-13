@@ -35,8 +35,8 @@ public class ProductionController {
 	
 	@RequestMapping(value = "/goproducecheck", method = RequestMethod.GET)
 	public String goproducecheck(ManufactureVO manufacture, Model model,HttpSession session) {
-		ArrayList<ManufactureVO> result = pService.produceSelect(manufacture);
-		model.addAttribute("producelist", result);
+		ArrayList<ManufactureVO> plist = pService.produceSelect(manufacture);
+		model.addAttribute("producelist", plist);
 		return "production/producecheck";
 	}
 	

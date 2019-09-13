@@ -41,19 +41,5 @@ public class ProductionDAO {
 		return result;
 	}
 	
-	public ArrayList<BoardVO> boardAllSelect() {
-		ArrayList<BoardVO> result = null;
-
-		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
-		try {
-			result = mapper.boardAllSelect();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return result;
-		}
-		return result;
-	}
-
-	
 	
 }

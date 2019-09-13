@@ -97,41 +97,37 @@
                                 <tr>
                                     <th data-field="name1"
                                         data-sortable="true">
-                                        	이름
+                                        	mfseq
                                     </th>
                                     <th data-field="name"
                                         data-sortable="true">
-                                        	제품 코드
+                                        	pd_code
                                     </th>
                                     <th data-field="stargazers_count"
                                         data-sortable="true">
-                                        	제품명
+                                        	생산시작일
                                     </th>
                                     <th data-field="company"
                                         data-sortable="true">
-                                        	생산시작일
+                                        	생산종료일
                                         	
                                     </th>
                                     <th data-field="forks_count"
                                         data-sortable="true">
-                                        	생산종료일
+                                        	적재창고
                                     </th>
                                     <th data-field="prorobuy"
                                         data-sortable="true">
-                                        	원재료비
-                                    </th>
-                                    <th data-field="kind"
-                                        data-sortable="true">
-                                        	가공비
-                                    </th>
-                                    <th data-field="etc"
-                                        data-sortable="true">
                                         	수량
+                                    </th>
+<!--                                     <th data-field="kind"
+                                        data-sortable="true">
+                                        	원재료비
                                     </th>
                                     <th data-field="dd"
                                         data-sortable="true">
-                                        	적재창고
-                                    </th>
+                                        	가공비
+                                    </th> -->
                                      <th data-field="dd"
                                         data-sortable="true">
                                         	진행상황
@@ -140,9 +136,37 @@
                                         data-sortable="true">
                                         	기타
                                     </th>
+                                   <th data-field="ff"
+                                        data-sortable="true">
+                                        	수정/삭제
+                                    </th>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                  <tbody>
+  								<tr th:each="list : ${producelist}">
+<!-- 									<td th:text="${list.rn}"></td>
+ -->									<!-- <td><a th:href="@{http://localhost:9088/boarddetail(boardSeq=${list.board_seq})}"><p th:text="${list.title}"></p></a></td> -->
+									
+									<td th:text="${list.mfseq}"></td>
+ 									<td th:text="${list.pd_code}"></td>
+									<td th:text="${list.manuf_startdate}"></td>
+ 									<td th:text="${list.manuf_enddate}"></td>									
+ 									<td th:text="${list.warehouse_code}"></td>									
+ 									<td th:text="${list.manuf_amount}"></td>									
+ 									<td th:text="${list.manuf_status}"></td>									
+ 									<td><input type="checkbox" data-toggle="toggle" data-on="생산 완료" data-off="생산 미완료"></td>
+									<td>
+									<button class="mb-2 mr-2 btn btn-primary"
+												onclick="window.open('goMaterialsUpdate','window_name','width=100,height=100,location=no,status=no,scrollbars=yes');">수정</button>
+											<button class="mb-2 mr-2 btn btn-primary"
+												onclick="">삭제</button>
+									
+									</td>
+								</tr>
+                                </tbody>
+                                
+                                
+<!--                                 <tbody>
                                 <tr>
                                 <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td><input type="checkbox" data-toggle="toggle" data-on="생산 완료" data-off="생산 미완료"></td>										<td>
 
@@ -154,7 +178,7 @@
 										</td>
                                 </tr>
                                 </tbody>
-                            </table>
+ -->                            </table>
                         </div>
                     </div>
                 </div>

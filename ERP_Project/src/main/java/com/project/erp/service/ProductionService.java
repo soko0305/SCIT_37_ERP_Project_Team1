@@ -28,6 +28,6 @@ public class ProductionService {
 		ArrayList<ManufactureVO> result = pDAO.produceSelect(manufacture);
 		
 		// TODO Auto-generated method stub
-		return null;
+		return result;
 	}
 }

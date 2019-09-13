@@ -22,12 +22,12 @@
 		#{pd_sort}
 	)
 	</insert>
-	<select id="produceSelect" resultType="com.project.erp.vo.ProductVO" parameterType="com.project.erp.vo.ProductVO">
+	<select id="produceSelect" resultType="com.project.erp.vo.ManufactureVO" parameterType="com.project.erp.vo.ManufactureVO">
 		SELECT
 	 		mfseq
 			,pd_code 
- 			,manuf_startdate
- 			,manuf_enddate
+ 			,TO_CHAR(manuf_startdate, 'YYYY-MM-DD') AS manuf_startdate 
+ 			,TO_CHAR(manuf_enddate, 'YYYY-MM-DD') AS manuf_enddate
 			,manuf_status 
 			,warehouse_code 
 		 	,manuf_amount
