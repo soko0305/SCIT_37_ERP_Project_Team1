@@ -44,7 +44,16 @@ public class SalesDAO {
 		return result;
 	}
 	
-	
+	public int insertBuyer(Buyer buyer){
+		int result = 0;
+		try{
+		SalesMapper mapper = sqlSession.getMapper(SalesMapper.class);
+		result= mapper.insertBuyer(buyer);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 	/*
 	 * select
@@ -63,6 +72,19 @@ public class SalesDAO {
 		}
 		return buyer1;
 	}
+	
+	public Buyer selectBuyer(Buyer buyer){
+		Buyer buyer1 = null;
+		try{
+		SalesMapper mapper = sqlSession.getMapper(SalesMapper.class);
+		buyer1= mapper.selectBuyer(buyer);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return buyer1;
+		
+	}
+
 	
 	//Sales 목록 전체 select
 	public List<Sales> selectAllSales(){
@@ -100,6 +122,18 @@ public class SalesDAO {
 		
 	}
 	
+	public List<Buyer> selectAllBuyer(){
+		List<Buyer> list1 = null;
+		try{
+		SalesMapper mapper = sqlSession.getMapper(SalesMapper.class);
+		list1=mapper.selectAllBuyer();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return list1;
+		
+	}
+
 	
 	
 	/*
@@ -118,5 +152,34 @@ public class SalesDAO {
 		}
 		return result;
 		
+	}
+	
+
+	public int updateBuyer(Buyer buyer){
+		int result = 0;
+		try{
+		SalesMapper mapper = sqlSession.getMapper(SalesMapper.class);
+		result= mapper.updateBuyer(buyer);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return result;
+		
+	}
+	
+	
+	/*
+	 * delete
+	 */
+	
+	public int deleteBuyer(Buyer buyer){
+		int result = 0;
+		try{
+		SalesMapper mapper = sqlSession.getMapper(SalesMapper.class);
+		result= mapper.deleteBuyer(buyer);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return result;
 	}
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.erp.vo.BoardVO;
+import com.project.erp.vo.FileVO;
 import com.project.erp.vo.RawMaterialVO;
 @Repository
 public class BoardDAO {
@@ -18,8 +19,6 @@ public class BoardDAO {
 
 	public int boardInsert(BoardVO board) {
 		int result = 0;
-		System.out.println("2");
-		System.out.println(board);
 		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
 		try {
 			result = mapper.boardInsert(board);
@@ -83,4 +82,61 @@ public class BoardDAO {
 		}
 		return result;
 	}
+
+	public BoardVO selectBoard(String board_seq) {
+		 BoardVO result = null;
+
+		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+		try {
+			result = mapper.selectBoard(board_seq);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return result;
+		}
+		return result;
 }
+	
+
+	public int deleteBoard(String boardSeq) {
+		int result = 0;
+ 
+		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+		try {
+			result = mapper.deleteBoard(boardSeq);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return result;
+		}
+		return result;
+	}
+
+	public int updateBoard(BoardVO board) {
+		int result = 0;
+ 
+		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+		try {
+			result = mapper.updateBoard(board);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return result;
+		}
+		return result;
+	}
+
+	public int deleteAllBoard(String id) {
+		int result = 0;
+ 
+		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+		try {
+			result = mapper.deleteAllBoard(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return result;
+		}
+		return result;
+	}
+}
+
+
+
+

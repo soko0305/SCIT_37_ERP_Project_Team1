@@ -60,7 +60,7 @@ public class SalesService {
 			salesdetail_name = object.get("salesdetail_name").getAsString();
 			pd_code = object.get("pd_code").getAsString();
 			salesdetail_amount = object.get("salesdetail_amount").getAsString();
-			salesdetail_price = object.get("salesdetail_price").getAsString();
+			salesdetail_price = object.get("salesdetail_totalprice").getAsString();
 				
 				
 			//totalPrice 계산.
@@ -98,6 +98,7 @@ public class SalesService {
 			salesDetail.setSalesdetail_price(salesdetail_price);
 			salesDetail.setSales_ordernum(sales_ordernum);
 			salesDetail.setPd_code(pd_code);
+			dao.insertSalesDetail(salesDetail);
 			}
 		
 		if(result1==1 && result2 ==1){return "ok";
@@ -115,5 +116,35 @@ public class SalesService {
 	public List<SalesDetail> getDetails(SalesDetail salesDetail){
 		List<SalesDetail> list = dao.selectSalesDetail(salesDetail);
 		return list;
+	}
+	
+	public List<Buyer> selectAllBuyer(){
+		List<Buyer> list = dao.selectAllBuyer();
+		return list;
+	}
+	
+	public List<Sales> selectSalesStatusIsDone(){
+		List<Sales> list = dao.selectSalesStatusIsDone();
+		return list;
+	}
+	
+	public int insertBuyer(Buyer buyer){
+		int result = dao.insertBuyer(buyer);
+		return result;
+	}
+	
+	public int deleteBuyer(Buyer buyer){
+		int result = dao.deleteBuyer(buyer);
+		return result;
+	}
+	
+	public Buyer selectBuyer(Buyer buyer){
+		Buyer buyer1 = dao.selectBuyer(buyer);
+		return buyer1;
+	}
+	
+	public int updateBuyer(Buyer buyer){
+		int result = dao.updateBuyer(buyer);
+		return result;
 	}
 }

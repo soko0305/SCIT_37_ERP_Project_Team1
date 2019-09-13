@@ -32,6 +32,21 @@ salesdetailseq.nextval,
 )
 </insert>
 
+<insert id="insertBuyer" parameterType="com.project.erp.vo.Buyer">
+insert into buyer
+values(
+buyerseq.nextval,
+#{buyer_corp},
+#{buyer_owner},
+#{buyer_addr},
+#{buyer_tel},
+#{buyer_pic},
+#{buyer_pictel},
+#{buyer_email},
+#{buyer_memo}
+)
+</insert>
+
 
 
 <select id="selectAllSales" resultType="com.project.erp.vo.Sales">
@@ -53,12 +68,23 @@ from buyer
 where buyer_corp = #{buyer_corp}
 </select>
 
+<select id="selectBuyer" parameterType ="com.project.erp.vo.Buyer" resultType="com.project.erp.vo.Buyer">
+select *
+from buyer
+where buyerseq =#{buyerseq}
+</select>
+
 <select id="selectSalesStatusIsDone" resultType="com.project.erp.vo.Sales">
 select *
 from sales
 where sales_status='판매완료'
 </select>
 
+<select id="selectAllBuyer" resultType="com.project.erp.vo.Buyer">
+select *
+from buyer
+order by buyerseq asc
+</select>
 
 
 <update id="updateSalesStatus" parameterType="com.project.erp.vo.Sales">
@@ -79,4 +105,24 @@ sales_title=#{sales_title}
 where
 sales_ordernum=#{sales_ordernum}
 </update>
+
+<update id="updateBuyer" parameterType="com.project.erp.vo.Sales">
+update buyer
+set
+buyer_corp = #{buyer_corp},
+buyer_owner = #{buyer_owner},
+buyer_addr = #{buyer_addr},
+buyer_tel = #{buyer_tel},
+buyer_pic = #{buyer_pic},
+buyer_pictel = #{buyer_pictel},
+buyer_email = #{buyer_email},
+buyer_memo = #{buyer_memo}
+where
+buyerseq=#{buyerseq}
+</update>
+
+<delete id="deleteBuyer" parameterType="com.project.erp.vo.Buyer">
+delete from buyer where buyerseq=#{buyerseq}
+</delete>
+
 </mapper>

@@ -386,7 +386,7 @@
 								</thead>
 								<tbody>
 								
-									<tr th:each="list : ${rawMaterialList}">
+									<tr th:each="list : ${rawMaterialList}" th:if="${list.rawm_delete}=='N'">
 										<td th:text="${list.rawm_code}"></td>
 										<td th:text="${list.rawm_name}"></td>
 										<td th:text="${list.rawm_sort}"></td>

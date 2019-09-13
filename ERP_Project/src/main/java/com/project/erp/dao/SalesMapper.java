@@ -19,6 +19,7 @@ public interface SalesMapper {
 
 	public int insertSales(Sales sales);
 	public int insertSalesDetail(SalesDetail salesDetail);
+	public int insertBuyer(Buyer buyer);
 	
 	/*
 	 * select
@@ -28,6 +29,8 @@ public interface SalesMapper {
 	public Buyer selectOneBuyer(Buyer buyer); //BuyerSeq가 일치하는 Buyer를 select
 	public List<SalesDetail> selectSalesDetail(SalesDetail salesDetail); // OrderNumber를 통해 salesDetail을 select 
 	public List<Sales> selectSalesStatusIsDone();
+	public List<Buyer> selectAllBuyer();
+	public Buyer selectBuyer(Buyer buyer);
 	
 	
 	/*
@@ -35,5 +38,11 @@ public interface SalesMapper {
 	 */
 	
 	public int setSalesPrice(Sales sales);
+	public int updateBuyer(Buyer buyer);	
+	/*
+	 * delete
+	 */
+	
+	public int deleteBuyer(Buyer buyer);
 	
 }
