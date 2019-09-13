@@ -51,9 +51,10 @@ public class LinkController {
 	
 	@RequestMapping(value="/detailLink", method=RequestMethod.GET)
 	public String detailLink(Buyer buyer, Model model){
-		System.out.println(buyer);
 		Buyer buyer1 = null;
 		buyer1 = service.selectBuyer(buyer);
+		System.out.println(buyer1);
+		
 		model.addAttribute("buyer", buyer1);
 		return "sales/buyerDetails";
 	}

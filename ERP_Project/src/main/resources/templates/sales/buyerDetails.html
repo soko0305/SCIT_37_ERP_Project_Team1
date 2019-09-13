@@ -50,16 +50,29 @@ ixed-header fixed-sidebar">
                        
                     <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@위에 네비메뉴 -->
                         <div class="page-title-actions">
-                               <div class="card mb-4">
-                         	    <div class="card-header-tab card-header" >
-                                 <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i class="header-icon lnr-laptop-phone mr-3 text-muted opacity-6"> </i>실시간 주문 내역</div>
-                                 </div>
+                           <div class="card mb-4">
+                        	  <div class="card-header-tab card-header" >
+                                <div class="card-header-title font-size-lg  text-capitalize font-weight-normal"><i class="header-icon lnr-laptop-phone mr-3 text-muted opacity-6"> </i><h4 th:text="${buyer.buyer_corp}+'의 거래처정보'"></h4></div></div>
                             	<div class="card-body" id="insertWithAjax">
-                                		거래처정보
-                                <table style="width: 100%;" id="example" class="table table-hover table-bordered">
-                                  
-                               </table>
-                            </div>
+                            	<div>
+                            	   <button class="mb-2 mr-2 btn btn-primary" onclick="return deleteBuyer()">거래처 삭제</button>
+							   <button class="mb-2 mr-2 btn btn-primary">거래처 업데이트</button><br /><br />
+                               <h6 th:text="'거래처명 : '+${buyer.buyer_corp}"></h6>
+                               <h6 th:text="'대표자명  : '+${buyer.buyer_owner}"></h6>
+                               <h6 th:text="'주소 : '+${buyer.buyer_addr}"></h6>
+                               <h6 th:text="'연락처 : '+${buyer.buyer_tel}"></h6>
+                               <h6 th:text="'담당자 : '+${buyer.buyer_pic}"></h6>
+                               <h6 th:text="'담당자 연락처 : '+${buyer.buyer_pictel}"></h6>
+                               <h6 th:text="'이메일: '+${buyer.buyer_email}"></h6>
+							   <h6 th:text="'메모 (검색키워드): '+${buyer.buyer_memo}"></h6>
+							    <div class="card mb-4" style="float: right">
+							   <div class="card-body" ><h6>나중에 chart넣고싶은곳. 주거래품 / 판매금액</h6></div></div>           
+							   </div>  <br />
+							
+							   </div>  
+							  
+							         
+							   </div>     
                         </div>
                    </div>
                 <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
@@ -68,7 +81,6 @@ ixed-header fixed-sidebar">
        </div>
     </div>
   </div>
-</div>
 <!-- drawer 삽입 -->
 <div class="app-drawer-overlay d-none animated fadeIn"></div></body>
 </html>
