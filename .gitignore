@@ -12,3 +12,4 @@ Servers/Pivotal tc Server Developer Edition v3.1-config/catalina.policy
 Servers/.settings/org.eclipse.wst.server.core.prefs
 Servers/.project
 /.recommenders/
+ERP_Project/src/main/resources/static/firebase/firebasekey/scit37team1project-firebase-adminsdk-jziki-8a884c28bb.json

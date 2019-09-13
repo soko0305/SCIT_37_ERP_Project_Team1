@@ -61,12 +61,6 @@ public class InventoryService {
 	}
 
 
-	public void InventoryHistory() {
-		System.out.println("hello");
-		
-	}
-
-
 
 
 
