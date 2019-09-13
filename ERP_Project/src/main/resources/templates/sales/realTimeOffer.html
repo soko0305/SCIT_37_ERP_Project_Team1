@@ -28,6 +28,7 @@
 		$("#header").load("/header");
 		$("#navbar").load("/navbar");
 		$("#setting").load("/setting");
+		goDetail();
 	});
 	</script>
 	
@@ -67,6 +68,15 @@ function selectAllSales(){
 	})
 }
 
+
+function goDetail(){
+	 $('.goDetail').click(function(){
+		 var seq = $(this).attr('data-ordernum');
+		 var form = $('#formTry');
+		 $('#ordernum').val(seq);
+		 form.submit();
+	 })
+ }
 
 
 /*
@@ -150,6 +160,13 @@ function insertData(sheet){
 </script>
 </head>
 <body>
+
+
+<form action="salesDetailLink" id="formTry">
+<input type="hidden" id="ordernum" name="sales_ordernum">
+</form>
+
+
     <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
      <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Header삽입@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
     <div id="header"></div>
@@ -213,7 +230,7 @@ function insertData(sheet){
                                             	<tr th:each="list : ${salesList}">
 												<td th:text="${list.sales_ordernum}"></td>
 												<td th:text="${list.buyer_corp}"></td>
-												<td><a href="#" th:text="${list.sales_title}"></a></td>
+												<td><a href="#" class="goDetail" th:text="${list.sales_title}" th:attr="data-ordernum=${list.sales_ordernum}"></a></td>
 												<td th:text="${list.sales_totalprice}"></td>
 												<td th:text="${list.sales_orderdate}"></td>
 												<td style="text-align: center;"><button class="mb-2 mr-2 btn btn-primary" th:text="${list.sales_status}" ></button></td>

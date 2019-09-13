@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.project.erp.service.SalesService;
 import com.project.erp.vo.Buyer;
 import com.project.erp.vo.Sales;
+import com.project.erp.vo.SalesDetail;
 
 
 
@@ -57,6 +58,13 @@ public class LinkController {
 		
 		model.addAttribute("buyer", buyer1);
 		return "sales/buyerDetails";
+	}
+	
+	@RequestMapping(value="/salesDetailLink", method=RequestMethod.GET)
+	public String salesDetailLink(SalesDetail salesDetail, Model model){
+		List<SalesDetail> list = service.getDetails(salesDetail);
+		model.addAttribute("salesDetailList", list);
+		return "sales/offersheet";
 	}
 	
 }

@@ -98,6 +98,7 @@ public class SalesService {
 			salesDetail.setSalesdetail_price(salesdetail_price);
 			salesDetail.setSales_ordernum(sales_ordernum);
 			salesDetail.setPd_code(pd_code);
+			dao.insertSalesDetail(salesDetail);
 			}
 		
 		if(result1==1 && result2 ==1){return "ok";
