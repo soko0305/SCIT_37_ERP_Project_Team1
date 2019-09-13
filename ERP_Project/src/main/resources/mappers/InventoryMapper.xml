@@ -28,4 +28,25 @@
 		FROM product 
 		WHERE pd_code=#{pd_code}
 	</select>
+	
+	<select id="selectDistinctMaterialSupplier" resultType="com.project.erp.vo.SupplierVO">
+		SELECT supplierseq
+				, supplier_name
+				, supplier_owner
+				, supplier_addr
+				, supplier_tel
+				, supplier_pic
+				, supplier_email
+		FROM supplier 
+	</select>
+	
+		<select id="selectDistinctMaterialSort" resultType="com.project.erp.vo.RawMaterialVO">
+		SELECT DISTINCT rawm_sort
+		FROM rawmaterial
+	</select>
+	
+		<select id="selectDistinctProductSort" resultType="com.project.erp.vo.ProductVO">
+		SELECT DISTINCT pd_sort
+		FROM product
+	</select>
 </mapper>

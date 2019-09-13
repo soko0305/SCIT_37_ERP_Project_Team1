@@ -6,11 +6,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.project.erp.vo.InventoryVO;
 import com.project.erp.vo.ProductVO;
 import com.project.erp.vo.RawMaterialVO;
 import com.project.erp.vo.SupplierVO;
-import com.project.erp.vo.WarehouseVO;
 
 @Repository
 public class InventoryDAO {
@@ -41,6 +39,45 @@ public class InventoryDAO {
 		}
 		return m;
 	}
+
+
+	public ArrayList<SupplierVO> selectDistinctMaterialSupplier() {
+		ArrayList<SupplierVO> sList = null;
+		try{
+		InventoryMapper mapper = sqlSession.getMapper(InventoryMapper.class);
+		sList= mapper.selectDistinctMaterialSupplier();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return sList;
+	}
+
+
+	public ArrayList<RawMaterialVO> selectDistinctMaterialSort() {
+		ArrayList<RawMaterialVO> mList = null;
+		try{
+		InventoryMapper mapper = sqlSession.getMapper(InventoryMapper.class);
+		mList= mapper.selectDistinctMaterialSort();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return mList;
+	}
+
+
+	public ArrayList<ProductVO> selectDistinctProductSort() {
+		ArrayList<ProductVO> pList = null;
+		try{
+		InventoryMapper mapper = sqlSession.getMapper(InventoryMapper.class);
+		pList= mapper.selectDistinctProductSort();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return pList;
+	}
+
+
+
 
 	
 }
