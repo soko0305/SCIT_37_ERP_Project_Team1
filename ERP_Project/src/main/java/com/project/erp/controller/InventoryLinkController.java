@@ -20,7 +20,7 @@ public class InventoryLinkController {
 	
 	@RequestMapping(value="/goInventoryManagement", method = RequestMethod.GET)
 	public String goInventoryManagement(){
-		return "inventory/inventoryManagement2";
+		return "inventory/inventoryManagement";
 	}
 	
 	@RequestMapping(value="/goResearchConfirm", method = RequestMethod.GET)
@@ -59,5 +59,13 @@ public class InventoryLinkController {
 		model.addAttribute("pd_code", pd_code);
 		return "inventory/updateInventory";
 	}
+	
+	@RequestMapping(value="/goResearchInventoryHistory", method = RequestMethod.GET)
+	public String goResearchInventoryHistory(){
+		return "inventory/researchInventoryHistory";
+	}
+	
+
+	
 	
 }
