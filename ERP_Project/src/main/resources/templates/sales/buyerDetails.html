@@ -13,51 +13,30 @@
 
     <!-- Disable tap highlight on IE -->
     <meta name="msapplication-tap-highlight" content="no">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<!-- <script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script> -->
-	<!-- <script src="architectui-html-pro-theme-package/architectui-html-pro-docs/assets/scripts/main.1166e284e75a484445a0.js"></script> -->
-	<link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
-	<style type="text/css">
-	.filebox label { float: right ; display: inline-block; padding: .5em .75em; color: #999; font-size: inherit; line-height: normal; vertical-align: middle; background-color: #fdfdfd; cursor: pointer; border: 1px solid #ebebeb; border-bottom-color: #e2e2e2; border-radius: .25em; } .filebox input[type="file"] { /* 파일 필드 숨기기 */ position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; }
-	</style>
-	<script>
-	$(function(){
-		
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- <script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script> -->
+<link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
+<script>
+	$(function(){	
 		$("#header").load("/header");
 		$("#navbar").load("/navbar");
 		$("#setting").load("/setting");
-		deleteBuyer();
-		updateBuyer();
+
 	});
-	</script>
-	
-<script>
 
-function deleteBuyer(){
-	
-	
-}
-
-function updateBuyer(){
-	
-	
 }
 </script>
-</head>
 <body>
-    <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
-     <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Header삽입@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<div class="app-container app-theme-white body-tabs-shadow f
+ixed-header fixed-sidebar">
+    <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Header삽입@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
     <div id="header"></div>
     <div id="setting"></div> 
             <div class="app-main">
-     <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@왼쪽 메뉴@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-                     <div id="navbar"></div>
-    
+            <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@왼쪽 메뉴@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+                <div id="navbar"></div>
                 <div class="app-main__outer">
                 <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-                
                 <div class="app-main__inner">
                     <div class="app-page-title">
                         <div class="page-title-wrapper">
@@ -66,75 +45,61 @@ function updateBuyer(){
                                     <i class="pe-7s-notebook icon-gradient bg-mixed-hopes">
                                     </i>
                                 </div>
-                               <div>실시간 주문관리
+                                <div>판매처 관리
                                     <div class="page-title-subheading">
-                                    	바이어로부터의 실시간 주문내역 확인 및 Status 수정 기능
+                                    	판매처에 대한 정보 열람 및 검색
                                     </div>
                                 </div>
                             </div>    
                           </div>
                     </div>         
-            
+                    
                     <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@위에 달린 메뉴 -->
-                    
-                            
-                    
-				<div class="filebox">
- 				<label for="excelFile">직접 업로드하기</label>
-  				<input type="file" id="excelFile" onchange="excelExport(event)"/> </div><br /><br /><hr />
-
-				<!-- <h6>JSON 형태로 보기</h6>
-				<div id="displayExcelJson"></div> -->
-          		
- <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
- 
-                 <div class="page-title-actions">
+                       
+                    <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@위에 네비메뉴 -->
+                        <div class="page-title-actions">
                                <div class="card mb-4">
                          	    <div class="card-header-tab card-header" >
                                  <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i class="header-icon lnr-laptop-phone mr-3 text-muted opacity-6"> </i>실시간 주문 내역</div>
                                  </div>
-       
-                            
-                            	<div class="card-body">
-                            	
+                            	<div class="card-body" id="insertWithAjax">
+						<button class="mb-2 mr-2 btn-square btn btn-primary idAddbuyer" style="width:100%">거래처추가</button><br /><br />
                                 <table style="width: 100%;" id="example" class="table table-hover table-bordered">
                                    <thead>
                                         <tr>
-                                            <th>주문 번호</th>
-                                            <th>거래처</th>
-                                            <th>주문 내용</th>
-                                            <th>금액</th>
-                                            <th>주문일자</th>
-                                            <th>Status</th>
+                                            <th>번호</th>
+                                            <th>거래처명</th>
+                                            <th>대표자명</th>
+                                            <th>담당자</th>
+                                            <th>담당자연락처</th>
+                                            <th>이메일</th>
+                                            <th>주소</th>
+                                            <th>검색키워드</th>
                                         </tr>
                                         </thead>
                                         <tbody class="tbody">
-                                            	<tr th:each="list : ${salesList}">
-												<td th:text="${list.sales_ordernum}"></td>
+                                            	<tr th:each="list : ${buyerList}">
+												<td th:text="${list.buyerseq}"></td>
 												<td th:text="${list.buyer_corp}"></td>
-												<td><a href="javaScript:goDetail();" th:text="${list.sales_title}"></a></td>
-												<td th:text="${list.sales_totalprice}"></td>
-												<td th:text="${list.sales_orderdate}"></td>
-												<td style="text-align: center;"><button class="mb-2 mr-2 btn btn-primary" th:text="${list.sales_status}" ></button></td>
+												<td th:text="${list.buyer_owner}"></td>
+												<td th:text="${list.buyer_pic}"></td>
+												<td th:text="${list.buyer_pictel}"></td>
+												<td th:text="${list.buyer_email}"></td>
+												<td th:text="${list.buyer_addr}"></td>
+												<td th:text="${list.buyer_memo}"></td>
 										</tr> 
                                   </tbody>
                                </table>
                             </div>
                         </div>
                    </div>
-                  
-                   
-
                 <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-                <!-- footer 삽입 -->    
-		</div>	
-   </div>
- </div>
+                
+                <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@footer 삽입@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->  
+       </div>
+    </div>
+  </div>
 </div>
-
 <!-- drawer 삽입 -->
-
-<div class="app-drawer-overlay d-none animated fadeIn"></div>
-</body>
+<div class="app-drawer-overlay d-none animated fadeIn"></div></body>
 </html>
-

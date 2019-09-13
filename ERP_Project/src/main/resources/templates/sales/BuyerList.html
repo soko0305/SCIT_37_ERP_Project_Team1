@@ -22,12 +22,22 @@
 		$("#navbar").load("/navbar");
 		$("#setting").load("/setting");
 		printAddBuyer();
+		goDetail();
 	});
+	
+	
 	function printAddBuyer(){
 	 $('.idAddbuyer').click(function(){
 			var g_oWindow = window.open("/insertBuyer", "Input Storage Information","width=700, height=700, location=no, toolbar=no, menubar=no, scrollbars=no, status=no, resizable=yes");
 	})
-}
+	}
+	
+	function goDetail(){
+		 $('.goDetail').click(function(){
+			 var seq = $(this).attr('data-buyerseq');
+			 alert(seq);
+		 })
+	 }
 </script>
 <body>
 <div class="app-container app-theme-white body-tabs-shadow f
@@ -83,7 +93,7 @@ ixed-header fixed-sidebar">
                                         <tbody class="tbody">
                                             	<tr th:each="list : ${buyerList}">
 												<td th:text="${list.buyerseq}"></td>
-												<td th:text="${list.buyer_corp}"></td>
+												<td><a href="#" class="goDetail" th:text="${list.buyer_corp}" th:attr="data-buyerseq=${list.buyerseq}"></a></td>
 												<td th:text="${list.buyer_owner}"></td>
 												<td th:text="${list.buyer_pic}"></td>
 												<td th:text="${list.buyer_pictel}"></td>

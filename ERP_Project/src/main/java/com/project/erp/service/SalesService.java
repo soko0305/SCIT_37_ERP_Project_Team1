@@ -60,7 +60,7 @@ public class SalesService {
 			salesdetail_name = object.get("salesdetail_name").getAsString();
 			pd_code = object.get("pd_code").getAsString();
 			salesdetail_amount = object.get("salesdetail_amount").getAsString();
-			salesdetail_price = object.get("salesdetail_price").getAsString();
+			salesdetail_price = object.get("salesdetail_totalprice").getAsString();
 				
 				
 			//totalPrice 계산.
