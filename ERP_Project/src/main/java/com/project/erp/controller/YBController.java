@@ -65,18 +65,10 @@ public class YBController {
 		return "production/sample";
 	} 	
 
-	 
-	@RequestMapping(value="/rawmaterialrequest", method = RequestMethod.GET)
-	public String rawmaterialrequest(){
-		return "production/rawmaterialrequest";
+ 	@RequestMapping(value="/confirmproductionrequest", method = RequestMethod.GET)
+	public String 	confirmproductionrequest(){
+		return "production/	confirmproductionrequest";
 	} 	
-	
-	 
-	@RequestMapping(value="/confirmproductionrequest", method = RequestMethod.GET)
-	public String confirmproductionrequest(){
-		return "production/confirmproductionrequest";
-	} 
-	
 	
 	//
 	//생산품 등록 이동 Form

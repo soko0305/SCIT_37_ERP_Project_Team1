@@ -12,6 +12,6 @@ public interface MemberMapper {
 	public int insertMember(MemberVO member);
 	public MemberVO selectMemberById(MemberVO member);
  	public MemberVO updateLogin(MemberVO member);
- 	public MemberVO updateLogout(MemberVO member);
+ 	public MemberVO updateLogout(String member);
 
   }

@@ -1,9 +1,13 @@
 package com.project.erp.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.erp.vo.BoardVO;
+import com.project.erp.vo.ManufactureVO;
 import com.project.erp.vo.ProductVO;
 
 @Repository
@@ -24,4 +28,32 @@ public class ProductionDAO {
 		}
 		return result;
 	}
+	public ArrayList<ManufactureVO> produceSelect(ManufactureVO manufacture) {
+		ArrayList<ManufactureVO> result = null;
+		
+		ProductionMapper mapper = sqlSession.getMapper(ProductionMapper.class);
+		try {
+			result = mapper.produceSelect(manufacture);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return result;
+		}
+		return result;
+	}
+	
+	public ArrayList<BoardVO> boardAllSelect() {
+		ArrayList<BoardVO> result = null;
+
+		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
+		try {
+			result = mapper.boardAllSelect();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return result;
+		}
+		return result;
+	}
+
+	
+	
 }

@@ -1,7 +1,5 @@
 package com.project.erp.controller;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.project.erp.dao.MemberDAO; 
+import com.project.erp.dao.MemberDAO;
 import com.project.erp.vo.MemberVO;
 
 @Controller
@@ -63,7 +61,9 @@ public class MemberController {
 	}
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(MemberVO member, Model model, HttpSession session) {
-			memberDao.updateLogout(member);
+		
+			String userid = session.getAttribute("loginid").toString();
+			memberDao.updateLogout(userid);
 			session.invalidate();
 		
 		return "member/login";

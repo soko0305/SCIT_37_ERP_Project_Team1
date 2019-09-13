@@ -22,4 +22,22 @@
 		#{pd_sort}
 	)
 	</insert>
+	<select id="produceSelect" resultType="com.project.erp.vo.ProductVO" parameterType="com.project.erp.vo.ProductVO">
+		SELECT
+	 		mfseq
+			,pd_code 
+ 			,manuf_startdate
+ 			,manuf_enddate
+			,manuf_status 
+			,warehouse_code 
+		 	,manuf_amount
+			,sales_ordernum 
+			,manuf_requserid 
+			,manuf_reqdate 
+			,'A' as salesdetailseq 
+	 	FROM
+		manufacture
+<!--	WHERE
+ 		pd_code=#{pd_code}
+ -->	</select>
 </mapper>

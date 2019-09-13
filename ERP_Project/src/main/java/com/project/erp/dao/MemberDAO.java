@@ -47,7 +47,7 @@ public class MemberDAO {
 		}
 		return m;
 	}
- 	public MemberVO updateLogout(MemberVO member){
+ 	public MemberVO updateLogout(String member){
 		MemberVO m = null;
 		try{
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
