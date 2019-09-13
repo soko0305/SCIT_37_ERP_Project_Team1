@@ -131,4 +131,9 @@ public class SalesService {
 		int result = dao.insertBuyer(buyer);
 		return result;
 	}
+	
+	public int deleteBuyer(Buyer buyer){
+		int result = dao.deleteBuyer(buyer);
+		return result;
+	}
 }

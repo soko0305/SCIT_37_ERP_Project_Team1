@@ -140,4 +140,20 @@ public class SalesDAO {
 		return result;
 		
 	}
+	
+	
+	/*
+	 * delete
+	 */
+	
+	public int deleteBuyer(Buyer buyer){
+		int result = 0;
+		try{
+		SalesMapper mapper = sqlSession.getMapper(SalesMapper.class);
+		result= mapper.deleteBuyer(buyer);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

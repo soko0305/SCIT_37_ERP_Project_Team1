@@ -38,4 +38,10 @@ public interface SalesMapper {
 	
 	public int setSalesPrice(Sales sales);
 	
+	/*
+	 * delete
+	 */
+	
+	public int deleteBuyer(Buyer buyer);
+	
 }

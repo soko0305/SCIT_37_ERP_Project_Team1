@@ -48,4 +48,9 @@ public class LinkController {
 		
 		return "sales/insertBuyer";
 	}
+	
+	@RequestMapping(value="/buyerDetails", method=RequestMethod.GET)
+	public String buyerDetails(){
+		return "sales/buyerDetails";
+	}
 }

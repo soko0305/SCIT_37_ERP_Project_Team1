@@ -99,4 +99,9 @@ sales_title=#{sales_title}
 where
 sales_ordernum=#{sales_ordernum}
 </update>
+
+<delete id="deleteBuyer" parameterType="com.project.erp.vo.Buyer">
+delete from buyer where buyerseq=#{buyerseq}
+</delete>
+
 </mapper>

@@ -28,125 +28,22 @@
 		$("#header").load("/header");
 		$("#navbar").load("/navbar");
 		$("#setting").load("/setting");
+		deleteBuyer();
+		updateBuyer();
 	});
 	</script>
 	
 <script>
 
-/*
- * 
- *	
- *	Body 관련 메소드
- *
- */
-
- 
-
-//엑셀 업로드 프로세스가 완료된 후, insert가 끝난 DB ajax로 새로 출력해주기.
-function selectAllSales(){
-	$.ajax({
-		url:'selectAllSales',
-		success:function(data){
-			str = '';
-			$('.tbody').html(str);
-				
-			
-			for(var i = 0; i<data.length; i++ ){
-				str1 = '';
-				str1+='<tr>';
-				str1+='<td>'+data[i].sales_ordernum+'</td>';
-				str1+='<td>'+data[i].buyer_corp+'</td>';
-				str1+='<td><a href="a">'+data[i].sales_title+'</a></td>';
-				str1+='<td>'+data[i].sales_totalprice+'</td>';
-				str1+='<td>'+data[i].sales_orderdate+'</td>';
-				str1+='<td style="text-align: center;"><button class="mb-2 mr-2 btn btn-primary">'+data[i].sales_status+'</button></td>';
-				str1+='</tr>'
-				$('.tbody').append(str1);
-			}
-		}
-	})
-}
-
-
-
-/*
- * 
- *	
- *	엑셀 문서 처리 관련 메소드
- *
- */
-
- 
- 
-//sheetJS를 사용한 Excel read 메소드.
-function excelExport(event){
-	excelExportCommon(event, handleExcelDataAll);
-}
-
-//sheetJS를 사용한 Excel read 메소드.
-function excelExportCommon(event, callback){
-    var input = event.target;
-    var reader = new FileReader();
-    reader.onload = function(){
-        var fileData = reader.result;
-        var wb = XLSX.read(fileData, {type : 'binary'});
-        var sheetNameList = wb.SheetNames; // 시트 이름 목록 가져오기 
-        var firstSheetName = sheetNameList[1]; // 첫번째 시트명
-        var firstSheet = wb.Sheets[firstSheetName]; // 첫번째 시트 
-        callback(firstSheet);      
-    };
-    reader.readAsBinaryString(input.files[0]);
-}
-
-//sheetJS를 사용한 Excel read 메소드.
-function handleExcelDataAll(sheet){
-	insertData(sheet);
-	handleExcelDataJson(sheet); // json 형태
-	handleExcelDataHtml(sheet); // html 형태
-}
-
-//sheetJS를 사용한 Excel read하고, DB에 담는 Ajax
-function insertData(sheet){
-	var excelJson =  XLSX.utils.sheet_to_json (sheet);
+function deleteBuyer(){
 	
-		$.ajax({
-			url:'insertData',
-			data:JSON.stringify(excelJson),
-			datatype:'json',
-			contentType: "application/json; charset=utf-8",
-			type:'post',
-			success:function(data){
-				if(data=='ok'){alert('성공')}
-				selectAllSales();
-			}
-			
-		})
-} 
+	
+}
 
-//sheetJS를 사용한 Excel read 메소드.
-/* function handleExcelDataJson(sheet){
-	var sheetJson = XLSX.utils.sheet_to_json (sheet);
-	$("#displayExcelJson").html(sheetJson);
-	str='';
-	$("#displayExcelJson").append(str);
-	for(var i =0; i<sheetJson.length; i++){
-		str1='';
-		str1+=sheetJson[0].company;
-		str1+='&nbsp;'
-		str1+=sheetJson[0].sales_ordernum;
-		str1+='&nbsp;'
-		str1+=sheetJson[i].salesdetail_name;
-		str1+='&nbsp;'
-		str1+=sheetJson[i].pd_code;
-		str1+='&nbsp;'
-		str1+=sheetJson[i].salesdetail_amount;
-		str1+='&nbsp;'
-		str1+=sheetJson[i].salesdetail_price;
-		str1+='<br />'
-		$("#displayExcelJson").append(str1);
-	} 
-
-} */
+function updateBuyer(){
+	
+	
+}
 </script>
 </head>
 <body>
@@ -215,7 +112,7 @@ function insertData(sheet){
                                             	<tr th:each="list : ${salesList}">
 												<td th:text="${list.sales_ordernum}"></td>
 												<td th:text="${list.buyer_corp}"></td>
-												<td><a href="#" th:text="${list.sales_title}"></a></td>
+												<td><a href="javaScript:goDetail();" th:text="${list.sales_title}"></a></td>
 												<td th:text="${list.sales_totalprice}"></td>
 												<td th:text="${list.sales_orderdate}"></td>
 												<td style="text-align: center;"><button class="mb-2 mr-2 btn btn-primary" th:text="${list.sales_status}" ></button></td>
