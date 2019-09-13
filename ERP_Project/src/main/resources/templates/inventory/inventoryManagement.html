@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="UTF-8" xmlns:th="http://www.thymeleaf.org">
+<html lang="UTF-8">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="UTF-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Grid Tables - Basic example of a Bootstrap 4 table with sort, search and filter functionality.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"
     />
@@ -16,7 +16,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
 <link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
-  	<!-- firebase -->
+<!-- firebase -->
 	<script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-auth.js"></script>
   <!-- TODO: Add SDKs for Firebase products that you want to use
@@ -27,80 +27,110 @@
   <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
   <!-- firebase Config and initialize -->	
   <script src="firebase/firebase-config.js"></script>
+<script>
+	$(function(){	
+		$("#header").load("/header");
+		$("#navbar").load("/navbar");
+		$("#setting").load("/setting");
+	});
+</script>
 </head>
 <body>
 <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
+    <div id="header"></div>
+    <div id="setting"></div> 
             <div class="app-main">
             
-
-               
+                     <div id="navbar"></div>
+                <div class="app-main__outer">
                 <div class="app-main__inner">
-                     <div class="app-page-title">
+                    <div class="app-page-title">
                         <div class="page-title-wrapper">
                             <div class="page-title-heading">
                                 <div class="page-title-icon">
                                     <i class="pe-7s-notebook icon-gradient bg-mixed-hopes">
                                     </i>
                                 </div>
-                                <div><span id="putWarehouseName"></span> 창고 재고 정보
+                                <div>실시간 재고관리
                                     <div class="page-title-subheading">
-                                    	특정 창고 내 재고 정보 검색 및 조회
+                                    	실시간 재고 상황 검색, 수정 기능
                                     </div>
                                 </div>
-                            </div> 
+                            </div>    
                           </div>
-                    </div>                 
-                    <div class="main-card mb-3 card">
+                    </div>              <div class="main-card mb-3 card">
                         <div class="card-body">
                             <!-- search 코딩 -->
                         
-                           <select class="mb-2 form-control" id="inventoryType" style="display:inline ;width: 150px" >
+                           <select class="mb-2 form-control" style="display:inline ;width: 252px"  id="inventoryWarehouse">
+                                    <option value="">관리창고</option>
+                           </select>
+                            <select class="mb-2 form-control" style="display:inline ;width: 252px" id="inventoryType">
                                     <option value="">재고분류</option>
                                     <option value="product">생산품</option>
                                     <option value="material">원자재</option>
                            </select>
-                            <select class="mb-2 form-control" id="inventorySupplier" style="display:inline ;width: 150px">
-                                    <option value="">재고출처</option>
+                           <select class="mb-2 form-control" style="display:inline ;width: 252px" id="inventorySupplier">
+                                    <option value="">출처</option>
                            </select>
-                           <select class="mb-2 form-control" id="inventorySort" style="display:inline ;width: 150px">
+                           <select class="mb-2 form-control" style="display:inline ;width: 252px" id="inventorySort">
                                     <option value="">재고종류</option>
                            </select>
-                          <input placeholder="재고코드 또는 재고명" type="text" id="searchText" class="mb-2 form-control" style="display:inline ;width: 300px">        
-                                
-                           <button class="mb-2 mr-2 btn btn-primary" id="searchButton" style="display:inline ;height: 37px;width: 95px">
+                       		<input placeholder="재고코드 또는 재고명" type="text" class="mb-2 form-control" style="display:inline ;width: 530px" id="searchText">            
+                            <button class="mb-2 mr-2 btn btn-primary" style="display:inline ;height: 37px;width: 95px" id="searchButton">
                                 	Search
                            </button>
-
-                            <table  class="mb-0 table table-bordered">
+                       <div>
+                        <div class="input-group">
+                                     
+                               
+                        </div>
+                        </div>
+                           
+                      	
+                       
+                            <table class="mb-0 table table-bordered">
                                 <thead>
                                 <tr>
                                     <th data-field="name"
-                                        data-sortable="true">
+                                        data-sortable="true" width="100em">
                                         	재고코드
                                     </th>
                                     <th data-field="stargazers_count"
-                                        data-sortable="true">
+                                        data-sortable="true" width="250em">
                                         	재고명
                                     </th>
                                     <th data-field="company"
-                                        data-sortable="true">
-                                        	재고출처
+                                        data-sortable="true" width="150em">
+                                        	관리창고
                                     </th>
-                                    <th data-field="prorobuy"
-                                        data-sortable="true">
+                                    <th data-field="forks_count"
+                                        data-sortable="true" width="175em">
                                         	재고분류
                                     </th>
+                                    <th data-field="prorobuy"
+                                        data-sortable="true" width="250em">
+                                        	출처
+                                    </th>
                                     <th data-field="kind"
-                                        data-sortable="true">
+                                        data-sortable="true" width="175em">
                                         	재고종류
                                     </th>
                                     <th data-field="etc"
-                                        data-sortable="true">
+                                        data-sortable="true" width="200em">
                                         	재고수량
                                     </th>
                                     <th data-field="dd"
-                                        data-sortable="true">
+                                        data-sortable="true" width="200em">
                                         	단가
+                                    </th>
+                                   <th data-field="ff"
+                                        data-sortable="true" width="100px">
+                                        	수정
+                                    </th>
+                                    <th data-field="ff"
+                                        data-sortable="true" width="100px">
+                                        	삭제
                                     </th>
                                 </tr>
                                 </thead>
@@ -111,60 +141,44 @@
                     </div>
                 </div>
                 <!-- footer 삽입 -->    </div>
-  
+    </div>
 </div>
 <!-- drawer 삽입 -->
 <div class="app-drawer-overlay d-none animated fadeIn"></div><script type="text/javascript" src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
-<script th:inline="javascript">
-/*<![CDATA[*/
+<script>
 	$(function(){
 		var database = firebase.database();	
-		var warehouse_code = /*[[${warehouse_code}]]*/;
 		
-		database.ref(warehouse_code+'/').once('value', function(snapshot){
-			$("#putWarehouseName").html(snapshot.val().warehouse_name);
-		});
-		
-		
-		var p_count = /*[[${p_count}]]*/;
-		var m_count = /*[[${m_count}]]*/;
-		var msArray =[];
-		var rawArray=[];
-		var proArray=[];
 		//최신화 부분 수정 필요
 		/*
-		database.ref(warehouse_code+"/").once('value', function(snapshot){
+		database.ref().on('value', function(snapshot){
 			selelctInventoryINWarehouse();
 		});*/
 		selelctInventoryINWarehouse();
-		
-		// -> 밑에 함수별로 작게 나눈 이유-> 그렇지 않으면 순서가 섞여서 발생
-	  	//창고 내 생산품, 원자재 정보 가져오기
+
 		function selelctInventoryINWarehouse(){
 			$("#tBody").html('');
-			database.ref(warehouse_code+'/').child("inventory").on('child_added', function(snapshot){
-				if(snapshot.key.charAt(0)=='p'){
-					var pd_code = snapshot.key;	
-					getProductAmount(pd_code);
-					getProductSupplier();
-					printProductSort(pd_code);
-				}else if(snapshot.key.charAt(0)=='m'){
-					var rawm_code = snapshot.key;	
-					getMaterialAmount(rawm_code);
-					getMaterialANDSupplier(rawm_code);
-				}
-	    	});
-			
-			database.ref(warehouse_code+'/').once('value').then(function(snapshot1){
-				if(snapshot1.val().inventory=='empty'){
-					$("#tBody").html('<tr><td colspan="7" align="center"><span>창고에 재고가 없습니다</span></td><tr>');
-				}
+			database.ref().on('child_added', function(data){
+				var warehouse_code = data.key;
+				var warehouse_name = data.val().warehouse_name;
+				setWarehouseDropbox(warehouse_code, warehouse_name);
+				database.ref(warehouse_code+'/').child("inventory").on('child_added', function(snapshot){
+					if(snapshot.key.charAt(0)=='p'){
+						var pd_code = snapshot.key;	
+						getProductAmount(pd_code, warehouse_name, warehouse_code);
+					}else if(snapshot.key.charAt(0)=='m'){
+						var rawm_code = snapshot.key;	
+						getMaterialAmount(rawm_code, warehouse_name, warehouse_code);
+					}
+		    	});
 			});
+			setSupplierDropbox();	
+			setInventorySortDropbox();
 		}
 		
 		
 	  	//파이어베이스로 실시간 원자재 재고 가져오는 함수 
-		function getMaterialAmount(rawm_code){
+		function getMaterialAmount(rawm_code, warehouse_name, warehouse_code){
 			database.ref(warehouse_code+'/').child("inventory").child(rawm_code).once('value').then(function(snapshot){
 				var amount = snapshot.val().systemamount;
 				$.ajax({
@@ -172,7 +186,7 @@
 					type: "get",
 					data:{rawm_code:rawm_code},
 					success:function(serverData){
-						selectSupplier(serverData, amount);		
+						selectSupplier(serverData, amount, warehouse_name, warehouse_code);		
 					}
 				});
 				
@@ -181,7 +195,7 @@
 			
 	  	
 	  	//공급자 search해 최종 프린트 함수 -> 나중에 일중상 db로 원자재 공급처 이름도 추가하면 이 과정 필요 없음
-		function selectSupplier(serverData, amount){
+		function selectSupplier(serverData, amount, warehouse_name, warehouse_code){
 	  		$.ajax({
 				url: "selectSupplierBySeq",
 				type: "get",
@@ -191,11 +205,14 @@
 					str+='<tr>';
 					str+='<td>'+serverData.rawm_code+'</td>';
 					str+='<td>'+serverData.rawm_name+'</td>';
-					str+='<td>'+serverData1.supplier_name+'</td>';
+					str+='<td>'+warehouse_name+'</td>';
 					str+='<td>원자재</td>';
+					str+='<td>'+serverData1.supplier_name+'</td>';
 					str+='<td>'+serverData.rawm_sort+'</td>';
 					str+='<td>'+amount+'</td>';
 					str+='<td>'+serverData.rawm_price+'</td>';
+					str+='<td><button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary"  button-type="update" data-code="'+serverData.rawm_code+'" wh-code="'+warehouse_code+'" style="margin-top: 0.7em;margin-left: 1.2em">Update</button></td>';
+					str+='<td><button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary"  button-type="delete" data-code="'+serverData.rawm_code+'" wh-code="'+warehouse_code+'" style="margin-top: 0.7em;margin-left: 1.2em">Delete</button></button></td>';
 					str+='</tr>';
 					$("#tBody").append(str);	
 					}
@@ -204,7 +221,7 @@
 		
 		
 	  	//생산품 실시간 재고 가져오는 함수
-		function  getProductAmount(pd_code){
+		function  getProductAmount(pd_code, warehouse_name, warehouse_code){
 			database.ref(warehouse_code+'/').child("inventory").child(pd_code).once('value').then(function(snapshot){
 				var amount = snapshot.val().systemamount;
 				$.ajax({
@@ -212,7 +229,7 @@
 					type: "get",
 					data:{pd_code:pd_code},
 					success:function(serverData){
-						printProduct(serverData, amount); 	
+						printProduct(serverData, amount ,warehouse_name, warehouse_code); 	
 					}
 				});
 				
@@ -221,162 +238,96 @@
 		}
 		
 	  	//생산품 프린트
-		function printProduct(serverData, amount){
+		function printProduct(serverData, amount ,warehouse_name, warehouse_code){
 			var str='';
 			str+='<tr>';
 			str+='<td>'+serverData.pd_code+'</td>';
 			str+='<td>'+serverData.pd_name+'</td>';
-			str+='<td>자사</td>';
+			str+='<td>'+warehouse_name+'</td>';
 			str+='<td>생산품</td>';
+			str+='<td>자사</td>';
 			str+='<td>'+serverData.pd_sort+'</td>';
 			str+='<td>'+amount+'</td>';
 			str+='<td>'+(parseInt(serverData.pd_rmcost)+parseInt(serverData.pd_manufcost))+'</td>';
+			str+='<td><button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary"  button-type="update" data-code="'+serverData.pd_code+'" wh-code="'+warehouse_code+'" style="margin-top: 0.7em;margin-left: 1.2em">Update</button></td>';
+			str+='<td><button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary"  button-type="delete" data-code="'+serverData.pd_code+'" wh-code="'+warehouse_code+'" style="margin-top: 0.7em;margin-left: 1.2em">Delete</button></button></td>';
 			str+='</tr>';
 			$("#tBody").append(str);
 		}
-			
-	
-		//원자재 재고 출처 중복 제거하여 프린트하는 함수
-		function getUniqueMaterialSupplier(){
-			var umsArray =[];
-			for(var i = 0 ; i<msArray.length; i++){
-				var flag = true;
-					if(umsArray.length ==0){
-						umsArray.push(msArray[i]);
-					}else{
-						for(var j = 0 ; j<umsArray.length ;j++){
-							if(msArray[i].supplierseq==umsArray[j].supplierseq){
-								flag=false;
-							}		
-						}
-						if(flag){
-							umsArray.push(msArray[i]);
-						}
-					}
-				
-			}
-			
-			for(var i = 0 ; i<umsArray.length ; i++){
-				var str='';
-				str+='<option value="'+umsArray[i].supplierseq+'">';
-				str+=umsArray[i].supplier_name;
-				str+='</option>';
-				$("#inventorySupplier").append(str);
-				}
-			
-		}
-		
-		//원자재 출처 모두 찾는 함수 -> 일중상이 db 수정하면 더 효율적으로 만들 수 있음
-		function getMaterialANDSupplier(rawm_code){
-			$.ajax({
-				url: "selectMaterialByCode",
-				type: "get",
-				data:{rawm_code:rawm_code},
-				success:function(serverData){
-					$.ajax({
-						url: "selectSupplierBySeq",
-						type: "get",
-						data:{supplierseq:serverData.supplierseq},
-						success:function(serverData1){
-							msArray.push(serverData1);
-							if(msArray.length==m_count){
-								getUniqueMaterialSupplier();
-							}
-						}
-					});
-					getMaterialArray(serverData);
-				}
-			});
-		}
-		
-		//생산품 생산 시 출처에 자사 추가 함수
-		function getProductSupplier(){
-			var supplier_name = $("#productSupplierName").val();
-			if(supplier_name== undefined){
-			$("#inventorySupplier").append('<option id="productSupplierName" value="자사">자사</option>');
-			}
-		}
-			
-		//재고 종류 세팅
-		//원자재 종류 세팅
-		function getMaterialArray(serverData){
-			rawArray.push(serverData);
-			if(rawArray.length==m_count){
-				var urawArray =[];
-				for(var i = 0 ; i<rawArray.length; i++){
-					var flag = true;
-						if(urawArray.length ==0){
-							urawArray.push(rawArray[i]);
-						}else{
-							for(var j = 0 ; j<urawArray.length ;j++){
-								if(rawArray[i].rawm_sort==urawArray[j].rawm_sort){
-									flag=false;
-								}		
-							}
-							if(flag){
-								urawArray.push(rawArray[i]);
-							}
-						}
-					
-				}
-				
-				for(var i = 0 ; i<urawArray.length ; i++){
-					var str='';
-					str+='<option value="'+urawArray[i].rawm_sort+'">';
-					str+=urawArray[i].rawm_sort;
-					str+='</option>';
-					$("#inventorySort").append(str);
-			}
-		}
-		}
-	
-		//생산품 종류 세팅
-		function printProductSort(pd_code){
-			$.ajax({
-				url: "selectProductByCode",
-				type: "get",
-				data:{pd_code:pd_code},
-				success:function(serverData){
-					proArray.push(serverData);	
-					if(proArray.length==p_count){
-							var uproArray =[];
-							for(var i = 0 ; i<proArray.length; i++){
-								var flag = true;
-									if(uproArray.length ==0){
-										uproArray.push(proArray[i]);
-									}else{
-										for(var j = 0 ; j<uproArray.length ;j++){
-											if(proArray[i].pd_sort==uproArray[j].pd_sort){
-												flag=false;
-											}		
-										}
-										if(flag){
-											uproArray.push(proArray[i]);
-										}
-									}
-							}
-							
-							for(var i = 0 ; i<uproArray.length ; i++){
-								var str='';
-								str+='<option value="'+uproArray[i].pd_sort+'">';
-								str+=uproArray[i].pd_sort;
-								str+='</option>';
-								$("#inventorySort").append(str);
-						}
 
+		//창고 드롭박스 세팅 함수
+		function setWarehouseDropbox(warehouse_code, warehouse_name){
+			var str='';
+			str+='<option value="'+warehouse_code+'">';
+			str+=warehouse_name;
+			str+='</option>';
+			$("#inventoryWarehouse").append(str);
+		}
+		
+
+		//출처 세팅 함수
+		function setSupplierDropbox(){
+			$("#inventorySupplier").append("<option value='자사'>자사</option>");
+			$.ajax({
+				url: "selectDistinctMaterialSupplier",
+				type: "get",
+				success:function(serverData){
+					for(var i = 0 ; i<serverData.length ; i++){
+						var str='';
+						str+='<option value="'+serverData[i].supplierseq+'">';
+						str+=serverData[i].supplier_name;
+						str+='</option>';
+						$("#inventorySupplier").append(str);
+					}
+				}
+			});		
+		}
+			
+		//재고 종류 드롭박스 세팅
+		function setInventorySortDropbox(){
+			$.ajax({
+				url: "selectDistinctMaterialSort",
+				type: "get",
+				success:function(serverData){
+					for(var i = 0 ; i<serverData.length ; i++){
+						var str='';
+						str+='<option value="'+serverData[i].rawm_sort+'">';
+						str+=serverData[i].rawm_sort;
+						str+='</option>';
+						$("#inventorySort").append(str);
+					}
+				}
+			});	
+			
+			$.ajax({
+				url: "selectDistinctProductSort",
+				type: "get",
+				success:function(serverData){
+					for(var i = 0 ; i<serverData.length ; i++){
+						var str='';
+						str+='<option value="'+serverData[i].pd_sort+'">';
+						str+=serverData[i].pd_sort;
+						str+='</option>';
+						$("#inventorySort").append(str);
 					}
 				}
 			});
 		}
+		
+		
+		
 		
 		//검색 기능 구현
 		$("#searchButton").click(function(){
 			$("#tBody").html('');
+			var inventoryWarehouse= $("#inventoryWarehouse").val();
 			var inventoryType = $("#inventoryType").val();
 			var inventorySupplier= $("#inventorySupplier").val();
 			var inventorySort= $("#inventorySort").val();
 			var searchText= $("#searchText").val();	
-			
+			database.ref().on('child_added', function(data){
+				var warehouse_code = data.key;
+				var warehouse_name = data.val().warehouse_name;
 				database.ref(warehouse_code+'/').child("inventory").on('child_added', function(snapshot){
 				if(snapshot.key.charAt(0)=='p'){
 				var pd_code = snapshot.key;	
@@ -386,6 +337,13 @@
 					data:{pd_code:pd_code},
 					success:function(serverData){
 						var flag = true;
+						if(inventoryWarehouse!=""){
+							if(warehouse_code!=inventoryWarehouse){
+								flag=false;
+							}
+						}
+						
+						
 						if(inventoryType!=""){
 							if(inventoryType!="product"){
 									flag=false;
@@ -409,7 +367,7 @@
 						}
 						
 						if(flag){
-							getProductAmount(pd_code);
+							getProductAmount(pd_code, warehouse_name, warehouse_code);
 						}
 						
 					}
@@ -424,6 +382,12 @@
 					data:{rawm_code:rawm_code},
 					success:function(serverData){
 						var flag = true;
+						if(inventoryWarehouse!=""){
+							if(warehouse_code!=inventoryWarehouse){
+								flag=false;
+							}
+						}
+						
 						if(inventoryType!=""){
 							if(inventoryType!="material"){
 									flag=false;
@@ -446,17 +410,30 @@
 							}
 						}
 						if(flag){
-							getMaterialAmount(rawm_code);
+							getMaterialAmount(rawm_code, warehouse_name, warehouse_code);
 						}
 					}
 				});
 			}
 			});
-
 		});
+		});
+		
+		
+		//수정 기능
+		//삭제 기능
+		function updateANDdelete(){
+			$(".btn-outline-primary").click(function(){	
+				var button_type = $(this).attr("button-type");
+				var data_code = $(this).attr("data-code");
+				var warehouse_code = $(this).attr("wh-code");
+				alert(button_type);
+				alert(data_code);
+				alert(warehouse_code);
+			});
+		}
+		
 	});
-	/*]]>*/
 </script>
-
 </body>
 </html>
