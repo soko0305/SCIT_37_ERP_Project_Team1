@@ -54,8 +54,6 @@ public class LinkController {
 	public String detailLink(Buyer buyer, Model model){
 		Buyer buyer1 = null;
 		buyer1 = service.selectBuyer(buyer);
-		System.out.println(buyer1);
-		
 		model.addAttribute("buyer", buyer1);
 		return "sales/buyerDetails";
 	}
@@ -67,8 +65,8 @@ public class LinkController {
 		return "sales/offersheet";
 	}
 	
-	@RequestMapping(value="/excelTemplate", method=RequestMethod.GET)
+	@RequestMapping(value="/offersheet", method=RequestMethod.GET)
 	public String excelTemplate(){
-		return "sales/excelTemplate";
+		return "sales/offersheet";
 	}
 }
