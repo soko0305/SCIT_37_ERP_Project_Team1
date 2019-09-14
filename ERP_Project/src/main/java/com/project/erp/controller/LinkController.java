@@ -41,6 +41,7 @@ public class LinkController {
 	public String Management4(Model model){
 		List<Sales> list1 = null;
 		list1 = service.selectSalesStatusIsDone();
+		System.out.println(list1);
 		model.addAttribute("salesList", list1);
 		return "sales/salesHistory";
 	}
@@ -50,21 +51,40 @@ public class LinkController {
 		return "sales/insertBuyer";
 	}
 	
-	@RequestMapping(value="/detailLink", method=RequestMethod.GET)
-	public String detailLink(Buyer buyer, Model model){
+	@RequestMapping(value="/buyerListDetail", method=RequestMethod.GET)
+	public String buyerListDetail(Buyer buyer, Model model){
 		Buyer buyer1 = null;
 		buyer1 = service.selectBuyer(buyer);
-		System.out.println(buyer1);
-		
 		model.addAttribute("buyer", buyer1);
 		return "sales/buyerDetails";
 	}
 	
-	@RequestMapping(value="/salesDetailLink", method=RequestMethod.GET)
-	public String salesDetailLink(SalesDetail salesDetail, Model model){
-		List<SalesDetail> list = service.getDetails(salesDetail);
+	@RequestMapping(value="/realTimeOfferDetail", method=RequestMethod.GET)
+	public String realTimeOfferDetail(SalesDetail salesDetail, Model model){
+		List<SalesDetail> list = service.selectSalesDetailByOrdernum(salesDetail);
 		model.addAttribute("salesDetailList", list);
 		return "sales/offersheet";
 	}
 	
+	@RequestMapping(value="/salesHistoryDetail", method=RequestMethod.GET)
+	public String salesHistoryDetail(Sales sales, Model model){
+		String seq = sales.getBuyerseq();
+		String num = sales.getSales_ordernum();
+		
+		Buyer buyer = new Buyer();
+		buyer.setBuyerseq(seq);
+		
+		SalesDetail salesDetail = new SalesDetail();
+		salesDetail.setSales_ordernum(num);
+		
+		List<SalesDetail> list = service.selectSalesDetailByOrdernum(salesDetail);
+		Sales sale = service.selectSalesByOrdernum(sales);
+		Buyer buyer1 = service.selectBuyer(buyer);
+		
+		model.addAttribute("sales", sale);
+		model.addAttribute("buyer", buyer1);
+		model.addAttribute("detailList", list);
+		
+		return "sales/invoice";
+	}
 }

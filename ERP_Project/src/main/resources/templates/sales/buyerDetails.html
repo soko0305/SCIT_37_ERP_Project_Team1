@@ -28,7 +28,7 @@
 function deleteBuyer(){
 	confirm("정말 삭제하시겠습니까?");
 	if(confirm){
-		var seq = /*[[ ${buyer.buyerseq} ]]*/;
+		var seq = /*[[${buyer.buyerseq}]]*/;
 		var form = $('#formTry');
 		$('#buyerseq').val(seq);
 		form.submit();
@@ -67,7 +67,7 @@ function printUpdateBuyer(){
 		
 		$('#insertWithAjax').html(str);
 	
-		var seq = /*[[ ${buyer.buyerseq} ]]*/;
+		var seq = /*[[${buyer.buyerseq}]]*/;
 		$('#buyerseqforupdate').val(seq);
 	})
 
@@ -105,7 +105,7 @@ function printUpdateBuyer(){
                             	<div><br />
                                <button class="mb-2 mr-2 btn btn-primary" onclick="deleteBuyer()">거래처 삭제</button>
 							   <button class="mb-2 mr-2 btn btn-primary" id="drawHTML"onclick="printUpdateBuyer()">거래처 업데이트</button><br /><br />
-                               <h6 th:text="'거래처명 : '+${buyer.buyer_corp}"></h6>
+                               <h6 ></h6>
                                <h6 th:text="'대표자명  : '+${buyer.buyer_owner}"></h6>
                                <h6 th:text="'주소 : '+${buyer.buyer_addr}"></h6>
                                <h6 th:text="'연락처 : '+${buyer.buyer_tel}"></h6>

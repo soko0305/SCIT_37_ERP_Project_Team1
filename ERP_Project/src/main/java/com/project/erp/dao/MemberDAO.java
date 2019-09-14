@@ -67,9 +67,14 @@ public class MemberDAO {
 		}
 		return m;
 	}
+<<<<<<< HEAD
 
 	public ArrayList<MemberVO> selectMemberBeforePemit() {
 		ArrayList<MemberVO> mList = null;
+=======
+ 	public MemberVO updateLogout(String member){
+		MemberVO m = null;
+>>>>>>> master
 		try{
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
 		mList = mapper.selectMemberBeforePemit();

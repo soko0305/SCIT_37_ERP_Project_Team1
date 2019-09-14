@@ -113,11 +113,6 @@ public class SalesService {
 		return list;
 	}
 	
-	public List<SalesDetail> getDetails(SalesDetail salesDetail){
-		List<SalesDetail> list = dao.selectSalesDetail(salesDetail);
-		return list;
-	}
-	
 	public List<Buyer> selectAllBuyer(){
 		List<Buyer> list = dao.selectAllBuyer();
 		return list;
@@ -146,5 +141,15 @@ public class SalesService {
 	public int updateBuyer(Buyer buyer){
 		int result = dao.updateBuyer(buyer);
 		return result;
+	}
+
+	public Sales selectSalesByOrdernum(Sales sales){
+		Sales sale = dao.selectSalesByOrdernum(sales);
+		return sale;
+	}
+	
+	public List<SalesDetail> selectSalesDetailByOrdernum(SalesDetail salesdetail){
+		List<SalesDetail> list = dao.selectSalesDetailByOrdernum(salesdetail);
+		return list;
 	}
 }

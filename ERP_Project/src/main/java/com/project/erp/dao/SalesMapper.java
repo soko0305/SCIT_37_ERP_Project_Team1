@@ -27,11 +27,11 @@ public interface SalesMapper {
 	
 	public List<Sales> selectAllSales(); //Sales 목록 전체 select
 	public Buyer selectOneBuyer(Buyer buyer); //BuyerSeq가 일치하는 Buyer를 select
-	public List<SalesDetail> selectSalesDetail(SalesDetail salesDetail); // OrderNumber를 통해 salesDetail을 select 
+	public List<SalesDetail> selectSalesDetailByOrdernum(SalesDetail salesDetail); // OrderNumber를 통해 salesDetail을 select 
+	public Sales selectSalesByOrdernum(Sales sales);
 	public List<Sales> selectSalesStatusIsDone();
 	public List<Buyer> selectAllBuyer();
 	public Buyer selectBuyer(Buyer buyer);
-	
 	
 	/*
 	 * update
