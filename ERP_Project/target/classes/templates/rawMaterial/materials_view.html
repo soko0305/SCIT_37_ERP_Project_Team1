@@ -24,13 +24,20 @@
 	href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css"
 	rel="stylesheet">
 <script>
+
 	$(function(){
+		var openWin;
 		$(".btn-primary").click(function(){
 			var type = $(this).attr("data-type")
 			var code = $(this).val();
 			if(type=='update'){
-				$("#code").val(code);
-				$("#updateForm").submit();
+				/* $("#code").val(code);
+				$("#updateForm").submit(); */
+				var url = "goMaterialsUpdate?rawm_code="+code;
+			    var name = "popup test";
+			    var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+			    window.open(url, name, option);
+			    
 			}else if(type=='delete'){
 				$("#code1").val(code);
 				$("#deleteForm").submit();
