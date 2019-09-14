@@ -59,8 +59,6 @@ public class SalesDAO {
 	 * select
 	 */
 
-	
-	
 	//BuyerSeq가 일치하는 Buyer를 select
 	public Buyer selectOneBuyer(Buyer buyer){
 		Buyer buyer1 = null;
@@ -99,11 +97,11 @@ public class SalesDAO {
 	}
 
 	// OrderNumber를 통해 salesDetail을 select 
-	public List<SalesDetail> selectSalesDetail(SalesDetail salesDetail){
+	public List<SalesDetail> selectSalesDetailByOrdernum(SalesDetail salesDetail){
 		List<SalesDetail> list1 = null;
 		try{
 		SalesMapper mapper = sqlSession.getMapper(SalesMapper.class);
-		list1=mapper.selectSalesDetail(salesDetail);
+		list1=mapper.selectSalesDetailByOrdernum(salesDetail);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -134,8 +132,17 @@ public class SalesDAO {
 		
 	}
 
-	
-	
+	public Sales selectSalesByOrdernum(Sales sales){
+		Sales sales1 = null;
+		try{
+			SalesMapper mapper = sqlSession.getMapper(SalesMapper.class);
+			sales1 = mapper.selectSalesByOrdernum(sales);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			return sales1;
+	}
+
 	/*
 	 * update
 	 */

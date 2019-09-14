@@ -40,7 +40,7 @@ public class SalesController {
 	
 	@RequestMapping(value="/getDetails", method = RequestMethod.GET)
 	public @ResponseBody List<SalesDetail> getDetails(SalesDetail salesDetail){
-		List<SalesDetail> list = service.getDetails(salesDetail);
+		List<SalesDetail> list = service.selectSalesDetailByOrdernum(salesDetail);
 		return list;
 	}
 	
