@@ -9,29 +9,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.erp.service.ProductionService;
-import com.project.erp.vo.BoardVO;
+import com.project.erp.service.RawMaterialService;
 import com.project.erp.vo.ManufactureVO;
+import com.project.erp.vo.ProductMaterialVO;
 import com.project.erp.vo.ProductVO;
+import com.project.erp.vo.RawMaterialVO;
 
 @Controller
 public class ProductionController {
 
 	@Autowired
 	ProductionService pService;
+	@Autowired
+	RawMaterialService rawMaterialService;
 	
-	//생산풍 등록
-	@RequestMapping(value="/productionInsert", method=RequestMethod.POST)
-	public String productionInsert(ProductVO product) {
-		System.out.println("pInsert : " + product);
-		int result =pService.productionInsert(product);
-		if(result == 0) {
-			return "production/producecheck";
-		}else {
-			return "production/producecheck";
-		}
-	}	
+
 	
 	//생산조회 리스트 조회
 	@RequestMapping(value = "/goproducecheck", method = RequestMethod.GET)
@@ -67,7 +62,10 @@ public class ProductionController {
 	
 	//생산품 삽입
 	@RequestMapping(value="/productioninsert", method = RequestMethod.GET)
-	public String productioninsert(){
+	public String productioninsert(Model model){
+		ArrayList<RawMaterialVO> mList = null;
+		mList = rawMaterialService.rawMaterialAllSelect();
+		model.addAttribute("materialList", mList);
 		return "production/production_insert2";
 	} 
  
@@ -109,4 +107,24 @@ public class ProductionController {
 			return "redirect:/goproductioncheck";
 		}
 	}
+
+	
+	
+	//생산품 등록
+	@RequestMapping(value = "/insertProuct", method = RequestMethod.POST)
+	public @ResponseBody String insertProuct(ProductVO product) {
+			int result =pService.productionInsert(product);
+			ProductVO p =null;
+			if(result !=0){
+				p = pService.selectLatestProduct();
+			}
+			return p.getPd_code();
+	}
+	
+	@RequestMapping(value = "/insertProudctMaterial", method = RequestMethod.POST)
+	public @ResponseBody void insertProudctMaterial(ProductMaterialVO productMaterial) {
+			int result =pService.insertProudctMaterial(productMaterial);
+
+	}
+	
 }

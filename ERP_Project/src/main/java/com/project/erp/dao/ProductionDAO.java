@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.project.erp.vo.BoardVO;
 import com.project.erp.vo.ManufactureVO;
+import com.project.erp.vo.ProductMaterialVO;
 import com.project.erp.vo.ProductVO;
 
 @Repository
@@ -18,13 +19,12 @@ public class ProductionDAO {
 	
 	public int productionInsert(ProductVO product) {
 		int result = 0;
-		
 		ProductionMapper mapper = sqlSession.getMapper(ProductionMapper.class);
 		try {
 			result = mapper.productionInsert(product);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return result;
+			return 0;
 		}
 		return result;
 	}
@@ -61,6 +61,32 @@ public class ProductionDAO {
 		} catch (Exception e) {			
 			e.printStackTrace();
 			return result;
+		}
+		return result;
+	}
+	
+	public ProductVO selectLatestProduct() {
+		ProductVO p = null;
+
+		ProductionMapper mapper = sqlSession.getMapper(ProductionMapper.class);
+		try {
+			p = mapper.selectLatestProduct();
+		} catch (Exception e) {			
+			e.printStackTrace();
+			return null;
+		}
+		return p;
+	}
+	
+	
+	public int insertProudctMaterial(ProductMaterialVO productMaterial) {
+		int result = 0;
+		ProductionMapper mapper = sqlSession.getMapper(ProductionMapper.class);
+		try {
+			result = mapper.insertProudctMaterial(productMaterial);
+		} catch (Exception e) {			
+			e.printStackTrace();
+			return 0;
 		}
 		return result;
 	}
