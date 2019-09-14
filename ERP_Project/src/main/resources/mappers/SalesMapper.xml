@@ -49,18 +49,33 @@ buyerseq.nextval,
 
 
 
+
 <select id="selectAllSales" resultType="com.project.erp.vo.Sales">
 select *
 from sales
 order by sales_ordernum desc
 </select> 
 
-<select id="selectSalesDetail" parameterType="com.project.erp.vo.SalesDetail" resultType="com.project.erp.vo.SalesDetail">
+<select id="selectAllBuyer" resultType="com.project.erp.vo.Buyer">
+select *
+from buyer
+order by buyerseq asc
+</select>
+
+
+
+
+<select id="selectSalesDetailByOrdernum" parameterType="com.project.erp.vo.SalesDetail" resultType="com.project.erp.vo.SalesDetail">
 select *
 from salesdetail
 where sales_ordernum=#{sales_ordernum}
 </select>
 
+<select  id="selectSalesByOrdernum" parameterType="com.project.erp.vo.Sales" resultType="com.project.erp.vo.Sales">
+select *
+from sales
+where sales_ordernum=#{sales_ordernum}
+</select>
 
 <select id="selectOneBuyer" parameterType="com.project.erp.vo.Buyer" resultType="com.project.erp.vo.Buyer">
 select buyerseq
@@ -80,11 +95,6 @@ from sales
 where sales_status='판매완료'
 </select>
 
-<select id="selectAllBuyer" resultType="com.project.erp.vo.Buyer">
-select *
-from buyer
-order by buyerseq asc
-</select>
 
 
 <update id="updateSalesStatus" parameterType="com.project.erp.vo.Sales">
