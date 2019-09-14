@@ -58,7 +58,7 @@ public class ProductionDAO {
 		ProductionMapper mapper = sqlSession.getMapper(ProductionMapper.class);
 		try {
 			result = mapper.productionDelete(product);
-		} catch (Exception e) {
+		} catch (Exception e) {			
 			e.printStackTrace();
 			return result;
 		}

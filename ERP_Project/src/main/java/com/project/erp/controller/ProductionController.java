@@ -68,7 +68,7 @@ public class ProductionController {
 	//생산품 삽입
 	@RequestMapping(value="/productioninsert", method = RequestMethod.GET)
 	public String productioninsert(){
-		return "production/productioninsert";
+		return "production/production_insert2";
 	} 
  
  
@@ -92,6 +92,10 @@ public class ProductionController {
 	@RequestMapping(value = "/gopRegistration", method = RequestMethod.GET)
 	public String gopRegistration() {
 		return "production/pRegistration";
+	}
+	@RequestMapping(value = "/gomRegistration", method = RequestMethod.GET)
+	public String gomRegistration() {
+		return "production/mRegistration";
 	}
 	// 생산품 삭제
 	@RequestMapping(value = "/deleteProduct", method = RequestMethod.POST)
