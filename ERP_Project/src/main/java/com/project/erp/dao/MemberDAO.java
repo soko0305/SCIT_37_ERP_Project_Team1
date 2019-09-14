@@ -36,27 +36,70 @@ public class MemberDAO {
 		return m;
 	}
 
-	public MemberVO updateLogin(MemberVO member) {
-		// TODO Auto-generated method stub
+	public int updateLogin(MemberVO member) {
+		int check =0;
+		try{
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		check = mapper.updateLogin(member);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return check;
+	}
+ 	public int updateLogout(MemberVO member){
+ 		int check =0;
+		try{
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		check = mapper.updateLogout(member);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+ 		return check;	
+ 	}
+
+	public MemberVO selectMemberByIdAndPw(MemberVO member) {
 		MemberVO m = null;
 		try{
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
-		m = mapper.updateLogin(member);
+		m = mapper.selectMemberByIdAndPw(member);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		return m;
 	}
- 	public MemberVO updateLogout(MemberVO member){
-		MemberVO m = null;
+
+	public ArrayList<MemberVO> selectMemberBeforePemit() {
+		ArrayList<MemberVO> mList = null;
 		try{
 		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
-		m = mapper.updateLogout(member);
+		mList = mapper.selectMemberBeforePemit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
- 		return m;	
- 	}
+		return mList;
+	}
+
+	public int permitAccount(String userid) {
+ 		int check =0;
+		try{
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		check = mapper.permitAccount(userid);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+ 		return check;	
+	}
+
+	public int rejectAccount(String userid) {
+ 		int check =0;
+		try{
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		check = mapper.rejectAccount(userid);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+ 		return check;	
+	}
 
 
  }

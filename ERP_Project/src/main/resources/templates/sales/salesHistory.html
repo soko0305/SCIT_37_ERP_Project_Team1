@@ -23,43 +23,28 @@
 		$("#header").load("/header");
 		$("#navbar").load("/navbar");
 		$("#setting").load("/setting");
-		
 		goDetail();
 	});
 	
-	function goDetail(){
-		$('.getordernum').click(function(){
+function goDetail(){
+		$('.goDetail').click(function(){
 			var num = $(this).attr('data-ordernum');
-			
-				$.ajax({
-					url:'getDetails',
-					data:{
-						sales_ordernum : num
-					},
-					success:function(data){
-					 	str = '';
-						$('#getdetails').html(str);
-							
-						
-						for(var i = 0; i<data.length; i++ ){
-							str1 = '';
-							str1+='<tr>';
-							str1+='<td>'+data[i].sales_ordernum+'</td>';
-							str1+='<td>'+data[i].buyer_corp+'</td>';
-							str1+='<td><a href="a">'+data[i].sales_title+'</a></td>';
-							str1+='<td>'+data[i].sales_totalprice+'</td>';
-							str1+='<td>'+data[i].sales_orderdate+'</td>';
-							str1+='<td style="text-align: center;"><button class="mb-2 mr-2 btn btn-primary">'+data[i].sales_status+'</button></td>';
-							str1+='</tr>'
-							$('.tbody').append(str1);
-						}
-					}
-			})
-		})
-	}
+			var seq = $(this).attr('data-buyerseq');
+			var form = $('#formTry');
+			 $('#buyerseq').val(seq);
+			 $('#ordernum').val(num);
+			 form.submit();
+	})
+}
 </script>
 
 <body>
+
+<form action="salesHistoryDetail" id="formTry">
+<input type="hidden" id="ordernum" name="sales_ordernum">
+<input type="hidden" id="buyerseq" name="buyerseq">
+</form>
+
 <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
     <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Header삽입@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
     <div id="header"></div>
@@ -104,7 +89,7 @@
                                           <tr th:each="list : ${salesList}">
 												<td th:text="${list.sales_ordernum}"  ></td>
 												<td th:text="${list.buyer_corp}"></td>
-												<td><a href="#" class="getordernum" th:text="${list.sales_title}" th:attr="data-ordernum=${list.sales_ordernum}"></a></td>
+												<td><a href="#" class="goDetail" th:text="${list.sales_title}" th:attr="data-ordernum=${list.sales_ordernum},data-buyerseq=${list.buyerseq}"></a></td>
 												<td th:text="${list.sales_totalprice}"></td>
 												<td th:text="${list.sales_orderdate}"></td>
 										  </tr> 

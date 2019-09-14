@@ -7,8 +7,7 @@
     <meta http-equiv="Content-Language" content="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Register Boxed - ArchitectUI HTML Bootstrap 4 Dashboard Template</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"/>
     <meta name="description" content="ArchitectUI HTML Bootstrap 4 Dashboard Template">
 
     <!-- Disable tap highlight on IE -->
@@ -17,10 +16,58 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
 <link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
-
-
-    
 </head>
+<script>
+	$(function(){
+
+		$("#insertButton").click(function(){
+			var buyer_corp = $("#buyer_corp").val();
+			var buyer_owner = $("#buyer_owner").val();
+			var buyer_addr = $("#buyer_addr").val();
+			var buyer_tel = $("#buyer_tel").val();
+			var buyer_pic = $("#buyer_pic").val();
+			var buyer_pictel = $("#buyer_pictel").val();
+			var buyer_email = $("#buyer_email").val();
+			var buyer_memo = $("#buyer_memo").val();
+			
+			
+			if(buyer_corp==null ||buyer_corp==""){
+				$("#errorMessage").html("거래처명을 입력해주세요.");
+				}else{
+					if(buyer_owner==null ||buyer_owner==""){
+					$("#errorMessage").html("대표명을 입력해주세요");
+				}else{
+					if(buyer_addr==null ||buyer_addr==""){
+					$("#errorMessage").html("주소를 입력해주세요");
+				}else{
+					if(buyer_tel==null ||buyer_tel==""){
+					$("#errorMessage").html("연락처를 입력해주세요");
+				}else{
+					if(buyer_pic==null ||buyer_pic==""){
+					$("#errorMessage").html("담당자명을 입력해주세요");
+				}else{
+					if(buyer_pictel==null ||buyer_pictel==""){
+					$("#errorMessage").html("담당자 연락처를 입력해주세요");
+				}else{
+					if(buyer_email==null ||buyer_email==""){
+					$("#errorMessage").html("이메일을 입력해주세요");
+				}else{	
+					$('#insertBuyerToDb').submit();
+					opener.document.location.href="/buyerList";
+					self.close();
+
+							}
+						}
+					}
+				}
+			}	
+		}
+	}
+});
+});
+
+</script>
+
 <body>
 <div class="app-container app-theme-white body-tabs-shadow">
   <div class="app-container">
@@ -97,55 +144,6 @@
             </div>
         </div>
 </div>
-<script>
-	$(function(){
 
-		$("#insertButton").click(function(){
-			var buyer_corp = $("#buyer_corp").val();
-			var buyer_owner = $("#buyer_owner").val();
-			var buyer_addr = $("#buyer_addr").val();
-			var buyer_tel = $("#buyer_tel").val();
-			var buyer_pic = $("#buyer_pic").val();
-			var buyer_pictel = $("#buyer_pictel").val();
-			var buyer_email = $("#buyer_email").val();
-			var buyer_memo = $("#buyer_memo").val();
-			
-			
-			if(buyer_corp==null ||buyer_corp==""){
-				$("#errorMessage").html("거래처명을 입력해주세요.");
-				}else{
-					if(buyer_owner==null ||buyer_owner==""){
-					$("#errorMessage").html("대표명을 입력해주세요");
-				}else{
-					if(buyer_addr==null ||buyer_addr==""){
-					$("#errorMessage").html("주소를 입력해주세요");
-				}else{
-					if(buyer_tel==null ||buyer_tel==""){
-					$("#errorMessage").html("연락처를 입력해주세요");
-				}else{
-					if(buyer_pic==null ||buyer_pic==""){
-					$("#errorMessage").html("담당자명을 입력해주세요");
-				}else{
-					if(buyer_pictel==null ||buyer_pictel==""){
-					$("#errorMessage").html("담당자 연락처를 입력해주세요");
-				}else{
-					if(buyer_email==null ||buyer_email==""){
-					$("#errorMessage").html("이메일을 입력해주세요");
-				}else{	
-					$('#insertBuyerToDb').submit();
-					opener.document.location.href="/buyerList";
-					self.close();
-
-							}
-						}
-					}
-				}
-			}	
-		}
-				}
-	});
-});
-
-</script>
 </body>
 </html>
