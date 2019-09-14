@@ -168,8 +168,8 @@ function repeatButton(){
 		<div class="form-group">
 			<label for="supplierseq" class="select">공급처명</label> <input
 				name="supplierseq" id="supplierseq" list="test" class="form-control" autocomplete="off">
-			<datalist class="select" id="test">
-				<option class="sList" th:each="list : ${supplierList}"
+			<datalist class="select" id="test" >
+				<option class="sList" th:each="list : ${supplierList}" 
 					th:text="${list.supplier_name}" th:value="${list.supplierseq}">
 				</option>
 			</datalist>
