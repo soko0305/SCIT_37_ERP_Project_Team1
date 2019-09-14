@@ -41,7 +41,6 @@ public class LinkController {
 	public String Management4(Model model){
 		List<Sales> list1 = null;
 		list1 = service.selectSalesStatusIsDone();
-		System.out.println(list1);
 		model.addAttribute("salesList", list1);
 		return "sales/salesHistory";
 	}
