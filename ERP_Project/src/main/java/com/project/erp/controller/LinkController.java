@@ -67,4 +67,8 @@ public class LinkController {
 		return "sales/offersheet";
 	}
 	
+	@RequestMapping(value="/excelTemplate", method=RequestMethod.GET)
+	public String excelTemplate(){
+		return "sales/excelTemplate";
+	}
 }
