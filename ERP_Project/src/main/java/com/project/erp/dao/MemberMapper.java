@@ -14,7 +14,6 @@ public interface MemberMapper {
 	public int insertMember(MemberVO member);
 	
 	public MemberVO selectMemberById(MemberVO member);
-<<<<<<< HEAD
 	
  	public int updateLogin(MemberVO member);
  	
@@ -25,10 +24,6 @@ public interface MemberMapper {
 	public ArrayList<MemberVO> selectMemberBeforePemit();
 
 	public int rejectAccount(String userid);
-=======
- 	public MemberVO updateLogin(MemberVO member);
- 	public MemberVO updateLogout(String member);
->>>>>>> master
 
 	public int permitAccount(String userid);
 	
