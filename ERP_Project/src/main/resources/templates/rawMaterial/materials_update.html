@@ -23,122 +23,151 @@
 <script
 	src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
 <script th:inline="javascript">
-$(function() {
-	/*<![CDATA[*/
-		var minimum = /*[[${result.rawm_minimum}]]*/;
-		var set = /*[[${result.rawm_set}]]*/;
-	if($("#rawm_autoorder").val()=='CHECKED'){
+/*<![CDATA[*/
+	$(function(){
+		var rawm_code = /*[[${rawm_code}]]*/;
+		$.ajax({
+			url:"rawMaterialOneSelect",
+			data:{rawm_code : rawm_code},
+			type:"POST",
+			success:function(result){
+				$("#rawm_code").val(result.rawm_code);
+				$("#rawm_name").val(result.rawm_name);
+				$("#rawm_sort").val(result.rawm_sort);
+				$("#rawm_price").val(result.rawm_price);
+				$("#supplierseq").val(result.supplierseq);
+				$("#rawm_autoorder").val(result.rawm_autoorder);
+				var autooder = $("#rawm_autoorder").val();
+				var mini = result.rawm_minimum;
+				var set = result.rawm_set;
+				var checked = 'CHECKED';
+				var nocheck = 'UNCHECKED';
+				var min = 0;
+				var se = 0;
+				
+				
+				if(autooder =='CHECKED'){
+					
+					$("#rawm_autoorder").prop('checked', true) ;
+					var str1 = '<label for="rawm_minimum" class="">원자재최저수량</label>'
+						+'<input name="rawm_minimum" id="rawm_minimum" type="number"'
+						+'value='+mini+' class="form-control">';
+					var str2 = '<label for="rawm_set" class="">원자재설정수량</label>'
+						+ '<input name="rawm_set" id="rawm_set" type="number"'
+						+'value='+set+' class="form-control">';
+						
+					$(".form-group1").html(str1);
+					$(".form-group2").html(str2);
+					
+					$("#rawm_autoorder").change(function() {
+						if ($("#rawm_autoorder").is(":checked")) {
+							$("#rawm_autoorder").val(checked);
+							var str1 = '<label for="rawm_minimum" class="">원자재최저수량</label>'
+									+ '<input name="rawm_minimum" id="rawm_minimum" type="number" value='+mini+' class="form-control">'
+							var str2 = '<label for="rawm_set" class="">원자재설정수량</label>'
+									+ '<input name="rawm_set" id="rawm_set" type="number" value='+set+' class="form-control">'
+							$(".form-group1").html(str1);
+							$(".form-group2").html(str2);
+						} else {
+							
+							$("#rawm_autoorder").val(nocheck);
+							var str1 = '<input name="rawm_minimum" id="rawm_minimum" type="hidden"'
+								+'value='+min+' class="form-control">';
+							var str2 = '<input name="rawm_set" id="rawm_set" type="hidden"'
+								+'value='+se+' class="form-control">';
+							$(".form-group1").html(str1);
+							$(".form-group2").html(str2);
+						}
+					});
+				}else{
+					var str1 = '<input name="rawm_minimum" id="rawm_minimum" type="hidden"'
+						+'value='+mini+' class="form-control">';
+					var str2 = '<input name="rawm_set" id="rawm_set" type="hidden"'
+						+'value='+set+' class="form-control">';
+					$(".form-group1").html(str1);
+					$(".form-group2").html(str2);
+					
+					$("#rawm_autoorder").change(function() {
+						if ($("#rawm_autoorder").is(":checked")) {
+							$("#rawm_autoorder").val(checked);
+							var str1 = '<label for="rawm_minimum" class="">원자재최저수량</label>'
+									+ '<input name="rawm_minimum" id="rawm_minimum" type="number" value='+mini+' class="form-control">'
+							var str2 = '<label for="rawm_set" class="">원자재설정수량</label>'
+									+ '<input name="rawm_set" id="rawm_set" type="number" value='+set+' class="form-control">'
+							$(".form-group1").html(str1);
+							$(".form-group2").html(str2);
+						} else {
+							
+							$("#rawm_autoorder").val(nocheck);
+							var str1 = '<input name="rawm_minimum" id="rawm_minimum" type="hidden"'
+								+'value='+min+' class="form-control">';
+							var str2 = '<input name="rawm_set" id="rawm_set" type="hidden"'
+								+'value='+se+' class="form-control">';
+							$(".form-group1").html(str1);
+							$(".form-group2").html(str2);
+						}
+					});
+				}
+			}
+		});
+		$(".btn-primary").click(function(){
+			var code = $("#rawm_code").val();
+			var name = $("#rawm_name").val();
+			var sort = $("#rawm_sort").val();
+			var price = $("#rawm_price").val();
+			var seq = $("#supplierseq").val();
+			var order = $("#rawm_autoorder").val();
+			var minimum = $("#rawm_minimum").val();
+			var set = $("#rawm_set").val();
 
-		$("#rawm_autoorder").prop('checked', true) ;
-		var str1 = '<label for="rawm_minimum" class="">원자재최저수량</label>'
-			+'<input name="rawm_minimum" id="rawm_minimum" type="number"'
-			+'value='+minimum+' class="form-control">';
-		var str2 = '<label for="rawm_set" class="">원자재설정수량</label>'
-			+ '<input name="rawm_set" id="rawm_set" type="number"'
-			+'value='+set+' class="form-control">';
+			var code1 = $("#rawm_code1").val(code);
+			var name1 = $("#rawm_name1").val(name);
+			var sort1 = $("#rawm_sort1").val(sort);
+			var price1 = $("#rawm_price1").val(price);
+			var seq1 = $("#supplierseq1").val(seq);
+			var order1 = $("#rawm_autoorder1").val(order);
+			var minimum1 = $("#rawm_minimum1").val(minimum);
+			var set1 = $("#rawm_set1").val(set);
 			
-		$(".form-group1").html(str1);
-		$(".form-group2").html(str2);
-		
-		repeatButton();
-	}else{
-
-		var str1 = '<input name="rawm_minimum" id="rawm_minimum" type="hidden"'
-			+'value='+minimum+' class="form-control">';
-		var str2 = '<input name="rawm_set" id="rawm_set" type="hidden"'
-			+'value='+set+' class="form-control">';
-		$(".form-group1").html(str1);
-		$(".form-group2").html(str2);
-		repeatButton();
-	}
-	
-	$(".btn-primary").click(function(){
-		var code = $("#rawm_code").val();
-		var name = $("#rawm_name").val();
-		var sort = $("#rawm_sort").val();
-		var price = $("#rawm_price").val();
-		var seq = $("#supplierseq").val();
-		var order = $("#rawm_autoorder").val();
-		var minimum = $("#rawm_minimum").val();
-		var set = $("#rawm_set").val();
-
-		alert(order);
-		alert(minimum);
-		alert(set);
-		var code1 = $("#rawm_code1").val(code);
-		var name1 = $("#rawm_name1").val(name);
-		var sort1 = $("#rawm_sort1").val(sort);
-		var price1 = $("#rawm_price1").val(price);
-		var seq1 = $("#supplierseq1").val(seq);
-		var order1 = $("#rawm_autoorder1").val(order);
-		var minimum1 = $("#rawm_minimum1").val(minimum);
-		var set1 = $("#rawm_set1").val(set);
-		
-		/* var code2 = $("#rawm_code1").val();
-		var name2 = $("#rawm_name1").val();
-		var sort2 = $("#rawm_sort1").val();
-		var price2 = $("#rawm_price1").val();
-		var seq2 = $("#supplierseq1").val();
-		var order2 = $("#rawm_autoorder1").val();
-		var minimum2 = $("#rawm_minimum1").val();
-		var set2 = $("#rawm_set1").val();
-		
-		if(!name2){
-			alert("원자재명을 입력해주세요");
-			return false;
-		}
-		if(!sort2){
-			alert("원자재종류를 입력해주세요");
-			return false;
-		}
-		if(!price2){
-			alert("원자재단가를 입력해주세요");
-			return false;
-		}
-		if(!seq2){
-			alert("공급처명을 입력해주세요");
-			return false;
-		}
-		if ($("#rawm_autoorder").is(":checked")) {
-			if(minimum2.length < 1){
-				alert("원자재최저량을 1개이상 입력해주세요");
+			
+			var code2 = $("#rawm_code1").val();
+			var name2 = $("#rawm_name1").val();
+			var sort2 = $("#rawm_sort1").val();
+			var price2 = $("#rawm_price1").val();
+			var seq2 = $("#supplierseq1").val();
+			var order2 = $("#rawm_autoorder1").val();
+			var minimum2 = $("#rawm_minimum1").val();
+			var set2 = $("#rawm_set1").val();
+			
+			if(!name2){
+				alert("원자재명을 입력해주세요");
 				return false;
 			}
-		} */
-		
-		$("#rawMaterialUpdateForm").submit();
-	})
-})
-
-function repeatButton(){
-	var checked = 'CHECKED';
-	var nocheck = 'NOCHECK';
-	var mini = 0;
-	var se = 0;
-	$("#rawm_autoorder").change(function() {
-		if ($("#rawm_autoorder").is(":checked")) {
-			$("#rawm_autoorder").val(checked);
-			var str1 = '<label for="rawm_minimum" class="">원자재최저수량</label>'
-					+ '<input name="rawm_minimum" id="rawm_minimum" type="number" class="form-control">'
-			var str2 = '<label for="rawm_set" class="">원자재설정수량</label>'
-					+ '<input name="rawm_set" id="rawm_set" type="number" class="form-control">'
-			$(".form-group1").html(str1);
-			$(".form-group2").html(str2);
-		} else {
+			if(!sort2){
+				alert("원자재종류를 입력해주세요");
+				return false;
+			}
+			if(!price2){
+				alert("원자재단가를 입력해주세요");
+				return false;
+			}
+			if(!seq2){
+				alert("공급처명을 입력해주세요");
+				return false;
+			}
+			if ($("#rawm_autoorder").is(":checked")) {
+				if(minimum2.length < 1){
+					alert("원자재최저량을 1개이상 입력해주세요");
+					return false;
+				}
+			}
 			
-			$("#rawm_autoorder").val(nocheck);
-			$("#rawm_minimum").val(mini);
-			$("#rawm_set").val(se);
-			var str1 = '<input name="rawm_minimum" id="rawm_minimum" type="hidden"'
-				+'class="form-control">';
-			var str2 = '<input name="rawm_set" id="rawm_set" type="hidden"'
-				+'class="form-control">';
-			$(".form-group1").html(str1);
-			$(".form-group2").html(str2);
-		}
+			$("#rawMaterialUpdateForm").submit();
+			opener.document.location.href="/goMaterialsList";
+            self.close();
+		});
 	});
-}
-/*]]>*/
+	/*]]>*/
 </script>
 </head>
 
@@ -147,29 +176,29 @@ function repeatButton(){
 	<div class="col-md-3">
 		<div class="form-group">
 			<label for="rawm_code">원자재코드</label> <input id="rawm_code"
-				name="rawm_code" type="text" th:value="${result.rawm_code}"
+				name="rawm_code" type="text" 
 				readonly="readonly" class="form-control">
 		</div>
 		<div class="form-group">
 			<label for="rawm_name">원재료명</label> <input id="rawm_name"
-				name="rawm_name" type="text" th:value="${result.rawm_name}"
+				name="rawm_name" type="text"
 				class="form-control">
 		</div>
 		<div class="form-group">
 			<label for="rawm_sort">원재료종류</label> <input id="rawm_sort"
-				name="rawm_sort" type="text" th:value="${result.rawm_sort}"
+				name="rawm_sort" type="text"
 				class="form-control">
 		</div>
 		<div class="form-group">
 			<label for="rawm_price">단가</label> <input id="rawm_price" type="text"
-				name="rawm_price" th:value="${result.rawm_price}"
+				name="rawm_price"
 				class="form-control">
 		</div>
 		<div class="form-group">
 			<label for="supplierseq" class="select">공급처명</label> <input
 				name="supplierseq" id="supplierseq" list="test" class="form-control" autocomplete="off">
-			<datalist class="select" id="test">
-				<option class="sList" th:each="list : ${supplierList}"
+			<datalist class="select" id="test" >
+				<option class="sList" th:each="list : ${supplierList}" 
 					th:text="${list.supplier_name}" th:value="${list.supplierseq}">
 				</option>
 			</datalist>
@@ -179,7 +208,7 @@ function repeatButton(){
 		<div class="position-relative form-group">
 			<div class="custom-checkbox custom-control">
 				<input type="checkbox" id="rawm_autoorder" name="rawm_autoorder"
-					th:value="${result.rawm_autoorder}" class="custom-control-input">
+					class="custom-control-input">
 				<label class="custom-control-label" for="rawm_autoorder">&nbsp;자동구매</label>
 			</div>
 		</div>

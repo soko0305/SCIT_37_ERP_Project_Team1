@@ -6,9 +6,10 @@ PD_CODE  varchar2(100) primary key,
 PD_NAME varchar2(100) not null,
 PD_RMCOST   number not null,
 PD_MANUFCOST   number not null,
-PD_SORT varchar2(100) not null
+PD_SORT varchar2(100) not null,
+WAREHOUSE_CODE varchar2(100) not null
 )
- 
+ create sequence pd_code;
 drop table MANUFACTURE;
 
 create table MANUFACTURE(

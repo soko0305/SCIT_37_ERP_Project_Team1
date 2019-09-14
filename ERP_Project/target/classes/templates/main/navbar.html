@@ -1,6 +1,5 @@
 <script type="text/javascript"	src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
-
-<html lang="utf-8">
+<html lang="UTF-8" xmlns:th="http://www.thymeleaf.org">
             <div class="app-sidebar sidebar-shadow">
 
                 <div class="app-header__logo">
@@ -441,18 +440,23 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/goBoardList">
-                                    <i class="metismenu-icon pe-7s-way">
-                                    </i>board
-                                </a>
-                            </li>
-                            <li>
-                            
-                            
                                 <a href="/logout">
                               	
                                      <i class="metismenu-icon pe-7s-id">
                                      </i>logout
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/goBoardList" >
+                                    <i class="metismenu-icon pe-7s-way">
+                                    </i>board
+                                </a>
+                            </li>
+                            <li th:if="${session.loginid!=null and session.logindepartment.toString().equals('인사')}">
+                                <a href="/goPermitAccount">
+                              	
+                                     <i class="metismenu-icon pe-7s-id">
+                                     </i>confirm request
                                 </a>
                             </li>
                             <li class="app-sidebar__heading">재고</li>

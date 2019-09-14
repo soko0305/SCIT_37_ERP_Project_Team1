@@ -22,4 +22,43 @@
 		#{pd_sort}
 	)
 	</insert>
+	<select id="produceSelect" resultType="com.project.erp.vo.ManufactureVO" parameterType="com.project.erp.vo.ManufactureVO">
+		SELECT
+	 		mfseq
+			,pd_code 
+ 			,TO_CHAR(manuf_startdate, 'YYYY-MM-DD') AS manuf_startdate 
+ 			,TO_CHAR(manuf_enddate, 'YYYY-MM-DD') AS manuf_enddate
+			,manuf_status 
+			,warehouse_code 
+		 	,manuf_amount
+			,sales_ordernum 
+			,manuf_requserid 
+			,manuf_reqdate 
+			,'A' as salesdetailseq 
+	 	FROM
+		manufacture
+<!--	WHERE
+ 		pd_code=#{pd_code}
+ -->	</select>	
+ 	<select id="productionSelect" resultType="com.project.erp.vo.ProductVO" parameterType="com.project.erp.vo.ProductVO">
+
+		SELECT
+	 		pd_code
+			,pd_name
+ 			,pd_rmcost
+ 			,pd_manufcost
+			,pd_sort
+			,warehouse_code
+	 	FROM
+		product
+<!--	WHERE
+ 		pd_code=#{pd_code}
+ -->	</select>	
+ 	<delete id="productionDelete" parameterType="com.project.erp.vo.ProductVO">
+		delete
+		from
+			product
+		where
+			pd_code=#{pd_code}
+	</delete>
 </mapper>
