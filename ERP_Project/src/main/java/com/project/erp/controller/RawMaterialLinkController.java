@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.erp.dao.OrderDAO;
 import com.project.erp.dao.RawMaterialDAO;
@@ -97,13 +98,21 @@ public class RawMaterialLinkController {
 	}
 
 	// 원자재 수정 Form
-	@RequestMapping(value = "/goMaterialsUpdate", method = RequestMethod.POST)
+	@RequestMapping(value = "/goMaterialsUpdate", method = RequestMethod.GET)
 	public String goMaterialsUpdate(String rawm_code, Model model) {
-		RawMaterialVO result = rService.rawMaterialOneSelect(rawm_code);
-		model.addAttribute("result", result);
+		/*RawMaterialVO result = rService.rawMaterialOneSelect(rawm_code);
+		model.addAttribute("result", result);*/
 		ArrayList<SupplierVO> result1 = sService.supplierAllSelect();
 		model.addAttribute("supplierList", result1);
+		
+		model.addAttribute("rawm_code", rawm_code);
 		return "rawMaterial/materials_update";
+	}
+	// 원자재 하나 가져오기
+	@RequestMapping(value = "/rawMaterialOneSelect", method = RequestMethod.POST)
+	public @ResponseBody RawMaterialVO rawMaterialOneSelect(String rawm_code, Model model) {
+		RawMaterialVO result = rService.rawMaterialOneSelect(rawm_code);
+		return result;
 	}
 	//
 	//
