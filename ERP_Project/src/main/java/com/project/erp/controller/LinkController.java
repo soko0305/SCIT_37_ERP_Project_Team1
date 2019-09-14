@@ -41,6 +41,7 @@ public class LinkController {
 	public String Management4(Model model){
 		List<Sales> list1 = null;
 		list1 = service.selectSalesStatusIsDone();
+		System.out.println(list1);
 		model.addAttribute("salesList", list1);
 		return "sales/salesHistory";
 	}
@@ -58,7 +59,7 @@ public class LinkController {
 		return "sales/buyerDetails";
 	}
 	
-	@RequestMapping(value="/salesDetailLink", method=RequestMethod.GET)
+	@RequestMapping(value="/realTimeOfferDetail", method=RequestMethod.GET)
 	public String salesDetailLink(SalesDetail salesDetail, Model model){
 		List<SalesDetail> list = service.getDetails(salesDetail);
 		model.addAttribute("salesDetailList", list);
