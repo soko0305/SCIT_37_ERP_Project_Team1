@@ -51,8 +51,8 @@ public class LinkController {
 		return "sales/insertBuyer";
 	}
 	
-	@RequestMapping(value="/detailLink", method=RequestMethod.GET)
-	public String detailLink(Buyer buyer, Model model){
+	@RequestMapping(value="/buyerListDetail", method=RequestMethod.GET)
+	public String buyerListDetail(Buyer buyer, Model model){
 		Buyer buyer1 = null;
 		buyer1 = service.selectBuyer(buyer);
 		model.addAttribute("buyer", buyer1);
@@ -60,13 +60,13 @@ public class LinkController {
 	}
 	
 	@RequestMapping(value="/realTimeOfferDetail", method=RequestMethod.GET)
-	public String salesDetailLink(SalesDetail salesDetail, Model model){
+	public String realTimeOfferDetail(SalesDetail salesDetail, Model model){
 		List<SalesDetail> list = service.getDetails(salesDetail);
 		model.addAttribute("salesDetailList", list);
 		return "sales/offersheet";
 	}
 	
-	@RequestMapping(value="/offersheet", method=RequestMethod.GET)
+	@RequestMapping(value="/salesHistoryDetail", method=RequestMethod.GET)
 	public String excelTemplate(){
 		return "sales/offersheet";
 	}
