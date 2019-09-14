@@ -5,18 +5,18 @@
 
 <mapper namespace="com.project.erp.dao.MemberMapper">
 
-		<insert id="insertMember" parameterType="com.project.erp.vo.MemberVO">
+	<insert id="insertMember" parameterType="com.project.erp.vo.MemberVO">
 		INSERT INTO erp_member(
-		userid
-		,userpw
-		,userstatus
-		,userdepartment
-		,userstate
-		,name
-		,phonenumber
-		,email
-		,address
-		,loginstate
+					userid
+					,userpw
+					,userstatus
+					,userdepartment
+					,userstate
+					,name
+					,phonenumber
+					,email
+					,address
+					,loginstate
 
 		)
 		VALUES(
@@ -35,13 +35,43 @@
 	
  
 
+	<select id="selectMemberByIdAndPw" parameterType="com.project.erp.vo.MemberVO" resultType="com.project.erp.vo.MemberVO">
+		SELECT  	userid
+					,userstatus
+					,userdepartment
+					,userstate
+					,loginstate
+		FROM erp_member
+		WHERE userid=#{userid}
+			  AND
+			  userpw=#{userpw}
+	</select>
+
+
 	<select id="selectMemberById" parameterType="com.project.erp.vo.MemberVO" resultType="com.project.erp.vo.MemberVO">
-		SELECT  userid
-				, userpw
- 				, userstate
+		SELECT  	userid
+					,userstatus
+					,userdepartment
+					,userstate
+					,loginstate
 		FROM erp_member
 		WHERE userid=#{userid}
 	</select>
+	
+	<select id="selectMemberBeforePemit" resultType="com.project.erp.vo.MemberVO">
+		SELECT  	userid
+					,userstatus
+					,userdepartment
+					,userstate
+					,name
+					,phonenumber
+					,email
+					,address
+					,loginstate
+		FROM erp_member
+		WHERE userstate='notallowed'
+	</select>
+	
  <update id="updateLogin" parameterType="com.project.erp.vo.MemberVO">
 	
 		UPDATE erp_member set
@@ -50,6 +80,7 @@
 			userid=#{userid}
 	
 	</update>
+	
  <update id="updateLogout" parameterType="com.project.erp.vo.MemberVO">
 	
 		UPDATE erp_member set
@@ -58,4 +89,18 @@
 			userid=#{userid}
 	
 	</update>
+	
+	 <update id="permitAccount" parameterType="String">
+		UPDATE erp_member 
+		SET
+			userstate='allowed'
+ 		WHERE
+			userid=#{userid}
+	
+	</update>
+	
+	<delete  id="rejectAccount" parameterType="String">
+		DELETE erp_member 
+		WHERE userid=#{userid}
+	</delete>
 </mapper>

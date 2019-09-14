@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Language" content="en">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Data Tables - Choose between regular React Bootstrap
+	tables or advanced dynamic ones.</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+<meta name="description"
+	content="Choose between regular React Bootstrap tables or advanced dynamic ones.">
+
+<!-- Disable tap highlight on IE -->
+<meta name="msapplication-tap-highlight" content="no">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<!--  <script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>-->
+	<link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
+<script>
+	$(function(){
+		$("#header").load("/header");
+		$("#navbar").load("/navbar");
+		$("#setting").load("/setting");
+		
+		$(".btn-primary").click(function(){	
+			var type = $(this).attr("data-type")
+			var userid = $(this).val();
+			if(type=='update'){
+				$("#code").val(userid);
+				$("#updateForm").submit();
+			}else if(type=='delete'){
+				$("#code1").val(userid);
+				$("#deleteForm").submit();
+			}
+		});
+	});
+</script>
+</head>
+<body>
+<form action="goPermitAccountRequest" method="post" id="updateForm">
+	<input type="hidden" name="userid" id="code">
+</form>
+<form action="goRejectAccountRequest" method="post" id="deleteForm">
+	<input type="hidden" name="userid" id="code1">
+</form>
+	<div
+		class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
+		<div id="header"></div>
+    	<div id="setting"></div> 
+		<div class="app-main">
+			<div id="navbar"></div>
+			<div class="app-main__outer">
+				<div class="app-main__inner">
+					<div class="app-page-title">
+                        <div class="page-title-wrapper">
+                            <div class="page-title-heading">
+                                <div class="page-title-icon">
+                                    <i class="pe-7s-notebook icon-gradient bg-mixed-hopes">
+                                    </i>
+                                </div>
+                                <div>회원가입 신청 관리
+                                    <div class="page-title-subheading">
+                                    	인사담당자의 직원 계정 관리 기능 
+
+                                    </div>
+                                </div>
+                            </div>    
+                          </div>
+                    </div> 
+					<div class="main-card mb-3 card">
+						<div class="card-body">
+							<table style="width: 100%;" id="example"
+								class="table table-hover table-striped table-bordered">
+								<thead>
+									<tr>
+										<th>직원 ID</th>
+										<th>직원명</th>
+										<th>부서</th>
+										<th>직책</th>
+										<th>직원 연락처</th>
+										<th>직원 이메일</th>
+										<th>직원 거주지</th>
+										<th>기타</th>
+									</tr>
+								</thead>
+								<tbody>
+								
+								
+
+									<tr th:each="list : ${memberList}">
+										<td th:text="${list.userid}"></td>
+										<td th:text="${list.name}"></td>
+										<td th:text="${list.userdepartment}"></td>
+										<td th:text="${list.userstatus}"></td>
+										<td th:text="${list.phonenumber}"></td>
+										<td th:text="${list.email}"></td>
+										<td th:text="${list.address}"></td>
+										<td>
+											<button class="mb-2 mr-2 btn-square btn btn-primary"
+												data-type="update" th:value="${list.userid}">인증</button>
+											<button class="mb-2 mr-2 btn-square btn btn-primary"
+												data-type="delete" th:value="${list.userid}">삭제</button>
+										</td>
+									</tr>
+									
+								</tbody>
+
+							</table>
+						</div>
+					</div>
+				</div>
+				<!-- app-wrapper-footer -->
+			</div>
+		</div>
+	</div>
+	<!-- drawer wrapper -->
+	<div class="app-drawer-overlay d-none animated fadeIn"></div>
+</body>
+</html>
