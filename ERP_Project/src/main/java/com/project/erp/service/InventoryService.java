@@ -7,11 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.project.erp.dao.InventoryDAO;
 import com.project.erp.dao.RawMaterialDAO;
-import com.project.erp.vo.InventoryVO;
 import com.project.erp.vo.ProductVO;
 import com.project.erp.vo.RawMaterialVO;
 import com.project.erp.vo.SupplierVO;
-import com.project.erp.vo.WarehouseVO;
 
 @Service
 public class InventoryService {
@@ -39,6 +37,27 @@ public class InventoryService {
 		ProductVO m = null;
 		m = inventoryDAO.selectProductByCode(pd_code);
 		return m;
+	}
+
+
+	public ArrayList<SupplierVO> selectDistinctMaterialSupplier() {
+		ArrayList<SupplierVO> sList = null;
+		sList = inventoryDAO.selectDistinctMaterialSupplier();
+		return sList;
+	}
+
+
+	public ArrayList<RawMaterialVO> selectDistinctMaterialSort() {
+		ArrayList<RawMaterialVO> rList = null;
+		rList = inventoryDAO.selectDistinctMaterialSort();
+		return rList;
+	}
+
+
+	public ArrayList<ProductVO> selectDistinctProductSort() {
+		ArrayList<ProductVO> pList = null;
+		pList = inventoryDAO.selectDistinctProductSort();
+		return pList;
 	}
 
 

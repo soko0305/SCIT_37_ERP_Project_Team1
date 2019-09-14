@@ -128,10 +128,10 @@
 						}else{
 					
 							//파이어베이스에서 해당 창고 테이블 수정 함수
-											database.ref(warehouse_code+'/').update({warehouse_name:warehouse_name});
-											database.ref(warehouse_code+'/').update({warehouse_addr:warehouse_addr});
-											database.ref(warehouse_code+'/').update({warehouse_size:warehouse_size});
-											database.ref(warehouse_code+'/').update({warehouse_date:warehouse_date});
+											database.ref('warehouse/'+warehouse_code).update({warehouse_name:warehouse_name});
+											database.ref('warehouse/'+warehouse_code).update({warehouse_addr:warehouse_addr});
+											database.ref('warehouse/'+warehouse_code).update({warehouse_size:warehouse_size});
+											database.ref('warehouse/'+warehouse_code).update({warehouse_date:warehouse_date});
 
 							window.open("about:blank","_self").close();
 						}
