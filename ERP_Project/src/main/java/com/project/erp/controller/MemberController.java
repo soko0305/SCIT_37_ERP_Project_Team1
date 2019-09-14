@@ -18,23 +18,36 @@ public class MemberController {
 	@Autowired
 	MemberDAO memberDao;
 	
+	//회원가입 화면
+	@RequestMapping(value="/signup", method = RequestMethod.GET)
+	public String signup(){
+		return "member/signup";
+	}
+
+	//아이디로 조회
 	@RequestMapping(value="/selectMemberById", method = RequestMethod.GET)
 	public @ResponseBody MemberVO selectMemberById(MemberVO member){
 		MemberVO m = memberDao.selectMemberById(member);
 			return m;	
 		
 	}
+	
+	//조회
 	@RequestMapping(value="/selectMember ", method = RequestMethod.GET)
 	public @ResponseBody MemberVO selectMember(MemberVO member){
 		MemberVO m = memberDao.selectMemberById(member);
 			return m;	
 		
 	}
+	
+	//멤버 db 삽입
 	@RequestMapping(value="/insertMember", method = RequestMethod.POST)
 	public String insertMember(MemberVO member){ 
 		 memberDao.insertMember(member);
  		return "member/login";
 	}
+	
+	//로그인
 	@RequestMapping(value="/login", method = RequestMethod.POST)
 	public String login(MemberVO member, HttpSession session, Model model){
 		MemberVO m = memberDao.selectMemberById(member);
@@ -59,6 +72,8 @@ public class MemberController {
 			return "member/login";	
 		}
 	}
+	
+	//로그아웃
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(MemberVO member, Model model, HttpSession session) {
 		

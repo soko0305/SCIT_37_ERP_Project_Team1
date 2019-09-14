@@ -27,7 +27,17 @@ public class ProductionService {
 		
 		ArrayList<ManufactureVO> result = pDAO.produceSelect(manufacture);
 		
-		// TODO Auto-generated method stub
+ 		return result;
+	}
+
+	public ArrayList<ProductVO> productionSelect(ProductVO product) {
+		ArrayList<ProductVO> result = pDAO.productionSelect(product);
 		return result;
 	}
+
+	public int deleteProduct(ProductVO product) {
+		int result = pDAO.productionDelete(product);		
+		return result;
+	}
+
 }

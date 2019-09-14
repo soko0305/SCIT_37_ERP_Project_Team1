@@ -39,5 +39,26 @@
 		manufacture
 <!--	WHERE
  		pd_code=#{pd_code}
- -->	</select>
+ -->	</select>	
+ 	<select id="productionSelect" resultType="com.project.erp.vo.ProductVO" parameterType="com.project.erp.vo.ProductVO">
+
+		SELECT
+	 		pd_code
+			,pd_name
+ 			,pd_rmcost
+ 			,pd_manufcost
+			,pd_sort
+			,warehouse_code
+	 	FROM
+		product
+<!--	WHERE
+ 		pd_code=#{pd_code}
+ -->	</select>	
+ 	<delete id="productionDelete" parameterType="com.project.erp.vo.ProductVO">
+		delete
+		from
+			product
+		where
+			pd_code=#{pd_code}
+	</delete>
 </mapper>

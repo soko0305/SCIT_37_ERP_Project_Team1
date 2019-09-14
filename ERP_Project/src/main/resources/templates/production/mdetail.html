@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Language" content="en">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>order_insert</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+<meta name="description"
+	content="Choose between regular React Bootstrap tables or advanced dynamic ones.">
+
+<!-- Disable tap highlight on IE -->
+<meta name="msapplication-tap-highlight" content="no">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
+<link
+	href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css"
+	rel="stylesheet">
+<script>
+	$(function() {
+		/* 버튼 액션 */
+		$(".btn-primary").click(function() {
+			$("#productionInsertForm").submit();
+			opener.location.href = 'productioncheck';
+			/* window.open("about:blank", "_self").close(); */
+		});
+
+	});
+</script>
+</head>
+
+<body>
+
+	<div class="col-md-3">
+		<form action="productionInsert" method="post" id="productionInsertForm">
+			<!-- 생산품코드 -->
+			<input id="pd_code" name="pd_code" type="hidden"
+				class="form-control">
+
+			<div class="form-group">
+				<label for="pd_name">생산품명</label> <input id="pd_name"
+					name="pd_name" type="text" class="form-control">
+			</div>
+			<div class="form-group">
+				<label for="pd_rmcost">재료비</label> <input id="pd_rmcost"
+					name="pd_rmcost" readonly="readonly" type="number"
+					class="form-control" placeholder="추후산정" value="0">
+			</div>
+			<div class="form-group">
+				<label for="pd_manufcost">생산비</label> <input id="pd_manufcost"
+					name="pd_manufcost" type="number" class="form-control">
+			</div>
+			<div class="form-group">
+				<label for="pd_sort">생산품종류</label> <input id="pd_sort"
+					name="pd_sort" type="text" class="form-control">
+			</div>
+			<div class="form-group">
+				<button class="mb-2 mr-2 btn-square btn btn-primary">등록</button>
+			</div>
+		</form>
+	</div>
+
+</body>
+</html>

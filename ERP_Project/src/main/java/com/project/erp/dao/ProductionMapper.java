@@ -14,4 +14,6 @@ public interface ProductionMapper {
 
 	public int productionInsert(ProductVO product);
 	public ArrayList<ManufactureVO> produceSelect(ManufactureVO manufacture);
+ 	public ArrayList<ProductVO> productionSelect(ProductVO product);
+	public int productionDelete(ProductVO product);
 }
