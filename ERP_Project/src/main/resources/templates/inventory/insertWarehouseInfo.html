@@ -115,7 +115,7 @@
 						if(warehouse_date==null ||warehouse_date==""){
 							$("#errorMessage").html("창고 개설일을 입력해주세요");
 						}else{							
-							database.ref().push({"warehouse_name": warehouse_name, 
+							database.ref("warehouse/").push({"warehouse_name": warehouse_name, 
 								 "warehouse_addr": warehouse_addr, 
 								 "warehouse_size": warehouse_size, 
 								 "warehouse_date": warehouse_date,

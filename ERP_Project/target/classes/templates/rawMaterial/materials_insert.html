@@ -42,6 +42,38 @@
 				$(".form-group2").html(str2);
 			}
 		});
+		$(".btn-primary").click(function(){
+			var name = $("#rawm_name").val();
+			var sort = $("#rawm_sort").val();
+			var price = $("#rawm_price").val();
+			var seq = $("#supplierseq").val();
+			var minimum = $("#rawm_minimum").val();
+			var set = $("#rawm_set").val();
+			
+			if(!name){
+				alert("원자재명을 입력해주세요");
+				return false;
+			}
+			if(!sort){
+				alert("원자재종류를 입력해주세요");
+				return false;
+			}
+			if(!price){
+				alert("원자재단가를 입력해주세요");
+				return false;
+			}
+			if(!seq){
+				alert("공급처명을 입력해주세요");
+				return false;
+			}
+			if ($("#rawm_autoorder").is(":checked")) {
+				if(minimum.length < 1){
+					alert("원자재최저량을 1개이상 입력해주세요");
+					return false;
+				}
+			}
+			$("#rawMaterialInsertForm").submit();
+		});
 	});
 </script>
 </head>
@@ -393,7 +425,7 @@
 							<div class="main-card mb-3 card">
 								<div class="card-body">
 									<h5 class="card-title">원자재 등록</h5>
-									<form action="rawMaterialInsert" method="post" class="">
+									<form action="rawMaterialInsert" method="post" id="rawMaterialInsertForm">
 										<div class="form-row">
 											<div class="col-md-6">
 												<div class="position-relative form-group">
@@ -452,7 +484,7 @@
 												</div>
 											</div>
 										</div>
-										<button class="mt-2 btn btn-primary">등록</button>
+										<button type="button" class="mt-2 btn btn-primary">등록</button>
 									</form>
 								</div>
 							</div>

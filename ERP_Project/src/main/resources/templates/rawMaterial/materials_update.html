@@ -25,11 +25,10 @@
 <script th:inline="javascript">
 $(function() {
 	/*<![CDATA[*/
-	if($("#rawm_autoorder").val()=='CHECKED'){
-
 		var minimum = /*[[${result.rawm_minimum}]]*/;
 		var set = /*[[${result.rawm_set}]]*/;
-		
+	if($("#rawm_autoorder").val()=='CHECKED'){
+
 		$("#rawm_autoorder").prop('checked', true) ;
 		var str1 = '<label for="rawm_minimum" class="">원자재최저수량</label>'
 			+'<input name="rawm_minimum" id="rawm_minimum" type="number"'
@@ -43,6 +42,13 @@ $(function() {
 		
 		repeatButton();
 	}else{
+
+		var str1 = '<input name="rawm_minimum" id="rawm_minimum" type="hidden"'
+			+'value='+minimum+' class="form-control">';
+		var str2 = '<input name="rawm_set" id="rawm_set" type="hidden"'
+			+'value='+set+' class="form-control">';
+		$(".form-group1").html(str1);
+		$(".form-group2").html(str2);
 		repeatButton();
 	}
 	
@@ -59,14 +65,46 @@ $(function() {
 		alert(order);
 		alert(minimum);
 		alert(set);
-		$("#rawm_code1").val(code);
-		$("#rawm_name1").val(name);
-		$("#rawm_sort1").val(sort);
-		$("#rawm_price1").val(price);
-		$("#supplierseq1").val(seq);
-		$("#rawm_autoorder1").val(order);
-		$("#rawm_minimum1").val(minimum);
-		$("#rawm_set1").val(set);
+		var code1 = $("#rawm_code1").val(code);
+		var name1 = $("#rawm_name1").val(name);
+		var sort1 = $("#rawm_sort1").val(sort);
+		var price1 = $("#rawm_price1").val(price);
+		var seq1 = $("#supplierseq1").val(seq);
+		var order1 = $("#rawm_autoorder1").val(order);
+		var minimum1 = $("#rawm_minimum1").val(minimum);
+		var set1 = $("#rawm_set1").val(set);
+		
+		/* var code2 = $("#rawm_code1").val();
+		var name2 = $("#rawm_name1").val();
+		var sort2 = $("#rawm_sort1").val();
+		var price2 = $("#rawm_price1").val();
+		var seq2 = $("#supplierseq1").val();
+		var order2 = $("#rawm_autoorder1").val();
+		var minimum2 = $("#rawm_minimum1").val();
+		var set2 = $("#rawm_set1").val();
+		
+		if(!name2){
+			alert("원자재명을 입력해주세요");
+			return false;
+		}
+		if(!sort2){
+			alert("원자재종류를 입력해주세요");
+			return false;
+		}
+		if(!price2){
+			alert("원자재단가를 입력해주세요");
+			return false;
+		}
+		if(!seq2){
+			alert("공급처명을 입력해주세요");
+			return false;
+		}
+		if ($("#rawm_autoorder").is(":checked")) {
+			if(minimum2.length < 1){
+				alert("원자재최저량을 1개이상 입력해주세요");
+				return false;
+			}
+		} */
 		
 		$("#rawMaterialUpdateForm").submit();
 	})
@@ -92,9 +130,9 @@ function repeatButton(){
 			$("#rawm_minimum").val(mini);
 			$("#rawm_set").val(se);
 			var str1 = '<input name="rawm_minimum" id="rawm_minimum" type="hidden"'
-				+'value=0 class="form-control">';
+				+'class="form-control">';
 			var str2 = '<input name="rawm_set" id="rawm_set" type="hidden"'
-				+'value=0 class="form-control">';
+				+'class="form-control">';
 			$(".form-group1").html(str1);
 			$(".form-group2").html(str2);
 		}
