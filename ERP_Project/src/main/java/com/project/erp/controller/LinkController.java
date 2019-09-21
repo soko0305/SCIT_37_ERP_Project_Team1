@@ -41,13 +41,11 @@ public class LinkController {
 	public String Management4(Model model){
 		List<Sales> list1 = null;
 		list1 = service.selectSalesStatusIsDone();
-		System.out.println(list1);
 		model.addAttribute("salesList", list1);
 		return "sales/salesHistory";
 	}
 	@RequestMapping(value="/insertBuyer", method = RequestMethod.GET)
-	public String insertBuyer(Model model){
-		
+	public String insertBuyer(){	
 		return "sales/insertBuyer";
 	}
 	
@@ -63,7 +61,7 @@ public class LinkController {
 	public String realTimeOfferDetail(SalesDetail salesDetail, Model model){
 		List<SalesDetail> list = service.selectSalesDetailByOrdernum(salesDetail);
 		model.addAttribute("salesDetailList", list);
-		return "sales/offersheet";
+		return "sales/realTimeOfferDetail";
 	}
 	
 	@RequestMapping(value="/salesHistoryDetail", method=RequestMethod.GET)

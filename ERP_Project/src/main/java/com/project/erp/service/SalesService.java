@@ -31,6 +31,7 @@ public class SalesService {
 		String pd_code = null;
 		String salesdetail_amount = null;
 		String salesdetail_price = null;
+		String salesdetail_valueofsupply=null;
 		
 		int totalPrice = 0;
 		
@@ -60,11 +61,12 @@ public class SalesService {
 			salesdetail_name = object.get("salesdetail_name").getAsString();
 			pd_code = object.get("pd_code").getAsString();
 			salesdetail_amount = object.get("salesdetail_amount").getAsString();
-			salesdetail_price = object.get("salesdetail_totalprice").getAsString();
+			salesdetail_price = object.get("salesdetail_price").getAsString();
+			salesdetail_valueofsupply=object.get("salesdetail_valueofsupply").getAsString();
 				
 				
 			//totalPrice 계산.
-			totalPrice += Integer.parseInt(salesdetail_price);
+			totalPrice += Integer.parseInt(salesdetail_valueofsupply);
 			String price = Integer.toString(totalPrice);
 			
 			
@@ -98,6 +100,7 @@ public class SalesService {
 			salesDetail.setSalesdetail_price(salesdetail_price);
 			salesDetail.setSales_ordernum(sales_ordernum);
 			salesDetail.setPd_code(pd_code);
+			salesDetail.setSalesdetail_valueofsupply(salesdetail_valueofsupply);
 			dao.insertSalesDetail(salesDetail);
 			}
 		

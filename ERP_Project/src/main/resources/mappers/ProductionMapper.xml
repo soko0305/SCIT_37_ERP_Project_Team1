@@ -61,4 +61,34 @@
 		where
 			pd_code=#{pd_code}
 	</delete>
+	
+	<select id="selectLatestProduct" resultType="com.project.erp.vo.ProductVO">
+		SELECT
+	 		pd_code
+			,pd_name
+ 			,pd_rmcost
+ 			,pd_manufcost
+			,pd_sort
+	 	FROM product
+	 	WHERE pd_code=(SELECT MAX(pd_code)
+	 				   FROM product 
+	 					)
+	</select>
+	
+	<insert id="insertProudctMaterial" parameterType="com.project.erp.vo.ProductMaterialVO">
+		INSERT INTO product_material
+		(
+			product_material_code
+			, pd_code
+			, rawm_code
+			, product_material_amount
+		)
+		VALUES
+		(
+			 'pm' || TO_CHAR(product_material_code.NEXTVAL)
+			, #{pd_code}
+			, #{rawm_code}
+			, #{product_material_amount}
+		)
+	</insert>
 </mapper>

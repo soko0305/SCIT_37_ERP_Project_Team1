@@ -29,6 +29,7 @@
 		$("#navbar").load("/navbar");
 		$("#setting").load("/setting");
 		goDetail();
+		changeStats();
 	});
 	</script>
 	
@@ -77,6 +78,15 @@ function goDetail(){
 		 form.submit();
 	 })
  }
+
+function changeStats(){
+	$('.statusbutton').click(function(){
+		var num = $(this).attr('data-ordernum');
+		var stats = $(this).attr('data-stats');
+		alert(num); 
+		alert(stats);
+	})
+}
 
 
 /*
@@ -233,7 +243,7 @@ function insertData(sheet){
 												<td><a href="#" class="goDetail" th:text="${list.sales_title}" th:attr="data-ordernum=${list.sales_ordernum}"></a></td>
 												<td th:text="${list.sales_totalprice}"></td>
 												<td th:text="${list.sales_orderdate}"></td>
-												<td style="text-align: center;"><button class="mb-2 mr-2 btn btn-primary" th:text="${list.sales_status}" ></button></td>
+												<td style="text-align: center;"><button class="mb-2 mr-2 btn btn-primary statusbutton" th:text="${list.sales_status}" th:attr="data-stats=${list.sales_status}, data-ordernum=${list.sales_ordernum}"></button></td>
 										</tr> 
                                   </tbody>
                                </table>

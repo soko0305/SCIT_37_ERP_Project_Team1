@@ -10,5 +10,6 @@ public class SalesDetail {
 	private String salesdetail_amount;
 	private String salesdetail_price;
 	private String sales_ordernum;
+	private String salesdetail_valueofsupply;
 	private String pd_code;
 }

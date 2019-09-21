@@ -28,7 +28,8 @@ salesdetailseq.nextval,
 #{salesdetail_amount},
 #{salesdetail_price},
 #{sales_ordernum},
-#{pd_code}
+#{pd_code},
+#{salesdetail_valueofsupply}
 )
 </insert>
 
@@ -72,7 +73,14 @@ where sales_ordernum=#{sales_ordernum}
 </select>
 
 <select  id="selectSalesByOrdernum" parameterType="com.project.erp.vo.Sales" resultType="com.project.erp.vo.Sales">
-select *
+select 
+sales_ordernum,
+buyerseq,
+sales_orderdate,
+sales_status,
+sales_totalprice,
+sales_title,
+buyer_corp
 from sales
 where sales_ordernum=#{sales_ordernum}
 </select>
