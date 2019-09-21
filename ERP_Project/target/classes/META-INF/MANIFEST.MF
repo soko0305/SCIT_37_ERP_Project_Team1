@@ -1,21 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: ERP_Project
 Implementation-Version: 0.0.1-SNAPSHOT
-<<<<<<< HEAD
-<<<<<<< HEAD
-Built-By: 하라
-=======
-<<<<<<< HEAD
 Built-By: kita
-=======
-Built-By: user
->>>>>>> master
->>>>>>> moon
-=======
-Built-By: user
->>>>>>> 5ef54b382e724390f8bff90841cb0f34b705606c
 Implementation-Vendor-Id: com.project.erp
-Build-Jdk: 1.8.0_202
+Build-Jdk: 1.8.0_221
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
  ot-starter-parent/com.project.erp
 Created-By: Maven Integration for Eclipse
