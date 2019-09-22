@@ -9,12 +9,12 @@ public class ManufactureVO {
  			private String  manuf_startdate;
  			private String  manuf_enddate;
 			private String 	 manuf_status; 
-			private String 	 warehouse_code; 
+			private String 	 warehouse_code; //이건 나두기
 			private String 	 manuf_amount; 
-			private String 	 sales_ordernum; 
-			private String 	 manuf_requserid; 
-			private String 	 manuf_reqdate; 
-			private String 	 salesdetailseq;
+			private String 	 sales_ordernum; //비워두기 '0'
+			private String 	 manuf_requserid; //비워두기 '0'
+			private String 	 manuf_reqdate;  //sysdate
+			private String 	 salesdetailseq;//비워두기 '0'
 			private String   pd_name;
 			private String   mf_delete;
 			

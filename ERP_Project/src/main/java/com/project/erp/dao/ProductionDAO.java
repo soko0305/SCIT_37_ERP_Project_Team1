@@ -92,7 +92,6 @@ public class ProductionDAO {
 		}
 		return result;
 	}
-<<<<<<< HEAD
 	public int deleteProduce(ManufactureVO manufacture) {
 		int result = 0;
 		ProductionMapper mapper = sqlSession.getMapper(ProductionMapper.class);
@@ -113,8 +112,8 @@ public class ProductionDAO {
 			e.printStackTrace();
 			return result;
 		}
-		return result;		 
-=======
+		return result;		
+	}
 	public ProductVO selelctProductByCode(String pd_code) {
 		ProductVO p = null;
 
@@ -161,7 +160,6 @@ public class ProductionDAO {
 			return 0;
 		}
 		return result;
->>>>>>> 44e6e110e8ebef25e9af501aa856d0c398193f07
 	}
 	 
 }

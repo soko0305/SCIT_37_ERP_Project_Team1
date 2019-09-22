@@ -59,23 +59,10 @@
          str+='</option>';
          $("#test1").append(str);
       }
-      
-      $("#rawm_code").change(function() {
-          $.ajax({
-            url : "autoSelect",
-            data : {rawm_code : $("#rawm_code").val()},
-            type : 'get',
-            success : function(result) {
-               $("#supplierseq").empty();
-               $("#supplierseq").val(result.supplierseq);
-               $("#rawm_name").empty();
-               $("#rawm_name").val(result.rawm_name);
-            }
-         }); 
-      });
+     
       $(".btn-primary").click(function(){
-         $("#orderInsertForm").submit();
-         opener.location.href='goAllView'
+         $("#produceinsertForm").submit();
+         opener.location.href='gorpoducecheck'
          window.open("about:blank","_self").close();
       });
       
@@ -103,14 +90,34 @@
       <input id="rawm_name" name="rawm_name" type="hidden">
       
       <div class="form-group">
-         <label for="rawm_code">원자재명</label> <input id="rawm_code"
-            name="rawm_code" list="test" class="form-control" autocomplete="off">
+         <label for="rawm_code">제품명</label> <input id="pd_code"
+            name="pd_code" list="test" class="form-control" autocomplete="off">
          <datalist class="select" id="test">
-            <option class="rList" th:each="list : ${rList}"
-               th:text="${list.rawm_name}" th:value="${list.rawm_code}">
+            <option class="pList" th:each="list : ${pList}"
+               th:text="${list.pd_name}" th:value="${list.pd_code}">
             </option>
          </datalist>
       </div>
+      
+   		<div class="form-row">
+			<div class="col-md-4">
+				<div class="position-relative form-group">
+				<label for="manuf_startdate" class="">생산일자	</label>
+				<input type="date" class="manuf_startdate" data-toggle="datepicker">
+				</div>
+				</div>
+			</div>
+										
+										
+			<div class="form-row">
+			<div class="col-md-4">
+			<div class="position-relative form-group">
+			<label for="manuf_amount" class="">수량</label><input
+			name="manuf_amount" id="manuf_amount" placeholder="5ea"
+			type="number" class="form-control">
+			</div>
+			</div>
+			</div>
       <div class="form-group">
          <label for="rmorder_amount">원자재수량</label> <input id="rmorder_amount"
             name="rmorder_amount" type="text" class="form-control">
