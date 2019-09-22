@@ -3,6 +3,8 @@
 		        창고 테이블 접근      inventory속성  내  mm5라는 제품 코드 내         수량 입력 
 		database.ref('w49/').child("inventory").child("mm5").set({"systemamount":50});*/
 		
+		database.ref('w49/').child("inventory").child("mm5").push({"systemamount":50});
+		
 		/*재고 값 불러오기
 		database.ref('w49/').child("inventory").child("mm5").once('child_added').then(function(snapshot){
 			snapshot.val();
@@ -12,9 +14,9 @@
 		/*
 		파이어베이스 재고 추가 방법 
 		               파이어베이스로 mm5 코드 가진 제품 접근          이를 읽어                                      snapshot에 넣기(systemamount": 재고수량) 으로 이루어져 있음
-		database.ref('w49/').child("inventory").child("mm5").once('child_added').then(function(snapshot){
+		database.ref('warehouse/~').child("inventory").child("m~").once('child_added').then(function(snapshot){
 																			       snapshot의 값(재고수량) 불러오기		
-			database.ref('w49/').child("inventory").child("mm5").update({"systemamount":snapshot.val()+10});
+			database.ref('warehouse/~').child("inventory").child("m~").update({"systemamount":snapshot.val()+10});
 																			                          실제로 추가하는 수량
 		}); */
 		
@@ -22,3 +24,45 @@
 		/*재고 창고에서 삭제
 		database.ref('w49/').child("inventory").child("mm5").set({"systemamount":null});
 		*/
+		
+		
+		
+				function selelctInventoryINWarehouse(){
+			$("#tBody").html('');
+			database.ref('warehouse/').on('child_added', function(data){
+				var warehouse_code = data.key;
+				var warehouse_name = data.val().warehouse_name;
+				setWarehouseDropbox(warehouse_code, warehouse_name);
+				database.ref('warehouse/'+warehouse_code).child("inventory").on('child_added', function(snapshot){
+					if(snapshot.key.charAt(0)=='p'){
+						var pd_code = snapshot.key;	
+						getProductAmount(pd_code, warehouse_name, warehouse_code);
+					}else if(snapshot.key.charAt(0)=='m'){
+						var rawm_code = snapshot.key;	
+						getMaterialAmount(rawm_code, warehouse_name, warehouse_code);
+					}
+		    	});
+			});
+			setSupplierDropbox();	
+			setInventorySortDropbox();
+		}
+		
+		
+		
+		
+			  	//생산품 실시간 재고 가져오는 함수
+		function  getProductAmount(pd_code, warehouse_name, warehouse_code){
+			database.ref('warehouse/'+warehouse_code).child("inventory").child(pd_code).once('value').then(function(snapshot){
+				var amount = snapshot.val().systemamount;
+				$.ajax({
+					url: "selectProductByCode",
+					type: "get",
+					data:{pd_code:pd_code},
+					success:function(serverData){
+						printProduct(serverData, amount ,warehouse_name, warehouse_code); 	
+					}
+				});
+				
+				
+			}
+		
