@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="utf-8">
@@ -28,22 +28,22 @@
 $(function(){
 	$(".btn-primary").click(function(){
 		var type = $(this).attr("data-type");
+		var code = $(this).val();
 		if(type=="insert"){
 			/* location.href="goOrderInsert"; */
 			var url = "goOrderInsert";
 		    var name = "popup test";
 		    var option = "width = 500, height = 500, top = 100, left = 200, location = no"
 		    window.open(url, name, option);
+		 if(type=="update"){
+			 var url = "materials_request?rmorder_code"+code;
+			 var name = "popup test";
+			 var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+			 window.open(url, name, option);
+		 }
 		}
 	});
 });
-
-function popup(){
-	var url = "goOrderInsert";
-    var name = "popup test";
-    var option = "width = 500, height = 500, top = 100, left = 200, location = no"
-    window.open(url, name, option);
-}
 </script>
  
 <body>
@@ -379,23 +379,23 @@ function popup(){
 										<th>원자재수량</th>
 										<th>원자재요청USERID</th>
 										<th>원자재구매진행</th>
-										<th>업데이트란</th>
+										<th>요청</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td name="arg1">19.09.01</td>
-										<td>A-001</td>
-										<td>나사</td>
-										<td>10</td>
-										<td>안기모</td>
-										<td>미확인</td>
+									<tr th:each="list : ${oList}" th:if="${list.rmorder_status}=='미확인'">
+										<td th:text="${list.rmorder_reqdate}"></td>
+										<td th:text="${list.mfseq}"></td>
+										<td th:text="${list.rawm_name}"></td>
+										<td th:text="${list.rmorder_amount}"></td>
+										<td th:text="${list.rmorder_requserid}"></td>
+										<td th:text="${list.rmorder_status}"></td>
 										<td>
+										<!-- <span th:if="${account.getAccountStatus().toString().equals('ACTIVE')}">재직중</span> -->
 											<button class="mb-2 mr-2 btn-square btn btn-primary"
-												onclick="popup();">요청하기</button>
+												data-type="update" th:value="${list.rmorder_code}">요청하기</button>
 										</td>
 									</tr>
-
 								</tbody>
 								<tfoot>
 									<tr>
@@ -405,7 +405,7 @@ function popup(){
 										<th>원자재수량</th>
 										<th>원자재요청USERID</th>
 										<th>원자재구매진행</th>
-										<th>업데이트란</th>
+										<th>요청</th>
 									</tr>
 								</tfoot>
 							</table>

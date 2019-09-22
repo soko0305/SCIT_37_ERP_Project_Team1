@@ -20,4 +20,8 @@ public interface OrderMapper {
 	public int orderUpdate(Order_rawMaterialVO order);					//발주 수정
 	
 	public ArrayList<Order_rawMaterialVO> orderDashSelect();			//발주 내역 대쉬보드 3개 출력
+
+	public int rawMaterialRequest(Order_rawMaterialVO rawmaterial);		//발주 요청
+
+	public Order_rawMaterialVO requestOneSelect(String rmorder_code);	//발주 요청 한개 가져오기
 }

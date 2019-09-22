@@ -41,7 +41,9 @@
 		rmorder_amount,
 		warehouse_code,
 		rmorder_requserid,
-		rmorder_status
+		rmorder_status,
+		mfseq,
+		rmorder_reqdate
 	from
 		ORDER_RAWMATERIAL
 	</select>
@@ -90,4 +92,31 @@
 	order by
 			rmorder_date desc
 	</select>
+	
+	<insert id="rawMaterialRequest" parameterType="com.project.erp.vo.Order_rawMaterialVO">
+	insert into ORDER_RAWMATERIAL
+	(
+		rmorder_code,
+		rmorder_reqdate,
+		rmorder_requserid,
+		rmorder_status,
+		mfseq,
+		rawm_code,
+		rawm_name,
+		rmorder_amount,
+		warehouse_code
+	)
+	values
+	(
+		'oR' || TO_CHAR(rmorder_code.nextval),
+		sysdate,
+		#{rmorder_requserid},
+		#{rmorder_status},
+		#{mfseq},
+		#{rawm_code},
+		#{rawm_name},
+		#{rmorder_amount},
+		#{warehouse_code}
+	)
+	</insert>
 </mapper>

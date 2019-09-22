@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.erp.dao.OrderDAO;
-import com.project.erp.dao.RawMaterialDAO;
-import com.project.erp.dao.SupplierDAO;
+import com.project.erp.service.OrderService;
 import com.project.erp.service.RawMaterialService;
 import com.project.erp.service.SupplierService;
 import com.project.erp.vo.Order_rawMaterialVO;
@@ -26,6 +25,9 @@ public class RawMaterialLinkController {
 
 	@Autowired
 	RawMaterialService rService;
+	
+	@Autowired
+	OrderService oService;
 	
 	@Autowired
 	OrderDAO oDAO;
@@ -118,7 +120,9 @@ public class RawMaterialLinkController {
 	//
 	// 발주 전체 출력 Form
 	@RequestMapping(value = "/goOrder", method = RequestMethod.GET)
-	public String goOrder() {
+	public String goOrder(Model model) {
+		ArrayList<Order_rawMaterialVO> result1 = oService.orderAllselect();
+		model.addAttribute("oList", result1);
 		return "rawMaterial/order_view";
 	}
 
@@ -143,5 +147,13 @@ public class RawMaterialLinkController {
 	public String production_insert() {
 		return "production/production_insert";
 	}
-
+	
+	@RequestMapping(value = "/materials_request", method = RequestMethod.GET)
+	public String materials_request(String rmorder_code,Model model) {
+		ArrayList<RawMaterialVO> result = rService.rawMaterialAllSelect();
+		model.addAttribute("rList", result);
+		
+		model.addAttribute("rmorder_code",rmorder_code);
+		return "production/materials_request";
+	}
 }
