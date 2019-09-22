@@ -48,6 +48,7 @@ public class ProductionService {
 		return result;
 	}
 
+<<<<<<< HEAD
  
 	public int deleteProduce(ManufactureVO manufacture) {
 		String check = "Y";
@@ -63,3 +64,29 @@ public class ProductionService {
 	}
 
 
+=======
+	public ProductVO selelctProductByCode(String pd_code) {
+		ProductVO p = pDAO.selelctProductByCode(pd_code);
+		return p;
+	}
+
+	public ArrayList<ProductMaterialVO> selectAllProductMaterial(String pd_code) {
+		ArrayList<ProductMaterialVO> pmList = pDAO.selectAllProductMaterial(pd_code);
+		return pmList;
+	}
+
+	public int productionUpdate(ProductVO product) {
+		int result = pDAO.productionUpdate(product);		
+		return result;
+	}
+
+	public int deleteProudctMaterial(String pd_code) {
+		int result = pDAO.deleteProudctMaterial(pd_code);		
+		return result;
+	}
+
+	
+	
+	
+}
+>>>>>>> 44e6e110e8ebef25e9af501aa856d0c398193f07

@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="UTF-8" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Language" content="en">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Data Tables - Choose between regular React Bootstrap
+	tables or advanced dynamic ones.</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+<meta name="description"
+	content="Choose between regular React Bootstrap tables or advanced dynamic ones.">
+
+<!-- Disable tap highlight on IE -->
+<meta name="msapplication-tap-highlight" content="no">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
+<link
+	href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css"
+	rel="stylesheet">
+	
+<script th:inline="javascript">
+/*<![CDATA[*/
+$(function() {
+	var materialList = /*[[${materialList}]]*/; 
+	var product= /*[[${product}]]*/;
+	var pmList= /*[[${pmList}]]*/;
+	var count =0;
+	
+	settingView();
+	function settingView(){
+		$("#pd_name").val(product.pd_name);
+		$("#pd_sort").val(product.pd_sort);
+		$("#pd_manufcost").val(product.pd_manufcost);
+		for(var j = 0 ; j<pmList.length; j++){
+		
+			count ++;
+		var row = "<tr>";
+	   row += '<td>';
+	   row+='<select class="mb-2 form-control" id="rawMaterial'+count+'" style="display:inline ;width: 252px"  id="materialDropBox">';
+	   row+='<option value="'+pmList[j].rawm_code+','+pmList[j].rawm_price+'">';
+	   row+=pmList[j].rawm_name;
+	   row+='</option>';
+	   for(var i = 0 ; i<materialList.length ; i++){
+		   if(pmList[j].rawm_code!=materialList[i].rawm_code){
+		   row+='<option value="'+materialList[i].rawm_code+','+materialList[i].rawm_price+'">';
+		   row+=materialList[i].rawm_name;
+		   row+='</option>';
+		   }
+	   }
+	   row+='</select>';
+	   row += '</td>';
+	   row += '<td><input name="product_material_amount" id="product_material_amount'+count+'" placeholder="수량" type="number" class="form-control" value="'+pmList[j].product_material_amount+'"></td>';
+	   row += '<td>  <button class="mb-2 mr-2 btn-transition btn btn-outline-primary btn-sm" style="height: 20px; width: 20px; padding-left: 6.5px; padding-top: 0px ;margin-top: 7px; margin-left: 7px">-</button></td>';
+	   row += '</tr>';
+	  $(".addMaterial").append(row);
+		}
+	}
+	
+	
+	 $("#addTR").click(function () {	 
+		count ++;
+		var row = "<tr>";
+	   row += '<td>';
+	   row+='<select class="mb-2 form-control" id="rawMaterial'+count+'" style="display:inline ;width: 252px"  id="materialDropBox">';
+	   row+='<option value="">원자재</option>';
+	   for(var i = 0 ; i<materialList.length ; i++){
+		   row+='<option value="'+materialList[i].rawm_code+','+materialList[i].rawm_price+'">';
+		   row+=materialList[i].rawm_name;
+		   row+='</option>';
+	   }
+	   row+='</select>';
+	   row += '</td>';
+	   row += '<td><input name="product_material_amount" id="product_material_amount'+count+'" placeholder="수량" type="number" class="form-control"></td>';
+	   row += '<td>  <button class="mb-2 mr-2 btn-transition btn btn-outline-primary btn-sm" style="height: 20px; width: 20px; padding-left: 6.5px; padding-top: 0px ;margin-top: 7px; margin-left: 7px">-</button></td>';
+	   row += '</tr>';
+	  $(".addMaterial").append(row);
+	  
+	 });
+	 
+	 $(".addMaterial").on("click", "button", function() {
+	  $(this).closest("tr").remove();
+	 });
+	 
+	 
+	 $("#insertButton").click(function(){
+		var pd_name =  $("#pd_name").val();
+		var pd_sort =  $("#pd_sort").val();
+		var pd_manufcost =  $("#pd_manufcost").val();
+		var mArray = [];
+		var totalMaterialPrice = 0;
+		var flag = true;
+		if(pd_name!=""&&pd_sort!=""&&pd_manufcost>0){
+		for(var i = 1; i<=count ; i++){
+			if($("#rawMaterial"+i).val()!=undefined && $("#product_material_amount"+i).val()!=undefined){
+				var codeAndPrice = $("#rawMaterial"+i).val();
+				var splitCodeAndPrice = codeAndPrice.split(',');
+				var rawm_code = splitCodeAndPrice[0];
+				var rawm_price = splitCodeAndPrice[1];
+				var product_material_amount = $("#product_material_amount"+i).val();
+				if(rawm_code!=""&&product_material_amount>0){
+					mArray.push({rawm_code, product_material_amount});
+					totalMaterialPrice+=(rawm_price*product_material_amount);
+				}else{
+					flag = false;
+				}
+			}
+		}
+			if(flag==true &&mArray.length>0){
+				$.ajax({
+					url:"updateProuct",
+					type:"POST",
+					data:{pd_code:product.pd_code,
+						  pd_name:pd_name,
+						  pd_sort:pd_sort,
+						  pd_manufcost:pd_manufcost,
+						  pd_rmcost:totalMaterialPrice
+						 },
+					success:function(serverData){
+						if(serverData!=0){
+								for(var k = 0 ; k<mArray.length ; k++){
+									$.ajax({
+										url:"insertProudctMaterial",
+										type:"POST",
+										data:{pd_code:product.pd_code,
+											  rawm_code:mArray[k].rawm_code,
+											  product_material_amount:mArray[k].product_material_amount
+											 },
+										success:function(){
+											window.open("about:blank","_self").close();
+										}
+									});
+								}
+								
+
+						}
+					}
+				});
+					
+			}else{
+				alert("원자재 정보를 모두 입력해주세요");
+			}
+		}else{
+			alert("정보를 모두 입력해주세요");
+		}
+	 });
+	});
+/*]]>*/
+</script>
+</head>
+<body>
+	<div
+	class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar closed-sidebar-mobile closed-sidebar">
+	<div class="app-main">
+		<div class="app-main__outer">
+			<div class="app-main__inner">
+				 <div class="app-page-title">
+                        <div class="page-title-wrapper">
+                            <div class="page-title-heading">
+                                <div class="page-title-icon">
+                                    <i class="pe-7s-notebook icon-gradient bg-mixed-hopes">
+                                    </i>
+                                </div>
+                                <div><span id="putWarehouseName"></span> 생산품 등록
+                                    <div class="page-title-subheading">
+                                    	생산품 관련 정보 및 필요 원자재 정보 기입
+                                    </div>
+                                </div>
+                            </div> 
+                          </div>
+                    </div>         
+				<div class="tab-content">
+					<div class="tab-pane tabs-animation fade active show"
+						id="tab-content-0" role="tabpanel">
+						<div class="main-card mb-3 card">
+							<div class="card-body">
+								<h5 class="card-title">생산품 등록</h5>
+								<!-- form 필요 -->
+									<div class="form-row">
+										<div class="col-md-6">
+											<div class="position-relative form-group">
+												<label for="exampleEmail11">생산품명</label><input
+													name="pd_name" id="pd_name"
+													placeholder="생산품명" type="text"
+													class="form-control">
+											</div>
+										</div>
+										
+									</div>
+									
+									<div class="form-row">
+									<div class="col-md-6">
+											<div class="position-relative form-group">
+												<label for="examplePassword11">생산품종류</label><input
+													name="pd_sort" id="pd_sort"
+													placeholder="생산품종류" type="text"
+													class="form-control">
+											</div>
+										</div>
+										</div>
+									<div class="form-row">
+									<div class="col-md-6">
+									<div class="position-relative form-group">
+										<label for="exampleAddress2">생산품 생산비</label><input
+											name="pd_manufcost" id="pd_manufcost"
+											placeholder="생산비" type="number"
+											class="form-control">
+									</div>
+									</div>
+									</div>
+									<div class="position-relative form-group">
+										<label for="exampleAddress">원자재 등록</label>
+										<button class="mb-2 mr-2 btn-transition btn btn-outline-primary" id="addTR" style="height: 20px; width: 20px; padding-left: 4.5px; padding-top: 0px ;margin-top: 7px;">+</button>
+									<div class="addMaterial">
+  
+        							</div> 
+									</div>
+									<button class="mt-2 btn btn-primary" id="insertButton">등록</button>
+							
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="app-wrapper-footer">
+				<div class="app-footer">
+					<!-- app-footer__inner -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- drawer wrapper -->
+<div class="app-drawer-overlay d-none animated fadeIn"></div>
+
+
+<div class="jvectormap-tip"></div>
+</body>
+</html>

@@ -24,6 +24,7 @@
 		'N'
 	)
 	</insert>
+<<<<<<< HEAD
 	<select id="produceSelect" resultType="com.project.erp.vo.ManufactureVO" >
 		 SELECT
 		 	m.mfseq
@@ -58,6 +59,42 @@
  
  	<delete id="deleteProduction" parameterType="com.project.erp.vo.ProductVO">
 		update
+=======
+	<select id="produceSelect" resultType="com.project.erp.vo.ManufactureVO" parameterType="com.project.erp.vo.ManufactureVO">
+		SELECT
+	 		mfseq
+			,pd_code 
+ 			,TO_CHAR(manuf_startdate, 'YYYY-MM-DD') AS manuf_startdate 
+ 			,TO_CHAR(manuf_enddate, 'YYYY-MM-DD') AS manuf_enddate
+			,manuf_status 
+			,warehouse_code 
+		 	,manuf_amount
+			,sales_ordernum 
+			,manuf_requserid 
+			,manuf_reqdate 
+			,'A' as salesdetailseq 
+	 	FROM
+		manufacture
+<!--	WHERE
+ 		pd_code=#{pd_code}
+ -->	</select>	
+ 	<select id="productionSelect" resultType="com.project.erp.vo.ProductVO" parameterType="com.project.erp.vo.ProductVO">
+
+		SELECT
+	 		pd_code
+			,pd_name
+ 			,pd_rmcost
+ 			,pd_manufcost
+			,pd_sort
+	 	FROM
+		product
+<!--	WHERE
+ 		pd_code=#{pd_code}
+ -->	</select>	
+ 	<delete id="productionDelete" parameterType="com.project.erp.vo.ProductVO">
+		delete
+		from
+>>>>>>> 44e6e110e8ebef25e9af501aa856d0c398193f07
 			product
 		set
 			pd_delete=#{pd_delete}
@@ -101,4 +138,53 @@
 			, #{product_material_amount}
 		)
 	</insert>
+	
+	
+	<select id="selelctProductByCode" parameterType="String" resultType="com.project.erp.vo.ProductVO">
+		SELECT
+	 		pd_code
+			,pd_name
+ 			,pd_rmcost
+ 			,pd_manufcost
+			,pd_sort
+	 	FROM product
+	 	WHERE pd_code=#{pd_code}
+	</select>
+	
+	<select id="selectAllProductMaterial" parameterType="String" resultType="com.project.erp.vo.ProductMaterialVO">
+		SELECT
+	 		pm.product_material_code
+			,pm.pd_code
+ 			,pm.rawm_code
+ 			,pm.product_material_amount
+ 			,rm.supplierseq
+			,rm.rawm_name
+			,rm.rawm_sort
+			,rm.rawm_price
+			,rm.rawm_autoorder
+			,rm.rawm_minimum
+			,rm.rawm_set
+			,rm.rawm_delete
+	 	FROM product_material pm JOIN rawmaterial rm
+	 	ON pm.rawm_code = rm.rawm_code
+	 	WHERE pm.pd_code=#{pd_code}
+	</select>
+	
+	<delete id="deleteProudctMaterial">
+		DELETE product_material
+		WHERE pd_code=#{pd_code}
+	</delete>
+	
+	<update id="productionUpdate" parameterType="com.project.erp.vo.ProductVO">
+		update product
+		set
+			pd_name = #{pd_name}
+ 			,pd_rmcost = #{pd_rmcost}
+ 			,pd_manufcost = #{pd_manufcost}
+			,pd_sort = #{pd_sort}
+		WHERE pd_code=#{pd_code}
+	</update>
+
+
+	
 </mapper>
