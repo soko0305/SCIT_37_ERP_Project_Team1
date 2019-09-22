@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="UTF-8" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -128,7 +128,7 @@
                                  <td th:text="${list.warehouse_code}"></td>
                                  <td>
  
- 								<button class="mb-2 mr-2 btn-square btn btn-primary"onclick="window.open('/production/pRegistration','window_name','width=100,height=100, location=no,status=no,scrollbars=yes');">수정</button>
+ 								<button class="mb-2 mr-2 btn-square btn btn-primary" th:value="${list.pd_code}">수정</button>
 														
 											 	<!-- <form action="productionDelete" method="post" style='display:inline' >
 	 	<input type="hidden" name="pd_code"  th:value="${productionlist.pd_code}">
@@ -144,5 +144,13 @@
     </div>
 </div>
 <!-- drawer 삽입 -->
-<div class="app-drawer-overlay d-none animated fadeIn"></div><script type="text/javascript" src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script></body>
+<div class="app-drawer-overlay d-none animated fadeIn"></div>
+<script>
+	$(function(){
+		$(".btn-primary").click(function(){
+			window.open('/goProductionUpdate?pd_code='+$(this).val(),'window_name','width=800,height=600, location=no,status=no,scrollbars=yes');
+		});
+	});
+</script>
+<script type="text/javascript" src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script></body>
 </html>
