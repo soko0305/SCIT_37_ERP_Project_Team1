@@ -19,4 +19,6 @@ public interface ProductionMapper {
 	public int productionDelete(ProductVO product);
 	public ProductVO selectLatestProduct();
 	public int insertProudctMaterial(ProductMaterialVO productMaterial);
+	public int deleteProduce(ManufactureVO manufacture);
+	public int deleteProduction(ProductVO product);
 }

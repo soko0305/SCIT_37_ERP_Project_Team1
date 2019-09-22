@@ -14,6 +14,8 @@ public class ManufactureVO {
 			private String 	 sales_ordernum; 
 			private String 	 manuf_requserid; 
 			private String 	 manuf_reqdate; 
-			private String 	 salesdetailseq; 
+			private String 	 salesdetailseq;
+			private String   pd_name;
+			private String   mf_delete;
 			
 }

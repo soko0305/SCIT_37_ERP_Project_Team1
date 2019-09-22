@@ -11,7 +11,8 @@
 		pd_name,
 		pd_rmcost,
 		pd_manufcost,
-		pd_sort
+		pd_sort,
+		pd_delete	
 	)
 	values
 	(
@@ -19,49 +20,58 @@
 		#{pd_name},
 		#{pd_rmcost},
 		#{pd_manufcost},
-		#{pd_sort}
+		#{pd_sort},
+		'N'
 	)
 	</insert>
-	<select id="produceSelect" resultType="com.project.erp.vo.ManufactureVO" parameterType="com.project.erp.vo.ManufactureVO">
-		SELECT
-	 		mfseq
-			,pd_code 
- 			,TO_CHAR(manuf_startdate, 'YYYY-MM-DD') AS manuf_startdate 
- 			,TO_CHAR(manuf_enddate, 'YYYY-MM-DD') AS manuf_enddate
-			,manuf_status 
-			,warehouse_code 
-		 	,manuf_amount
-			,sales_ordernum 
-			,manuf_requserid 
-			,manuf_reqdate 
-			,'A' as salesdetailseq 
-	 	FROM
-		manufacture
-<!--	WHERE
- 		pd_code=#{pd_code}
- -->	</select>	
- 	<select id="productionSelect" resultType="com.project.erp.vo.ProductVO" parameterType="com.project.erp.vo.ProductVO">
-
-		SELECT
-	 		pd_code
-			,pd_name
- 			,pd_rmcost
- 			,pd_manufcost
-			,pd_sort
-			,warehouse_code
-	 	FROM
+	<select id="produceSelect" resultType="com.project.erp.vo.ManufactureVO" >
+		 SELECT
+		 	m.mfseq
+ 			,m.pd_code 
+ 			,p.pd_name
+ 			,TO_CHAR(m.manuf_startdate, 'YYYY-MM-DD') AS manuf_startdate 
+ 			,TO_CHAR(m.manuf_enddate, 'YYYY-MM-DD') AS manuf_enddate
+			,m.manuf_status 
+			,m.warehouse_code 
+		 	,m.manuf_amount
+ 			,m.manuf_requserid 
+			,TO_CHAR(m.manuf_reqdate , 'YYYY-MM-DD') AS manuf_reqdate
+			,mf_delete
+ 	 	FROM
+		manufacture m, product p
+		WHERE	m.pd_code = p.pd_code
+		and mf_delete='N'
+</select>
+ 
+	<select id="productionSelect" resultType="com.project.erp.vo.ProductVO" >
+		 SELECT
+			 pd_code			 
+			 ,pd_name 		 
+			 ,pd_rmcost  		 
+			 ,pd_manufcost 	 
+			 ,pd_sort
+			 <!-- ,pd_delete -->			 
+ 	 	FROM
+			product 
+	<!-- 	WHERE	pd_delete='N' -->
+ </select>
+ 
+ 	<delete id="deleteProduction" parameterType="com.project.erp.vo.ProductVO">
+		update
 		product
-<!--	WHERE
- 		pd_code=#{pd_code}
- -->	</select>	
- 	<delete id="productionDelete" parameterType="com.project.erp.vo.ProductVO">
-		delete
-		from
-			product
+		set
+			pd_delete=#{pd_delete}
 		where
 			pd_code=#{pd_code}
 	</delete>
-	
+	<delete id="deleteProduce"  parameterType="com.project.erp.vo.ManufactureVO">
+		update
+ 			 manufacture	
+		set
+			mf_delete=#{mf_delete}
+		where
+			mfseq=#{mfseq}
+	</delete>
 	<select id="selectLatestProduct" resultType="com.project.erp.vo.ProductVO">
 		SELECT
 	 		pd_code

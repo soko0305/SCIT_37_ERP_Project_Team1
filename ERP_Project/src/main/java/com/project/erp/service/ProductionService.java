@@ -49,4 +49,18 @@ public class ProductionService {
 		return result;
 	}
 
-}
+ 
+	public int deleteProduce(ManufactureVO manufacture) {
+		String check = "Y";
+		manufacture.setMf_delete(check);
+		return pDAO.deleteProduce(manufacture);
+ 	}
+
+	public int deleteProduction(ProductVO product) {
+		String check = "Y";
+		product.setPd_delete(check);
+		return pDAO.deleteProduction(product);
+ 	}
+	}
+
+

@@ -35,6 +35,13 @@ public class ProductionController {
 		model.addAttribute("producelist", plist);
 		return "production/producecheck";
 	}
+	@RequestMapping(value = "/goproduceupdate", method = RequestMethod.GET)
+	public String goproduceupdate(ManufactureVO manufacture, Model model,HttpSession session) {
+		ArrayList<ManufactureVO> plist = pService.produceSelect(manufacture);
+		model.addAttribute("producelist", plist);
+		return "production/produceupdate";
+	}
+	
 	//생산품 조회 리스트 조회
  	@RequestMapping(value = "/goproductioncheck", method = RequestMethod.GET)
 	public String goproductioncheck(ProductVO product, Model model,HttpSession session) {
@@ -42,11 +49,12 @@ public class ProductionController {
 		model.addAttribute("productionlist", plist);
 		return "production/productioncheck";
 	}
-	//생산조회
-	@RequestMapping(value="/producecheck", method = RequestMethod.GET)
-	public String producecheck(){
-		return "production/producecheck";
-	} 
+ 	@RequestMapping(value = "/goproductionupdate", method = RequestMethod.GET)
+	public String goproductionupdate(ProductVO product, Model model,HttpSession session) {
+		ArrayList<ProductVO> plist = pService.productionSelect(product);
+		model.addAttribute("productionlist", plist);
+		return "production/productionupdate";
+	}
 	
 	//메인화면 이동
 	@RequestMapping(value="/main", method = RequestMethod.GET)
@@ -70,11 +78,7 @@ public class ProductionController {
 	} 
  
  
-	//생산품 조회
-	@RequestMapping(value="/productioncheck", method = RequestMethod.GET)
-	public String productioncheck(){
-		return "production/productioncheck";
-	} 
+
 	@RequestMapping(value="/sample", method = RequestMethod.GET)
 	public String sample(){
 		return "production/sample";
@@ -95,11 +99,21 @@ public class ProductionController {
 	public String gomRegistration() {
 		return "production/mRegistration";
 	}
+	// 생산 삭제
+	@RequestMapping(value = "/deleteProduce", method = RequestMethod.POST)
+	public String deleteProduce(ManufactureVO manufacture) {
+		int result = pService.deleteProduce(manufacture);
+
+		if (result == 0) {
+			return "redirect:/goproducecheck";
+		} else {
+			return "redirect:/goproducecheck";
+		}
+	}
 	// 생산품 삭제
-	@RequestMapping(value = "/deleteProduct", method = RequestMethod.POST)
-	public String deleteProduct(ProductVO product) {
-		
-		int result = pService.deleteProduct(product);
+	@RequestMapping(value = "/deleteProduction", method = RequestMethod.POST)
+	public String deleteProduction(ProductVO product) {
+		int result = pService.deleteProduction(product);
 
 		if (result == 0) {
 			return "redirect:/goproductioncheck";
@@ -107,7 +121,6 @@ public class ProductionController {
 			return "redirect:/goproductioncheck";
 		}
 	}
-
 	
 	
 	//생산품 등록
