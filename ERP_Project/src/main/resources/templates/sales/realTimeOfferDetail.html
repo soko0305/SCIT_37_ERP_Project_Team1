@@ -16,14 +16,62 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<!-- <script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script> -->
 	<link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
+	<!-- firebase -->
+	<script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script><script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-auth.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use https://firebase.google.com/docs/web/setup#config-web-app -->
+    <!-- firebaseUI -->
+    <script src="https://cdn.firebase.com/libs/firebaseui/4.0.0/firebaseui.js"></script>
+    <!-- firebase -->
+    <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
+    <!-- firebase Config and initialize -->	
+    <script src="firebase/firebase-config.js"></script>
+
 </head>
 
-<script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+ var list = /*[[${salesDetailList}]]*/;
+ var database = firebase.database();
+ 
 	$(function(){	
 		$("#header").load("/header");
 		$("#navbar").load("/navbar");
 		$("#setting").load("/setting");
-	});
+
+		selectTest();
+	})
+		
+		function selectTest(){
+		
+			database.ref('warehouse/').on('child_added', function(data){
+				var warehouse_code = data.key;
+				var warehouse_name = data.val().warehouse_name;
+				database.ref('warehouse/'+warehouse_code).child("inventory").on('child_added', function(snapshot){
+					
+					
+					
+					for(var i = 0; i<list.length ; i++){
+					if(snapshot.key==list[i].pd_code){
+						var amount = snapshot.child("systemamount").val();
+						var index = i+1;
+						str1= '<tr>';
+						str1+='<td>'+index+'</td>';
+						str1+='<td>'+list[i].salesdetail_name+'</td>';
+						str1+='<td>'+list[i].salesdetail_amount+'</td>';
+						str1+='<td>'+amount+'</td>';
+					    str1+='<td>'+list[i].salesdetail_status+'</td></tr>';
+					    
+						$('#tbody1').append(str1);
+						
+						}
+					}
+					
+		    	});
+			});
+			
+		}
+		
+	/*]]>*/
 </script>
 <body>
 <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
@@ -82,14 +130,8 @@
                                             <th>Status</th>
                                         </tr>
                                         </thead>
-                                          <tbody class="tbody">
-                                           	<tr th:each="list,iterStat : ${salesDetailList}">
-											<td th:text="${iterStat.count}"></td>
-											<td th:text="${list.salesdetail_name}"></td>
-											<td th:text="${list.salesdetail_amount}"></td>
-											<td th:text="firebase자리"></td>
-											<td th:text="${list.salesdetail_status}"></td>
-										</tr> 
+                                          <tbody id="tbody1">
+                                      
                                   </tbody>
                                     </table></div>
                                             </div>
