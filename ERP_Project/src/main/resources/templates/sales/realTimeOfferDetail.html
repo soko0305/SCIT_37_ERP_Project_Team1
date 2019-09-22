@@ -82,16 +82,15 @@
                                             <th>Status</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>iPhoneX</td>
-                                            <td>100</td>
-                                            <td>120</td>
-                                            <th>Ready</th>
-                                        </tr>
-                                      
-                                        </tbody>
+                                          <tbody class="tbody">
+                                           	<tr th:each="list,iterStat : ${salesDetailList}">
+											<td th:text="${iterStat.count}"></td>
+											<td th:text="${list.salesdetail_name}"></td>
+											<td th:text="${list.salesdetail_amount}"></td>
+											<td th:text="firebase자리"></td>
+											<td th:text="${list.salesdetail_status}"></td>
+										</tr> 
+                                  </tbody>
                                     </table></div>
                                             </div>
                                             <div class="tab-pane" id="tab-eg9-2" role="tabpanel">
