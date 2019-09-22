@@ -24,7 +24,6 @@
 		'N'
 	)
 	</insert>
-<<<<<<< HEAD
 	<select id="produceSelect" resultType="com.project.erp.vo.ManufactureVO" >
 		 SELECT
 		 	m.mfseq
@@ -57,9 +56,7 @@
 	 	WHERE	pd_delete='N'
  </select>
  
- 	<delete id="deleteProduction" parameterType="com.project.erp.vo.ProductVO">
-		update
-=======
+
 	<select id="produceSelect" resultType="com.project.erp.vo.ManufactureVO" parameterType="com.project.erp.vo.ManufactureVO">
 		SELECT
 	 		mfseq
@@ -91,10 +88,10 @@
 <!--	WHERE
  		pd_code=#{pd_code}
  -->	</select>	
- 	<delete id="productionDelete" parameterType="com.project.erp.vo.ProductVO">
-		delete
-		from
->>>>>>> 44e6e110e8ebef25e9af501aa856d0c398193f07
+
+	
+		<delete id="deleteProduction" parameterType="com.project.erp.vo.ProductVO">
+		update
 			product
 		set
 			pd_delete=#{pd_delete}
@@ -109,6 +106,8 @@
 		where
 			mfseq=#{mfseq}
 	</delete>
+	
+	
 	<select id="selectLatestProduct" resultType="com.project.erp.vo.ProductVO">
 		SELECT
 	 		pd_code
