@@ -30,31 +30,32 @@ public class ProductionController {
 	
 	//생산조회 리스트 조회
 	@RequestMapping(value = "/goproducecheck", method = RequestMethod.GET)
-	public String goproducecheck(ManufactureVO manufacture, Model model,HttpSession session) {
-		ArrayList<ManufactureVO> plist = pService.produceSelect(manufacture);
+	public String goproducecheck( Model model,HttpSession session) {
+		ArrayList<ManufactureVO> plist = pService.produceSelect();
 		model.addAttribute("producelist", plist);
+		
 		return "production/producecheck";
 	}
 	@RequestMapping(value = "/goproduceupdate", method = RequestMethod.GET)
 	public String goproduceupdate(ManufactureVO manufacture, Model model,HttpSession session) {
-		ArrayList<ManufactureVO> plist = pService.produceSelect(manufacture);
+		ArrayList<ManufactureVO> plist = pService.produceSelect();
 		model.addAttribute("producelist", plist);
 		return "production/produceupdate";
 	}
 	
 	//생산품 조회 리스트 조회
  	@RequestMapping(value = "/goproductioncheck", method = RequestMethod.GET)
-	public String goproductioncheck(ProductVO product, Model model,HttpSession session) {
-		ArrayList<ProductVO> plist = pService.productionSelect(product);
+	public String goproductioncheck(Model model,HttpSession session) {
+		ArrayList<ProductVO> plist = pService.productionSelect();
 		model.addAttribute("productionlist", plist);
 		return "production/productioncheck";
 	}
- 	@RequestMapping(value = "/goproductionupdate", method = RequestMethod.GET)
+ /*	@RequestMapping(value = "/goproductionupdate", method = RequestMethod.GET)
 	public String goproductionupdate(ProductVO product, Model model,HttpSession session) {
 		ArrayList<ProductVO> plist = pService.productionSelect(product);
 		model.addAttribute("productionlist", plist);
 		return "production/productionupdate";
-	}
+	}*/
 	
 	//메인화면 이동
 	@RequestMapping(value="/main", method = RequestMethod.GET)
@@ -63,7 +64,7 @@ public class ProductionController {
 		}
 	
 	//생산 삽입
-	@RequestMapping(value="/produceinsert", method = RequestMethod.GET)
+	@RequestMapping(value="/goproduceinsert", method = RequestMethod.GET)
 	public String produceinsert(){
 		return "production/produceinsert";
 	} 
@@ -114,13 +115,14 @@ public class ProductionController {
 	@RequestMapping(value = "/deleteProduction", method = RequestMethod.POST)
 	public String deleteProduction(ProductVO product) {
 		int result = pService.deleteProduction(product);
-
+		
 		if (result == 0) {
 			return "redirect:/goproductioncheck";
+		
 		} else {
 			return "redirect:/goproductioncheck";
 		}
-	}
+ 	}
 	
 	
 	//생산품 등록

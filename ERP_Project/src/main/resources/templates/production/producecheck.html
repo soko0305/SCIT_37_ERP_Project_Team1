@@ -1,6 +1,6 @@
 
 <!doctype html>
-<html lang="en">
+<html lang="UTF-8" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -26,8 +26,6 @@
 			var type = $(this).attr("data-type")
 			var code = $(this).val();
 			if(type=='update'){
-				/* $("#code").val(code);
-				$("#updateForm").submit(); */
 				var url = "goproduceupdate?mfseq="+code;
 			    var name = "popup test";
 			    var option = "width = 500, height = 500, top = 100, left = 200, location = no"
@@ -37,7 +35,7 @@
 				$("#code1").val(code);
 				$("#deleteProduce").submit();
 			}else{
-				location.href="goproduceupdate"
+				location.href="goproduceinsert"
 			}
 		});
 	});
@@ -1896,9 +1894,9 @@
                                 </thead>
         						<tbody>
   								<tr th:each="list : ${producelist}">
-									<td th:text="${list.mfseq}"></td>
-<!-- 								<td th:text="${list.pd_code}"></td>
- -->								<td th:text="${list.pd_name}"></td>
+<!-- 									<td th:text="${list.mfseq}"></td>
+ -->	 							<td th:text="${list.pd_code}"></td>
+ 									<td th:text="${list.pd_name}"></td>
  									<td th:text="${list.manuf_startdate}"></td>
  									<td th:text="${list.manuf_enddate}"></td>									
  									<td th:text="${list.warehouse_code}"></td>									
@@ -1918,7 +1916,7 @@
 								</tr>
                                 </tbody>
                             </table>
-                            <a href="/produceinsert"><button type="button" class="btn btn-shadow btn-wide btn-primary" id="write">
+                            <a href="/goproduceinsert"><button type="button" class="btn btn-shadow btn-wide btn-primary" id="write">
                                 <span class="btn-icon-wrapper pr-2 opacity-7">
                                     <i class="fa fa-plus fa-w-20"></i>
                                 </span>

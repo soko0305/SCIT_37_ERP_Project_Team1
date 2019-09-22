@@ -14,8 +14,8 @@ import com.project.erp.vo.ProductVO;
 public interface ProductionMapper {
 
 	public int productionInsert(ProductVO product);
-	public ArrayList<ManufactureVO> produceSelect(ManufactureVO manufacture);
- 	public ArrayList<ProductVO> productionSelect(ProductVO product);
+	public ArrayList<ManufactureVO> produceSelect();
+ 	public ArrayList<ProductVO> productionSelect();
 	public int productionDelete(ProductVO product);
 	public ProductVO selectLatestProduct();
 	public int insertProudctMaterial(ProductMaterialVO productMaterial);

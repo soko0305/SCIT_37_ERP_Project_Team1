@@ -28,28 +28,30 @@ public class ProductionDAO {
 		}
 		return result;
 	}
-	public ArrayList<ManufactureVO> produceSelect(ManufactureVO manufacture) {
+	public ArrayList<ManufactureVO> produceSelect() {
 		ArrayList<ManufactureVO> result = null;
-		
 		ProductionMapper mapper = sqlSession.getMapper(ProductionMapper.class);
 		try {
-			result = mapper.produceSelect(manufacture);
+			result = mapper.produceSelect();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			return result;
 		}
 		return result;
 	}
-	public ArrayList<ProductVO> productionSelect(ProductVO product) {
+	public ArrayList<ProductVO> productionSelect() {
 		ArrayList<ProductVO> result = null;
 		
 		ProductionMapper mapper = sqlSession.getMapper(ProductionMapper.class);
 		try {
-			result = mapper.productionSelect(product);
+ 
+			result = mapper.productionSelect();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return result;
 		}
+		System.out.println(result);
 		return result;	
 	}
 	public int productionDelete(ProductVO product) {

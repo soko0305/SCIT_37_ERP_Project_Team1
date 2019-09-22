@@ -50,15 +50,15 @@
 			 ,pd_rmcost  		 
 			 ,pd_manufcost 	 
 			 ,pd_sort
-			 <!-- ,pd_delete -->			 
+			 ,pd_delete			 
  	 	FROM
 			product 
-	<!-- 	WHERE	pd_delete='N' -->
+	 	WHERE	pd_delete='N'
  </select>
  
  	<delete id="deleteProduction" parameterType="com.project.erp.vo.ProductVO">
 		update
-		product
+			product
 		set
 			pd_delete=#{pd_delete}
 		where

@@ -22,15 +22,14 @@ public class ProductionService {
 		return result;
 	}
 
-	public ArrayList<ManufactureVO> produceSelect(ManufactureVO manufacture) {
+	public ArrayList<ManufactureVO> produceSelect() {
 		
-		ArrayList<ManufactureVO> result = pDAO.produceSelect(manufacture);
-		
+		ArrayList<ManufactureVO> result = pDAO.produceSelect();
  		return result;
 	}
 
-	public ArrayList<ProductVO> productionSelect(ProductVO product) {
-		ArrayList<ProductVO> result = pDAO.productionSelect(product);
+	public ArrayList<ProductVO> productionSelect() {
+		ArrayList<ProductVO> result = pDAO.productionSelect();
 		return result;
 	}
 
@@ -59,7 +58,7 @@ public class ProductionService {
 	public int deleteProduction(ProductVO product) {
 		String check = "Y";
 		product.setPd_delete(check);
-		return pDAO.deleteProduction(product);
+			return pDAO.deleteProduction(product);
  	}
 	}
 
