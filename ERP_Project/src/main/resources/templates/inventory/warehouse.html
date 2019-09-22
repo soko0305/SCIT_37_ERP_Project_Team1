@@ -117,13 +117,18 @@
 					$("#warehouseTable").append(str);
 					
 				}else{
-					selectANDPrintAll();
+					//selectANDPrintAll();
 				}
 
 		});
-		updateButtonSetting();
-		deleteButtonSetting();
-		detailButtonSetting();
+		
+		database.ref("warehouse/").on('child_added', function(data){	
+			printAllInventory(data);
+			deleteButtonSetting();
+			updateButtonSetting();
+			detailButtonSetting();
+		});
+		
 
 		//창고관리 버튼 타입 및 창고코드 변수
 		var type=null;
@@ -137,10 +142,12 @@
 					count = 0; 	
 					database.ref("warehouse/").on('child_added', function(data){	
 						printAllInventory(data);
+
+						deleteButtonSetting();
+						updateButtonSetting();
+						detailButtonSetting();
 					});
-					deleteButtonSetting();
-					updateButtonSetting();
-					detailButtonSetting();
+					
 		}
 
 
