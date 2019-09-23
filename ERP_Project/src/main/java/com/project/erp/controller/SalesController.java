@@ -32,9 +32,9 @@ public class SalesController {
 	}
 	
 	//모든 리스트 뿌려줄 때 호출할 메소드.
-	@RequestMapping(value="/selectAllSales", method = RequestMethod.GET)
-	public @ResponseBody List<Sales> selectAllSales(){
-		List<Sales> list = service.selectAllSales();
+	@RequestMapping(value="/selectSalesWithoutDone", method = RequestMethod.GET)
+	public @ResponseBody List<Sales> selectSalesWithoutDone(){
+		List<Sales> list = service.selectSalesWithoutDone();
 		return list;
 	}
 	

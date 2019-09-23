@@ -89,6 +89,7 @@ public class ProductionDAO {
 		}
 		return result;
 	}
+<<<<<<< HEAD
 	
 	public ArrayList<ProductMaterialVO> productMaterialSelect(ProductMaterialVO vo){
 		ArrayList<ProductMaterialVO> result = null;
@@ -102,6 +103,54 @@ public class ProductionDAO {
 		}
 		return result;
 		
+=======
+	public ProductVO selelctProductByCode(String pd_code) {
+		ProductVO p = null;
+
+		ProductionMapper mapper = sqlSession.getMapper(ProductionMapper.class);
+		try {
+			p = mapper.selelctProductByCode(pd_code);
+		} catch (Exception e) {			
+			e.printStackTrace();
+			return null;
+		}
+		return p;
+	}
+	public ArrayList<ProductMaterialVO> selectAllProductMaterial(String pd_code) {
+		ArrayList<ProductMaterialVO> pmList = null;
+		ProductionMapper mapper = sqlSession.getMapper(ProductionMapper.class);
+		try {
+			pmList = mapper.selectAllProductMaterial(pd_code);
+		} catch (Exception e) {			
+			e.printStackTrace();
+			return null;
+		}
+		return pmList;
+	}
+	
+	public int productionUpdate(ProductVO product) {
+		int result = 0;
+		ProductionMapper mapper = sqlSession.getMapper(ProductionMapper.class);
+		try {
+			result = mapper.productionUpdate(product);
+		} catch (Exception e) {			
+			e.printStackTrace();
+			return 0;
+		}
+		return result;
+	}
+	
+	public int deleteProudctMaterial(String pd_code) {
+		int result = 0;
+		ProductionMapper mapper = sqlSession.getMapper(ProductionMapper.class);
+		try {
+			result = mapper.deleteProudctMaterial(pd_code);
+		} catch (Exception e) {			
+			e.printStackTrace();
+			return 0;
+		}
+		return result;
+>>>>>>> master
 	}
 	 
 }

@@ -52,4 +52,27 @@ public class ProductionService {
 		return pDAO.productMaterialSelect(vo);
 	}
 
+	public ProductVO selelctProductByCode(String pd_code) {
+		ProductVO p = pDAO.selelctProductByCode(pd_code);
+		return p;
+	}
+
+	public ArrayList<ProductMaterialVO> selectAllProductMaterial(String pd_code) {
+		ArrayList<ProductMaterialVO> pmList = pDAO.selectAllProductMaterial(pd_code);
+		return pmList;
+	}
+
+	public int productionUpdate(ProductVO product) {
+		int result = pDAO.productionUpdate(product);		
+		return result;
+	}
+
+	public int deleteProudctMaterial(String pd_code) {
+		int result = pDAO.deleteProudctMaterial(pd_code);		
+		return result;
+	}
+
+	
+	
+	
 }

@@ -12,4 +12,5 @@ public class SalesDetail {
 	private String sales_ordernum;
 	private String salesdetail_valueofsupply;
 	private String pd_code;
+	private String salesdetail_status;
 }

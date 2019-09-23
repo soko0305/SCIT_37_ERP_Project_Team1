@@ -127,6 +127,7 @@ public class ProductionController {
 
 	}
 	
+<<<<<<< HEAD
 	@RequestMapping(value = "/amount", method = RequestMethod.GET)
 	public String amount(ProductMaterialVO vo, Model model) {
 		System.out.println("vo : " + vo);
@@ -134,6 +135,31 @@ public class ProductionController {
 		System.out.println(result);
 		model.addAttribute("pmList", result);
 		return "production/amount";
+=======
+	//생산품 업데이트
+	@RequestMapping(value = "/updateProuct", method = RequestMethod.POST)
+	public @ResponseBody int updateProuct(ProductVO product) {
+			int result =pService.productionUpdate(product);
+			int result2 =pService.deleteProudctMaterial(product.getPd_code());
+			if(result!=0&&result2!=0){
+				return 1; 
+			}else{
+			return 0;
+			}
+	}
+	
+	//생산품 업데이트로 가기
+	@RequestMapping(value = "/goProductionUpdate", method = RequestMethod.GET)
+	public String goProductionUpdate(String pd_code, Model model) {
+		ProductVO product = pService.selelctProductByCode(pd_code);
+		ArrayList<ProductMaterialVO> pmList = pService.selectAllProductMaterial(pd_code);
+		ArrayList<RawMaterialVO> mList = null;
+		mList = rawMaterialService.rawMaterialAllSelect();
+		model.addAttribute("materialList", mList);
+		model.addAttribute("product", product);
+		model.addAttribute("pmList", pmList);
+		return "production/production_update";
+>>>>>>> master
 	}
 	
 }

@@ -48,7 +48,6 @@
  			,pd_rmcost
  			,pd_manufcost
 			,pd_sort
-			,warehouse_code
 	 	FROM
 		product
 <!--	WHERE
@@ -91,4 +90,53 @@
 			, #{product_material_amount}
 		)
 	</insert>
+	
+	
+	<select id="selelctProductByCode" parameterType="String" resultType="com.project.erp.vo.ProductVO">
+		SELECT
+	 		pd_code
+			,pd_name
+ 			,pd_rmcost
+ 			,pd_manufcost
+			,pd_sort
+	 	FROM product
+	 	WHERE pd_code=#{pd_code}
+	</select>
+	
+	<select id="selectAllProductMaterial" parameterType="String" resultType="com.project.erp.vo.ProductMaterialVO">
+		SELECT
+	 		pm.product_material_code
+			,pm.pd_code
+ 			,pm.rawm_code
+ 			,pm.product_material_amount
+ 			,rm.supplierseq
+			,rm.rawm_name
+			,rm.rawm_sort
+			,rm.rawm_price
+			,rm.rawm_autoorder
+			,rm.rawm_minimum
+			,rm.rawm_set
+			,rm.rawm_delete
+	 	FROM product_material pm JOIN rawmaterial rm
+	 	ON pm.rawm_code = rm.rawm_code
+	 	WHERE pm.pd_code=#{pd_code}
+	</select>
+	
+	<delete id="deleteProudctMaterial">
+		DELETE product_material
+		WHERE pd_code=#{pd_code}
+	</delete>
+	
+	<update id="productionUpdate" parameterType="com.project.erp.vo.ProductVO">
+		update product
+		set
+			pd_name = #{pd_name}
+ 			,pd_rmcost = #{pd_rmcost}
+ 			,pd_manufcost = #{pd_manufcost}
+			,pd_sort = #{pd_sort}
+		WHERE pd_code=#{pd_code}
+	</update>
+
+
+	
 </mapper>
