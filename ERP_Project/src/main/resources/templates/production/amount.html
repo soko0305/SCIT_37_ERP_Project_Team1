@@ -73,7 +73,7 @@ $(function(){
 			database.ref('warehouse/'+warehouse_code).child("inventory").child(rawm_code).once('value').then(function(snapshot){
 				var name = snapshot.key;
 				var amount = snapshot.val().systemamount;
-				
+				alert(name);
 			});
 		}
 	}

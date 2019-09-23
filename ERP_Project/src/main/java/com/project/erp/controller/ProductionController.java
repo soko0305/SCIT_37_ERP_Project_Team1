@@ -121,21 +121,20 @@ public class ProductionController {
 			return p.getPd_code();
 	}
 	
-	@RequestMapping(value = "/insertProudctMaterial", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/insertProudctMaterial", method = RequestMethod.POST)
 	public @ResponseBody void insertProudctMaterial(ProductMaterialVO productMaterial) {
 			int result =pService.insertProudctMaterial(productMaterial);
 
-	}
-	
-<<<<<<< HEAD
+	}*/
+
 	@RequestMapping(value = "/amount", method = RequestMethod.GET)
-	public String amount(ProductMaterialVO vo, Model model) {
-		System.out.println("vo : " + vo);
-		ArrayList<ProductMaterialVO> result = pService.productMaterialSelect(vo);
-		System.out.println(result);
+	public String amount(String pd_code, Model model) {
+		ArrayList<ProductMaterialVO> result = pService.selectAllProductMaterial(pd_code);
+		System.out.println("aa : " + result);
 		model.addAttribute("pmList", result);
 		return "production/amount";
-=======
+	}
+
 	//생산품 업데이트
 	@RequestMapping(value = "/updateProuct", method = RequestMethod.POST)
 	public @ResponseBody int updateProuct(ProductVO product) {
@@ -159,7 +158,6 @@ public class ProductionController {
 		model.addAttribute("product", product);
 		model.addAttribute("pmList", pmList);
 		return "production/production_update";
->>>>>>> master
 	}
 	
 }

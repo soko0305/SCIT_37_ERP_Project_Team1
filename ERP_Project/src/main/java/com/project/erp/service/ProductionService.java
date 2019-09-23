@@ -47,10 +47,6 @@ public class ProductionService {
 		int result =  pDAO.insertProudctMaterial(productMaterial);
 		return result;
 	}
-	
-	public ArrayList<ProductMaterialVO> productMaterialSelect(ProductMaterialVO vo){
-		return pDAO.productMaterialSelect(vo);
-	}
 
 	public ProductVO selelctProductByCode(String pd_code) {
 		ProductVO p = pDAO.selelctProductByCode(pd_code);

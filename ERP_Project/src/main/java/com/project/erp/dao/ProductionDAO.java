@@ -89,21 +89,7 @@ public class ProductionDAO {
 		}
 		return result;
 	}
-<<<<<<< HEAD
-	
-	public ArrayList<ProductMaterialVO> productMaterialSelect(ProductMaterialVO vo){
-		ArrayList<ProductMaterialVO> result = null;
-		ProductionMapper mapper = sqlSession.getMapper(ProductionMapper.class);
-		try {
-			result = mapper.productMaterialSelect(vo);
-			System.out.println("dao result : " + result);
-		} catch (Exception e) {			
-			e.printStackTrace();
-			return result;
-		}
-		return result;
-		
-=======
+
 	public ProductVO selelctProductByCode(String pd_code) {
 		ProductVO p = null;
 
@@ -150,7 +136,7 @@ public class ProductionDAO {
 			return 0;
 		}
 		return result;
->>>>>>> master
+	
 	}
 	 
 }
