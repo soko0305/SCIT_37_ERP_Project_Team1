@@ -153,10 +153,9 @@ public class ProductionController {
 			}
 			return p.getPd_code();
 	}
-<<<<<<< HEAD
+
 	
 	/*@RequestMapping(value = "/insertProudctMaterial", method = RequestMethod.POST)
-=======
 	@RequestMapping(value = "/produceInsert", method = RequestMethod.POST)
 	public String produceInsert(ManufactureVO manufacture) {
 		int result = pService.produceInsert(manufacture);
@@ -166,22 +165,22 @@ public class ProductionController {
 		} else {
 			return "redirect:/goproducecheck";
 		}
-	}
-
-	@RequestMapping(value = "/insertProudctMaterial", method = RequestMethod.POST)
->>>>>>> master
-	public @ResponseBody void insertProudctMaterial(ProductMaterialVO productMaterial) {
-			int result =pService.insertProudctMaterial(productMaterial);
-
 	}*/
 
+	//pd_code로 원자재 다 들고오기
 	@RequestMapping(value = "/amount", method = RequestMethod.GET)
 	public String amount(String pd_code, Model model) {
 		ArrayList<ProductMaterialVO> result = pService.selectAllProductMaterial(pd_code);
-		System.out.println("aa : " + result);
 		model.addAttribute("pmList", result);
 		return "production/amount";
 	}
+	
+	//pd_code로 원자재 체크
+		@RequestMapping(value = "/amountCheck", method = RequestMethod.GET)
+		public @ResponseBody ArrayList<ProductMaterialVO> amount(String pd_code) {
+			ArrayList<ProductMaterialVO> result = pService.selectAllProductMaterial(pd_code);
+			return result;
+		}
 
 	//생산품 업데이트
 	@RequestMapping(value = "/updateProuct", method = RequestMethod.POST)

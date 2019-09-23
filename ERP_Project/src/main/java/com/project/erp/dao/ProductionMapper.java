@@ -19,13 +19,10 @@ public interface ProductionMapper {
 	public int productionDelete(ProductVO product);
 	public ProductVO selectLatestProduct();
 	public int insertProudctMaterial(ProductMaterialVO productMaterial);
-<<<<<<< HEAD
 
-
-=======
 	public int deleteProduce(ManufactureVO manufacture);
 	public int deleteProduction(ProductVO product);
->>>>>>> master
+
 	public ProductVO selelctProductByCode(String pd_code);
 	public ArrayList<ProductMaterialVO> selectAllProductMaterial(String pd_code);
 	public int productionUpdate(ProductVO product);
