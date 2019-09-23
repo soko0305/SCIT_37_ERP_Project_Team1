@@ -1,29 +1,25 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="utf-8">
 
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta http-equiv="Content-Language" content="en">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>order_insert</title>
-<meta name="viewport"
-   content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
-<meta name="description"
-   content="Choose between regular React Bootstrap tables or advanced dynamic ones.">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Register Boxed - ArchitectUI HTML Bootstrap 4 Dashboard Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"
+    />
+    <meta name="description" content="ArchitectUI HTML Bootstrap 4 Dashboard Template">
 
-<!-- Disable tap highlight on IE -->
-<meta name="msapplication-tap-highlight" content="no">
+    <!-- Disable tap highlight on IE -->
+    <meta name="msapplication-tap-highlight" content="no">
 
-<script
-   src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script
-   src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
-<link
-   href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css"
-   rel="stylesheet">
-<!-- firebase -->
-   <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
+<link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
+
+  	<!-- firebase -->
+	<script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-auth.js"></script>
   <!-- TODO: Add SDKs for Firebase products that you want to use
        https://firebase.google.com/docs/web/setup#config-web-app -->
@@ -31,17 +27,15 @@
   <script src="https://cdn.firebase.com/libs/firebaseui/4.0.0/firebaseui.js"></script>
   <!-- firebase -->
   <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
-  <!-- firebase Config and initialize -->   
+  <!-- firebase Config and initialize -->	
   <script src="firebase/firebase-config.js"></script>
-<script>
+    <script>
    $(function() {
-      var database = firebase.database();   
+	   
+    /*  파이어베이스 
+    	var database = firebase.database();   
       
-      //최신화 부분 수정 필요
-      /*
-      database.ref().on('value', function(snapshot){
-         selelctInventoryINWarehouse();
-      });*/
+
       selelctInventoryINWarehouse();
       
       function selelctInventoryINWarehouse(){
@@ -58,9 +52,9 @@
          str+=warehouse_name;
          str+='</option>';
          $("#test1").append(str);
-      }
+      } */
      
-      $(".btn-primary").click(function(){
+      $("#insertButton").click(function(){
          $("#produceinsertForm").submit();
          opener.location.href='gorpoducecheck'
          window.open("about:blank","_self").close();
@@ -69,73 +63,120 @@
    });
 </script>
 </head>
-
 <body>
+      <form action="produceInsert" method="post" id="produceinsertForm">
+<div class="app-container app-theme-white body-tabs-shadow">
+        <div class="app-container">
+            <div class="h-100 bg-premium-dark">
+                <div class="d-flex h-100 justify-content-center align-items-center">
+                    <div class="mx-auto app-login-box col-md-8">
+                        <div class="app-logo-inverse mx-auto mb-3"></div>
+                        <div class="modal-dialog w-100">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <h5 class="modal-title">
+                                        <h4 class="mt-2">
+                                       
+                                            <div>생산 추가</div>
+                                            <span>새로 생산을 하실 <span class="text-success">생산 정보</span> 를 기입해주세요</span></h4>
+                                    </h5>
+                                    <div class="divider row"></div>
+                                    <div class="form-row">
+                                  
+                                    <div class="col-md-12">
+                                            <div class="position-relative form-group">
+												<input id="pd_code" placeholder="생산할제품명"
+            										name="pd_code" list="test" class="form-control" autocomplete="off">
+        												 <datalist class="select" id="test">
+          		 											 <option class="pList" th:each="list : ${pList}"
+              											 th:text="${list.pd_name}" th:value="${list.pd_code}">
+            											</option>
+         										</datalist>
+         						           </div>
+                                      </div>
+<!--                                        <div class="col-md-12">
+                                            <div class="position-relative form-group">
+												<input type="text" name="manuf_startdate" placeholder="생산시작일" class="form-control" data-toggle="datepicker-icon">
+                                            </div>
+                                      </div> -->
+                                      <div class="col-md-12">
+                                            <div class="position-relative form-group">
+												<input name="manuf_amount" id="manuf_amount" type="number" placeholder="생산수량"class="form-control">
+                                            </div>
+                                      </div>
+                                      <div class="col-md-12">
+                                            <div class="position-relative form-group">
+												<input name="sales_ordernum" id="sales_ordernum" type="text" placeholder="생산요청번호" class="form-control">
+                                            </div>
+                                      </div>
+                                      <div class="col-md-12">
+                                            <div class="position-relative form-group">
+												<input name="manuf_requserid" id="manuf_requserid" type="text"  placeholder="생산요청자" class="form-control">
+                                            </div>
+                                      </div>
+ 
+                                                                                                                                                        
+                             <div class="col-md-12">
+                            	<div class="input-group">
+                                                <div class="input-group-prepend datepicker-trigger">
+                                                    <div class="input-group-text">
+                                                        <i class="fa fa-calendar-alt"></i>
+                                                    </div>
+                                                </div>
+												<input type="text" name="manuf_startdate" placeholder="생산시작일" class="form-control" data-toggle="datepicker-icon">
+                                </div>
+                               </div>
+                               
+                                     </div>
+                                   
+ 
+                                    
+                                <div class="modal-footer d-block text-center">
+                                    <button id="insertButton" class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg" type="button">창고 등록</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center text-white opacity-8 mt-3">Copyright © ArchitectUI 2019</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</form>
+<!-- <script>
+	$(function(){
+		var database = firebase.database();	
+		$("#insertButton").click(function(){
+			var warehouse_name = $("#warehouse_name").val();
+			var warehouse_addr = $("#warehouse_addr").val();
+			var warehouse_size = $("#warehouse_size").val();
+			var warehouse_date = $("#warehouse_date").val();
+			if(warehouse_name==null ||warehouse_name==""){
+				$("#errorMessage").html("창고 이름을 입력해주세요");
+			}else{
+				if(warehouse_addr==null ||warehouse_addr==""){
+					$("#errorMessage").html("창고 주소를 입력해주세요");
+				}else{
+					if(warehouse_size==null ||warehouse_size==""){
+						$("#errorMessage").html("창고 면적을 입력해주세요");
+					}else{
+						if(warehouse_date==null ||warehouse_date==""){
+							$("#errorMessage").html("창고 개설일을 입력해주세요");
+						}else{							
+							database.ref("warehouse/").push({"warehouse_name": warehouse_name, 
+								 "warehouse_addr": warehouse_addr, 
+								 "warehouse_size": warehouse_size, 
+								 "warehouse_date": warehouse_date,
+								 "inventory":"empty"});
 
-   <div class="col-md-3">
-      <form action="produceinsert" method="post" id="produceinsertForm">
-      <!-- 원자재주문일자 -->
-      <input id="rmorder_date" name="rmorder_date" type="hidden"
-         class="form-control">
-      <!-- 원자재요청userid -->
-      <input id="rmorder_requserid" name="rmorder_requserid" type="hidden"
-         value="user" class="form-control">
-      <!-- 원자재구매코드 -->
-      <input id="rmorder_code" name="rmorder_code" type="hidden"
-         class="form-control">
-      <!-- 원자재 구매진행 -->
-      <input id="rmorder_status" name="rmorder_status" type="hidden"
-         class="form-control" value="UNARRIVE">
-      <!-- 원자재명 -->
-      <input id="rawm_name" name="rawm_name" type="hidden">
-      
-      <div class="form-group">
-         <label for="rawm_code">제품명</label> <input id="pd_code"
-            name="pd_code" list="test" class="form-control" autocomplete="off">
-         <datalist class="select" id="test">
-            <option class="pList" th:each="list : ${pList}"
-               th:text="${list.pd_name}" th:value="${list.pd_code}">
-            </option>
-         </datalist>
-      </div>
-      
-   		<div class="form-row">
-			<div class="col-md-4">
-				<div class="position-relative form-group">
-				<label for="manuf_startdate" class="">생산일자	</label>
-				<input type="date" class="manuf_startdate" data-toggle="datepicker">
-				</div>
-				</div>
-			</div>
-										
-										
-			<div class="form-row">
-			<div class="col-md-4">
-			<div class="position-relative form-group">
-			<label for="manuf_amount" class="">수량</label><input
-			name="manuf_amount" id="manuf_amount" placeholder="5ea"
-			type="number" class="form-control">
-			</div>
-			</div>
-			</div>
-      <div class="form-group">
-         <label for="rmorder_amount">원자재수량</label> <input id="rmorder_amount"
-            name="rmorder_amount" type="text" class="form-control">
-      </div>
-      <div class="form-group">
-         <label for="supplierseq">공급처코드(명)</label> <input id="supplierseq"
-            name="supplierseq" readonly="readonly" type="text"
-            class="form-control">
-      </div>
-      <div class="form-group">
-          <label for="warehouse_code" class="select1">창고코드</label>
-             <select name="warehouse_code" class="form-control" id="test1"></select> 
-      </div>
-      <div class="form-group">
-         <button class="mb-2 mr-2 btn-square btn btn-primary">요청하기</button>
-      </div>
-      </form>
-   </div>
+							window.open("about:blank","_self").close();
+						}
+					}
+				}
+			}
+		});
+	});
 
+</script> -->
 </body>
 </html>

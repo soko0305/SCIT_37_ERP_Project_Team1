@@ -83,7 +83,28 @@ public class ProductionService {
 		return result;
 	}
 
-}
+	public int produceInsert(ManufactureVO manufacture) {
+		int result = pDAO.produceInsert(manufacture);
+		return result;
+	}
+
+	public ManufactureVO produceOneSelect(String mfseq) {
+		return pDAO.produceOneSelect(mfseq);
+	}
+
+	public int produceUpdate(ManufactureVO manufacture) {
+		return pDAO.produceUpdate(manufacture);
+	}
+
+	public int statusProduce(ManufactureVO manufacture) {
+		String check = "완료";
+		manufacture.setManuf_status(check);
+		return pDAO.statusProduce(manufacture);
+
+	}
+ 
+	}
+ 
 	
 	
 

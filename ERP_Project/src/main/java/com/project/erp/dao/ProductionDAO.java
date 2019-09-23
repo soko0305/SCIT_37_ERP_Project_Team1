@@ -10,6 +10,7 @@ import com.project.erp.vo.BoardVO;
 import com.project.erp.vo.ManufactureVO;
 import com.project.erp.vo.ProductMaterialVO;
 import com.project.erp.vo.ProductVO;
+import com.project.erp.vo.RawMaterialVO;
 
 @Repository
 public class ProductionDAO {
@@ -51,7 +52,6 @@ public class ProductionDAO {
 			e.printStackTrace();
 			return result;
 		}
-		System.out.println(result);
 		return result;	
 	}
 	public int productionDelete(ProductVO product) {
@@ -161,5 +161,52 @@ public class ProductionDAO {
 		}
 		return result;
 	}
-	 
+	public int produceInsert(ManufactureVO manufacture) {
+		int result = 0;
+		ProductionMapper mapper = sqlSession.getMapper(ProductionMapper.class);
+		try {
+			result = mapper.produceInsert(manufacture);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+		return result;
+	}
+	public ManufactureVO produceOneSelect(String mfseq) {
+		ManufactureVO result = null;
+		ProductionMapper mapper = sqlSession.getMapper(ProductionMapper.class);
+		try {
+			result = mapper.produceOneSelect(mfseq);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return result;
+		}
+
+
+		return result;
+	}
+	public int produceUpdate(ManufactureVO manufacture) {
+		int result = 0;
+		ProductionMapper mapper = sqlSession.getMapper(ProductionMapper.class);
+		try {
+			result = mapper.produceUpdate(manufacture);
+		} catch (Exception e) {			
+			e.printStackTrace();
+			return result;
+		}
+		return result;		 
+	}
+	public int statusProduce(ManufactureVO manufacture) {
+		int result = 0;
+		ProductionMapper mapper = sqlSession.getMapper(ProductionMapper.class);
+		try {
+			result = mapper.statusProduce(manufacture);
+		} catch (Exception e) {			
+			e.printStackTrace();
+			return result;
+		}
+		return result;		 
+	}
+	
 }

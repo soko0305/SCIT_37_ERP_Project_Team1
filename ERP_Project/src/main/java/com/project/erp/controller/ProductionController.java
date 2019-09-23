@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,9 +38,8 @@ public class ProductionController {
 		return "production/producecheck";
 	}
 	@RequestMapping(value = "/goproduceupdate", method = RequestMethod.GET)
-	public String goproduceupdate(ManufactureVO manufacture, Model model,HttpSession session) {
-		ArrayList<ManufactureVO> plist = pService.produceSelect();
-		model.addAttribute("producelist", plist);
+	public String goproduceupdate(String mfseq, Model model,HttpSession session) {
+		model.addAttribute("mfseq", mfseq);
 		return "production/produceupdate";
 	}
 	
@@ -56,7 +56,13 @@ public class ProductionController {
 		model.addAttribute("productionlist", plist);
 		return "production/productionupdate";
 	}*/
-	
+ 	//생산 1개 가져오기
+	@RequestMapping(value = "/produceOneSelect", method = RequestMethod.POST)
+	public @ResponseBody ManufactureVO produceOneSelect(String mfseq, Model model) {
+		ManufactureVO result = pService.produceOneSelect(mfseq);
+
+		return result;
+	}
 	//메인화면 이동
 	@RequestMapping(value="/main", method = RequestMethod.GET)
 	public String home(){
@@ -65,7 +71,10 @@ public class ProductionController {
 	
 	//생산 삽입
 	@RequestMapping(value="/goproduceinsert", method = RequestMethod.GET)
-	public String produceinsert(){
+	public String produceinsert(Model model){
+		ArrayList<ProductVO> result= pService.productionSelect();
+		model.addAttribute("pList",result);
+
 		return "production/produceinsert";
 	} 
 	
@@ -104,13 +113,22 @@ public class ProductionController {
 	@RequestMapping(value = "/deleteProduce", method = RequestMethod.POST)
 	public String deleteProduce(ManufactureVO manufacture) {
 		int result = pService.deleteProduce(manufacture);
-
 		if (result == 0) {
 			return "redirect:/goproducecheck";
 		} else {
 			return "redirect:/goproducecheck";
 		}
 	}
+	// 생산 완료 변환
+	@RequestMapping(value = "/statusProduce", method = RequestMethod.POST)
+	public String statusProduce(ManufactureVO manufacture) {
+		int result = pService.statusProduce(manufacture);
+		if (result == 0) {
+			return "redirect:/goproducecheck";
+		} else {
+			return "redirect:/goproducecheck";
+		}
+	}	
 	// 생산품 삭제
 	@RequestMapping(value = "/deleteProduction", method = RequestMethod.POST)
 	public String deleteProduction(ProductVO product) {
@@ -135,7 +153,17 @@ public class ProductionController {
 			}
 			return p.getPd_code();
 	}
-	
+	@RequestMapping(value = "/produceInsert", method = RequestMethod.POST)
+	public String produceInsert(ManufactureVO manufacture) {
+		int result = pService.produceInsert(manufacture);
+
+		if (result == 0) {
+			return "redirect:/goproducecheck";
+		} else {
+			return "redirect:/goproducecheck";
+		}
+	}
+
 	@RequestMapping(value = "/insertProudctMaterial", method = RequestMethod.POST)
 	public @ResponseBody void insertProudctMaterial(ProductMaterialVO productMaterial) {
 			int result =pService.insertProudctMaterial(productMaterial);
@@ -153,7 +181,20 @@ public class ProductionController {
 			return 0;
 			}
 	}
-	
+	 
+	// 생산 수정
+	@ExceptionHandler
+	@RequestMapping(value = "/produceUpdate", method = RequestMethod.POST)
+	public String produceUpdate(ManufactureVO manufacture) {
+
+		int result = pService.produceUpdate(manufacture);
+
+		if (result == 0) {
+			return "redirect:/goproducecheck";
+		} else {
+			return "redirect:/goproducecheck";
+		}
+	}
 	//생산품 업데이트로 가기
 	@RequestMapping(value = "/goProductionUpdate", method = RequestMethod.GET)
 	public String goProductionUpdate(String pd_code, Model model) {

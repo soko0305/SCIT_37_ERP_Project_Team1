@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.project.erp.dao.ProductionMapper">
-	<insert id="productionInsert" parameterType="com.project.erp.vo.ProductVO">
+	 <insert id="productionInsert" parameterType="com.project.erp.vo.ProductVO">
 	insert into PRODUCT
 	(
 		pd_code,
@@ -24,25 +24,82 @@
 		'N'
 	)
 	</insert>
+	
+	
+	 <insert id="produceInsert" parameterType="com.project.erp.vo.ManufactureVO">
+	insert into manufacture
+	(
+		mfseq,
+		pd_code,
+		manuf_startdate,
+		manuf_enddate,
+		manuf_status,
+		warehouse_code,
+		manuf_amount,
+		sales_ordernum,
+		manuf_requserid,
+		manuf_reqdate,
+		salesdetailseq,
+		mf_delete
+
+	)
+	values
+	(
+		'm' || TO_CHAR(mfseq.nextval),
+		#{pd_code},	
+		to_char(to_date(#{manuf_startdate},'MM/DD/YYYY'),'YYYY-MM-DD'),	
+		sysdate,
+		'미완',	
+		'0',
+		#{manuf_amount},
+		'0',
+		'0',	
+		sysdate,		
+		'0',	
+		'N'	
+
+	)
+	</insert>	
+	
 	<select id="produceSelect" resultType="com.project.erp.vo.ManufactureVO" >
 		 SELECT
 		 	m.mfseq
  			,m.pd_code 
  			,p.pd_name
- 			,TO_CHAR(m.manuf_startdate, 'YYYY-MM-DD') AS manuf_startdate 
- 			,TO_CHAR(m.manuf_enddate, 'YYYY-MM-DD') AS manuf_enddate
+ 			,to_char(manuf_startdate, 'yyyy-mm-dd') as manuf_startdate
+ 			,to_char(manuf_enddate, 'yyyy-mm-dd') as manuf_enddate
 			,m.manuf_status 
 			,m.warehouse_code 
 		 	,m.manuf_amount
  			,m.manuf_requserid 
-			,TO_CHAR(m.manuf_reqdate , 'YYYY-MM-DD') AS manuf_reqdate
+ 			,to_char(manuf_reqdate, 'yyyy-mm-dd') as manuf_reqdate 			
+			,m.mf_delete
+ 	 	FROM
+		manufacture m, product p
+		WHERE	m.pd_code = p.pd_code
+		and m.mf_delete='N'
+</select>
+	<select id="produceOneSelect" parameterType="String" resultType="com.project.erp.vo.ManufactureVO" >
+		 SELECT
+		 	m.mfseq
+ 			,m.pd_code 
+ 			,p.pd_name
+ 			,manuf_startdate 
+ 			,manuf_enddate
+			,m.manuf_status 
+			,m.warehouse_code 
+		 	,m.manuf_amount
+ 			,m.manuf_requserid 
+			,manuf_reqdate
 			,mf_delete
  	 	FROM
 		manufacture m, product p
 		WHERE	m.pd_code = p.pd_code
-		and mf_delete='N'
+		and m.mf_delete='N'
+		and mfseq=#{mfseq}
 </select>
- 
+
+	
 	<select id="productionSelect" resultType="com.project.erp.vo.ProductVO" >
 		 SELECT
 			 pd_code			 
@@ -55,57 +112,34 @@
 			product 
 	 	WHERE	pd_delete='N'
  </select>
+
  
-
-	<select id="produceSelect" resultType="com.project.erp.vo.ManufactureVO" parameterType="com.project.erp.vo.ManufactureVO">
-		SELECT
-	 		mfseq
-			,pd_code 
- 			,TO_CHAR(manuf_startdate, 'YYYY-MM-DD') AS manuf_startdate 
- 			,TO_CHAR(manuf_enddate, 'YYYY-MM-DD') AS manuf_enddate
-			,manuf_status 
-			,warehouse_code 
-		 	,manuf_amount
-			,sales_ordernum 
-			,manuf_requserid 
-			,manuf_reqdate 
-			,'A' as salesdetailseq 
-	 	FROM
-		manufacture
-<!--	WHERE
- 		pd_code=#{pd_code}
- -->	</select>	
- 	<select id="productionSelect" resultType="com.project.erp.vo.ProductVO" parameterType="com.project.erp.vo.ProductVO">
-
-		SELECT
-	 		pd_code
-			,pd_name
- 			,pd_rmcost
- 			,pd_manufcost
-			,pd_sort
-	 	FROM
-		product
-<!--	WHERE
- 		pd_code=#{pd_code}
- -->	</select>	
-
+		<update id="statusProduce" parameterType="com.project.erp.vo.ManufactureVO">
+			update
+				manufacture
+			set
+				manuf_status=#{manuf_status},
+				manuf_enddate=sysdate
+			where
+				mfseq=#{mfseq}
+		</update>
 	
-		<delete id="deleteProduction" parameterType="com.project.erp.vo.ProductVO">
+		<update id="deleteProduction" parameterType="com.project.erp.vo.ProductVO">
 		update
 			product
 		set
 			pd_delete=#{pd_delete}
 		where
 			pd_code=#{pd_code}
-	</delete>
-	<delete id="deleteProduce"  parameterType="com.project.erp.vo.ManufactureVO">
+	</update>
+	<update id="deleteProduce"  parameterType="com.project.erp.vo.ManufactureVO">
 		update
  			 manufacture	
 		set
 			mf_delete=#{mf_delete}
 		where
 			mfseq=#{mfseq}
-	</delete>
+	</update>
 	
 	
 	<select id="selectLatestProduct" resultType="com.project.erp.vo.ProductVO">
@@ -117,8 +151,7 @@
 			,pd_sort
 	 	FROM product
 	 	WHERE pd_code=(SELECT MAX(pd_code)
-	 				   FROM product 
-	 					)
+	 				   FROM product)
 	</select>
 	
 	<insert id="insertProudctMaterial" parameterType="com.project.erp.vo.ProductMaterialVO">
@@ -183,7 +216,25 @@
 			,pd_sort = #{pd_sort}
 		WHERE pd_code=#{pd_code}
 	</update>
-
-
+	<update id="produceUpdate" parameterType="com.project.erp.vo.ManufactureVO">
+	update
+			manufacture
+	set
+		pd_code = #{pd_code}
+		manuf_startdate = #{manuf_startdate}
+		manuf_enddate= #{manuf_enddate}
+		manuf_status= #{manuf_status}
+		<!-- warehouse_code= #{warehouse_code} -->
+		manuf_amount= #{manuf_amount}
+		sales_ordernum= #{sales_ordernum}
+		manuf_requserid= #{manuf_requserid}
+		manuf_reqdate= #{manuf_reqdate}
+		salesdetailseq= #{salesdetailseq}
+		where
+			mfseq = #{mfseq}
+	</update>
+	
+	
+	
 	
 </mapper>

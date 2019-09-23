@@ -25,5 +25,9 @@ public interface ProductionMapper {
 	public ArrayList<ProductMaterialVO> selectAllProductMaterial(String pd_code);
 	public int productionUpdate(ProductVO product);
 	public int deleteProudctMaterial(String pd_code);
+	public int produceInsert(ManufactureVO manufacture);
+	public ManufactureVO produceOneSelect(String mfseq);
+	public int produceUpdate(ManufactureVO manufacture);
+	public int statusProduce(ManufactureVO manufacture);
 }
 

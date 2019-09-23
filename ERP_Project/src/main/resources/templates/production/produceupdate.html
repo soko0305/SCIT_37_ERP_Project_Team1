@@ -26,41 +26,57 @@
 <script th:inline="javascript">
 /*<![CDATA[*/
 	$(function(){
-		var rawm_code = /*[[${rawm_code}]]*/;
+		
+	
+		var mfseq = /*[[${mfseq}]]*/;
 		$.ajax({
-			url:"rawMaterialOneSelect",
-			data:{rawm_code : rawm_code},
+			url:"produceOneSelect",
+			data:{mfseq : mfseq},
 			type:"POST",
 			success:function(result){
-				$("#rawm_code").val(result.rawm_code);
-				$("#rawm_name").val(result.rawm_name);
-				$("#rawm_sort").val(result.rawm_sort);
-				$("#rawm_price").val(result.rawm_price);
-				$("#supplierseq").val(result.supplierseq);
-				$("#rawm_autoorder").val(result.rawm_autoorder);
+				$("#mfseq").val(result.mfseq);
+				$("#pd_code").val(result.pd_code);
+				$("#manuf_startdate").val(result.manuf_startdate);
+				$("#manuf_enddate").val(result.manuf_enddate);
+				$("#manuf_amount").val(result.manuf_amount);
+				$("#sales_ordernum").val(result.sales_ordernum);
+				$("#manuf_requserid").val(result.manuf_requserid);
+				$("#manuf_reqdate").val(result.manuf_reqdate);
+				$("#salesdetailseq").val(result.salesdetailseq);
+				$("#manuf_status").val(result.manuf_status);
+				$("#warehouse_code").val(result.warehouse_code);
 
+			}
+		});
+		
 		$(".btn-primary").click(function(){
-			var code = $("#rawm_code").val();
-			var name = $("#rawm_name").val();
-			var sort = $("#rawm_sort").val();
-			var price = $("#rawm_price").val();
-			var seq = $("#supplierseq").val();
-			var order = $("#rawm_autoorder").val();
-			var minimum = $("#rawm_minimum").val();
-			var set = $("#rawm_set").val();
-
-			var code1 = $("#rawm_code1").val(code);
-			var name1 = $("#rawm_name1").val(name);
-			var sort1 = $("#rawm_sort1").val(sort);
-			var price1 = $("#rawm_price1").val(price);
-			var seq1 = $("#supplierseq1").val(seq);
-			var order1 = $("#rawm_autoorder1").val(order);
-			var minimum1 = $("#rawm_minimum1").val(minimum);
-			var set1 = $("#rawm_set1").val(set);
+/* 			var mfseq = $("#mfseq").val();
+			var pd_code = $("#pd_code").val();
+			var manuf_startdate = $("#manuf_startdate").val();
+			var manuf_enddate = $("#manuf_enddate").val();
+			var manuf_amount = $("#manuf_amount").val();
+			var sales_ordernum = $("#sales_ordernum").val();
+			var manuf_reqdate = $("#manuf_reqdate").val();
+			var salesdetailseq = $("#salesdetailseq").val();
+			var manuf_status = $("#manuf_status").val();
+			var warehouse_code = $("#warehouse_code").val();
 			
+			
+			var mfseq1 = $("#mfseq1").val(mfseq);
+			var pd_code = $("#pd_code1").val();
+			var manuf_startdate1 = $("#manuf_startdate1").val(manuf_startdate);
+			var manuf_enddate1 = $("#manuf_enddate1").val(manuf_enddate);
+			var manuf_amount1 = $("#manuf_amount1").val(manuf_amount);
+			var sales_ordernum1 = $("#sales_ordernum1").val(sales_ordernum);
+			var manuf_reqdate1 = $("#manuf_reqdate1").val(manuf_reqdate);
+			var salesdetailseq1 = $("#salesdetailseq1").val(salesdetailseq);
+			var manuf_status1 = $("#manuf_status1").val(manuf_status);			
+			var warehouse_code = $("#warehouse_code1").val(warehouse_code);
+			
+ */
 
-			$("#rawMaterialUpdateForm").submit();
-			opener.document.location.href="/goMaterialsList";
+			$("#produceUpdateForm").submit();
+			opener.document.location.href="/goproducecheck";
             self.close();
 		});
 	});
@@ -70,40 +86,45 @@
 
 <body>
 
-	<div class="col-md-3">
-		<div class="form-group">
-			<label for="rawm_code">원자재코드</label> <input id="rawm_code"
-				name="rawm_code" type="text" 
-				readonly="readonly" class="form-control">
+<form action="produceUpdate" method="post"	id="produceUpdateForm">
+   		<div class="form-row">
+			<div class="col-md-6">
+				<div class="position-relative form-group">
+					<label for="manuf_startdate" class="">생산시작일</label>
+				<input type="date" id="manuf_startdate" name="manuf_startdate" class="form-control" >
+			</div>
 		</div>
-		<div class="form-group">
-			<label for="rawm_name">원재료명</label> <input id="rawm_name"
-				name="rawm_name" type="text"
-				class="form-control">
+	</div>
+		
+										
+		<div class="form-row">
+			<div class="col-md-6">
+				<div class="position-relative form-group">
+					<label for="manuf_amount" class="">생산수량</label>
+					<input name="manuf_amount" id="manuf_amount" 
+				type="number" class="form-control">
+			</div>
 		</div>
-		<div class="form-group">
-			<label for="rawm_sort">원재료종류</label> <input id="rawm_sort"
-				name="rawm_sort" type="text"
-				class="form-control">
+	</div>
+
+		<div class="form-row">
+			<div class="col-md-6">
+				<div class="position-relative form-group">
+					<label for="manuf_requserid" class="">생산요청자</label>
+					<input name="manuf_requserid" id="manuf_requserid" type="text" class="form-control">
+				</div>
+			</div>
 		</div>
-		<div class="form-group">
-			<label for="rawm_price">단가</label> <input id="rawm_price" type="text"
-				name="rawm_price"
-				class="form-control">
+		<div class="form-row">
+			<div class="col-md-6">
+				<div class="position-relative form-group">
+					<label for="warehouse_code" class="">창고코드</label>
+					<input name="warehouse_code" id="warehouse_code" type="text" class="form-control">
+				</div>
+			</div>
 		</div>
-		<div class="form-group">
-			<label for="supplierseq" class="select">공급처명</label> <input
-				name="supplierseq" id="supplierseq" list="test" class="form-control" autocomplete="off">
-			<datalist class="select" id="test" >
-				<option class="sList" th:each="list : ${supplierList}" 
-					th:text="${list.supplier_name}" th:value="${list.supplierseq}">
-				</option>
-			</datalist>
 
 
-		</div>
-
-		</div>
 		<!-- if check -->
 		<div class="form-row">
 			<div class="col-md-6">
@@ -122,17 +143,22 @@
 		</div>
 
 	</div>
-
-	<form action="rawMaterialUpdate" method="post"
-		id="rawMaterialUpdateForm">
-		<input type="hidden" id="rawm_code1" name="rawm_code"> <input
-			type="hidden" id="rawm_name1" name="rawm_name"> <input
-			type="hidden" id="rawm_sort1" name="rawm_sort"> <input
-			type="hidden" id="rawm_price1" name="rawm_price"> <input
-			type="hidden" id="supplierseq1" name="supplierseq"> <input
-			type="hidden" id="rawm_autoorder1" name="rawm_autoorder"> <input
-			type="hidden" id="rawm_minimum1" name="rawm_minimum"> <input
-			type="hidden" id="rawm_set1" name="rawm_set">
+	
 	</form>
+
+
+	<!-- <form action="produceUpdate" method="post"	id="produceUpdateForm">
+		<input type="hidden" id="mfseq1" name="mfseq"> <input
+			type="hidden" id="manuf_startdate1" name="manuf_startdate"> <input
+			type="hidden" id="manuf_enddate1" name="manuf_enddate"> <input
+			type="hidden" id="manuf_amount1" name="manuf_amount"> <input
+			type="hidden" id="sales_ordernum1" name="sales_ordernum"> <input
+			type="hidden" id="manuf_reqdate1" name="manuf_reqdate"> <input
+			type="hidden" id="salesdetailseq1" name="salesdetailseq"> <input
+			type="hidden" id="warehouse_code1" name="warehouse_code"><input
+			type="hidden" id="manuf_status1" name="manuf_status"><input
+			type="hidden" id="manuf_status1" name="manuf_status"><input
+			type="hidden" id="manuf_status1" name="manuf_status">
+	</form> -->
 </body>
 </html>

@@ -19,11 +19,50 @@
 	<script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
 	<link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
 	
-<script>
+<script th:inline="javascript">
+/*<![CDATA[*/
  	$(function(){
-		var openWin;
+ 		var producelist = /*[[${producelist}]]*/;
+		var today = new Date();
+		
+		
+ 		for(var i = 0 ; i<producelist.length; i++){
+ 			str='';
+ 			str+='<tr>';
+ 			str+='<td>'+producelist[i].pd_code+'</td>';
+ 			str+='<td>'+producelist[i].pd_name+'</td>';
+ 			str+='<td>'+producelist[i].manuf_startdate+'</td>';
+ 			str+='<td>'+producelist[i].manuf_enddate+'</td>';
+ 			str+='<td>'+producelist[i].warehouse_code+'</td>';
+ 			str+='<td>'+producelist[i].manuf_amount+'</td>';
+ 			str+='<td>'+producelist[i].manuf_requserid+'</td>';
+ 			str+='<td>'+producelist[i].manuf_reqdate+'</td>';
+ 			str+='<td>'+producelist[i].manuf_status+'</td>';
+ 			
+ 			var mfseq = producelist[i].mfseq;
+ 			var startdate = producelist[i].manuf_startdate;
+ 			var startdateOfSplit = startdate.split('-');
+ 			var date = new Date(startdateOfSplit[0].toString(), startdateOfSplit[1]-1,startdateOfSplit[2]);
+ 			var status =producelist[i].manuf_status;
+			str+='<td>';
+			if(status=='미완'){
+				str+='<button class="mb-2 mr-2 btn btn-primary" data-type="status" value="'+producelist[i].mfseq+'">완료</button>';
+			}
+ 	 		if(today.getTime()<date.getTime()){
+ 			
+ 			str+='<button class="mb-2 mr-2 btn btn-primary" data-type="update" value="'+producelist[i].mfseq+'">수정</button>';
+ 			str+='<button class="mb-2 mr-2 btn btn-primary" data-type="delete" value="'+producelist[i].mfseq+'">삭제</button>';
+ 			
+ 			} 
+ 	 		str+='</td>';
+ 			str+='</tr>';
+ 			$("#tbody").append(str);
+ 		}
+		
+ 	
+	
 		$(".btn-primary").click(function(){
-			var type = $(this).attr("data-type")
+			var type = $(this).attr("data-type");
 			var code = $(this).val();
 			if(type=='update'){
 				var url = "goproduceupdate?mfseq="+code;
@@ -34,18 +73,26 @@
 			}else if(type=='delete'){
 				$("#code1").val(code);
 				$("#deleteProduce").submit();
+			}else if(type=='status'){
+				$("#code1").val(code);
+				$("#statusProduce").submit();				
+			
 			}else{
 				location.href="goproduceinsert"
 			}
 		});
+	
 	});
+	/*]]>*/
 </script>
 </head>
 <body>
-<form action="deleteProduce" method="post" id="deleteProduce">
+<form action="statusProduce" method="post" id="statusProduce">
 	<input type="hidden" name="mfseq" id="code1">
 </form>
- 
+ <form action="deleteProduce" method="post" id="deleteProduce">
+	<input type="hidden" name="mfseq" id="code1">
+</form>
 <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
     <div class="app-header header-shadow">
         <div class="app-header__logo">
@@ -1879,23 +1926,23 @@
                             <table style="width: 100%;" id="example" class="table table-hover table-striped table-bordered">
                                 <thead>
                                 <tr>
-                                    <th>PD번호</th>
-                                    <th>PD품명</th>
+                                    <th>제품번호</th>
+                                    <th>제품명</th>
                                     <th>시작일</th>
                                     <th>종료일</th>
                                      <th>창고</th>
                                     <th>수량</th>
-                                    <th>MF요청인</th>
-                                    <th>MF요청일</th>
+                                    <th>생산요청인</th>
+                                    <th>생산요청일</th>
                                      <th>상태</th>
                                     <th>기타</th>
                                     
                                 </tr>
                                 </thead>
-        						<tbody>
+        						<tbody id="tbody">
+        					<!--  	
   								<tr th:each="list : ${producelist}">
-<!-- 									<td th:text="${list.mfseq}"></td>
- -->	 							<td th:text="${list.pd_code}"></td>
+		 							<td th:text="${list.pd_code}"></td>
  									<td th:text="${list.pd_name}"></td>
  									<td th:text="${list.manuf_startdate}"></td>
  									<td th:text="${list.manuf_enddate}"></td>									
@@ -1904,16 +1951,12 @@
  									 <td th:text="${list.manuf_requserid}"></td>									
   									<td th:text="${list.manuf_reqdate}"></td>								
   									<td th:text="${list.manuf_status}"></td>								
- 										
- 										
-
-<!--  									<td><input type="checkbox" data-toggle="toggle" data-on="생산 완료" data-off="생산 미완료" id="toggleSwitch"></td>
- -->									<td>
+									<td>
 									<button class="mb-2 mr-2 btn btn-primary" data-type="update" th:value="${list.mfseq}">수정</button>
 									<button class="mb-2 mr-2 btn btn-primary" data-type="delete" th:value="${list.mfseq}">삭제</button>
-
 								</td>
 								</tr>
+								-->
                                 </tbody>
                             </table>
                             <a href="/goproduceinsert"><button type="button" class="btn btn-shadow btn-wide btn-primary" id="write">
