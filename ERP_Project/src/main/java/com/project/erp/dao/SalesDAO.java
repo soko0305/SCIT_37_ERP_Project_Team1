@@ -82,7 +82,16 @@ public class SalesDAO {
 		return buyer1;
 		
 	}
-
+	public List<Sales> selectSalesWithoutDone(){
+		List<Sales> list1 = null;
+		try{
+		SalesMapper mapper = sqlSession.getMapper(SalesMapper.class);
+		list1=mapper.selectSalesWithoutDone();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return list1;
+	}
 	
 	//Sales 목록 전체 select
 	public List<Sales> selectAllSales(){
