@@ -92,7 +92,7 @@ public class SalesService {
 			sales.setSales_title(salestitle);
 			result1 = dao.setSalesPrice(sales);
 			}
-			
+		
 			//SalesDetail 객체를 DB에 저장하는 메소드.
 			SalesDetail salesDetail = new SalesDetail();
 			salesDetail.setSalesdetail_name(salesdetail_name);
