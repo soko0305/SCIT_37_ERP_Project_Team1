@@ -45,9 +45,9 @@
  
 
 //엑셀 업로드 프로세스가 완료된 후, insert가 끝난 DB ajax로 새로 출력해주기.
-function selectAllSales(){
+function selectSalesWithoutDone(){
 	$.ajax({
-		url:'selectAllSales',
+		url:'selectSalesWithoutDone',
 		success:function(data){
 			str = '';
 			$('.tbody').html(str);
@@ -58,12 +58,13 @@ function selectAllSales(){
 				str1+='<tr>';
 				str1+='<td>'+data[i].sales_ordernum+'</td>';
 				str1+='<td>'+data[i].buyer_corp+'</td>';
-				str1+='<td><a href="a">'+data[i].sales_title+'</a></td>';
+				str1+='<td><a href="#" class="goDetail" data-ordernum="'+data[i].sales_ordernum+'">'+data[i].sales_title+'</a></td>';
 				str1+='<td>'+data[i].sales_totalprice+'</td>';
 				str1+='<td>'+data[i].sales_orderdate+'</td>';
 				str1+='<td style="text-align: center;"><button class="mb-2 mr-2 btn btn-primary">'+data[i].sales_status+'</button></td>';
 				str1+='</tr>'
 				$('.tbody').append(str1);
+				goDetail();
 			}
 		}
 	})
@@ -121,8 +122,6 @@ function excelExportCommon(event, callback){
 //sheetJS를 사용한 Excel read 메소드.
 function handleExcelDataAll(sheet){
 	insertData(sheet);
-	handleExcelDataJson(sheet); // json 형태
-	handleExcelDataHtml(sheet); // html 형태
 }
 
 //sheetJS를 사용한 Excel read하고, DB에 담는 Ajax
@@ -137,7 +136,7 @@ function insertData(sheet){
 			type:'post',
 			success:function(data){
 				if(data=='ok'){alert('성공')}
-				selectAllSales();
+				selectSalesWithoutDone();
 			}
 			
 		})
@@ -237,6 +236,7 @@ function insertData(sheet){
                                         </tr>
                                         </thead>
                                         <tbody class="tbody">
+                                     
                                             	<tr th:each="list : ${salesList}">
 												<td th:text="${list.sales_ordernum}"></td>
 												<td th:text="${list.buyer_corp}"></td>

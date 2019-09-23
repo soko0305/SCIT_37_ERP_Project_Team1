@@ -32,7 +32,7 @@ public class LinkController {
 	@RequestMapping(value="/realTimeOffer", method = RequestMethod.GET)
 	public String Management2(Model model){
 		List<Sales> list1 = null;
-		list1 = service.selectAllSales();
+		list1 = service.selectSalesWithoutDone();
 		model.addAttribute("salesList", list1);
 		return "sales/realTimeOffer";
 	}

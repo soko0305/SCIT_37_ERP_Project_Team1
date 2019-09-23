@@ -126,6 +126,10 @@ public class SalesService {
 		return list;
 	}
 	
+	public List<Sales> selectSalesWithoutDone(){
+		List<Sales> list = dao.selectSalesWithoutDone();
+		return list;
+	}
 	public int insertBuyer(Buyer buyer){
 		int result = dao.insertBuyer(buyer);
 		return result;
@@ -155,4 +159,6 @@ public class SalesService {
 		List<SalesDetail> list = dao.selectSalesDetailByOrdernum(salesdetail);
 		return list;
 	}
+	
+	
 }

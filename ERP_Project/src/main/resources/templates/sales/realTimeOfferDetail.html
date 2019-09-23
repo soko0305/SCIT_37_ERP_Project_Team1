@@ -48,21 +48,25 @@
 				var warehouse_name = data.val().warehouse_name;
 				database.ref('warehouse/'+warehouse_code).child("inventory").on('child_added', function(snapshot){
 					
-					
-					
 					for(var i = 0; i<list.length ; i++){
 					if(snapshot.key==list[i].pd_code){
 						var amount = snapshot.child("systemamount").val();
 						var index = i+1;
-						str1= '<tr>';
+						str1= '<tr align="center">';
 						str1+='<td>'+index+'</td>';
 						str1+='<td>'+list[i].salesdetail_name+'</td>';
 						str1+='<td>'+list[i].salesdetail_amount+'</td>';
 						str1+='<td>'+amount+'</td>';
-					    str1+='<td>'+list[i].salesdetail_status+'</td></tr>';
-					    
-						$('#tbody1').append(str1);
+						if(list[i].salesdetail_amount<=amount){
+					    str1+='<td><a href="#" class="mb-2 mr-2 btn btn-primary">READY</a></td></tr>';
+						}else{
+						str1+='<td><a href="#" class="mb-2 mr-2 btn btn-danger">생산요청</a></td></tr>';	
+						}
 						
+						if(!list.salesdetail_amount>amount){
+							alert('!');
+						}
+						$('#tbody1').append(str1);
 						}
 					}
 					
@@ -88,59 +92,25 @@
                     <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@위에 달린 메뉴 -->
 
                    <div class="main-card mb-3 card">
-                              <div class="card-body" ><br /><br />
-                              <div class="alert alert-info fade show" style=" font-size:20pt; font-weight: 700; text-align:center; font-family: Nanum Gothic"><주문번호 12345678-1111의 상세페이지></div><br /><hr /><br />
+                              <div class="card-body" >
+                          <br />
                                       <div class="mb-3 card">
-                                        <div class="tabs-lg-alternate card-header">
-                                            <ul class="nav nav-justified">
-                                                <li class="nav-item">
-                                                    <a data-toggle="tab" href="#tab-eg9-0" class="active nav-link">
-                                                        <h4 style="font-family: Nanum Gothic">주문 상세</h4>
-                                                        <div class="tab-subheading">
-                                                                <span class="pr-2 opactiy-6">
-                                                                    <i class="fa fa-comment-dots"></i>
-                                                                </span>
-                                                            	Order Details
-                                                        </div>
-                                                    </a></li>
-                                                <li class="nav-item">
-                                                    <a data-toggle="tab" href="#tab-eg9-2" class="nav-link">
-                                                        <h4 style="font-family: Nanum Gothic;">진행 상황</h4>
-                                                        <div class="tab-subheading">
-                                                            <span class="pr-2 opactiy-6">
-                                                                <i class="fa fa-bullhorn"></i>
-                                                            </span>
-                                                            Progress
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="tab-content">
-                                            <div class="tab-pane active" id="tab-eg9-0" role="tabpanel">
-                                                <div class="card-body"><br /><br />  
-                                                <h4 class="card-title"> <주문번호 1234567-1234> </h4>
-                                                <table class="mb-0 table table-hover">
+                                          <div class="card-body"><br /><br /><hr />
+                                            <table style="width: 100%;" id="example" class="table table-hover table-bordered">
                                         <thead>
-                                        <tr>
+                                        <tr align="center">
                                             <th>no</th>
-                                            <th>품  목</th>
-                                            <th>수  량</th>
+                                            <th>품 목</th>
+                                            <th>주문수량</th>
                                             <th>현재고량</th>
                                             <th>Status</th>
                                         </tr>
                                         </thead>
                                           <tbody id="tbody1">
                                       
-                                  </tbody>
-                                    </table></div>
-                                            </div>
-                                            <div class="tab-pane" id="tab-eg9-2" role="tabpanel">
-                                                <div class="card-body"><p class="mb-0">It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
-                                                    PageMaker including versions of Lorem Ipsum.</p></div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                		  </tbody>
+                                    </table><hr /></div>
+                                   </div>
                                 </div>
                             </div>
                          </div>
