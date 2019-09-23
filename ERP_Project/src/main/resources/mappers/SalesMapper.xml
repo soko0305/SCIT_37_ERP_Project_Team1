@@ -57,6 +57,12 @@ from sales
 order by sales_ordernum desc
 </select> 
 
+<select id="selectSalesWithoutDone" resultType="com.project.erp.vo.Sales">
+select *
+from sales
+where sales_status != '판매완료'
+</select>
+
 <select id="selectAllBuyer" resultType="com.project.erp.vo.Buyer">
 select *
 from buyer

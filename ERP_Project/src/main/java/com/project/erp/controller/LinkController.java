@@ -32,7 +32,7 @@ public class LinkController {
 	@RequestMapping(value="/realTimeOffer", method = RequestMethod.GET)
 	public String Management2(Model model){
 		List<Sales> list1 = null;
-		list1 = service.selectAllSales();
+		list1 = service.selectSalesWithoutDone();
 		model.addAttribute("salesList", list1);
 		return "sales/realTimeOffer";
 	}
@@ -58,9 +58,24 @@ public class LinkController {
 	}
 	
 	@RequestMapping(value="/realTimeOfferDetail", method=RequestMethod.GET)
-	public String realTimeOfferDetail(SalesDetail salesDetail, Model model){
+	public String realTimeOfferDetail(Sales sales, Model model){
+		
+		String seq = sales.getBuyerseq();
+		String num = sales.getSales_ordernum();
+		
+		Buyer buyer = new Buyer();
+		buyer.setBuyerseq(seq);
+		
+		SalesDetail salesDetail = new SalesDetail();
+		salesDetail.setSales_ordernum(num);
+		
 		List<SalesDetail> list = service.selectSalesDetailByOrdernum(salesDetail);
-		model.addAttribute("salesDetailList", list);
+		Sales sale = service.selectSalesByOrdernum(sales);
+		Buyer buyer1 = service.selectBuyer(buyer);
+		
+		model.addAttribute("sales", sale);
+		model.addAttribute("buyer", buyer1);
+		model.addAttribute("detailList", list);
 		return "sales/realTimeOfferDetail";
 	}
 	
