@@ -127,4 +127,13 @@ public class ProductionController {
 
 	}
 	
+	@RequestMapping(value = "/amount", method = RequestMethod.GET)
+	public String amount(ProductMaterialVO vo, Model model) {
+		System.out.println("vo : " + vo);
+		ArrayList<ProductMaterialVO> result = pService.productMaterialSelect(vo);
+		System.out.println(result);
+		model.addAttribute("pmList", result);
+		return "production/amount";
+	}
+	
 }

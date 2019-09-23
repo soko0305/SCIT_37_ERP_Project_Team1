@@ -19,4 +19,6 @@ public interface ProductionMapper {
 	public int productionDelete(ProductVO product);
 	public ProductVO selectLatestProduct();
 	public int insertProudctMaterial(ProductMaterialVO productMaterial);
+	
+	public ArrayList<ProductMaterialVO> productMaterialSelect(ProductMaterialVO vo);		//생산품 원자재 select
 }

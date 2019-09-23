@@ -6,7 +6,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.project.erp.vo.BoardVO;
 import com.project.erp.vo.ManufactureVO;
 import com.project.erp.vo.ProductMaterialVO;
 import com.project.erp.vo.ProductVO;
@@ -89,6 +88,20 @@ public class ProductionDAO {
 			return 0;
 		}
 		return result;
+	}
+	
+	public ArrayList<ProductMaterialVO> productMaterialSelect(ProductMaterialVO vo){
+		ArrayList<ProductMaterialVO> result = null;
+		ProductionMapper mapper = sqlSession.getMapper(ProductionMapper.class);
+		try {
+			result = mapper.productMaterialSelect(vo);
+			System.out.println("dao result : " + result);
+		} catch (Exception e) {			
+			e.printStackTrace();
+			return result;
+		}
+		return result;
+		
 	}
 	 
 }

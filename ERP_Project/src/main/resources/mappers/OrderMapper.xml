@@ -48,7 +48,7 @@
 		ORDER_RAWMATERIAL
 	</select>
 	
-	<select id="orderOneSelect" parameterType="String" resultType="com.project.erp.vo.Order_rawMaterialVO">
+	<select id="requestOneSelect" parameterType="String" resultType="com.project.erp.vo.Order_rawMaterialVO">
 	select
 		rmorder_code,
 		rawm_code,
@@ -58,7 +58,9 @@
 		rmorder_amount,
 		warehouse_code,
 		rmorder_requserid,
-		rmorder_status
+		rmorder_status,
+		mfseq,
+		rmorder_reqdate
 	from
 		ORDER_RAWMATERIAL
 	where

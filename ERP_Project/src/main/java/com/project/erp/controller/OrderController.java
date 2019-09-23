@@ -38,6 +38,7 @@ public class OrderController {
 
 	@RequestMapping(value = "/orderInsert", method = RequestMethod.POST)
 	public String orderInsert(Order_rawMaterialVO order) {
+		System.out.println("order : " + order);
 		int result = oService.orderInsert(order);
 
 		if (result == 0) {
