@@ -21,15 +21,14 @@ public class ProductionService {
 		return result;
 	}
 
-	public ArrayList<ManufactureVO> produceSelect(ManufactureVO manufacture) {
+	public ArrayList<ManufactureVO> produceSelect() {
 		
-		ArrayList<ManufactureVO> result = pDAO.produceSelect(manufacture);
-		
+		ArrayList<ManufactureVO> result = pDAO.produceSelect();
  		return result;
 	}
 
-	public ArrayList<ProductVO> productionSelect(ProductVO product) {
-		ArrayList<ProductVO> result = pDAO.productionSelect(product);
+	public ArrayList<ProductVO> productionSelect() {
+		ArrayList<ProductVO> result = pDAO.productionSelect();
 		return result;
 	}
 
@@ -47,6 +46,21 @@ public class ProductionService {
 		int result =  pDAO.insertProudctMaterial(productMaterial);
 		return result;
 	}
+
+ 
+	public int deleteProduce(ManufactureVO manufacture) {
+		String check = "Y";
+		manufacture.setMf_delete(check);
+		return pDAO.deleteProduce(manufacture);
+ 	}
+
+	public int deleteProduction(ProductVO product) {
+		String check = "Y";
+		product.setPd_delete(check);
+			return pDAO.deleteProduction(product);
+ 	}
+
+
 
 	public ProductVO selelctProductByCode(String pd_code) {
 		ProductVO p = pDAO.selelctProductByCode(pd_code);
@@ -68,7 +82,28 @@ public class ProductionService {
 		return result;
 	}
 
+	public int produceInsert(ManufactureVO manufacture) {
+		int result = pDAO.produceInsert(manufacture);
+		return result;
+	}
+
+	public ManufactureVO produceOneSelect(String mfseq) {
+		return pDAO.produceOneSelect(mfseq);
+	}
+
+	public int produceUpdate(ManufactureVO manufacture) {
+		return pDAO.produceUpdate(manufacture);
+	}
+
+	public int statusProduce(ManufactureVO manufacture) {
+		String check = "완료";
+		manufacture.setManuf_status(check);
+		return pDAO.statusProduce(manufacture);
+
+	}
+ 
+	}
+ 
 	
 	
-	
-}
+

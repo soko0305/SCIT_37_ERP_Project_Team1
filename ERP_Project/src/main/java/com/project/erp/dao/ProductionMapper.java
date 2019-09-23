@@ -14,16 +14,25 @@ import com.project.erp.vo.ProductVO;
 public interface ProductionMapper {
 
 	public int productionInsert(ProductVO product);
-	public ArrayList<ManufactureVO> produceSelect(ManufactureVO manufacture);
- 	public ArrayList<ProductVO> productionSelect(ProductVO product);
+	public ArrayList<ManufactureVO> produceSelect();
+ 	public ArrayList<ProductVO> productionSelect();
 	public int productionDelete(ProductVO product);
 	public ProductVO selectLatestProduct();
 	public int insertProudctMaterial(ProductMaterialVO productMaterial);
+<<<<<<< HEAD
 
 
+=======
+	public int deleteProduce(ManufactureVO manufacture);
+	public int deleteProduction(ProductVO product);
+>>>>>>> master
 	public ProductVO selelctProductByCode(String pd_code);
 	public ArrayList<ProductMaterialVO> selectAllProductMaterial(String pd_code);
 	public int productionUpdate(ProductVO product);
 	public int deleteProudctMaterial(String pd_code);
+	public int produceInsert(ManufactureVO manufacture);
+	public ManufactureVO produceOneSelect(String mfseq);
+	public int produceUpdate(ManufactureVO manufacture);
+	public int statusProduce(ManufactureVO manufacture);
 }
 

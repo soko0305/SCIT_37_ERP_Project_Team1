@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.project.erp.vo.ManufactureVO;
 import com.project.erp.vo.ProductMaterialVO;
 import com.project.erp.vo.ProductVO;
+import com.project.erp.vo.RawMaterialVO;
 
 @Repository
 public class ProductionDAO {
@@ -27,24 +28,25 @@ public class ProductionDAO {
 		}
 		return result;
 	}
-	public ArrayList<ManufactureVO> produceSelect(ManufactureVO manufacture) {
+	public ArrayList<ManufactureVO> produceSelect() {
 		ArrayList<ManufactureVO> result = null;
-		
 		ProductionMapper mapper = sqlSession.getMapper(ProductionMapper.class);
 		try {
-			result = mapper.produceSelect(manufacture);
+			result = mapper.produceSelect();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			return result;
 		}
 		return result;
 	}
-	public ArrayList<ProductVO> productionSelect(ProductVO product) {
+	public ArrayList<ProductVO> productionSelect() {
 		ArrayList<ProductVO> result = null;
 		
 		ProductionMapper mapper = sqlSession.getMapper(ProductionMapper.class);
 		try {
-			result = mapper.productionSelect(product);
+ 
+			result = mapper.productionSelect();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return result;
@@ -89,7 +91,32 @@ public class ProductionDAO {
 		}
 		return result;
 	}
+<<<<<<< HEAD
 
+=======
+	public int deleteProduce(ManufactureVO manufacture) {
+		int result = 0;
+		ProductionMapper mapper = sqlSession.getMapper(ProductionMapper.class);
+		try {
+			result = mapper.deleteProduce(manufacture);
+		} catch (Exception e) {			
+			e.printStackTrace();
+			return result;
+		}
+		return result;		 
+	}
+	public int deleteProduction(ProductVO product) {
+		int result = 0;
+		ProductionMapper mapper = sqlSession.getMapper(ProductionMapper.class);
+		try {
+			result = mapper.deleteProduction(product);
+		} catch (Exception e) {			
+			e.printStackTrace();
+			return result;
+		}
+		return result;		
+	}
+>>>>>>> master
 	public ProductVO selelctProductByCode(String pd_code) {
 		ProductVO p = null;
 
@@ -138,5 +165,52 @@ public class ProductionDAO {
 		return result;
 	
 	}
-	 
+	public int produceInsert(ManufactureVO manufacture) {
+		int result = 0;
+		ProductionMapper mapper = sqlSession.getMapper(ProductionMapper.class);
+		try {
+			result = mapper.produceInsert(manufacture);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+		return result;
+	}
+	public ManufactureVO produceOneSelect(String mfseq) {
+		ManufactureVO result = null;
+		ProductionMapper mapper = sqlSession.getMapper(ProductionMapper.class);
+		try {
+			result = mapper.produceOneSelect(mfseq);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return result;
+		}
+
+
+		return result;
+	}
+	public int produceUpdate(ManufactureVO manufacture) {
+		int result = 0;
+		ProductionMapper mapper = sqlSession.getMapper(ProductionMapper.class);
+		try {
+			result = mapper.produceUpdate(manufacture);
+		} catch (Exception e) {			
+			e.printStackTrace();
+			return result;
+		}
+		return result;		 
+	}
+	public int statusProduce(ManufactureVO manufacture) {
+		int result = 0;
+		ProductionMapper mapper = sqlSession.getMapper(ProductionMapper.class);
+		try {
+			result = mapper.statusProduce(manufacture);
+		} catch (Exception e) {			
+			e.printStackTrace();
+			return result;
+		}
+		return result;		 
+	}
+	
 }
