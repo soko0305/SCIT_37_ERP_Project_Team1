@@ -1,0 +1,461 @@
+
+<!doctype html>
+<html>
+  <head>
+    <title>Gmail API demo</title>
+    <meta charset="UTF-8">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+<link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
+<script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
+    <style>
+      iframe {
+        width: 100%;
+        border: 0;
+        min-height: 80%;
+        height: 600px;
+        display: flex;
+      }
+    </style>
+  </head>
+  
+  
+  <script>
+  $(function(){	
+	 $("#header").load("/header");
+	 $("#navbar").load("/navbar");
+	 $("#setting").load("/setting");
+		
+	  handleClientLoad();
+	})
+  
+  </script>
+    
+    <script type="text/javascript">
+    var clientId = '1023366377810-vuaksn9f9taimk6ueqqrf50bfjmdm6le.apps.googleusercontent.com';
+    var apiKey = 'AIzaSyAqzJfMuiR4ltnAVw6AeDchVNCDcLWeRMc';
+    var scopes =
+        'https://www.googleapis.com/auth/gmail.readonly '+
+        'https://www.googleapis.com/auth/gmail.send';
+      function handleClientLoad() {
+        gapi.client.setApiKey(apiKey);
+        window.setTimeout(checkAuth, 1);
+      }
+      function checkAuth() {
+        gapi.auth.authorize({
+          client_id: clientId,
+          scope: scopes,
+          immediate: true
+        }, handleAuthResult);
+      }
+      function handleAuthClick() {
+        gapi.auth.authorize({
+          client_id: clientId,
+          scope: scopes,
+          immediate: false
+        }, handleAuthResult);
+        return false;
+      }
+      function handleAuthResult(authResult) {
+        if(authResult && !authResult.error) {
+          loadGmailApi();
+          $('.table-inbox').removeClass("hidden");
+          $('#compose-button').removeClass("hidden");
+        } else {
+            handleAuthClick();
+        }
+      }
+      function loadGmailApi() {
+        gapi.client.load('gmail', 'v1', displayInbox);
+      }
+      function displayInbox() {
+        var request = gapi.client.gmail.users.messages.list({
+          'userId': 'me',
+          'labelIds': 'INBOX',
+          'maxResults': 10
+        });
+        request.execute(function(response) {
+          $.each(response.messages, function() {
+            var messageRequest = gapi.client.gmail.users.messages.get({
+              'userId': 'me',
+              'id': this.id
+            });
+            messageRequest.execute(appendMessageRow);
+          });
+        });
+      }
+      function appendMessageRow(message) {
+        $('.table-inbox tbody').append(
+        		
+          '<tr>\'<td class="text-center" style="width: 78px;"><div class="custom-checkbox custom-control"><input type="checkbox" id="eCheckbox12" class="custom-control-input"><label class="custom-control-label" for="eCheckbox12">&nbsp;</label></div></td><td>'+getHeader(message.payload.headers, 'From')+'</td>\<td>\<a href="#message-modal-' + message.id + '" data-toggle="modal" id="message-link-' + message.id+'">' +getHeader(message.payload.headers, 'Subject') +'</a>\</td>\<td>'+getHeader(message.payload.headers, 'Date')+'</td>\</tr>'
+        );
+        var reply_to = (getHeader(message.payload.headers, 'Reply-to') !== '' ?
+          getHeader(message.payload.headers, 'Reply-to') :
+          getHeader(message.payload.headers, 'From')).replace(/\"/g, '&quot;');
+        var reply_subject = 'Re: '+getHeader(message.payload.headers, 'Subject').replace(/\"/g, '&quot;');
+        $('body').append(
+          '<div class="modal fade" id="message-modal-' + message.id +'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">\<div class="modal-dialog modal-lg">\ <div class="modal-content">\<div class="modal-header">\<h4 class="modal-title" id="myModalLabel">' +getHeader(message.payload.headers, 'Subject') +'</h4>\<button type="button"\class="close"\data-dismiss="modal"\aria-label="Close">\<span aria-hidden="true">&times;</span></button>\ </div>\
+                <div class="modal-body">\
+                  <iframe id="message-iframe-'+message.id+'" srcdoc="<p>Loading...</p>">\
+                  </iframe>\
+                </div>\
+                <div class="modal-footer">\
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\
+                  <button type="button" class="btn btn-primary reply-button" data-dismiss="modal" data-toggle="modal" data-target="#reply-modal"\
+                  onclick="fillInReply(\
+                    \''+reply_to+'\', \
+                    \''+reply_subject+'\', \
+                    \''+getHeader(message.payload.headers, 'Message-ID')+'\'\
+                    );"\
+                  >Reply</button>\
+                </div>\
+              </div>\
+            </div>\
+          </div>'
+        );
+        $('#message-link-'+message.id).on('click', function(){
+          var ifrm = $('#message-iframe-'+message.id)[0].contentWindow.document;
+          $('body', ifrm).html(getBody(message.payload));
+        });
+      }
+      
+      
+      function sendEmail()
+      {
+        $('#send-button').addClass('disabled');
+        sendMessage(
+          {
+            'To': $('#compose-to').val(),
+            'Subject': $('#compose-subject').val()
+          },
+          $('#compose-message').val(),
+          composeTidy
+        );
+        return false;
+      }
+      function composeTidy()
+      {
+        $('#compose-modal').modal('hide'); 
+        $('#compose-to').val('');
+        $('#compose-subject').val('');
+        $('#compose-message').val('');
+        $('#send-button').removeClass('disabled');
+      }
+      function sendReply()
+      {
+        $('#reply-button').addClass('disabled');
+        sendMessage(
+          {
+            'To': $('#reply-to').val(),
+            'Subject': $('#reply-subject').val(),
+            'In-Reply-To': $('#reply-message-id').val()
+          },
+          $('#reply-message').val(),
+          replyTidy
+        );
+        return false;
+      }
+      function replyTidy()
+      {
+        $('#reply-modal').modal('hide');
+        $('#reply-message').val('');
+        $('#reply-button').removeClass('disabled');
+      }
+      function fillInReply(to, subject, message_id)
+      {
+        $('#reply-to').val(to);
+        $('#reply-subject').val(subject);
+        $('#reply-message-id').val(message_id);
+      }
+      function sendMessage(headers_obj, message, callback)
+      {
+        var email = '';
+        for(var header in headers_obj)
+          email += header += ": "+headers_obj[header]+"\r\n";
+        email += "\r\n" + message;
+        var sendRequest = gapi.client.gmail.users.messages.send({
+          'userId': 'me',
+          'resource': {
+            'raw': window.btoa(email).replace(/\+/g, '-').replace(/\//g, '_')
+          }
+        });
+        return sendRequest.execute(callback);
+      }
+      function getHeader(headers, index) {
+        var header = '';
+        $.each(headers, function(){
+          if(this.name.toLowerCase() === index.toLowerCase()){
+            header = this.value;
+          }
+        });
+        return header;
+      }
+      function getBody(message) {
+        var encodedBody = '';
+        if(typeof message.parts === 'undefined')
+        {
+          encodedBody = message.body.data;
+        }
+        else
+        {
+          encodedBody = getHTMLPart(message.parts);
+        }
+        encodedBody = encodedBody.replace(/-/g, '+').replace(/_/g, '/').replace(/\s/g, '');
+        return decodeURIComponent(escape(window.atob(encodedBody)));
+      }
+      function getHTMLPart(arr) {
+        for(var x = 0; x <= arr.length; x++)
+        {
+          if(typeof arr[x].parts === 'undefined')
+          {
+            if(arr[x].mimeType === 'text/html')
+            {
+              return arr[x].body.data;
+            }
+          }
+          else
+          {
+            return getHTMLPart(arr[x].parts);
+          }
+        }
+        return '';
+      }
+    </script>
+    <body>
+    <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
+    <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Header삽입@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+    <div id="header"></div>
+    <div id="setting"></div> 
+            <div class="app-main">
+            <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@왼쪽 메뉴@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+                <div id="navbar"></div>
+                <div class="app-main__outer">
+                <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+                
+                     <div class="app-main__inner p-0">
+        
+                    <div class="app-inner-layout">
+                        <div class="app-inner-layout__header bg-heavy-rain">
+                            <div class="app-page-title">
+                                <div class="page-title-wrapper">
+                                    <div class="page-title-heading">
+                                        <div class="page-title-icon">
+                                            <i class="pe-7s-power icon-gradient bg-mixed-hopes">
+                                            </i>
+                                        </div>
+                                        <div>Mailbox
+                                            <div class="page-title-subheading">Create stunning UIs for your pages with these layout components.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="page-title-actions">
+                                        <button type="button" data-toggle="tooltip" title="Example Tooltip" data-placement="bottom" class="btn-shadow mr-3 btn btn-dark">
+                                            <i class="fa fa-star"></i>
+                                        </button>
+                                        <div class="d-inline-block dropdown">
+                                            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn-shadow dropdown-toggle btn btn-info">
+                                                <span class="btn-icon-wrapper pr-2 opacity-7">
+                                                    <i class="fa fa-business-time fa-w-20"></i>
+                                                </span>
+                                                Buttons
+                                            </button>
+                                            <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
+                                                <ul class="nav flex-column">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link">
+                                                            <i class="nav-link-icon lnr-inbox"></i>
+                                                            <span>
+                                                                Inbox
+                                                            </span>
+                                                            <div class="ml-auto badge badge-pill badge-secondary">86</div>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link">
+                                                            <i class="nav-link-icon lnr-book"></i>
+                                                            <span>
+                                                                Book
+                                                            </span>
+                                                            <div class="ml-auto badge badge-pill badge-danger">5</div>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link">
+                                                            <i class="nav-link-icon lnr-picture"></i>
+                                                            <span>
+                                                                Picture
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a disabled class="nav-link disabled">
+                                                            <i class="nav-link-icon lnr-file-empty"></i>
+                                                            <span>
+                                                                File Disabled
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>    </div>
+                            </div>                </div>
+                            <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+                        <div class="app-inner-layout__wrapper">
+                            <div class="app-inner-layout__content card">
+                                <div>
+                                    <div class="app-inner-layout__top-pane">
+                                        <div class="pane-left">
+                                            <div class="mobile-app-menu-btn">
+                                                <button type="button" class="hamburger hamburger--elastic">
+                                                    <span class="hamburger-box">
+                                                        <span class="hamburger-inner"></span>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                            <h4 class="mb-0">Inbox</h4></div>
+                                       <!--  <div class="pane-right">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <i class="fa fa-search fa-w-16 "></i>
+                                                    </div>
+                                                </div>
+                                                <input placeholder="Search..." type="text" class="form-control"></div>
+                                        </div> -->
+                                    </div>
+                                    
+                                    <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+                                    <div class="bg-white">
+                                        <div class="table-responsive">
+                                            <table class="text-nowrap table-lg mb-0 table  table-inbox table-hover">
+                                              <thead>
+          <tr>
+            <th>From</th>
+            <th>Subject</th>
+            <th>Date/Time</th>
+          </tr>
+        </thead>
+
+                                                <tbody>
+                                            
+                                               
+                                               
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="app-inner-layout__bottom-pane d-block text-center">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="app-inner-layout__sidebar card">
+                                <ul class="nav flex-column">
+                                    <li class="pt-4 pl-3 pr-3 pb-3 nav-item">
+                                        <a href="#compose-modal" data-toggle="modal" id="compose-button" class="btn-pill btn-shadow btn btn-primary btn-block pull-right hidden">Write New Email</a>
+                                
+                                    </li>
+                                    <li class="nav-item-header nav-item">My Account</li>
+                                    <li class="nav-item"><a href="javascript:void(0);" class="nav-link"><i class="nav-link-icon pe-7s-chat"> </i><span>Inbox</span>
+                                        <div class="ml-auto badge badge-pill badge-info"></div>
+                                    </a></li>
+                                    <li class="nav-item"><a href="javascript:void(0);" class="nav-link"><i class="nav-link-icon pe-7s-wallet"> </i><span>Sent Items</span></a></li>
+                                    <li class="nav-item"><a href="javascript:void(0);" class="nav-link"><i class="nav-link-icon pe-7s-config"> </i><span>All Messages</span>
+                                        <div class="ml-auto badge badge-success">New</div>
+                                    </a></li>
+                                    <li class="nav-item-divider nav-item"></li>
+                                    <li class="nav-item"><a href="javascript:void(0);" class="nav-link"><i class="nav-link-icon pe-7s-box2"> </i><span>Trash</span></a></li>
+                                    <li class="nav-item"><a href="javascript:void(0);" class="nav-link"><i class="nav-link-icon pe-7s-coffee"> </i><span>Others</span>
+                                        <div class="ml-auto badge badge-warning">512</div>
+                                    </a></li>
+                              
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+       <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+             
+                <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@footer 삽입@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->   
+       
+    </div>
+</div>
+</div>
+<!-- drawer 삽입 -->
+<div class="app-drawer-overlay d-none animated fadeIn"></div>
+</body>
+</html>
+
+  
+<div class="modal fade" id="compose-modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+           <h4 class="modal-title">Send Email</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form onsubmit="return sendEmail();">
+            <div class="modal-body">
+              <div class="form-group">
+                <input type="email" class="form-control" id="compose-to" placeholder="To" required />
+              </div>
+
+              <div class="form-group">
+                <input type="text" class="form-control" id="compose-subject" placeholder="Subject" required />
+              </div>
+
+              <div class="form-group">
+                <textarea class="form-control" id="compose-message" placeholder="Message" rows="10" required></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" id="send-button" class="btn btn-primary">Send</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="modal fade" id="reply-modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        
+          <div class="modal-header">
+           <h4 class="modal-title">Reply</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+           
+          </div>
+          <form onsubmit="return sendReply();">
+            <input type="hidden" id="reply-message-id" />
+
+            <div class="modal-body">
+              <div class="form-group">
+                <input type="text" class="form-control" id="reply-to" disabled />
+              </div>
+
+              <div class="form-group">
+                <input type="text" class="form-control disabled" id="reply-subject" disabled />
+              </div>
+
+              <div class="form-group">
+                <textarea class="form-control" id="reply-message" placeholder="Message" rows="10" required></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" id="reply-button" class="btn btn-primary">Send</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+                

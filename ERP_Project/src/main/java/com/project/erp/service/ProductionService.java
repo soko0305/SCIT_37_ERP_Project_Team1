@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.erp.dao.ProductionDAO;
-import com.project.erp.vo.BoardVO;
 import com.project.erp.vo.ManufactureVO;
 import com.project.erp.vo.ProductMaterialVO;
 import com.project.erp.vo.ProductVO;

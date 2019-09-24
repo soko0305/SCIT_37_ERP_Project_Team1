@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Language" content="en">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>materials_request</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+<meta name="description"
+	content="Choose between regular React Bootstrap tables or advanced dynamic ones.">
+
+<!-- Disable tap highlight on IE -->
+<meta name="msapplication-tap-highlight" content="no">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
+<link
+	href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css"
+	rel="stylesheet">
+<script>
+/*<![CDATA[*/
+	$(function() {
+		var rmorder_code= /*[[${rmorder_code}]]*/;
+		$.ajax({
+			url:"requestOneSelect",
+			data:{rmorder_code : rmorder_code},
+			type:"POST",
+			success:function(result){
+				
+			}
+		});
+		$("#rawm_code").change(function() {
+			 $.ajax({
+				url : "autoSelect",
+				data : {rawm_code : $("#rawm_code").val()},
+				type : 'get',
+				success : function(result) {
+					$("#rawm_name").empty();
+					$("#rawm_name").val(result.rawm_name);
+				}
+			}); 
+		});
+		
+		$(".btn-primary").click(function() {
+			var code = $("#rawm_code").val();
+			var amount = $("#rmorder_amount").val();
+			var warehouse = $("#warehouse_code").val();
+
+			if (!code) {
+				alert("원자재명을 기입해 주세요");
+				return false;
+			}
+			if (!amount) {
+				alert("원자재수량을 기입해 주세요");
+				return false;
+			}
+			if (!warehouse) {
+				alert("창고를 기입해 주세요");
+				return false;
+			}
+			$("#rawMaterialRequestForm").submit();
+			/* opener.location.href='goAllView'
+			window.open("about:blank","_self").close(); */
+		});
+	});
+/*]]>*/
+</script>
+</head>
+<body>
+
+			<div class="col-md-3">
+				<form action="rawMaterialRequest" method="post" id="rawMaterialRequestForm">
+					<input type="hidden" name="rmorder_code">
+					<input type="hidden" name="rmorder_reqdate">
+					<input type="hidden" name="rmorder_requserid" value="user">
+					<input type="hidden" name="rmorder_status" value="미확인">
+					<input type="hidden" name="rawm_name" id="rawm_name">
+				<div class="form-group">
+					<label for="mfseq">생산코드</label> <input id="mfseq" name="mfseq"
+						type="text" readonly="readonly" value="code01" class="form-control">
+				</div>
+				<div class="form-group">
+					<label for="rawm_code">원자재명</label> <input id="rawm_code"
+						name="rawm_code" list="test" class="form-control" autocomplete="off">
+					<datalist class="select" id="test">
+						<option class="rList" th:each="list : ${rList}"
+							th:text="${list.rawm_name}" th:value="${list.rawm_code}">
+						</option>
+					</datalist>
+			</div>
+			<div class="form-group">
+				<label for="rmorder_amount">원자재수량</label> <input id="rmorder_amount"
+					name="rmorder_amount" type="number" class="form-control" autocomplete="off">
+			</div>
+			<div class="form-group">
+				<label for="warehouse_code">창고</label> <input id="warehouse_code"
+					name="warehouse_code" type="text" class="form-control" autocomplete="off">
+			</div>
+			<div class="form-group">
+				<button type="button" class="mb-2 mr-2 btn-square btn btn-primary">요청</button>
+			</div>
+		</form>
+	</div>
+
+</body>
+</html>

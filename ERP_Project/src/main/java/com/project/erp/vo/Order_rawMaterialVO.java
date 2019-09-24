@@ -15,5 +15,6 @@ public class Order_rawMaterialVO {
 	private String warehouse_code;		//창고코드
 	private String rmorder_requserid;	//원자재 요청 user
 	private String rmorder_reqdate;		//원자재주문요청일자
-	/*private String mfseq;				//생산코드
-*/}
+	private String mfseq;				//생산코드
+	private String rmorder_arrivedate;	//원자재도착일자
+}

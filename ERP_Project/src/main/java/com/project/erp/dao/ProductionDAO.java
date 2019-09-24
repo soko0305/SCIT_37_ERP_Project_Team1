@@ -6,11 +6,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.project.erp.vo.BoardVO;
 import com.project.erp.vo.ManufactureVO;
 import com.project.erp.vo.ProductMaterialVO;
 import com.project.erp.vo.ProductVO;
-import com.project.erp.vo.RawMaterialVO;
 
 @Repository
 public class ProductionDAO {
@@ -92,6 +90,7 @@ public class ProductionDAO {
 		}
 		return result;
 	}
+
 	public int deleteProduce(ManufactureVO manufacture) {
 		int result = 0;
 		ProductionMapper mapper = sqlSession.getMapper(ProductionMapper.class);
@@ -114,6 +113,7 @@ public class ProductionDAO {
 		}
 		return result;		
 	}
+
 	public ProductVO selelctProductByCode(String pd_code) {
 		ProductVO p = null;
 
@@ -160,6 +160,7 @@ public class ProductionDAO {
 			return 0;
 		}
 		return result;
+	
 	}
 	public int produceInsert(ManufactureVO manufacture) {
 		int result = 0;

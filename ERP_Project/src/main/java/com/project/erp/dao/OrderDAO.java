@@ -39,19 +39,6 @@ public class OrderDAO {
 		}
 		return result;
 	}
-
-	public Order_rawMaterialVO orderOneSelect(String rmorder_code) {
-		Order_rawMaterialVO result = null;
-
-		OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);
-		try {
-			result = mapper.orderOneSelect(rmorder_code);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return result;
-		}
-		return result;
-	}
 	
 	public int orderUpdate(Order_rawMaterialVO order) {
 		int result = 0;
@@ -72,6 +59,32 @@ public class OrderDAO {
 		OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);
 		try {
 			result = mapper.orderDashSelect();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return result;
+		}
+		return result;
+	}
+
+	public int rawMaterialRequest(Order_rawMaterialVO rawmaterial) {
+		int result = 0;
+
+		OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);
+		try {
+			result = mapper.rawMaterialRequest(rawmaterial);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return result;
+		}
+		return result;
+	}
+
+	public Order_rawMaterialVO requestOneSelect(String rmorder_code) {
+		Order_rawMaterialVO result = null;
+
+		OrderMapper mapper = sqlSession.getMapper(OrderMapper.class);
+		try {
+			result = mapper.requestOneSelect(rmorder_code);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return result;

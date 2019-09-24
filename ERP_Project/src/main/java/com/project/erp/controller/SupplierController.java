@@ -39,6 +39,7 @@ public class SupplierController {
 	}
 	@RequestMapping(value="/supplierUpdate", method=RequestMethod.POST)
 	public String supplierUpdate(SupplierVO supplier) {
+		System.out.println("update : " + supplier);
 		int result = sService.supplierUpdate(supplier);
 		
 		if(result == 0) {
