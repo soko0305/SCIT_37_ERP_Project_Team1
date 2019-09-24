@@ -22,8 +22,22 @@
 <link
 	href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css"
 	rel="stylesheet">
+<!-- firebase -->
+	<script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-auth.js"></script>
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#config-web-app -->
+  <!-- firebaseUI -->
+  <script src="https://cdn.firebase.com/libs/firebaseui/4.0.0/firebaseui.js"></script>
+  <!-- firebase -->
+  <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
+  <!-- firebase Config and initialize -->	
+  <script src="firebase/firebase-config.js"></script>
 <script>
+var database = firebase.database();
 	$(function() {
+		
+		selelctInventoryINWarehouse();
 		
 		$("#rawm_code").change(function() {
 			 $.ajax({
@@ -43,8 +57,24 @@
 			opener.location.href='goAllView'
 			window.open("about:blank","_self").close();
 		});
-		
+
 	});
+	
+	function selelctInventoryINWarehouse(){
+		database.ref('warehouse/').on('child_added', function(data){
+			var warehouse_code = data.key;
+			var warehouse_name = data.val().warehouse_name;
+			setWarehouseDropbox(warehouse_code, warehouse_name);
+		});
+	}
+	//창고 드롭박스 세팅 함수
+	function setWarehouseDropbox(warehouse_code, warehouse_name){
+		var str='';
+		str+='<option value="'+warehouse_code+'">';
+		str+=warehouse_name;
+		str+='</option>';
+		$("#test1").append(str);
+	}
 </script>
 </head>
 
@@ -68,7 +98,8 @@
 		<input id="rawm_name" name="rawm_name" type="hidden">
 		
 		<div class="form-group">
-			<label for="rawm_code">원자재명</label> <input id="rawm_code"
+			<label for="rawm_code">원자재명</label>
+			<input id="rawm_code"
 				name="rawm_code" list="test" class="form-control" autocomplete="off">
 			<datalist class="select" id="test">
 				<option class="rList" th:each="list : ${rList}"
@@ -86,8 +117,11 @@
 				class="form-control">
 		</div>
 		<div class="form-group">
-			<label for="warehouse_code">창고코드</label> <input id="warehouse_code"
-				name="warehouse_code" type="text" class="form-control">
+			<label for="warehouse_code" class="select1">창고코드</label>
+			<!-- <input name="warehouse_code" list="test1" id="warehouse_code" class="form-control" autocomplete="off">
+				<datalist class="select" id="test1">						
+				</datalist> -->
+				<select name="warehouse_code" class="form-control" id="test1"></select> 
 		</div>
 		<div class="form-group">
 			<button class="mb-2 mr-2 btn-square btn btn-primary">요청하기</button>

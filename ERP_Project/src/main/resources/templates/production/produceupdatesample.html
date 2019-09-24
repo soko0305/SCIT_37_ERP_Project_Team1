@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="utf-8" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Language" content="en">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>supplier</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+<meta name="description"
+	content="This is an example dashboard created using build-in elements and components.">
+
+<!-- Disable tap highlight on IE -->
+<meta name="msapplication-tap-highlight" content="no">
+
+<link
+	href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css"
+	rel="stylesheet">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- 	여기부터 필요
+ --><script
+	src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+	$(function(){
+		var mfseq = /*[[${mfseq}]]*/;
+		$.ajax({
+			url:"produceOneSelect",
+			data:{mfseq : mfseq},
+			type:"POST",
+			success:function(result){
+				$("#pd_code").val(result.pd_code);
+				$("#rawm_name").val(result.rawm_name);
+				$("#rawm_sort").val(result.rawm_sort);
+				$("#rawm_price").val(result.rawm_price);
+				$("#supplierseq").val(result.supplierseq);
+				$("#rawm_autoorder").val(result.rawm_autoorder);
+
+		$(".btn-primary").click(function(){
+			var code = $("#rawm_code").val();
+			var name = $("#rawm_name").val();
+			var sort = $("#rawm_sort").val();
+			var price = $("#rawm_price").val();
+			var seq = $("#supplierseq").val();
+			var order = $("#rawm_autoorder").val();
+			var minimum = $("#rawm_minimum").val();
+			var set = $("#rawm_set").val();
+
+			var code1 = $("#rawm_code1").val(code);
+			var name1 = $("#rawm_name1").val(name);
+			var sort1 = $("#rawm_sort1").val(sort);
+			var price1 = $("#rawm_price1").val(price);
+			var seq1 = $("#supplierseq1").val(seq);
+			var order1 = $("#rawm_autoorder1").val(order);
+			var minimum1 = $("#rawm_minimum1").val(minimum);
+			var set1 = $("#rawm_set1").val(set);
+			
+
+			$("#rawMaterialUpdateForm").submit();
+			opener.document.location.href="/goMaterialsList";
+            self.close();
+		});
+	});
+	/*]]>*/
+</script>
+</head>
+
+<body>
+
+      <div class="form-group">
+      	<div class="col-md-6">
+         <label for="pd_code">생산할제품명</label> <input id="pd_code"
+            name="pd_code" list="test" class="form-control" autocomplete="off">
+        		 <datalist class="select" id="test">
+          		  <option class="pList" th:each="list : ${pList}"
+               th:text="${list.pd_name}" th:value="${list.pd_code}">
+            </option>
+         </datalist>
+      </div>
+      </div>
+   		<div class="form-row">
+			<div class="col-md-6">
+				<div class="position-relative form-group">
+					<label for="manuf_startdate" class="">생산시작일	</label>
+				<input type="date" name="manuf_startdate" class="manuf_startdate" >
+			</div>
+		</div>
+	</div>
+   		<div class="form-row">
+			<div class="col-md-6">
+				<div class="position-relative form-group">
+					<label for="manuf_enddate" class="">생산종료일	</label>
+				<input type="date" name="manuf_enddate" class="manuf_enddate" >
+			</div>
+		</div>
+	</div>										
+										
+		<div class="form-row">
+			<div class="col-md-6">
+				<div class="position-relative form-group">
+					<label for="manuf_manuf_enddateamount" class="">생산수량</label>
+					<input name="manuf_amount" id="manuf_amount" placeholder="5ea"
+				type="number" class="form-control">
+			</div>
+		</div>
+	</div>
+		<div class="form-row">
+			<div class="col-md-6">
+				<div class="position-relative form-group">
+					<label for="sales_ordernum" class="">생산요청번호</label>
+					<input name="sales_ordernum" id="sales_ordernum" type="text" class="form-control">
+				</div>
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="col-md-6">
+				<div class="position-relative form-group">
+					<label for="manuf_requserid" class="">생산요청자</label>
+					<input name="manuf_requserid" id="manuf_requserid" type="text" class="form-control">
+				</div>
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="col-md-6">
+				<div class="position-relative form-group">
+					<label for="manuf_reqdate" class="">생산주문일</label>
+					<input type="date" name="manuf_reqdate"  class="manuf_reqdate" >
+				</div>
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="col-md-6">
+				<div class="position-relative form-group">
+					<label for="salesdetailseq" class="">생산요청시퀀스</label>
+					<input name="salesdetailseq" id="salesdetailseq" type="text" class="form-control">
+				</div>
+			</div>
+		</div>	
+
+      <div class="form-group">
+      	<div class="col-md-6">
+         <label for="manuf_status">진행상황</label> <input id="manuf_status"
+            name="manuf_status" list="test" class="form-control" autocomplete="off">
+        		 <datalist class="select" id="test">
+          		  <option class="pList" th:each="list : ${pList}"
+               th:text="${list.manuf_status}" th:value="${list.manuf_status}">
+            </option>
+         </datalist>
+      </div>
+      </div>
+<!--     창고코드 입력
+		  <div class="form-group">
+          <label for="warehouse_code" class="select1">창고코드</label>
+             <select name="warehouse_code" class="form-control" id="test1"></select> 
+      </div> -->
+
+
+
+
+	<div class="col-md-3">
+		<div class="form-group">
+			<label for="rawm_code">원자재코드</label> <input id="rawm_code"
+				name="rawm_code" type="text" 
+				readonly="readonly" class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="rawm_name">원재료명</label> <input id="rawm_name"
+				name="rawm_name" type="text"
+				class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="rawm_sort">원재료종류</label> <input id="rawm_sort"
+				name="rawm_sort" type="text"
+				class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="rawm_price">단가</label> <input id="rawm_price" type="text"
+				name="rawm_price"
+				class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="supplierseq" class="select">공급처명</label> <input
+				name="supplierseq" id="supplierseq" list="test" class="form-control" autocomplete="off">
+			<datalist class="select" id="test" >
+				<option class="sList" th:each="list : ${supplierList}" 
+					th:text="${list.supplier_name}" th:value="${list.supplierseq}">
+				</option>
+			</datalist>
+
+
+		</div>
+
+		</div>
+		<!-- if check -->
+		<div class="form-row">
+			<div class="col-md-6">
+				<div class="position-relative form-group1">
+
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="position-relative form-group2">
+
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<button class="mb-2 mr-2 btn-square btn btn-primary">수정</button>
+		</div>
+
+	</div>
+
+	<form action="rawMaterialUpdate" method="post"
+		id="rawMaterialUpdateForm">
+		<input type="hidden" id="rawm_code1" name="rawm_code"> <input
+			type="hidden" id="rawm_name1" name="rawm_name"> <input
+			type="hidden" id="rawm_sort1" name="rawm_sort"> <input
+			type="hidden" id="rawm_price1" name="rawm_price"> <input
+			type="hidden" id="supplierseq1" name="supplierseq"> <input
+			type="hidden" id="rawm_autoorder1" name="rawm_autoorder"> <input
+			type="hidden" id="rawm_minimum1" name="rawm_minimum"> <input
+			type="hidden" id="rawm_set1" name="rawm_set">
+	</form>
+</body>
+</html>

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,24 +31,38 @@ public class ProductionController {
 	
 	//생산조회 리스트 조회
 	@RequestMapping(value = "/goproducecheck", method = RequestMethod.GET)
-	public String goproducecheck(ManufactureVO manufacture, Model model,HttpSession session) {
-		ArrayList<ManufactureVO> plist = pService.produceSelect(manufacture);
+	public String goproducecheck( Model model,HttpSession session) {
+		ArrayList<ManufactureVO> plist = pService.produceSelect();
 		model.addAttribute("producelist", plist);
+		
 		return "production/producecheck";
 	}
+	@RequestMapping(value = "/goproduceupdate", method = RequestMethod.GET)
+	public String goproduceupdate(String mfseq, Model model,HttpSession session) {
+		model.addAttribute("mfseq", mfseq);
+		return "production/produceupdate";
+	}
+	
 	//생산품 조회 리스트 조회
  	@RequestMapping(value = "/goproductioncheck", method = RequestMethod.GET)
-	public String goproductioncheck(ProductVO product, Model model,HttpSession session) {
-		ArrayList<ProductVO> plist = pService.productionSelect(product);
+	public String goproductioncheck(Model model,HttpSession session) {
+		ArrayList<ProductVO> plist = pService.productionSelect();
 		model.addAttribute("productionlist", plist);
 		return "production/productioncheck";
 	}
-	//생산조회
-	@RequestMapping(value="/producecheck", method = RequestMethod.GET)
-	public String producecheck(){
-		return "production/producecheck";
-	} 
-	
+ /*	@RequestMapping(value = "/goproductionupdate", method = RequestMethod.GET)
+	public String goproductionupdate(ProductVO product, Model model,HttpSession session) {
+		ArrayList<ProductVO> plist = pService.productionSelect(product);
+		model.addAttribute("productionlist", plist);
+		return "production/productionupdate";
+	}*/
+ 	//생산 1개 가져오기
+	@RequestMapping(value = "/produceOneSelect", method = RequestMethod.POST)
+	public @ResponseBody ManufactureVO produceOneSelect(String mfseq, Model model) {
+		ManufactureVO result = pService.produceOneSelect(mfseq);
+
+		return result;
+	}
 	//메인화면 이동
 	@RequestMapping(value="/main", method = RequestMethod.GET)
 	public String home(){
@@ -55,8 +70,11 @@ public class ProductionController {
 		}
 	
 	//생산 삽입
-	@RequestMapping(value="/produceinsert", method = RequestMethod.GET)
-	public String produceinsert(){
+	@RequestMapping(value="/goproduceinsert", method = RequestMethod.GET)
+	public String produceinsert(Model model){
+		ArrayList<ProductVO> result= pService.productionSelect();
+		model.addAttribute("pList",result);
+
 		return "production/produceinsert";
 	} 
 	
@@ -70,11 +88,7 @@ public class ProductionController {
 	} 
  
  
-	//생산품 조회
-	@RequestMapping(value="/productioncheck", method = RequestMethod.GET)
-	public String productioncheck(){
-		return "production/productioncheck";
-	} 
+
 	@RequestMapping(value="/sample", method = RequestMethod.GET)
 	public String sample(){
 		return "production/sample";
@@ -95,19 +109,38 @@ public class ProductionController {
 	public String gomRegistration() {
 		return "production/mRegistration";
 	}
+	// 생산 삭제
+	@RequestMapping(value = "/deleteProduce", method = RequestMethod.POST)
+	public String deleteProduce(ManufactureVO manufacture) {
+		int result = pService.deleteProduce(manufacture);
+		if (result == 0) {
+			return "redirect:/goproducecheck";
+		} else {
+			return "redirect:/goproducecheck";
+		}
+	}
+	// 생산 완료 변환
+	@RequestMapping(value = "/statusProduce", method = RequestMethod.POST)
+	public String statusProduce(ManufactureVO manufacture) {
+		int result = pService.statusProduce(manufacture);
+		if (result == 0) {
+			return "redirect:/goproducecheck";
+		} else {
+			return "redirect:/goproducecheck";
+		}
+	}	
 	// 생산품 삭제
-	@RequestMapping(value = "/deleteProduct", method = RequestMethod.POST)
-	public String deleteProduct(ProductVO product) {
+	@RequestMapping(value = "/deleteProduction", method = RequestMethod.POST)
+	public String deleteProduction(ProductVO product) {
+		int result = pService.deleteProduction(product);
 		
-		int result = pService.deleteProduct(product);
-
 		if (result == 0) {
 			return "redirect:/goproductioncheck";
+		
 		} else {
 			return "redirect:/goproductioncheck";
 		}
-	}
-
+ 	}
 	
 	
 	//생산품 등록
@@ -120,13 +153,35 @@ public class ProductionController {
 			}
 			return p.getPd_code();
 	}
-	
-	@RequestMapping(value = "/insertProudctMaterial", method = RequestMethod.POST)
-	public @ResponseBody void insertProudctMaterial(ProductMaterialVO productMaterial) {
-			int result =pService.insertProudctMaterial(productMaterial);
 
+	
+	/*@RequestMapping(value = "/insertProudctMaterial", method = RequestMethod.POST)
+	@RequestMapping(value = "/produceInsert", method = RequestMethod.POST)
+	public String produceInsert(ManufactureVO manufacture) {
+		int result = pService.produceInsert(manufacture);
+
+		if (result == 0) {
+			return "redirect:/goproducecheck";
+		} else {
+			return "redirect:/goproducecheck";
+		}
+	}*/
+
+	//pd_code로 원자재 다 들고오기
+	@RequestMapping(value = "/amount", method = RequestMethod.GET)
+	public String amount(String pd_code, Model model) {
+		ArrayList<ProductMaterialVO> result = pService.selectAllProductMaterial(pd_code);
+		model.addAttribute("pmList", result);
+		return "production/amount";
 	}
 	
+	//pd_code로 원자재 체크
+		@RequestMapping(value = "/amountCheck", method = RequestMethod.GET)
+		public @ResponseBody ArrayList<ProductMaterialVO> amount(String pd_code) {
+			ArrayList<ProductMaterialVO> result = pService.selectAllProductMaterial(pd_code);
+			return result;
+		}
+
 	//생산품 업데이트
 	@RequestMapping(value = "/updateProuct", method = RequestMethod.POST)
 	public @ResponseBody int updateProuct(ProductVO product) {
@@ -138,7 +193,20 @@ public class ProductionController {
 			return 0;
 			}
 	}
-	
+	 
+	// 생산 수정
+	@ExceptionHandler
+	@RequestMapping(value = "/produceUpdate", method = RequestMethod.POST)
+	public String produceUpdate(ManufactureVO manufacture) {
+
+		int result = pService.produceUpdate(manufacture);
+
+		if (result == 0) {
+			return "redirect:/goproducecheck";
+		} else {
+			return "redirect:/goproducecheck";
+		}
+	}
 	//생산품 업데이트로 가기
 	@RequestMapping(value = "/goProductionUpdate", method = RequestMethod.GET)
 	public String goProductionUpdate(String pd_code, Model model) {

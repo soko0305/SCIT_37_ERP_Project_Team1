@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Language" content="en">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>amount</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+<meta name="description"
+	content="Choose between regular React Bootstrap tables or advanced dynamic ones.">
+
+<!-- Disable tap highlight on IE -->
+<meta name="msapplication-tap-highlight" content="no">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
+<link
+	href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css"
+	rel="stylesheet">
+<!-- firebase -->
+	<script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-auth.js"></script>
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#config-web-app -->
+  <!-- firebaseUI -->
+  <script src="https://cdn.firebase.com/libs/firebaseui/4.0.0/firebaseui.js"></script>
+  <!-- firebase -->
+  <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
+  <!-- firebase Config and initialize -->	
+  <script src="firebase/firebase-config.js"></script>
+  
+<script th:inline="javascript">
+
+$(function(){
+	var database = firebase.database();
+	
+	$(".btn-primary").click(function(){
+	    
+	    var pd_code = $("#pd_code").val();
+	    var manuf_amount = $("#manuf_amount").val();
+	    $.ajax({
+	    	url:"amountCheck",
+	    	type:"GET",
+	    	data:{pd_code:pd_code},
+	    	success:function(result){
+	    		for(var i in result){
+	    			if(pd_code==result[i].pd_code){
+	    				/* r_code = result[i].rawm_code;
+	    				p_amount = result[i].product_material_amount; */
+	    				database.ref('warehouse/').on('child_added', function(data){
+	    					var warehouse_code = data.key;
+	    					database.ref('warehouse/'+warehouse_code).child("inventory").on('child_added', function(snapshot){
+	    						if(snapshot.key==result[i].rawm_code){
+	    							totalAmount = (result[i].product_material_amount * manuf_amount);
+	    							database.ref('warehouse/'+warehouse_code).child("inventory").child(result[i].rawm_code).once('value').then(function(snapshot){
+	    								var amount = snapshot.val().systemamount;
+		    							if(totalAmount > amount){
+		    								get = (totalAmount - amount);
+		    								
+		    								alert(result[i].rawm_name+"가"+get+"개 부족합니다");
+		    								 if (confirm("원자재 발주로 넘어가시겠습니까?") == true){    //확인
+
+		    									 	var url = "goOrderInsert";
+		    									    var name = "popup test";
+		    									    var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+		    									    window.open(url, name, option);
+		    								 }else{   //취소
+
+		    								     return false;
+
+		    								 }
+		    							}
+	    							});
+	    						}
+	    					});
+	    				});
+	    			}
+	    		}
+	    	}
+	    });
+	});
+	
+	/*
+	var database = firebase.database();
+	
+    var manuf_amount = $("#manuf_amount").val();
+    
+	selelctInventoryINWarehouse();
+	
+	function selelctInventoryINWarehouse(){
+		database.ref('warehouse/').on('child_added', function(data){
+			var warehouse_code = data.key;
+			var warehouse_name = data.val().warehouse_name;
+			database.ref('warehouse/'+warehouse_code).child("inventory").on('child_added', function(snapshot){
+				for(var i in list){
+					if(snapshot.key==list[i].rawm_code){
+						var rawm_code = snapshot.key;	
+						getMaterialAmount(rawm_code, warehouse_name, warehouse_code);
+					}
+				}	
+	    	});
+		});
+		//파이어베이스로 실시간 원자재 재고 가져오는 함수 
+		function getMaterialAmount(rawm_code, warehouse_name, warehouse_code){
+			database.ref('warehouse/'+warehouse_code).child("inventory").child(rawm_code).once('value').then(function(snapshot){
+				var name = snapshot.key;
+				var amount = snapshot.val().systemamount;
+				
+			});
+		}
+	}*/
+});
+
+</script>
+</head>
+<body>
+
+		<div class="col-md-3">
+			<form>
+			<div class="form-group">
+				<label for="pd_code">생산품코드</label> <input id="pd_code"
+					name="pd_code" type="text" class="form-control" value="1" readonly="readonly" autocomplete="off">
+			</div>
+			
+				<!-- <div class="form-group">
+					<label for="rawm_code">원자재명</label> <input id="rawm_code"
+						name="rawm_code" list="test" class="form-control" autocomplete="off">
+					<datalist class="select" id="test">
+						<option class="rList" th:each="list : ${rList}"
+							th:text="${list.rawm_name}" th:value="${list.rawm_code}">
+						</option>
+					</datalist>
+				</div> -->
+			
+			<div class="form-group">
+				<label for="manuf_amount">생산품수량</label> <input id="manuf_amount"
+					name="manuf_amount" type="number" class="form-control" autocomplete="off">
+			</div>
+			
+			<div class="form-group">
+				<label for="warehouse_code">창고</label> <input id="warehouse_code"
+					name="warehouse_code" type="text" class="form-control" autocomplete="off">
+			</div>
+			
+			<div class="form-group">
+				<button type="button" class="mb-2 mr-2 btn-square btn btn-primary">요청</button>
+			</div>
+			</form>
+		</div>
+
+</body>
+</html>

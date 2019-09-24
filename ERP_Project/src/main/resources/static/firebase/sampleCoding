@@ -12,7 +12,7 @@
 		*/
 		
 		/*
-		파이어베이스 재고 추가 방법 
+		파이어베이스 재고 업데이트 방법 
 		               파이어베이스로 mm5 코드 가진 제품 접근          이를 읽어                                      snapshot에 넣기(systemamount": 재고수량) 으로 이루어져 있음
 		database.ref('warehouse/~').child("inventory").child("m~").once('child_added').then(function(snapshot){
 																			       snapshot의 값(재고수량) 불러오기		
