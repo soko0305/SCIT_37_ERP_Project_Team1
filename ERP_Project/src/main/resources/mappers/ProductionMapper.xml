@@ -32,14 +32,11 @@
 		mfseq,
 		pd_code,
 		manuf_startdate,
-		manuf_enddate,
 		manuf_status,
 		warehouse_code,
 		manuf_amount,
-		sales_ordernum,
 		manuf_requserid,
 		manuf_reqdate,
-		salesdetailseq,
 		mf_delete
 
 	)
@@ -48,14 +45,11 @@
 		'm' || TO_CHAR(mfseq.nextval),
 		#{pd_code},	
 		to_char(to_date(#{manuf_startdate},'MM/DD/YYYY'),'YYYY-MM-DD'),	
-		sysdate,
 		'미완',	
 		'0',
 		#{manuf_amount},
-		'0',
-		'0',	
-		sysdate,		
-		'0',	
+		#{manuf_requserid},	
+		sysdate,			
 		'N'	
 
 	)
@@ -84,7 +78,7 @@
 		 	m.mfseq
  			,m.pd_code 
  			,p.pd_name
- 			,manuf_startdate 
+ 			,to_char(manuf_startdate, 'yyyy-mm-dd') as manuf_startdate 
  			,manuf_enddate
 			,m.manuf_status 
 			,m.warehouse_code 
@@ -220,16 +214,12 @@
 	update
 			manufacture
 	set
-		pd_code = #{pd_code}
-		manuf_startdate = #{manuf_startdate}
-		manuf_enddate= #{manuf_enddate}
-		manuf_status= #{manuf_status}
-		<!-- warehouse_code= #{warehouse_code} -->
-		manuf_amount= #{manuf_amount}
-		sales_ordernum= #{sales_ordernum}
+		pd_code = #{pd_code},
+		manuf_startdate = to_char(to_date(#{manuf_startdate},'MM/DD/YYYY'),'YYYY-MM-DD'),	
+		warehouse_code= #{warehouse_code}, 
+		manuf_amount= #{manuf_amount},
 		manuf_requserid= #{manuf_requserid}
-		manuf_reqdate= #{manuf_reqdate}
-		salesdetailseq= #{salesdetailseq}
+		<!-- salesdetailseq= #{salesdetailseq} -->
 		where
 			mfseq = #{mfseq}
 	</update>

@@ -39,13 +39,12 @@
  			str+='<td>'+producelist[i].manuf_reqdate+'</td>';
  			str+='<td>'+producelist[i].manuf_status+'</td>';
  			
- 			var mfseq = producelist[i].mfseq;
  			var startdate = producelist[i].manuf_startdate;
  			var startdateOfSplit = startdate.split('-');
  			var date = new Date(startdateOfSplit[0].toString(), startdateOfSplit[1]-1,startdateOfSplit[2]);
  			var status =producelist[i].manuf_status;
 			str+='<td>';
-			if(status=='미완'){
+			if(status=='미완'& today.getTime()<date.getTime()){
 				str+='<button class="mb-2 mr-2 btn btn-primary" data-type="status" value="'+producelist[i].mfseq+'">완료</button>';
 			}
  	 		if(today.getTime()<date.getTime()){
@@ -71,28 +70,28 @@
 			    window.open(url, name, option);
 			    
 			}else if(type=='delete'){
-				$("#code1").val(code);
+				$("#code").val(code);
+				alert(code);
 				$("#deleteProduce").submit();
 			}else if(type=='status'){
-				$("#code1").val(code);
+				$("#code").val(code);
 				$("#statusProduce").submit();				
-			
 			}else{
 				location.href="goproduceinsert"
 			}
 		});
-	
 	});
 	/*]]>*/
 </script>
 </head>
 <body>
 <form action="statusProduce" method="post" id="statusProduce">
-	<input type="hidden" name="mfseq" id="code1">
+	<input type="hidden" name="mfseq" id="code">
 </form>
- <form action="deleteProduce" method="post" id="deleteProduce">
-	<input type="hidden" name="mfseq" id="code1">
+<form action="deleteProduce" method="post" id="deleteProduce">
+	<input type="hidden" name="mfseq" id="code">
 </form>
+
 <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
     <div class="app-header header-shadow">
         <div class="app-header__logo">

@@ -38,7 +38,7 @@ public class ProductionController {
 		return "production/producecheck";
 	}
 	@RequestMapping(value = "/goproduceupdate", method = RequestMethod.GET)
-	public String goproduceupdate(String mfseq, Model model,HttpSession session) {
+	public String goproduceupdate(String mfseq, Model model) {
 		model.addAttribute("mfseq", mfseq);
 		return "production/produceupdate";
 	}
@@ -74,7 +74,7 @@ public class ProductionController {
 	public String produceinsert(Model model){
 		ArrayList<ProductVO> result= pService.productionSelect();
 		model.addAttribute("pList",result);
-
+		
 		return "production/produceinsert";
 	} 
 	
@@ -110,9 +110,21 @@ public class ProductionController {
 		return "production/mRegistration";
 	}
 	// 생산 삭제
+/*	@RequestMapping(value = "/deleteProduce", method = RequestMethod.POST)
+	public String deleteProduce(ManufactureVO manufacture) {
+		int result = pService.deleteProduce(manufacture);
+		System.out.println("con"+manufacture);
+		if (result == 0) {
+			return "redirect:/goproducecheck";
+		} else {
+			return "redirect:/goproducecheck";
+		}
+	}*/
+	//생산 삭p
 	@RequestMapping(value = "/deleteProduce", method = RequestMethod.POST)
 	public String deleteProduce(ManufactureVO manufacture) {
 		int result = pService.deleteProduce(manufacture);
+		System.out.println("con"+manufacture);	
 		if (result == 0) {
 			return "redirect:/goproducecheck";
 		} else {
@@ -123,6 +135,8 @@ public class ProductionController {
 	@RequestMapping(value = "/statusProduce", method = RequestMethod.POST)
 	public String statusProduce(ManufactureVO manufacture) {
 		int result = pService.statusProduce(manufacture);
+		System.out.println(manufacture);
+
 		if (result == 0) {
 			return "redirect:/goproducecheck";
 		} else {
@@ -154,9 +168,9 @@ public class ProductionController {
 			return p.getPd_code();
 	}
 	@RequestMapping(value = "/produceInsert", method = RequestMethod.POST)
-	public String produceInsert(ManufactureVO manufacture) {
+	public String produceInsert(ManufactureVO manufacture, HttpSession session) {
+		manufacture.setManuf_requserid((String)session.getAttribute("loginid"));
 		int result = pService.produceInsert(manufacture);
-
 		if (result == 0) {
 			return "redirect:/goproducecheck";
 		} else {
@@ -185,8 +199,8 @@ public class ProductionController {
 	// 생산 수정
 	@ExceptionHandler
 	@RequestMapping(value = "/produceUpdate", method = RequestMethod.POST)
-	public String produceUpdate(ManufactureVO manufacture) {
-
+	public String produceUpdate(ManufactureVO manufacture, HttpSession session) {
+		manufacture.setManuf_requserid((String)session.getAttribute("loginid"));
 		int result = pService.produceUpdate(manufacture);
 
 		if (result == 0) {

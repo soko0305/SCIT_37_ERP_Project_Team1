@@ -29,7 +29,7 @@
   <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
   <!-- firebase Config and initialize -->	
   <script src="firebase/firebase-config.js"></script>
-    <script>
+       <script>
    $(function() {
 	   
     /*  파이어베이스 
@@ -64,7 +64,6 @@
 </script>
 </head>
 <body>
-      <form action="produceInsert" method="post" id="produceinsertForm">
 <div class="app-container app-theme-white body-tabs-shadow">
         <div class="app-container">
             <div class="h-100 bg-premium-dark">
@@ -91,31 +90,14 @@
           		 											 <option class="pList" th:each="list : ${pList}"
               											 th:text="${list.pd_name}" th:value="${list.pd_code}">
             											</option>
-         										</datalist>
-         						           </div>
+         										</datalist>                                            </div>
                                       </div>
-<!--                                        <div class="col-md-12">
-                                            <div class="position-relative form-group">
-												<input type="text" name="manuf_startdate" placeholder="생산시작일" class="form-control" data-toggle="datepicker-icon">
-                                            </div>
-                                      </div> -->
-                                      <div class="col-md-12">
+                                       <div class="col-md-12">
                                             <div class="position-relative form-group">
 												<input name="manuf_amount" id="manuf_amount" type="number" placeholder="생산수량"class="form-control">
                                             </div>
                                       </div>
-                                      <div class="col-md-12">
-                                            <div class="position-relative form-group">
-												<input name="sales_ordernum" id="sales_ordernum" type="text" placeholder="생산요청번호" class="form-control">
-                                            </div>
-                                      </div>
-                                      <div class="col-md-12">
-                                            <div class="position-relative form-group">
-												<input name="manuf_requserid" id="manuf_requserid" type="text"  placeholder="생산요청자" class="form-control">
-                                            </div>
-                                      </div>
- 
-                                                                                                                                                        
+
                              <div class="col-md-12">
                             	<div class="input-group">
                                                 <div class="input-group-prepend datepicker-trigger">
@@ -129,10 +111,14 @@
                                
                                      </div>
                                    
- 
+                                    <div class="divider row"></div>
+                                    	<div align="center">
+                                   		<p style="color: red" id="errorMessage"></p>
+                                   		</div>
+                                    </div>
                                     
                                 <div class="modal-footer d-block text-center">
-                                    <button id="insertButton" class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg" type="button">창고 등록</button>
+                                    <button id="insertButton" class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg" type="button">생산 등록</button>
                                 </div>
                             </div>
                         </div>
@@ -142,7 +128,6 @@
             </div>
         </div>
 </div>
-</form>
 <!-- <script>
 	$(function(){
 		var database = firebase.database();	
