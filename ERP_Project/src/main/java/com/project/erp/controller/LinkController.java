@@ -100,4 +100,9 @@ public class LinkController {
 		
 		return "sales/invoice";
 	}
+	
+	@RequestMapping(value="/mail", method = RequestMethod.GET)
+	public String mail(){	
+		return "mail/googleoauth";
+	}
 }
