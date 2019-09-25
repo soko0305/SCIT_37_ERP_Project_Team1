@@ -37,6 +37,7 @@ public class ProductionController {
 		
 		return "production/producecheck";
 	}
+	//생산품 수정
 	@RequestMapping(value = "/goproduceupdate", method = RequestMethod.GET)
 	public String goproduceupdate(String mfseq, Model model) {
 		model.addAttribute("mfseq", mfseq);
@@ -89,10 +90,10 @@ public class ProductionController {
  
  
 
-	@RequestMapping(value="/sample", method = RequestMethod.GET)
+/*	@RequestMapping(value="/sample", method = RequestMethod.GET)
 	public String sample(){
 		return "production/sample";
-	} 	
+	} 	*/
 
  	@RequestMapping(value="/confirmproductionrequest", method = RequestMethod.GET)
 	public String 	confirmproductionrequest(){
@@ -109,18 +110,8 @@ public class ProductionController {
 	public String gomRegistration() {
 		return "production/mRegistration";
 	}
-	// 생산 삭제
-/*	@RequestMapping(value = "/deleteProduce", method = RequestMethod.POST)
-	public String deleteProduce(ManufactureVO manufacture) {
-		int result = pService.deleteProduce(manufacture);
-		System.out.println("con"+manufacture);
-		if (result == 0) {
-			return "redirect:/goproducecheck";
-		} else {
-			return "redirect:/goproducecheck";
-		}
-	}*/
-	//생산 삭p
+
+	//생산 삭제
 	@RequestMapping(value = "/deleteProduce", method = RequestMethod.POST)
 	public String deleteProduce(ManufactureVO manufacture) {
 		int result = pService.deleteProduce(manufacture);
@@ -168,8 +159,7 @@ public class ProductionController {
 			return p.getPd_code();
 	}
 
-	
-	/*@RequestMapping(value = "/insertProudctMaterial", method = RequestMethod.POST)
+	//생산품 삽입
 	@RequestMapping(value = "/produceInsert", method = RequestMethod.POST)
 	public String produceInsert(ManufactureVO manufacture, HttpSession session) {
 		manufacture.setManuf_requserid((String)session.getAttribute("loginid"));
@@ -179,7 +169,7 @@ public class ProductionController {
 		} else {
 			return "redirect:/goproducecheck";
 		}
-	}*/
+	}
 
 	//pd_code로 원자재 다 들고오기
 	@RequestMapping(value = "/amount", method = RequestMethod.GET)

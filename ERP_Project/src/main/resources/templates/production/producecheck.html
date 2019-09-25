@@ -63,6 +63,7 @@
 		$(".btn-primary").click(function(){
 			var type = $(this).attr("data-type");
 			var code = $(this).val();
+			var code1 = $(this).val();			
 			if(type=='update'){
 				var url = "goproduceupdate?mfseq="+code;
 			    var name = "popup test";
@@ -70,13 +71,12 @@
 			    window.open(url, name, option);
 			    
 			}else if(type=='delete'){
-				$("#code").val(code);
-				alert(code);
+				$("#code1").val(code1);
 				$("#deleteProduce").submit();
-			}else if(type=='status'){
+			} else if(type=='status'){
 				$("#code").val(code);
 				$("#statusProduce").submit();				
-			}else{
+			} else{
 				location.href="goproduceinsert"
 			}
 		});
@@ -85,11 +85,11 @@
 </script>
 </head>
 <body>
-<form action="statusProduce" method="post" id="statusProduce">
+ <form action="statusProduce" method="post" id="statusProduce">
 	<input type="hidden" name="mfseq" id="code">
-</form>
+</form> 
 <form action="deleteProduce" method="post" id="deleteProduce">
-	<input type="hidden" name="mfseq" id="code">
+	<input type="hidden" name="mfseq" id="code1">
 </form>
 
 <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">

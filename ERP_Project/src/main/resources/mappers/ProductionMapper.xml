@@ -223,8 +223,4 @@
 		where
 			mfseq = #{mfseq}
 	</update>
-	
-	
-	
-	
 </mapper>
