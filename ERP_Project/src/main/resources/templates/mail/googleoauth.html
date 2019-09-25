@@ -70,7 +70,7 @@
         gapi.client.load('gmail', 'v1', displayInbox);
       }
       function displayInbox() {
-        var request = gapi.client.gmail.users.messages.list({
+        var request = gapi.client.gmail.users. s.list({
           'userId': 'me',
           'labelIds': 'INBOX',
           'maxResults': 10
@@ -85,6 +85,7 @@
           });
         });
       }
+     
       function appendMessageRow(message) {
         $('.table-inbox tbody').append(
         		
@@ -95,12 +96,8 @@
           getHeader(message.payload.headers, 'From')).replace(/\"/g, '&quot;');
         var reply_subject = 'Re: '+getHeader(message.payload.headers, 'Subject').replace(/\"/g, '&quot;');
         $('body').append(
-          '<div class="modal fade" id="message-modal-' + message.id +'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">\<div class="modal-dialog modal-lg">\ <div class="modal-content">\<div class="modal-header">\<h4 class="modal-title" id="myModalLabel">' +getHeader(message.payload.headers, 'Subject') +'</h4>\<button type="button"\class="close"\data-dismiss="modal"\aria-label="Close">\<span aria-hidden="true">&times;</span></button>\ </div>\
-                <div class="modal-body">\
-                  <iframe id="message-iframe-'+message.id+'" srcdoc="<p>Loading...</p>">\
-                  </iframe>\
-                </div>\
-                <div class="modal-footer">\
+          '<div class="modal fade" id="message-modal-' + message.id +'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">\<div class="modal-dialog modal-lg">\ <div class="modal-content">\<div class="modal-header">\<h4 class="modal-title" id="myModalLabel">' +getHeader(message.payload.headers, 'Subject') +'</h4>\<button type="button"\class="close"\data-dismiss="modal"\aria-label="Close">\<span aria-hidden="true">&times;</span></button>\ </div>\<div class="modal-body">\<iframe id="message-iframe-'+message.id+'" srcdoc="<p>Loading...</p>">\</iframe>\<a id="download-attach" download="filename"/></div>\
+            		<div class="modal-footer">\
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\
                   <button type="button" class="btn btn-primary reply-button" data-dismiss="modal" data-toggle="modal" data-target="#reply-modal"\
                   onclick="fillInReply(\
@@ -191,6 +188,25 @@
         });
         return header;
       }
+      
+      function getAttachments(userId, message, callback) {
+    	  var parts = message.payload.parts;
+    	  for (var i = 0; i < parts.length; i++) {
+    	    var part = parts[i];
+    	    if (part.filename && part.filename.length > 0) {
+    	      var attachId = part.body.attachmentId;
+    	      var request = gapi.client.gmail.users.messages.attachments.get({
+    	        'id': attachId,
+    	        'messageId': message.id,
+    	        'userId': userId
+    	      });
+    	      request.execute(function(attachment) {
+    	        callback(part.filename, part.mimeType, attachment);
+    	      });
+    	    }
+    	  }
+    	}
+      
       function getBody(message) {
         var encodedBody = '';
         if(typeof message.parts === 'undefined')
@@ -331,12 +347,12 @@
                                         <div class="table-responsive">
                                             <table class="text-nowrap table-lg mb-0 table  table-inbox table-hover">
                                               <thead>
-          <tr>
-            <th>From</th>
-            <th>Subject</th>
-            <th>Date/Time</th>
-          </tr>
-        </thead>
+         										 <tr>
+        										    <th>From</th>
+           											<th>Subject</th>
+            										<th>Date/Time</th>
+       	 										  </tr>
+       											 </thead>
 
                                                 <tbody>
                                             
@@ -426,7 +442,6 @@
     <div class="modal fade" id="reply-modal" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
-        
           <div class="modal-header">
            <h4 class="modal-title">Reply</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
