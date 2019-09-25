@@ -100,7 +100,7 @@ public class ProductionController {
 		return "production/	confirmproductionrequest";
 	} 	
 	
-	//
+	
 	//생산품 등록 이동 Form
 	@RequestMapping(value = "/gopRegistration", method = RequestMethod.GET)
 	public String gopRegistration() {
