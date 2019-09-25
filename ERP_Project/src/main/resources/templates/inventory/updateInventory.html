@@ -117,6 +117,7 @@
 		database.ref('warehouse/'+warehouse_code).child('inventory').child(data_code).once('child_added', function(snapshot){
 			$("#amount").val(snapshot.val());
 			amount = snapshot.val();
+			buttonSetting();
 		});
 		
 		
@@ -140,13 +141,12 @@
 			$("#inventoryWarehouse").append(str);
 		}
 		
-		
+		function buttonSetting(){
 		$("#updateButton").click(function(){
 			if($("#amount").val()>=0){
 			if(button_type=='update'){
 				var u_amount = $("#amount").val();
-				database.ref('warehouse/'+warehouse_code).child('inventory').child(data_code).remove();
-				database.ref('warehouse/'+warehouse_code).child('inventory').child(data_code).set({"systemamount": u_amount});
+				database.ref('warehouse/'+warehouse_code).child('inventory').child(data_code).update({"systemamount": u_amount});
 				alert("재고 수량 변경을 완료했습니다.");
 				window.open("about:blank","_self").close();
 			}
@@ -154,27 +154,35 @@
 			if(button_type=='move'){
 				var u_warehouse_code = $("#inventoryWarehouse").val();
 				var u_amount = $("#amount").val();
-				if(amount<u_amount){
-					alert("이동시킬 재고가 부족합니다.");
-				}else{
-					var count = 0;
-					database.ref('warehouse/'+u_warehouse_code).child('inventory').child(data_code).once('child_added', function(snapshot){
-						count = snapshot.val();
-					});
-					
-					var mAmount = (parseInt(count)+parseInt(u_amount)).toString();
-					var dAmount =  (parseInt(amount)-parseInt(u_amount)).toString();
+				
+				database.ref('warehouse/'+warehouse_code).child('inventory').child(data_code).once('child_added', function(snapshot){
+					$("#amount").val(snapshot.val());
+					var amount1 = snapshot.val();
+					if(amount1<u_amount){
+						
+						alert("이동시킬 재고가 부족합니다.");
+					}else{
+						var count = 0;
+						database.ref('warehouse/'+u_warehouse_code).child('inventory').child(data_code).once('child_added', function(snapshot){
+							count = snapshot.val();
+						});
+						
+						var mAmount = (parseInt(count)+parseInt(u_amount)).toString();
+						var dAmount =  (parseInt(amount1)-parseInt(u_amount)).toString();
 
-					database.ref('warehouse/'+u_warehouse_code).child('inventory').child(data_code).update({"systemamount":mAmount});
-					database.ref('warehouse/'+warehouse_code).child('inventory').child(data_code).update({"systemamount":dAmount});
-					alert("재고 이동을 완료했습니다");
-					window.open("about:blank","_self").close();
-				}
+						database.ref('warehouse/'+u_warehouse_code).child('inventory').child(data_code).update({"systemamount":mAmount});
+						database.ref('warehouse/'+warehouse_code).child('inventory').child(data_code).update({"systemamount":dAmount});
+						alert("재고 이동을 완료했습니다");
+						window.open("about:blank","_self").close();
+					}	
+				});
+				
 			}
 			}else{
 				alert("음수를 입력할 수는 없습니다.");
 			}
 		});
+		}
 		
 	});
 	/*]]>*/

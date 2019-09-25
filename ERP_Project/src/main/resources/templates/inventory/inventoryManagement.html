@@ -174,9 +174,14 @@
 		database.ref().on('value', function(snapshot){
 			selelctInventoryINWarehouse();
 		});*/
-		selelctInventoryINWarehouse();
+			database.ref('warehouse/').on('value',function(snapshot){
+				selelctInventoryINWarehouse(snapshot);
+			});
 		
-		function selelctInventoryINWarehouse(){
+		
+		
+		/*
+		function selelctInventoryINWarehouse(snapshot){
 			$("#tBody").html('');
 			database.ref('warehouse/').on('child_added', function(data){
 				var warehouse_code = data.key;
@@ -194,7 +199,34 @@
 			});
 			setSupplierDropbox();	
 			setInventorySortDropbox();
+		}*/
+		function selelctInventoryINWarehouse(snapshot){
+			$("#tBody").html('');
+			for(key in snapshot.val()){
+				alert("1");
+				var warehouse_code = key;
+				database.ref('warehouse/'+warehouse_code).once('value', function(data){
+				var warehouse_name = data.val().warehouse_name;
+				setWarehouseDropbox(warehouse_code, warehouse_name);
+				database.ref('warehouse/'+warehouse_code).child("inventory").once('value', function(snapshot1){
+					for(key1 in snapshot1.val()){
+						if(key1.charAt(0)=='p'){
+						var pd_code = key1;	
+						getProductAmount(pd_code, warehouse_name, warehouse_code);
+					}else if(key1.charAt(0)=='m'){
+						var rawm_code = key1;	
+						getMaterialAmount(rawm_code, warehouse_name, warehouse_code);
+					}
+					}
+		    	});
+				});
+				
 		}
+			setSupplierDropbox();	
+			setInventorySortDropbox();
+		}
+		
+
 		
 		
 	  	//파이어베이스로 실시간 원자재 재고 가져오는 함수 
@@ -251,6 +283,7 @@
 					type: "get",
 					data:{pd_code:pd_code},
 					success:function(serverData){
+						
 						printProduct(serverData, amount ,warehouse_name, warehouse_code); 	
 					}
 				});

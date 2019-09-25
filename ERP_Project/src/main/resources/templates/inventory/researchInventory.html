@@ -137,6 +137,13 @@
 			selelctInventoryINWarehouse();
 		});*/
 		selelctInventoryINWarehouse();
+		database.ref('warehouse/'+warehouse_code).child("inventory").on('child_changed', function(snapshot){
+			selelctInventoryINWarehouse();
+		});
+		database.ref('warehouse/'+warehouse_code).child("inventory").on('child_removed', function(snapshot){
+			selelctInventoryINWarehouse();
+		});
+		
 		
 		// -> 밑에 함수별로 작게 나눈 이유-> 그렇지 않으면 순서가 섞여서 발생
 	  	//창고 내 생산품, 원자재 정보 가져오기
