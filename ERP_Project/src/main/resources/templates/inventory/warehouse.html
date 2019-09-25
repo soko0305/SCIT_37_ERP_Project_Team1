@@ -27,7 +27,47 @@
   <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
   <!-- firebase Config and initialize -->	
   <script src="firebase/firebase-config.js"></script>
+    <script>
     
+	//창고 삭제 버튼 눌렀을 때
+	function deleteButtonSetting(data){
+		var database = firebase.database();	
+		type= $(data).attr("button-type");
+		var warehouse_code= $(data).attr("data-seq");
+		if(type=="delete"){
+		var buttonConfirm = confirm("정말 창고 정보를 삭제하시겠습니까?");
+			if(buttonConfirm){
+				database.ref("warehouse/"+warehouse_code).remove();
+			}
+		}
+	}
+	
+	//창고 정보 수정 버튼 눌렀을때
+	function updateButtonSetting(data){
+		type= $(data).attr("button-type");
+		var warehouse_code= $(data).attr("data-seq");
+		if(type=='update'){
+			var g_oWindow = window.open("/goUpdateStorage?warehouse_code="+warehouse_code+"", "Update Storage Information","width=400, height=500, location=no, toolbar=no, menubar=no, scrollbars=no, status=no, resizable=yes");
+		
+		}
+	}
+	
+
+	
+	//창고 detail 버튼 눌렀을 때
+	function detailButtonSetting(data){
+			type= $(data).attr("button-type");
+			warehouse_code= $(data).attr("data-seq");
+			var p_count =$(data).attr("p-count");
+			var m_count = $(data).attr("m-count");
+			if(type=="detail"){
+				var g_oWindow = window.open("/goResearchInventory?warehouse_code="+warehouse_code+"&p_count="+p_count+"&m_count="+m_count, "Input Storage Information","width=900, height=700, location=no, toolbar=no, menubar=no, scrollbars=no, status=no, resizable=yes");
+		
+	}
+	}
+
+	
+    </script>
 	<script>
 	$(function(){	
 		$("#header").load("/header");
@@ -104,29 +144,21 @@
 		var database = firebase.database();	
 		//변경시 리스트 실시간 최신화
 		//최신화 부분 수정 필요
-		database.ref("warehouse/").on('value', function(snapshot){
-				if(snapshot.val()==null){
-					var str='';
-					str+='<tr><td>';
-					str+='<div class="main-card mb-3 card">';
-					str+='<div class="card-header">';
-					str+='<span>등록한 창고 정보가 없습니다.</span>';
-					str+='</div>';
-					str+='</div>';  
-					str+='</td></tr>';
-					$("#warehouseTable").append(str);
-					
-				}else{
-					//selectANDPrintAll();
-				}
 
+		
+		database.ref("warehouse/").on('child_added', function(data){
+
+			printAllInventory(data);
+			
 		});
 		
-		database.ref("warehouse/").on('child_added', function(data){	
-			printAllInventory(data);
-			deleteButtonSetting();
-			updateButtonSetting();
-			detailButtonSetting();
+		database.ref("warehouse/").on('child_changed', function(data){
+			window.location.href="/goStorage";
+			
+		});
+		database.ref("warehouse/").on('child_removed', function(data){
+			window.location.href="/goStorage";
+			
 		});
 		
 
@@ -183,7 +215,7 @@
 					str+='<div class="card-header">';
 					str+='<i class="header-icon lnr-laptop-phone icon-gradient bg-plum-plate"> </i>'+data.val().warehouse_name+'';
 					str+='<div class="btn-actions-pane-right actions-icon-btn" style="margin-top: 0.7em;">';
-					str+='<button class="mb-2 mr-2 btn-pill btn-transition btn btn-outline-primary btn-sm" button-type="detail" data-seq="'+data.key+'" p-count="'+count2+'" m-count="'+count3+'" type="button" style="float: right;">';
+					str+='<button class="mb-2 mr-2 btn-pill btn-transition btn btn-outline-primary btn-sm" onclick="detailButtonSetting(this);" button-type="detail" data-seq="'+data.key+'" p-count="'+count2+'" m-count="'+count3+'" type="button" style="float: right;">';
 					str+='detail';
 					str+='</button>';
 					str+='</div>';
@@ -197,8 +229,8 @@
 					str+='<p>개설일 : '+data.val().warehouse_date+'</p>';	
 					str+='</div>';
 					str+='<div class="d-block text-right card-footer">';
-					str+='<button class="btn-shadow-primary btn btn-primary btn-lg"  button-type="update" data-seq="'+data.key+'">Update</button>';
-					str+='<button class="mr-2 btn btn-link btn-sm" button-type="delete" data-seq="'+data.key+'">Delete</button>';
+					str+='<button class="btn-shadow-primary btn btn-primary btn-lg"  button-type="update" data-seq="'+data.key+'" onclick="updateButtonSetting(this);">Update</button>';
+					str+='<button class="mr-2 btn btn-link btn-sm" button-type="delete" data-seq="'+data.key+'" onclick="deleteButtonSetting(this);">Delete</button>';
 					str+='</div>';
 					str+='</div>';  
 					str+='</td>';
@@ -218,49 +250,7 @@
 		});  
 		
 		
-		//창고 정보 수정 버튼 눌렀을때
-		function updateButtonSetting(){
-		$(".btn-lg").click(function(){
-			type= $(this).attr("button-type");
-			var warehouse_code= $(this).attr("data-seq");
-			if(type=='update'){
-				var g_oWindow = window.open("/goUpdateStorage?warehouse_code="+warehouse_code+"", "Update Storage Information","width=400, height=500, location=no, toolbar=no, menubar=no, scrollbars=no, status=no, resizable=yes");
-			
-			}
-		});
-		}
-		
-		//창고 삭제 버튼 눌렀을 때
-		function deleteButtonSetting(){
-		$(".btn-sm").click(function(){
-			type= $(this).attr("button-type");
-			var warehouse_code= $(this).attr("data-seq");
-			if(type=="delete"){
-			var buttonConfirm = confirm("정말 창고 정보를 삭제하시겠습니까?");
-				if(buttonConfirm){
-					deleteWarehouseFromFirebase(warehouse_code);
-				}
-			}
-		});
-		}
-		
-		//창고 detail 버튼 눌렀을 때
-		function detailButtonSetting(){
-			$(".btn-sm").click(function(){
-				type= $(this).attr("button-type");
-				warehouse_code= $(this).attr("data-seq");
-				var p_count =$(this).attr("p-count");
-				var m_count = $(this).attr("m-count");
-				if(type=="detail"){
-					var g_oWindow = window.open("/goResearchInventory?warehouse_code="+warehouse_code+"&p_count="+p_count+"&m_count="+m_count, "Input Storage Information","width=900, height=700, location=no, toolbar=no, menubar=no, scrollbars=no, status=no, resizable=yes");
-			}
-			});
-		}
 
-		//파이어베이스에서 해당 창고 테이블 삭제 함수
-		function deleteWarehouseFromFirebase(warehouse_code){
-			database.ref("warehouse/"+warehouse_code).remove();
-		}
 
 	});
 </script>
