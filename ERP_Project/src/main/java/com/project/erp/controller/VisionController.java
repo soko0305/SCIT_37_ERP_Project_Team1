@@ -19,7 +19,7 @@ import java.util.List;
 
 @RestController
 public class VisionController {
-/*
+
 	@Autowired
 	private ResourceLoader resourceLoader;
 
@@ -35,5 +35,5 @@ public class VisionController {
 
 	        System.out.println(response.getLabelAnnotationsList().toString());
 	    }
-	    */
+	    
 }
