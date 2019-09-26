@@ -29,30 +29,9 @@
   <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
   <!-- firebase Config and initialize -->	
   <script src="firebase/firebase-config.js"></script>
-    <script>
+       <script>
    $(function() {
-	   
-    /*  파이어베이스 
-    	var database = firebase.database();   
-      
 
-      selelctInventoryINWarehouse();
-      
-      function selelctInventoryINWarehouse(){
-         database.ref('warehouse/').on('child_added', function(data){
-            var warehouse_code = data.key;
-            var warehouse_name = data.val().warehouse_name;
-            setWarehouseDropbox(warehouse_code, warehouse_name);
-         });
-      }
-      //창고 드롭박스 세팅 함수
-      function setWarehouseDropbox(warehouse_code, warehouse_name){
-         var str='';
-         str+='<option value="'+warehouse_code+'">';
-         str+=warehouse_name;
-         str+='</option>';
-         $("#test1").append(str);
-      } */
      
       $("#insertButton").click(function(){
          $("#produceinsertForm").submit();
@@ -64,6 +43,7 @@
 </script>
 </head>
 <body>
+
       <form action="produceInsert" method="post" id="produceinsertForm">
 <div class="app-container app-theme-white body-tabs-shadow">
         <div class="app-container">
@@ -91,31 +71,19 @@
           		 											 <option class="pList" th:each="list : ${pList}"
               											 th:text="${list.pd_name}" th:value="${list.pd_code}">
             											</option>
-         										</datalist>
-         						           </div>
+         										</datalist>                                           
+         								 </div>
                                       </div>
-<!--                                        <div class="col-md-12">
-                                            <div class="position-relative form-group">
-												<input type="text" name="manuf_startdate" placeholder="생산시작일" class="form-control" data-toggle="datepicker-icon">
-                                            </div>
-                                      </div> -->
-                                      <div class="col-md-12">
+                                       <div class="col-md-12">
                                             <div class="position-relative form-group">
 												<input name="manuf_amount" id="manuf_amount" type="number" placeholder="생산수량"class="form-control">
                                             </div>
                                       </div>
-                                      <div class="col-md-12">
+                                       <div class="col-md-12">
                                             <div class="position-relative form-group">
-												<input name="sales_ordernum" id="sales_ordernum" type="text" placeholder="생산요청번호" class="form-control">
+												<input name="warehouse_code" id="warehouse_code" type="text" placeholder="창고 코드"class="form-control">
                                             </div>
                                       </div>
-                                      <div class="col-md-12">
-                                            <div class="position-relative form-group">
-												<input name="manuf_requserid" id="manuf_requserid" type="text"  placeholder="생산요청자" class="form-control">
-                                            </div>
-                                      </div>
- 
-                                                                                                                                                        
                              <div class="col-md-12">
                             	<div class="input-group">
                                                 <div class="input-group-prepend datepicker-trigger">
@@ -129,10 +97,9 @@
                                
                                      </div>
                                    
- 
-                                    
+                                                                   
                                 <div class="modal-footer d-block text-center">
-                                    <button id="insertButton" class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg" type="button">창고 등록</button>
+                                    <button id="insertButton" class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg" type="button">생산 등록</button>
                                 </div>
                             </div>
                         </div>
@@ -142,41 +109,7 @@
             </div>
         </div>
 </div>
+</div>
 </form>
-<!-- <script>
-	$(function(){
-		var database = firebase.database();	
-		$("#insertButton").click(function(){
-			var warehouse_name = $("#warehouse_name").val();
-			var warehouse_addr = $("#warehouse_addr").val();
-			var warehouse_size = $("#warehouse_size").val();
-			var warehouse_date = $("#warehouse_date").val();
-			if(warehouse_name==null ||warehouse_name==""){
-				$("#errorMessage").html("창고 이름을 입력해주세요");
-			}else{
-				if(warehouse_addr==null ||warehouse_addr==""){
-					$("#errorMessage").html("창고 주소를 입력해주세요");
-				}else{
-					if(warehouse_size==null ||warehouse_size==""){
-						$("#errorMessage").html("창고 면적을 입력해주세요");
-					}else{
-						if(warehouse_date==null ||warehouse_date==""){
-							$("#errorMessage").html("창고 개설일을 입력해주세요");
-						}else{							
-							database.ref("warehouse/").push({"warehouse_name": warehouse_name, 
-								 "warehouse_addr": warehouse_addr, 
-								 "warehouse_size": warehouse_size, 
-								 "warehouse_date": warehouse_date,
-								 "inventory":"empty"});
-
-							window.open("about:blank","_self").close();
-						}
-					}
-				}
-			}
-		});
-	});
-
-</script> -->
 </body>
 </html>
