@@ -1,14 +1,13 @@
-
 <!doctype html>
 <html>
   <head>
     <title>Gmail API demo</title>
     <meta charset="UTF-8">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
-<script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
+
     <style>
       iframe {
         width: 100%;
@@ -18,10 +17,8 @@
         display: flex;
       }
     </style>
-  </head>
-  
-  
-  <script>
+
+    <script>
   $(function(){	
 	 $("#header").load("/header");
 	 $("#navbar").load("/navbar");
@@ -32,13 +29,15 @@
   
   </script>
     
-    <script type="text/javascript">
+  
+     <script type="text/javascript">
     var clientId = '1023366377810-vuaksn9f9taimk6ueqqrf50bfjmdm6le.apps.googleusercontent.com';
     var apiKey = 'AIzaSyAqzJfMuiR4ltnAVw6AeDchVNCDcLWeRMc';
     var scopes =
         'https://www.googleapis.com/auth/gmail.readonly '+
         'https://www.googleapis.com/auth/gmail.send';
       function handleClientLoad() {
+
         gapi.client.setApiKey(apiKey);
         window.setTimeout(checkAuth, 1);
       }
@@ -158,7 +157,10 @@
       }
       function composeTidy()
       {
-        $('#compose-modal').modal('hide'); 
+
+    	location.href='http://localhost:9088/mail';
+
+  	 
         $('#compose-to').val('');
         $('#compose-subject').val('');
         $('#compose-message').val('');
@@ -180,8 +182,10 @@
       }
       function replyTidy()
       {
-        $('#reply-modal').modal('hide');
-        $('#reply-message').val('');
+       	
+       	location.href='http://localhost:9088/mail';
+
+       	$('#reply-message').val('');
         $('#reply-button').removeClass('disabled');
       }
       function fillInReply(to, subject, message_id)
@@ -226,7 +230,9 @@
     	        'userId': userId
     	      });
     	      request.execute(function(attachment) {
+
     	        callback(part.filename, part.mimeType, attachment);
+    	        
     	      });
     	    }
     	  }
@@ -263,6 +269,7 @@
         return '';
       }
     </script>
+     </head>
     <body>
     <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
     <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Header삽입@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
@@ -498,4 +505,5 @@
         </div>
       </div>
     </div>
-                
+<!-- 
+<script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script> -->
