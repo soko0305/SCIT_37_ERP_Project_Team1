@@ -70,7 +70,7 @@
         gapi.client.load('gmail', 'v1', displayInbox);
       }
       function displayInbox() {
-        var request = gapi.client.gmail.users. s.list({
+        var request = gapi.client.gmail.users.messages.list({
           'userId': 'me',
           'labelIds': 'INBOX',
           'maxResults': 10
@@ -86,36 +86,61 @@
         });
       }
      
-      function appendMessageRow(message) {
-        $('.table-inbox tbody').append(
-        		
-          '<tr>\'<td class="text-center" style="width: 78px;"><div class="custom-checkbox custom-control"><input type="checkbox" id="eCheckbox12" class="custom-control-input"><label class="custom-control-label" for="eCheckbox12">&nbsp;</label></div></td><td>'+getHeader(message.payload.headers, 'From')+'</td>\<td>\<a href="#message-modal-' + message.id + '" data-toggle="modal" id="message-link-' + message.id+'">' +getHeader(message.payload.headers, 'Subject') +'</a>\</td>\<td>'+getHeader(message.payload.headers, 'Date')+'</td>\</tr>'
-        );
-        var reply_to = (getHeader(message.payload.headers, 'Reply-to') !== '' ?
-          getHeader(message.payload.headers, 'Reply-to') :
-          getHeader(message.payload.headers, 'From')).replace(/\"/g, '&quot;');
-        var reply_subject = 'Re: '+getHeader(message.payload.headers, 'Subject').replace(/\"/g, '&quot;');
-        $('body').append(
-          '<div class="modal fade" id="message-modal-' + message.id +'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">\<div class="modal-dialog modal-lg">\ <div class="modal-content">\<div class="modal-header">\<h4 class="modal-title" id="myModalLabel">' +getHeader(message.payload.headers, 'Subject') +'</h4>\<button type="button"\class="close"\data-dismiss="modal"\aria-label="Close">\<span aria-hidden="true">&times;</span></button>\ </div>\<div class="modal-body">\<iframe id="message-iframe-'+message.id+'" srcdoc="<p>Loading...</p>">\</iframe>\<a id="download-attach" download="filename"/></div>\
-            		<div class="modal-footer">\
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\
-                  <button type="button" class="btn btn-primary reply-button" data-dismiss="modal" data-toggle="modal" data-target="#reply-modal"\
-                  onclick="fillInReply(\
-                    \''+reply_to+'\', \
-                    \''+reply_subject+'\', \
-                    \''+getHeader(message.payload.headers, 'Message-ID')+'\'\
-                    );"\
-                  >Reply</button>\
-                </div>\
-              </div>\
-            </div>\
-          </div>'
-        );
-        $('#message-link-'+message.id).on('click', function(){
+      function appendMessageRow(message, callback) {
+    	  		
+            $('.table-inbox tbody').append(
+               '<tr>\<td>'+getHeader(message.payload.headers, 'From')+'</td>\<td>\<a href="#message-modal-' + message.id + '" data-toggle="modal" id="message-link-' + message.id+'">' +getHeader(message.payload.headers, 'Subject') +'</a>\</td>\<td>'+getHeader(message.payload.headers, 'Date')+'</td>\</tr>'
+              );
+               var reply_to = (getHeader(message.payload.headers, 'Reply-to') !== '' ?
+               getHeader(message.payload.headers, 'Reply-to') :
+               getHeader(message.payload.headers, 'From')).replace(/\"/g, '&quot;');
+               var reply_subject = 'Re: '+getHeader(message.payload.headers, 'Subject').replace(/\"/g, '&quot;');
+               
+            	
+               $('body').append(
+                       '<div class="modal fade" id="message-modal-' + message.id +
+                           '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">\
+                         <div class="modal-dialog modal-lg">\
+                           <div class="modal-content">\
+                             <div class="modal-header">\
+                               <h4 class="modal-title" id="myModalLabel">' +
+                                 getHeader(message.payload.headers, 'Subject') +
+                               '</h4>\
+                                  <button type="button"\
+                                       class="close"\
+                                       data-dismiss="modal"\
+                                       aria-label="Close">\
+                                 <span aria-hidden="true">&times;</span></button>\
+                             </div>\
+                             <div class="modal-body">\
+                               <iframe id="message-iframe-'+message.id+'" srcdoc="<p>Loading...</p>">\
+                               </iframe>\
+                             </div>\
+                             <div class="modal-footer">\
+                               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\
+                               <button type="button" class="btn btn-primary reply-button" data-dismiss="modal" data-toggle="modal" data-target="#reply-modal"\
+                               onclick="fillInReply(\
+                                 \''+reply_to+'\', \
+                                 \''+reply_subject+'\', \
+                                 \''+getHeader(message.payload.headers, 'Message-ID')+'\'\
+                                 );"\
+                               >Reply</button>\
+                             </div>\
+                           </div>\
+                         </div>\
+                       </div>'
+                     );
+               
+               
+				$('#message-link-'+message.id).on('click', function(){
+				
           var ifrm = $('#message-iframe-'+message.id)[0].contentWindow.document;
           $('body', ifrm).html(getBody(message.payload));
-        });
+        
+				});
+        
       }
+
       
       
       function sendEmail()
