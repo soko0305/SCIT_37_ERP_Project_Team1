@@ -115,8 +115,7 @@
                 
 	</dependencies>
 
-<<<<<<< HEAD
-=======
+
 <dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -129,7 +128,6 @@
 
 		</dependencies>
 	</dependencyManagement>
->>>>>>> soko
 
 
 	<build>
