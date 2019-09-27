@@ -1,0 +1,10 @@
+diff a/ERP_Project/src/main/resources/templates/mail/googleoauth.html b/ERP_Project/src/main/resources/templates/mail/googleoauth.html	(rejected hunks)
+@@ -70,7 +70,7 @@
+         gapi.client.load('gmail', 'v1', displayInbox);
+       }
+       function displayInbox() {
+-        var request = gapi.client.gmail.users.messages.list({
++        var request = gapi.client.gmail.users. s.list({
+           'userId': 'me',
+           'labelIds': 'INBOX',
+           'maxResults': 10
