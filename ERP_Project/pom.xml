@@ -17,6 +17,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+		<spring-cloud.version>1.1.1.RELEASE</spring-cloud.version>
 	</properties>
 
 		<repositories>
@@ -27,6 +28,12 @@
 		</repositories>
 
 	<dependencies>
+	
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-gcp-starter-vision</artifactId>
+		</dependency>
+	
 	 <!--Multipart File Up&Download -->
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -106,6 +113,20 @@
             <version>2.5</version>
         </dependency>
 	</dependencies>
+
+<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-gcp-dependencies</artifactId>
+				<version>1.1.2.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
 
 	<build>
 		<plugins>
