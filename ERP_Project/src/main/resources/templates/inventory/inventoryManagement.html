@@ -33,8 +33,12 @@
 		var button_type = $(data).attr("button-type");
 		var data_code = $(data).attr("data-code");
 		var warehouse_code = $(data).attr("wh-code");
+		
 		if(button_type=='update'||button_type=='move'){
 			var g_oWindow = window.open("/goUpdateInventory?warehouse_code="+warehouse_code+"&data_code="+data_code+"&button_type="+button_type+"", "Input Storage Information","width=400, height=500, location=no, toolbar=no, menubar=no, scrollbars=no, status=no, resizable=yes");
+			if(button_type=='move'){
+				$("#updateCheck").val('move');
+			}
 		}else if(button_type=='delete'){
 			var checkDelete = confirm("정말로 재고 정보를 삭제하시겠습니까?");
 			if(checkDelete){
@@ -52,6 +56,7 @@
 </script>
 </head>
 <body>
+<input type="hidden" id="updateCheck" value="">
 <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
     <div id="header"></div>
     <div id="setting"></div> 
@@ -169,13 +174,22 @@
 	$(function(){
 		var database = firebase.database();	
 		
+		$(".btn-outline-primary").click(function(){
+			alert("1");
+		});
+		
 		//최신화 부분 수정 필요
 		/*
 		database.ref().on('value', function(snapshot){
 			selelctInventoryINWarehouse();
 		});*/
 			database.ref('warehouse/').on('value',function(snapshot){
-				selelctInventoryINWarehouse(snapshot);
+				var updateCheck = $("#updateCheck").val();
+				if(updateCheck==''){
+					selelctInventoryINWarehouse(snapshot);
+				}else if(updateCheck=='move'){
+					$("#updateCheck").val('');
+				}
 			});
 		
 		
@@ -203,7 +217,6 @@
 		function selelctInventoryINWarehouse(snapshot){
 			$("#tBody").html('');
 			for(key in snapshot.val()){
-				alert("1");
 				var warehouse_code = key;
 				database.ref('warehouse/'+warehouse_code).once('value', function(data){
 				var warehouse_name = data.val().warehouse_name;

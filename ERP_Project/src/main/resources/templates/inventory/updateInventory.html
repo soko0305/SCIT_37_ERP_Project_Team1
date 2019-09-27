@@ -156,7 +156,7 @@
 				var u_amount = $("#amount").val();
 				
 				database.ref('warehouse/'+warehouse_code).child('inventory').child(data_code).once('child_added', function(snapshot){
-					$("#amount").val(snapshot.val());
+					
 					var amount1 = snapshot.val();
 					if(amount1<u_amount){
 						
