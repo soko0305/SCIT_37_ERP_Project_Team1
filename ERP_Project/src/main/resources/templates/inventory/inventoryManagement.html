@@ -33,8 +33,12 @@
 		var button_type = $(data).attr("button-type");
 		var data_code = $(data).attr("data-code");
 		var warehouse_code = $(data).attr("wh-code");
+		
 		if(button_type=='update'||button_type=='move'){
 			var g_oWindow = window.open("/goUpdateInventory?warehouse_code="+warehouse_code+"&data_code="+data_code+"&button_type="+button_type+"", "Input Storage Information","width=400, height=500, location=no, toolbar=no, menubar=no, scrollbars=no, status=no, resizable=yes");
+			if(button_type=='move'){
+				$("#updateCheck").val('move');
+			}
 		}else if(button_type=='delete'){
 			var checkDelete = confirm("정말로 재고 정보를 삭제하시겠습니까?");
 			if(checkDelete){
@@ -52,6 +56,7 @@
 </script>
 </head>
 <body>
+<input type="hidden" id="updateCheck" value="">
 <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
     <div id="header"></div>
     <div id="setting"></div> 
@@ -169,14 +174,28 @@
 	$(function(){
 		var database = firebase.database();	
 		
+		$(".btn-outline-primary").click(function(){
+			alert("1");
+		});
+		
 		//최신화 부분 수정 필요
 		/*
 		database.ref().on('value', function(snapshot){
 			selelctInventoryINWarehouse();
 		});*/
-		selelctInventoryINWarehouse();
+			database.ref('warehouse/').on('value',function(snapshot){
+				var updateCheck = $("#updateCheck").val();
+				if(updateCheck==''){
+					selelctInventoryINWarehouse(snapshot);
+				}else if(updateCheck=='move'){
+					$("#updateCheck").val('');
+				}
+			});
 		
-		function selelctInventoryINWarehouse(){
+		
+		
+		/*
+		function selelctInventoryINWarehouse(snapshot){
 			$("#tBody").html('');
 			database.ref('warehouse/').on('child_added', function(data){
 				var warehouse_code = data.key;
@@ -194,7 +213,33 @@
 			});
 			setSupplierDropbox();	
 			setInventorySortDropbox();
+		}*/
+		function selelctInventoryINWarehouse(snapshot){
+			$("#tBody").html('');
+			for(key in snapshot.val()){
+				var warehouse_code = key;
+				database.ref('warehouse/'+warehouse_code).once('value', function(data){
+				var warehouse_name = data.val().warehouse_name;
+				setWarehouseDropbox(warehouse_code, warehouse_name);
+				database.ref('warehouse/'+warehouse_code).child("inventory").once('value', function(snapshot1){
+					for(key1 in snapshot1.val()){
+						if(key1.charAt(0)=='p'){
+						var pd_code = key1;	
+						getProductAmount(pd_code, warehouse_name, warehouse_code);
+					}else if(key1.charAt(0)=='m'){
+						var rawm_code = key1;	
+						getMaterialAmount(rawm_code, warehouse_name, warehouse_code);
+					}
+					}
+		    	});
+				});
+				
 		}
+			setSupplierDropbox();	
+			setInventorySortDropbox();
+		}
+		
+
 		
 		
 	  	//파이어베이스로 실시간 원자재 재고 가져오는 함수 
@@ -251,6 +296,7 @@
 					type: "get",
 					data:{pd_code:pd_code},
 					success:function(serverData){
+						
 						printProduct(serverData, amount ,warehouse_name, warehouse_code); 	
 					}
 				});

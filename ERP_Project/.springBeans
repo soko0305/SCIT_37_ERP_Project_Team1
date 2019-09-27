@@ -9,6 +9,8 @@
 	<configs>
 	</configs>
 	<autoconfigs>
+		<config>java:com.project.erp.application.warehouseScheduler</config>
+		<config>java:com.project.erp.ErpProjectApplication</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>
