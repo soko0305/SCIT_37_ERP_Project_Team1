@@ -30,6 +30,10 @@
 				var type = $(this).attr("data-type");
 				var seq =  $(this).val();
 				if(type=='delete'){
+					if (confirm("공급처를 삭제하시겠습니까?") == true){    //확인
+					}else{   //취소
+				     	return false;
+					}
 					$("#seq").val(seq);
 					$("#deleteForm").submit();
 				}else if(type=='update'){
