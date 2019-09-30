@@ -54,7 +54,7 @@
                             <div class="main-card mb-3 card">
                                 <div class="card-body"><h5 class="card-title">재고정보 입력</h5>
                                 <div class="divider"></div>
-                                    <form class="">
+                                    <form id="checkAmountForm" action="uploadFile" method="POST" enctype="multipart/form-data">
                                         <div class="position-relative row form-group">
                                         	<label for="exampleEmail" class="col-sm-2 col-form-label">제품코드</label>
                                             <div class="col-sm-10">
@@ -73,7 +73,7 @@
                                         </div>
                                         <div class="position-relative row form-check" align="right">
                                             <div class="col-sm-10 offset-sm-2">
-                                            	<button class="btn btn-primary" >Submit</button>
+                                            	<button class="btn btn-primary" id="submitButton" type="button">Submit</button>
                                             </div>
                                         </div>
                                     </form>
@@ -117,7 +117,33 @@
 
 <!-- drawer wapper 삽입 -->
 <div class="app-drawer-overlay d-none animated fadeIn"></div>
-<script type="text/javascript" src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js">
+<script>
+var formData = new FormData();
+
+	$("#submitButton").click(function(){
+		//uploadFileFunc();
+		$("#checkAmountForm").submit();
+	});
+	/*
+	function uploadFileFunc(){
+		$.ajax({
+			url:"/uploadFile",
+			type: "POST",
+			data: new FormData($("#upload_file_frm")[0]),
+			enctype: 'multipart/form-data',
+	        processData: false,
+	        contentType: false,
+	        cache: false,
+	        success: function () {
+	            $("#uload_result_msg").text("File Upload Success");
+
+	        },
+	        error: function () {
+	            $("#uload_result_msg").text("File Upload Error");
+	        }
+		});
+	}*/
+
 </script>
 </body>
 
