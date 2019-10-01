@@ -13,7 +13,7 @@ public class HomeController {
 	
 	@RequestMapping(value="/gogo", method = RequestMethod.GET)
 	public String gogo(){
-		return "getFaceDeterction";
+		return "getFaceDetection";
 	} 
 	
 	@RequestMapping(value="/", method = RequestMethod.GET)
