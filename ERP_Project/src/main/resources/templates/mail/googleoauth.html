@@ -112,7 +112,7 @@
                              </div>\
                              <div class="modal-body">\
                                <iframe id="message-iframe-'+message.id+'" srcdoc="<p>Loading...</p>">\
-                               </iframe>\
+                               </iframe>\<a id="download-attach" download="filename">download</a>\
                              </div>\
                              <div class="modal-footer">\
                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\
@@ -211,7 +211,8 @@
         });
         return header;
       }
-      
+      // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+     /*  
       function getAttachments(userId, message, callback) {
     	  var parts = message.payload.parts;
     	  for (var i = 0; i < parts.length; i++) {
@@ -231,7 +232,65 @@
     	    }
     	  }
     	}
-      
+       */
+       //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+      /*  function getAttachments(messageID, parts, callback) {
+    	    var attachId = parts.body.attachmentId;
+    	    var request = gapi.client.gmail.users.messages.attachments.get({
+    	      'id': attachId,
+    	      'messageId': messageID,
+    	      'userId': 'me'
+    	    });
+    	    request.execute(function (attachment) {
+    	      callback(parts.filename, parts.mimeType, attachment);
+    	      if (attachment.length > 0) {
+    	    	    for (var i in attachment) {
+    	    	       getAttachments(response.id, attachment[i], function (filename, mimeType, attachment) {
+
+    	    	       let dataBase64Rep = attachment.data.replace(/-/g, '+').replace(/_/g, '/')
+
+    	    	       let urlBlob = b64toBlob(dataBase64Rep, mimeType, attachment.size)
+
+    	    	       let dlnk = document.getElementById('download-attach')
+    	    	       dlnk.href = urlBlob
+    	    	       dlnk.download = filename
+    	    	       dlnk.click()
+    	    	       URL.revokeObjectURL(urlBlob)
+    	    	   })
+    	    	}
+    	    	}
+    	    });
+    	  }
+
+    	
+
+    	function b64toBlob (b64Data, contentType, sliceSize) {
+    	  contentType = contentType || ''
+    	  sliceSize = sliceSize || 512
+
+    	  var byteCharacters = atob(b64Data)
+    	  var byteArrays = []
+
+    	  for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+    	    var slice = byteCharacters.slice(offset, offset + sliceSize)
+
+    	    var byteNumbers = new Array(slice.length)
+    	    for (var i = 0; i < slice.length; i++) {
+    	      byteNumbers[i] = slice.charCodeAt(i)
+    	    }
+
+    	    var byteArray = new Uint8Array(byteNumbers)
+
+    	    byteArrays.push(byteArray)
+    	  }
+
+    	  var blob = new Blob(byteArrays, {type: contentType})
+    	  let urlBlob = URL.createObjectURL(blob)
+    	  return urlBlob
+    	}
+    
+ */
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
       function getBody(message) {
         var encodedBody = '';
         if(typeof message.parts === 'undefined')
