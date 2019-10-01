@@ -95,7 +95,6 @@
                getHeader(message.payload.headers, 'From')).replace(/\"/g, '&quot;');
                var reply_subject = 'Re: '+getHeader(message.payload.headers, 'Subject').replace(/\"/g, '&quot;');
                
-            	
                $('body').append(
                        '<div class="modal fade" id="message-modal-' + message.id +
                            '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">\
@@ -130,12 +129,10 @@
                        </div>'
                      );
                
-               
+                                    
 				$('#message-link-'+message.id).on('click', function(){
-				
-          var ifrm = $('#message-iframe-'+message.id)[0].contentWindow.document;
-          $('body', ifrm).html(getBody(message.payload));
-        
+          			var ifrm = $('#message-iframe-'+message.id)[0].contentWindow.document;
+          			$('body', ifrm).html(getBody(message.payload));
 				});
         
       }
@@ -157,9 +154,7 @@
       }
       function composeTidy()
       {
-
-    	location.href='http://localhost:9088/mail';
-
+		location.reload(true);
   	 
         $('#compose-to').val('');
         $('#compose-subject').val('');
@@ -182,9 +177,8 @@
       }
       function replyTidy()
       {
-       	
-       	location.href='http://localhost:9088/mail';
 
+		location.reload(true);
        	$('#reply-message').val('');
         $('#reply-button').removeClass('disabled');
       }
