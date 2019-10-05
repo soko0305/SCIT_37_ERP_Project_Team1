@@ -19,6 +19,8 @@ public class InventoryController {
 	@Autowired
 	InventoryService inventoryService;
 	int flag = 0;
+	int amount= 0;
+	String code = null;
 	
 
 
@@ -68,5 +70,27 @@ public class InventoryController {
 		return pList;
 	}
 	
+	@RequestMapping(value="/setProductMaterialInfo", method = RequestMethod.POST)
+	public @ResponseBody void setProductMaterialInfo(ProductVO product){
+		code= product.getPd_code();
+		amount = product.getAmount();
+	}
+	
+	@RequestMapping(value="/setRawMaterialInfo", method = RequestMethod.POST)
+	public @ResponseBody void setRawMaterialInfo(RawMaterialVO rawmaterial){
+		code= rawmaterial.getRawm_code();
+		amount = rawmaterial.getAmount();
+	}
+	
+	
+	@RequestMapping(value="/getCodeANDAmount", method = RequestMethod.POST)
+	public @ResponseBody RawMaterialVO getCodeANDAmount(){
+		RawMaterialVO rawmaterial = new RawMaterialVO();
+		rawmaterial.setRawm_code(code);
+		rawmaterial.setAmount(amount);
+		code = null;
+		amount =0;
+		return rawmaterial;
+	}
 	
 }

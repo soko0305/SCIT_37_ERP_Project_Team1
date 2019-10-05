@@ -1,5 +1,6 @@
 package com.project.erp.file;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -7,15 +8,28 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.gcp.vision.CloudVisionTemplate;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.cloud.vision.v1.AnnotateImageResponse;
+import com.google.cloud.vision.v1.Feature;
+
 @Service
 public class FileUploadDownloadService {
 	 private final Path fileLocation;
+	 
+	 @Autowired
+		private ResourceLoader resourceLoader;
+
+		// [START spring_vision_autowire]
+		@Autowired
+		private CloudVisionTemplate cloudVisionTemplate;
+		// [END spring_vision_autowire]
 	    
 	    @Autowired
 	    public FileUploadDownloadService(FileUploadProperties prop) {
@@ -63,5 +77,22 @@ public class FileUploadDownloadService {
 	            throw new FileDownloadException(fileName + " 파일을 찾을 수 없습니다.", e);
 	        }
 	    }
+	    
+	    public int getObjectDetection(String fileDownloadUri) throws IOException {
+			Resource imageResource = this.resourceLoader.getResource(fileDownloadUri);
+			int count = 0;
+			AnnotateImageResponse response = this.cloudVisionTemplate.analyzeImage(imageResource,
+					Feature.Type.OBJECT_LOCALIZATION);
+			
+			for (int i = 0; i < response.getLocalizedObjectAnnotationsList().size(); i++) {
+				String name = response.getLocalizedObjectAnnotationsList().get(i).getName();
+				if(name.equals("Packaged goods")||
+				   name.equals("Box")
+					) {
+					count++;
+				}
+			 }
+			return count;
+		}
 
 }

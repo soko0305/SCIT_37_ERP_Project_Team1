@@ -4,15 +4,13 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
- 
+
 import javax.servlet.http.HttpServletRequest;
- 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.gcp.vision.CloudVisionTemplate;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import com.google.cloud.vision.v1.AnnotateImageResponse;
-import com.google.cloud.vision.v1.Feature;
  
 
 
@@ -35,26 +30,28 @@ private static final Logger logger = LoggerFactory.getLogger(FileUploadControlle
     
     @Autowired
     private FileUploadDownloadService service;
-	@Autowired
-	  private ResourceLoader resourceLoader;
 
-	  // [START spring_vision_autowire]
-	  @Autowired
-	  private CloudVisionTemplate cloudVisionTemplate;
-
-    
+    //일중상 백단
     @PostMapping("/uploadFile")
-    public FileUploadResponse uploadFile(@RequestParam("file") MultipartFile file) {
+    public int uploadFile(@RequestParam("file") MultipartFile file) {
+    	int result = 0;
     	String fileName = service.storeFile(file);
         String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
                                 .path("/downloadFile/")
                                 .path(fileName)
                                 .toUriString();
-        Resource imageResource = this.resourceLoader.getResource(fileDownloadUri);
+        /*Resource imageResource = this.resourceLoader.getResource(fileDownloadUri);
   	  AnnotateImageResponse response = this.cloudVisionTemplate.analyzeImage(
   	          imageResource, Feature.Type.OBJECT_LOCALIZATION);
   	  System.out.println(response.getLocalizedObjectAnnotationsList());
-        return new FileUploadResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize());
+        return new FileUploadResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize());*/
+        try {
+			result = service.getObjectDetection(fileDownloadUri);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return result;
     }
     
     @PostMapping("/uploadMultipleFiles")

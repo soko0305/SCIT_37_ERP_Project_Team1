@@ -15,4 +15,5 @@ public class RawMaterialVO {
 	private String rawm_delete;		//원자재삭제여부
 	private String warehouse_code;
 	private String systemamount;
+	private int amount;
 }
