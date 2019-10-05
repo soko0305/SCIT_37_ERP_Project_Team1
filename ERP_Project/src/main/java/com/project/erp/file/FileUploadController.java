@@ -42,7 +42,7 @@ private static final Logger logger = LoggerFactory.getLogger(FileUploadControlle
 	  @Autowired
 	  private CloudVisionTemplate cloudVisionTemplate;
 
-    
+    //일중상 백단
     @PostMapping("/uploadFile")
     public FileUploadResponse uploadFile(@RequestParam("file") MultipartFile file) {
     	String fileName = service.storeFile(file);

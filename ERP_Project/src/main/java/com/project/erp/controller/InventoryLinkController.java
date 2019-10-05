@@ -78,7 +78,12 @@ public class InventoryLinkController {
 	public @ResponseBody void checkAmountByPic(){
 	}
 	
+	@RequestMapping(value="/goResearchInventoryCode", method = RequestMethod.GET)
+	public String goResearchInventoryCode(){
+		return "inventory/ResearchInventoryCode";
+	}
 	
+
 
 
 	

@@ -58,9 +58,9 @@
                                         <div class="position-relative row form-group">
                                         	<label for="exampleEmail" class="col-sm-2 col-form-label">제품코드</label>
                                             <div class="col-sm-10">
-                                            	<input placeholder="제품코드" type="text" class="mb-2 form-control" style="display:inline ;width: 400px">        
+                                            	<input id="inputCode" placeholder="제품코드" type="text" class="mb-2 form-control" style="display:inline ;width: 400px">        
                                 
-                               						 <button class="mb-2 mr-2 btn btn-primary" style="display:inline ;height: 37px;width: 80px">
+                               						 <button id="searchButton" class="mb-2 mr-2 btn btn-primary" type="button" style="display:inline ;height: 37px;width: 80px">
                                 						검색
                            							 </button>
                                             </div>
@@ -73,7 +73,7 @@
                                         </div>
                                         <div class="position-relative row form-check" align="right">
                                             <div class="col-sm-10 offset-sm-2">
-                                            	<button class="btn btn-primary" id="submitButton" type="button">Submit</button>
+                                            	<button class="btn btn-primary" id="confirmButton" type="button">confirm</button>
                                             </div>
                                         </div>
                                     </form>
@@ -89,7 +89,7 @@
 										<div class="position-relative row form-group">
                                         	<label for="exampleEmail" class="col-sm-2 col-form-label">전산재고</label>
                                             <div class="col-sm-10">
-                                            	<input placeholder="전산재고" type="text" class="mb-2 form-control" style="display:inline ;width: 400px">
+                                            	<input id="inputEAmount" placeholder="전산재고" type="text" class="mb-2 form-control" style="display:inline ;width: 400px">
                                             </div>
                                         </div>
                                         
@@ -119,11 +119,53 @@
 <div class="app-drawer-overlay d-none animated fadeIn"></div>
 <script>
 var formData = new FormData();
-
-	$("#submitButton").click(function(){
+var code = null;
+var amount = 0;
+	$("#confirmButton").click(function(){
 		//uploadFileFunc();
-		$("#checkAmountForm").submit();
+		//$("#checkAmountForm").submit();
+		
+		var formData = new FormData();
+		formData.append("file", $("input[name=file]")[0].files[0]);
+		$.ajax({ url: '/uploadFile', 
+				 data: formData, 
+				 processData: false, 
+				 contentType: false, 
+				 type: 'POST', 
+				 success: function(data){
+					 //여기서 이제 숫자 센거 가져오면 끝
+					       alert("1"); } 
+		});
+		
+
+
 	});
+	
+	$("#searchButton").click(function(){
+		var g_oWindow = window.open("/goResearchInventoryCode", "Input Storage Information","width=700, height=500, location=no, toolbar=no, menubar=no, scrollbars=no, status=no, resizable=yes");
+		g_oInterval = window.setInterval(function() {
+	        try {
+	            // 창이 꺼졌는지 판단
+	            if( g_oWindow == null || g_oWindow.closed ) {
+	                window.clearInterval(g_oInterval);
+	                g_oWindow = null;
+
+	                $.ajax({
+	                	// 정보 가져오기
+	                	url:"getCodeANDAmount",
+	                	type:"POST",
+	                	success:function(serverData){
+	                		code = serverData.rawm_code;
+	                		amount = serverData.amount;
+	                		$("#inputCode").val(code);
+	                		$("#inputEAmount").val(amount);
+	                	}
+	                });
+	            }
+	        } catch (e) { }
+	    }, 500);
+	
+	});	
 	/*
 	function uploadFileFunc(){
 		$.ajax({
