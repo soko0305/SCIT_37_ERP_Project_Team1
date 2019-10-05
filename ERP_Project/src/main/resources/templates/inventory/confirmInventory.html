@@ -54,7 +54,6 @@
                             <div class="main-card mb-3 card">
                                 <div class="card-body"><h5 class="card-title">재고정보 입력</h5>
                                 <div class="divider"></div>
-                                    <form id="checkAmountForm" action="uploadFile" method="POST" enctype="multipart/form-data">
                                         <div class="position-relative row form-group">
                                         	<label for="exampleEmail" class="col-sm-2 col-form-label">제품코드</label>
                                             <div class="col-sm-10">
@@ -76,7 +75,6 @@
                                             	<button class="btn btn-primary" id="confirmButton" type="button">confirm</button>
                                             </div>
                                         </div>
-                                    </form>
                                 </div>
                             </div>
                        
@@ -84,7 +82,6 @@
                             <div class="main-card mb-3 card">
                                 <div class="card-body"><h5 class="card-title">재고 확인</h5>
                                 <div class="divider"></div>
-                                    <form>
                                     <div>
 										<div class="position-relative row form-group">
                                         	<label for="exampleEmail" class="col-sm-2 col-form-label">전산재고</label>
@@ -94,17 +91,16 @@
                                         </div>
                                         
                                            <div class="position-relative row form-group">
-                                        	<label for="exampleEmail" class="col-sm-2 col-form-label">실질재고</label>
+                                        	<label id="inputRAmount" for="exampleEmail" class="col-sm-2 col-form-label">실질재고</label>
                                             <div class="col-sm-10">
                                             	<input placeholder="실질재고" type="text" class="mb-2 form-control" style="display:inline ;width: 400px">
                                             </div>
                                         	</div>
                                         	<div align="right">
                                         	<!-- 일치 시 submit // 아닐 시 수정 또는 보류 -->
-                                            <button class="btn btn-secondary" >Submit</button>
+                                            <button class="btn btn-secondary" type="button" id="submitButton">Submit</button>
                                             </div>
                                         	</div>
-                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -118,13 +114,12 @@
 <!-- drawer wapper 삽입 -->
 <div class="app-drawer-overlay d-none animated fadeIn"></div>
 <script>
+$(function(){
+	
 var formData = new FormData();
 var code = null;
 var amount = 0;
 	$("#confirmButton").click(function(){
-		//uploadFileFunc();
-		//$("#checkAmountForm").submit();
-		
 		var formData = new FormData();
 		formData.append("file", $("input[name=file]")[0].files[0]);
 		$.ajax({ url: '/uploadFile', 
@@ -133,12 +128,10 @@ var amount = 0;
 				 contentType: false, 
 				 type: 'POST', 
 				 success: function(data){
-					 //여기서 이제 숫자 센거 가져오면 끝
-					       alert("1"); } 
+					 //$("#inputEAmount").val(data);
+					 alert(data);
+					 	 } 
 		});
-		
-
-
 	});
 	
 	$("#searchButton").click(function(){
@@ -166,25 +159,12 @@ var amount = 0;
 	    }, 500);
 	
 	});	
-	/*
-	function uploadFileFunc(){
-		$.ajax({
-			url:"/uploadFile",
-			type: "POST",
-			data: new FormData($("#upload_file_frm")[0]),
-			enctype: 'multipart/form-data',
-	        processData: false,
-	        contentType: false,
-	        cache: false,
-	        success: function () {
-	            $("#uload_result_msg").text("File Upload Success");
 
-	        },
-	        error: function () {
-	            $("#uload_result_msg").text("File Upload Error");
-	        }
-		});
-	}*/
+	//submit 해서 같으면 완료
+	//다르면 수정하게 만들기
+	
+	
+});
 
 </script>
 </body>
