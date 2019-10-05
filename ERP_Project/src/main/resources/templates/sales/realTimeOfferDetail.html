@@ -10,8 +10,7 @@
     <meta name="msapplication-tap-highlight" content="no">
     <meta name=ProgId content=Excel.Sheet>
 	<meta name=Generator content="Microsoft Excel 15">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"/>
     <meta name="description" content="Basic example of a Bootstrap 4 table with sort, search and filter functionality.">
 
     <!-- Disable tap highlight on IE -->
@@ -37,6 +36,7 @@
 /*<![CDATA[*/
  var list = /*[[${detailList}]]*/;
  var database = firebase.database();
+ var changeButton = 0;
  
 	$(function(){	
 		$("#header").load("/header");
@@ -57,7 +57,7 @@
 					if(snapshot.key==list[i].pd_code){
 						var amount = snapshot.child("systemamount").val();
 						var index = i+1;
-						str1= '<tr align="center">';
+						var str1= '<tr align="center">';
 						str1+='<td>'+index+'</td>';
 						str1+='<td>'+list[i].salesdetail_name+'</td>';
 						str1+='<td>'+list[i].salesdetail_amount+'</td>';
@@ -65,17 +65,43 @@
 						if(list[i].salesdetail_amount<=amount){
 					    str1+='<td><a href="#" class="mb-2 mr-2 btn btn-primary">READY</a></td></tr>';
 						}else{
-						str1+='<td><a href="#" class="mb-2 mr-2 btn btn-danger">생산요청</a></td></tr>';	
+						str1+='<td><a href="#" class="mb-2 mr-2 btn btn-danger">생산요청</a></td></tr>';
+						changeButton++;
 						}
 						
-					
 						$('#tbody1').append(str1);
+						
 						}
 					}
-					
+					drawButton();
 		    	});
 			});
 			
+		}
+	
+		//0일때에는 buttonplace에 판매하기 띄우고, 아닐 때에는 생산하러가기 띄우기.
+		function drawButton(){
+			var str = '';
+
+			if(changeButton==0){
+				str+='<button id="goSell" class="mb-2 mr-2 btn btn-primary">판매하기</button>';
+				$('#buttonplace').html(str);
+			}else{
+				str+='<a href="#" id="goProduct" class="mb-2 mr-2 btn btn-primary">생산하러가기</a>';
+				$('#buttonplace').html(str);
+			}
+			
+			sellProduct();
+		}
+		
+		//판매하기 눌렀을때에 재고 빼주기, 재고 뺀 후에는 판매완료로 status update 시키기. 그 후 salesHistory로.
+		function sellProduct(){
+			$('#goSell').click(function(){
+				database.ref('warehouse/').child("inventory").child(상품번호).once('child_added').then(function(snapshot){
+				       database.ref('warehouse/~').child("inventory").child(상품번호).update({"systemamount":snapshot.val()-@@@@주문받은만큼});
+				       
+				
+			})
 		}
 		
 	/*]]>*/
@@ -270,10 +296,9 @@
 										<td colspan=9 th:text="'￦ '+${sales.sales_totalprice}" class=xl678711 style='border-right: 1.0pt solid black; font-weight: 600; border-left: none'></td>
 									</tr>
 								</table>
-							</div></div>
-                                            </div>
-                                            <div class="tab-pane" id="tab-eg9-2" role="tabpanel">
-                                                <div class="card-body">
+							</div></div></div>
+                                <div class="tab-pane" id="tab-eg9-2" role="tabpanel">
+                                   <div class="card-body">
                                       <div class="mb-3 card">
                                           <div class="card-body"><br /><br /><hr />
                                             <table style="width: 100%;" id="example" class="table table-hover table-bordered">
@@ -289,7 +314,10 @@
                                           <tbody id="tbody1">
                                       
                                 		  </tbody>
-                                    </table><hr /></div>
+                                    </table><hr />
+                                    <div id="buttonplace"></div>
+                                    </div>
+                                    	
                                    </div></div>
                                             </div>
                                         </div>

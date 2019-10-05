@@ -14,8 +14,6 @@ import com.project.erp.vo.Sales;
 import com.project.erp.vo.SalesDetail;
 
 
-
-
 @Controller
 public class LinkController {
 

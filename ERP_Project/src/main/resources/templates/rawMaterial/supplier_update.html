@@ -1,33 +1,28 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="utf-8" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta http-equiv="Content-Language" content="en">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Data Tables - Choose between regular React Bootstrap
-	tables or advanced dynamic ones.</title>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
-<meta name="description"
-	content="Choose between regular React Bootstrap tables or advanced dynamic ones.">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Register Boxed - ArchitectUI HTML Bootstrap 4 Dashboard Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"
+    />
+    <meta name="description" content="ArchitectUI HTML Bootstrap 4 Dashboard Template">
 
-<!-- Disable tap highlight on IE -->
-<meta name="msapplication-tap-highlight" content="no">
+    <!-- Disable tap highlight on IE -->
+    <meta name="msapplication-tap-highlight" content="no">
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script
-	src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
-<link
-	href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css"
-	rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
+<link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
+
 <script>
 	$(function(){
 		
 		/* 버튼 Action */
-		$(".btn-primary").click(function(){
+		$("#updateButton").click(function(){
 			var check = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/
 			var seq = $("#supplierseq").val();
 			var name = $("#supplier_name").val();
@@ -86,49 +81,76 @@
 </script>
 </head>
 <body>
-	
-	<div class="col-md-3">
-		<div class="form-group">
-			<label for="supplierseq">공급처seq</label> <input id="supplierseq" name="supplierseq"
-				type="text" readonly="readonly" th:value="${result.supplierseq}" class="form-control">
-		</div>
-		<div class="form-group">
-			<label for="supplier_name">공급처명</label> <input id="supplier_name" name="supplier_name"
-				type="text" th:value="${result.supplier_name}" class="form-control">
-		</div>
-		<div class="form-group">
-			<label for="supplier_owner">공급처대표명</label> <input id="supplier_owner" name="supplier_owner"
-				type="text" th:value="${result.supplier_owner}" class="form-control">
-		</div>
-		<div class="form-group">
-			<label for="supplier_addr">공급처주소</label> <input id="supplier_addr" name="supplier_addr"
-				type="text" th:value="${result.supplier_addr}" class="form-control">
-		</div>
-		<div class="form-group">
-			<label for="supplier_tel">공급처연락처</label> <input id="supplier_tel" name="supplier_tel"
-				type="tel" th:value="${result.supplier_tel}" class="form-control">
-		</div>
-		<div class="form-group">
-			<label for="supplier_pic">공급처담당자명</label> <input id="supplier_pic" name="supplier_pic"
-				type="text" th:value="${result.supplier_pic}" class="form-control">
-		</div>
-		<div class="form-group">
-			<label for="supplier_email">공급처이메일</label> <input id="supplier_email" name="supplier_email"
-				type="email" th:value="${result.supplier_email}" class="form-control">
-		</div>
-		<div class="form-group">
-		<button type="submit" class="mb-2 mr-2 btn-square btn btn-primary">수정</button>
-		</div>
-	</div>
-	
-	<form action="supplierUpdate" method="post" id="supplierUpdateForm">
-		<input type="hidden" id="supplierseq1" name="supplierseq">
-		<input type="hidden" id="supplier_name1" name="supplier_name">
-		<input type="hidden" id="supplier_owner1" name="supplier_owner">
-		<input type="hidden" id="supplier_addr1" name="supplier_addr">
-		<input type="hidden" id="supplier_tel1" name="supplier_tel">
-		<input type="hidden" id="supplier_pic1" name="supplier_pic">
-		<input type="hidden" id="supplier_email1" name="supplier_email">
-	</form>
+<form action="supplierUpdate" method="post" id="supplierUpdateForm">
+	<input type="hidden" id="supplierseq1" name="supplierseq">
+	<input type="hidden" id="supplier_name1" name="supplier_name">
+	<input type="hidden" id="supplier_owner1" name="supplier_owner">
+	<input type="hidden" id="supplier_addr1" name="supplier_addr">
+	<input type="hidden" id="supplier_tel1" name="supplier_tel">
+	<input type="hidden" id="supplier_pic1" name="supplier_pic">
+	<input type="hidden" id="supplier_email1" name="supplier_email">
+</form>
+
+<div class="app-container app-theme-white body-tabs-shadow">
+        <div class="app-container">
+            <div class="h-100 bg-premium-dark">
+                <div class="d-flex h-100 justify-content-center align-items-center">
+                    <div class="mx-auto app-login-box col-md-8">
+                        <div class="app-logo-inverse mx-auto mb-3"></div>
+                        <div class="modal-dialog w-100">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <h5 class="modal-title">
+                                        <h4 class="mt-2">
+                                       
+                                            <div>공급처 수정</div>
+                                            <span>새로 수정 하실 <span class="text-success">공급처 정보</span> 를 기입해주세요</span></h4>
+                                    </h5>
+                                    <div class="col-md-3">
+										<div class="form-group">
+											<label for="supplierseq">공급처seq</label> <input id="supplierseq" name="supplierseq"
+												type="text" readonly="readonly" th:value="${result.supplierseq}" class="form-control">
+										</div>
+										<div class="form-group">
+											<label for="supplier_name">공급처명</label> <input id="supplier_name" name="supplier_name"
+												type="text" th:value="${result.supplier_name}" class="form-control">
+										</div>
+										<div class="form-group">
+											<label for="supplier_owner">공급처대표명</label> <input id="supplier_owner" name="supplier_owner"
+												type="text" th:value="${result.supplier_owner}" class="form-control">
+										</div>
+										<div class="form-group">
+											<label for="supplier_addr">공급처주소</label> <input id="supplier_addr" name="supplier_addr"
+												type="text" th:value="${result.supplier_addr}" class="form-control">
+										</div>
+										<div class="form-group">
+											<label for="supplier_tel">공급처연락처</label> <input id="supplier_tel" name="supplier_tel"
+												type="tel" th:value="${result.supplier_tel}" class="form-control">
+										</div>
+										<div class="form-group">
+											<label for="supplier_pic">공급처담당자명</label> <input id="supplier_pic" name="supplier_pic"
+												type="text" th:value="${result.supplier_pic}" class="form-control">
+										</div>
+										<div class="form-group">
+											<label for="supplier_email">공급처이메일</label> <input id="supplier_email" name="supplier_email"
+												type="email" th:value="${result.supplier_email}" class="form-control">
+										</div>
+									</div>
+									
+									<div class="modal-footer d-block text-center">
+                                    <button id="updateButton" class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg" type="button">공급처 수정</button>
+                                </div>
+                                    </div>
+                                    
+                                
+                            </div>
+                        </div>
+                        <div class="text-center text-white opacity-8 mt-3">Copyright © ArchitectUI 2019</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
 </body>
 </html>

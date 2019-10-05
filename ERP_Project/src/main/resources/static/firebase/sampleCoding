@@ -50,7 +50,7 @@
 		
 		
 		
-			  	//생산품 실시간 재고 가져오는 함수
+		//생산품 실시간 재고 가져오는 함수
 		function  getProductAmount(pd_code, warehouse_name, warehouse_code){
 			database.ref('warehouse/'+warehouse_code).child("inventory").child(pd_code).once('value').then(function(snapshot){
 				var amount = snapshot.val().systemamount;
