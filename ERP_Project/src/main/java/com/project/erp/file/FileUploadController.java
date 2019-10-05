@@ -1,9 +1,6 @@
 package com.project.erp.file;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -54,13 +51,13 @@ private static final Logger logger = LoggerFactory.getLogger(FileUploadControlle
         return result;
     }
     
-    @PostMapping("/uploadMultipleFiles")
+    /*@PostMapping("/uploadMultipleFiles")
     public List<FileUploadResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files){
         return Arrays.asList(files)
                 .stream()
                 .map(file -> uploadFile(file))
                 .collect(Collectors.toList());
-    }
+    }*/
     
     @GetMapping("/downloadFile/{fileName:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request){
