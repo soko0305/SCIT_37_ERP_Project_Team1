@@ -33,15 +33,16 @@
     <script type="text/javascript">
     var clientId = '585813930953-hsugmq6k1kalmevvm553ek555jrgug2j.apps.googleusercontent.com';
     var apiKey = 'AIzaSyAf7owsQ0t7h2_AJ0ifD-Cx6Qg6vc8niLA';
-                  
     var scopes =
         'https://www.googleapis.com/auth/gmail.readonly '+
         'https://www.googleapis.com/auth/gmail.send';
+    
       function handleClientLoad() {
 
         gapi.client.setApiKey(apiKey);
         window.setTimeout(checkAuth, 1);
       }
+      
       function checkAuth() {
         gapi.auth.authorize({
           client_id: clientId,
@@ -49,6 +50,7 @@
           immediate: true
         }, handleAuthResult);
       }
+      
       function handleAuthClick() {
         gapi.auth.authorize({
           client_id: clientId,
@@ -57,6 +59,7 @@
         }, handleAuthResult);
         return false;
       }
+      
       function handleAuthResult(authResult) {
         if(authResult && !authResult.error) {
           loadGmailApi();
@@ -66,9 +69,11 @@
             handleAuthClick();
         }
       }
+      
       function loadGmailApi() {
         gapi.client.load('gmail', 'v1', displayInbox);
       }
+      
       function displayInbox() {
         var request = gapi.client.gmail.users.messages.list({
           'userId': 'me',
@@ -112,9 +117,8 @@
                                  <span aria-hidden="true">&times;</span></button>\
                              </div>\
                              <div class="modal-body">\
-                               <iframe id="message-iframe-'+message.id+'" srcdoc="<p>Loading...</p>">\
-                               </iframe>\<button class="btn btn-primary" href="#" id="message-att-'+message.id+'" mid="'+message.id+'"/>Download</button>\
-                               <a href="#" id="message-a-'+message.id+'" downlaod=""></a>\
+                               <iframe id="message-iframe-'+message.id+'" srcdoc="<p>Loading...</p>">\</iframe>\
+                               <button class="btn btn-primary" href="#" id="message-att-'+message.id+'" mid="'+message.id+'"/>Download</button>\
                              </div>\
                              <div class="modal-footer">\
                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\
@@ -541,5 +545,3 @@
         </div>
       </div>
     </div>
-<!-- 
-<script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script> -->
