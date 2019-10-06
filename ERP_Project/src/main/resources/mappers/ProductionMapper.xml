@@ -187,9 +187,8 @@
 			,rm.rawm_name
 			,rm.rawm_sort
 			,rm.rawm_price
-			,rm.rawm_autoorder
+			,rm.rawm_notice
 			,rm.rawm_minimum
-			,rm.rawm_set
 			,rm.rawm_delete
 	 	FROM product_material pm JOIN rawmaterial rm
 	 	ON pm.rawm_code = rm.rawm_code

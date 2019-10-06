@@ -34,9 +34,96 @@
 var database = firebase.database();
 
 	$(function(){
-		
+		selelctInventoryINWarehouse();
 	});
    
+	function selelctInventoryINWarehouse(){
+		database.ref('warehouse/').on('child_added', function(data){
+			var warehouse_code = data.key;
+			var warehouse_name = data.val().warehouse_name;
+			
+			setWarehouseDropbox(warehouse_code, warehouse_name);
+			alert(warehouse_name);
+			call(warehouse_code);
+			
+		});
+	}
+	
+	//창고 드롭박스 세팅 함수
+	function setWarehouseDropbox(warehouse_code, warehouse_name){
+		var str='';
+		str+='<option value="'+warehouse_code+'" label="'+warehouse_name+'"></option>';
+		$("#codeList").append(str);
+	}
+	
+	function call(warehouse_code){
+		database.ref('warehouse/'+warehouse_code).child("inventory").on('child_added', function(snapshot){
+			if(snapshot.key.charAt(0)=='m'){
+				var rawm_code = snapshot.key;
+				alert(rawm_code);
+				database.ref('warehouse/'+warehouse_code).child("inventory").child(rawm_code).on('value', function(snapshot){
+					var code = snapshot.key;
+					var amount = snapshot.val().systemamount;
+					var totalAmount=0;
+					alert("code" + code + "amount" + amount);
+					
+					$("#insertButton").click(function(){
+						var manuf_amount = $("#manuf_amount").val();
+						var pd_code = $("#pd_code").val();
+						var flag = true;
+						$.ajax({
+							url:"amountCheck",
+							type:"GET",
+							data:{pd_code : pd_code},
+							success:function(result){
+								var count  =0;
+								alert(JSON.stringify(result));
+								for(var i in result){
+									alert("for문 code" + code);
+									if(code==result[i].rawm_code){
+										totalAmount = (result[i].product_material_amount * manuf_amount);
+										if(totalAmount > amount){
+											get = (totalAmount - amount);
+											alert(result[i].rawm_name+"가 "+get+"개 부족합니다");
+											flag = false;
+								    		
+											if(count ==result.length-1){
+									    		if (confirm("원자재 발주로 넘어가시겠습니까?") == true){    //확인
+
+												 	var url = "goOrderInsert";
+												    var name = "popup test";
+												    var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+												    window.open(url, name, option);
+												 }else{   //취소
+
+											     	return false;
+
+												 }
+								    		}
+										
+										}else{
+											database.ref('warehouse/'+warehouse_code).child("inventory").child(result[i].rawm_code).on('child_added', function(snapshot){
+											database.ref('warehouse/'+warehouse_code).child("inventory").child(result[i].rawm_code).update({"systemamount":snapshot.val() - totalAmount});
+											});
+										}
+									}
+									count ++;
+								}
+							}
+						});
+					});
+					if(flag){
+						alert("flag");
+						$("#produceinsertForm").submit();
+				         opener.location.href='gorpoducecheck'
+				         window.open("about:blank","_self").close();
+					}else{
+						alert("!!!");
+					}
+				});
+		};
+	});
+	}
 </script>
 </head>
 <body>
