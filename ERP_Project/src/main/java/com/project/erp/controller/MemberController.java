@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.erp.dao.MemberDAO;
+import com.project.erp.dao.OrderDAO;
 import com.project.erp.service.MemberService;
 import com.project.erp.vo.MemberVO;
+import com.project.erp.vo.Order_rawMaterialVO;
 
 @Controller
 public class MemberController {
@@ -21,6 +23,8 @@ public class MemberController {
 	
 	@Autowired
 	MemberService memberService;
+	@Autowired
+	OrderDAO oDAO;
 	
 	@RequestMapping(value="/selectMemberById", method = RequestMethod.GET)
 	public @ResponseBody MemberVO selectMemberById(MemberVO member){
@@ -56,7 +60,7 @@ public class MemberController {
 		return m;
 	}
 	@RequestMapping(value="/loginSuccess", method = RequestMethod.GET)
-	public  String loginSuccess(String userid, HttpSession session){
+	public  String loginSuccess(String userid, HttpSession session, Model model){
 					session.setAttribute("loginid", userid);
 					MemberVO member = new MemberVO();
 					member.setUserid(userid);
@@ -64,6 +68,10 @@ public class MemberController {
 					session.setAttribute("loginuserstatus", m.getUserstatus());
 					session.setAttribute("logindepartment", m.getUserdepartment());
 					memberService.updateLogin(m);
+					
+					/*발주 및 구매관리*/
+					ArrayList<Order_rawMaterialVO> orderDash =  oDAO.orderDashSelect();
+					model.addAttribute("orderList", orderDash);
 		return "main/index";
 	}
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)

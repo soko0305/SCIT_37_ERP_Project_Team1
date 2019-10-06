@@ -88,11 +88,25 @@
 		rmorder_requserid,
 		rmorder_status
 	from
-		ORDER_RAWMATERIAL
+		(select
+                rmorder_code,
+                rawm_code,
+                rawm_name,
+                supplierseq,
+                rmorder_date,
+                rmorder_amount,
+                warehouse_code,
+                rmorder_requserid,
+                rmorder_status
+            from
+                ORDER_RAWMATERIAL
+            order by
+                rmorder_date desc)
 	where
 			rownum&lt;=3
+			and rmorder_status='UNARRIVE'
 	order by
-			rmorder_date desc
+			rmorder_date DESC
 	</select>
 	
 	<insert id="rawMaterialRequest" parameterType="com.project.erp.vo.Order_rawMaterialVO">
