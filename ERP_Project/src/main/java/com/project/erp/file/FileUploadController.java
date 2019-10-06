@@ -50,7 +50,7 @@ private static final Logger logger = LoggerFactory.getLogger(FileUploadControlle
 		}
         return result;
     }
-<<<<<<< HEAD
+
     
    /* @PostMapping("/uploadMultipleFiles")
 =======

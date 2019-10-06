@@ -111,12 +111,12 @@ where sales_status='판매완료'
 
 
 
-<update id="updateSalesStatus" parameterType="com.project.erp.vo.Sales">
+<update id="updateSalesStatusDone" parameterType="com.project.erp.vo.Sales">
 update sales
 set
-<if test="status='승인대기'">
-status='승인완료'
-</if>
+
+sales_status='판매완료'
+
 where
 sales_ordernum=#{sales_ordernum}
 </update>
