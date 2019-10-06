@@ -41,7 +41,7 @@
                     <li class="nav-item">
                         <a href="javascript:void(0);" data-placement="bottom" rel="popover-focus" data-offset="300" data-toggle="popover-custom" class="nav-link">
                             <i class="nav-link-icon pe-7s-gift"> </i>
-                            Main Link
+                            Mega Menu
                             <i class="fa fa-angle-down ml-2 opacity-5"></i>
                         </a>
                         <div class="rm-max-width">
@@ -52,70 +52,62 @@
                                             <div class="col-sm-6 col-xl-4">
                                                 <ul class="nav flex-column">
                                                     <li class="nav-item-header nav-item">
-                                                        Member
+                                                        Overview
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a href="/signup" class="nav-link">
+                                                        <a href="javascript:void(0);" class="nav-link">
                                                             <i class="nav-link-icon lnr-inbox">
                                                             </i>
                                                             <span>
-                                                                signup
+                                                                Contacts
                                                             </span>
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a href="/login" class="nav-link">
+                                                        <a href="javascript:void(0);" class="nav-link">
                                                             <i class="nav-link-icon lnr-book">
                                                             </i>
                                                             <span>
-                                                                login
+                                                                Incidents
                                                             </span>
                                                             <div class="ml-auto badge badge-pill badge-danger">
                                                             </div>
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a href="/logout" class="nav-link">
+                                                        <a href="javascript:void(0);" class="nav-link">
                                                             <i class="nav-link-icon lnr-picture">
                                                             </i>
                                                             <span>
-                                                                logout
+                                                                Companies
                                                             </span>
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a href="/goBoardList" class="nav-link">
+                                                        <a disabled="" href="javascript:void(0);" class="nav-link disabled">
                                                             <i class="nav-link-icon lnr-file-empty">
                                                             </i>
                                                             <span>
-                                                                board
+                                                                Dashboards
                                                             </span>
                                                         </a>
                                                     </li>
-                                                    <li class="nav-item" th:if="${session.loginid!=null and session.logindepartment.toString().equals('�씤�궗')}">
-                                                        <a href="/goPermitAccount" class="nav-link">
-                                                            <i class="nav-link-icon lnr-file-empty">
-                                                            </i>
-                                                            <span>
-                                                                Administrator account
-                                                            </span>
-                                                        </a>
-                                                    </li>                                                    
                                                 </ul>
                                             </div>
                                             <div class="col-sm-6 col-xl-4">
                                                 <ul class="nav flex-column">
                                                     <li class="nav-item-header nav-item">
-                                                        Production	
+                                                        Favourites
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a href="/goproductioncheck" class="nav-link">
-                                                            	ProductionCheck
+                                                        <a href="javascript:void(0);" class="nav-link">
+                                                            Reports Conversions
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a href="/goproducecheck" class="nav-link">
-                                                            	ProduceCheck
+                                                        <a href="javascript:void(0);" class="nav-link">
+                                                            Quick Start
+                                                            <div class="ml-auto badge badge-success">New</div>
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
@@ -156,7 +148,7 @@
                             </div>
                         </div>
                     </li>
-<!--                     <li class="btn-group nav-item">
+                    <li class="btn-group nav-item">
                         <a  class="nav-link" data-toggle="dropdown" aria-expanded="false">
                             <span class="badge badge-pill badge-danger ml-0 mr-2">4</span>
                             Settings
@@ -190,8 +182,8 @@
                                 </li>
                             </ul>
                         </div>
-                    </li> -->
-                     <li class="dropdown nav-item">
+                    </li>
+                    <li class="dropdown nav-item">
                         <a aria-haspopup="true"  data-toggle="dropdown" class="nav-link" aria-expanded="false">
                             <i class="nav-link-icon pe-7s-settings"></i>
                             Projects
@@ -439,7 +431,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div> -
+                                </div>
                                 <div class="tab-pane" id="tab-events-header" role="tabpanel">
                                     <div class="scroll-area-sm">
                                         <div class="scrollbar-container">

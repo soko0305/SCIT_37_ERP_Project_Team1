@@ -77,23 +77,18 @@ var database = firebase.database();
 			var totalAmount=0;
 
 			$("#insertButton").click(function(){
-				
 				var manuf_amount = $("#manuf_amount").val();
 				var pd_code = $("#pd_code").val();
 				var flag = true;
-				var temp = 0;
-				//
+				
 				$.ajax({
 					url:"amountCheck",
 					type:"GET",
 					data:{pd_code : pd_code},
 					success:function(result){
-						/* alert(JSON.stringify(result)); */
-						var totalAmount = 0;
-						var count = 0;
-						temp = result.length;
-						for(var i=0; i<temp; i++){
-							/* alert("!"); */
+						var count  =0;
+						for(var i in result){
+							// alert("!");
 							if(code==result[i].rawm_code){
 								totalAmount = (result[i].product_material_amount * manuf_amount);
 								if(totalAmount > amount){
@@ -115,47 +110,49 @@ var database = firebase.database();
 										 }
 						    		}
 								
-								}else{
-									database.ref('warehouse/').once('child_added', function(data2){
-										
-										var warehouse_code2 = data2.key;
-										alert(warehouse_code2);
-										if(data2.val()!="empty"){
-											alert("!");
-											database.ref('warehouse/'+warehouse_code2).child("inventory").on('child_added', function(data2){
-												alert("!!");
-											if(data2.key==result[i].rawm_code){
-												alert("!!!");
-												database.ref('warehouse/'+warehouse_code2).child("inventory").child(result[i].rawm_code).once('child_added').then(function(snapshot){
-													database.ref('warehouse/'+warehouse_code2).child("inventory").child(result[i].rawm_code).update({"systemamount":snapshot.val() - totalAmount});
-												});	
-											}
-											});
-										}
-									});
 								}
 							}
 							count ++;
-							if(flag){
-								/* alert("flag") */;
-								
-								$("#produceinsertForm").submit();
-						         opener.location.href='gorpoducecheck'
-						         window.open("about:blank","_self").close();
-							}else{
-								alert("!!!");
-							}
-							
 						}
-						
-						
 					}
 				});
+				if(flag){
+					alert("flag");
+					$("#produceinsertForm").submit();
+			         opener.location.href='gorpoducecheck'
+			         window.open("about:blank","_self").close();
+				}else{
+					alert("!!!");
+				}
+				
+				
+				// (2) start 
+				  const test = (foldernum, str)=>{
+					  return new Promise(()=> {
+						  $.ajax({
+							  url:"countFiles",
+							  type:"POST",
+							  data:{foldernum:foldernum},
+							  success:function(count){
+								  str+='<h1>'+count+'</h1>';
+								  $("#folderList").append(str);
+							  }
+						  })
+					  })
+				  }
+				  // (2) end
+				  
+				  // (3) start
+				  async function runTest(foldernum, str) {
+					  await test(foldernum, str);
+				  }
+				  // (3) end
+				
 				
 			});
 		});
 	}
-	  
+	
 </script>
 </head>
 <body>

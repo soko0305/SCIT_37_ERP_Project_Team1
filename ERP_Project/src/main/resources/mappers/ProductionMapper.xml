@@ -46,7 +46,7 @@
 		#{pd_code},	
 		to_char(to_date(#{manuf_startdate},'MM/DD/YYYY'),'YYYY-MM-DD'),	
 		'미완',	
-		'0',
+		#{warehouse_code},
 		#{manuf_amount},
 		#{manuf_requserid},	
 		sysdate,			
