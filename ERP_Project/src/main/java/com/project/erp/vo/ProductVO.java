@@ -12,5 +12,6 @@ public class ProductVO {
 	private String pd_sort;			//생산품종류
 	private String warehouse_code; //창고	
 	private String   pd_delete; //삭제여부
+	private int amount;
 }
  

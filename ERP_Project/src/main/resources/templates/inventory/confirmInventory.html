@@ -54,13 +54,12 @@
                             <div class="main-card mb-3 card">
                                 <div class="card-body"><h5 class="card-title">재고정보 입력</h5>
                                 <div class="divider"></div>
-                                    <form id="checkAmountForm" action="uploadFile" method="POST" enctype="multipart/form-data">
                                         <div class="position-relative row form-group">
                                         	<label for="exampleEmail" class="col-sm-2 col-form-label">제품코드</label>
                                             <div class="col-sm-10">
-                                            	<input placeholder="제품코드" type="text" class="mb-2 form-control" style="display:inline ;width: 400px">        
+                                            	<input id="inputCode" placeholder="제품코드" type="text" class="mb-2 form-control" style="display:inline ;width: 400px">        
                                 
-                               						 <button class="mb-2 mr-2 btn btn-primary" style="display:inline ;height: 37px;width: 80px">
+                               						 <button id="searchButton" class="mb-2 mr-2 btn btn-primary" type="button" style="display:inline ;height: 37px;width: 80px">
                                 						검색
                            							 </button>
                                             </div>
@@ -73,10 +72,9 @@
                                         </div>
                                         <div class="position-relative row form-check" align="right">
                                             <div class="col-sm-10 offset-sm-2">
-                                            	<button class="btn btn-primary" id="submitButton" type="button">Submit</button>
+                                            	<button class="btn btn-primary" id="confirmButton" type="button">confirm</button>
                                             </div>
                                         </div>
-                                    </form>
                                 </div>
                             </div>
                        
@@ -84,27 +82,25 @@
                             <div class="main-card mb-3 card">
                                 <div class="card-body"><h5 class="card-title">재고 확인</h5>
                                 <div class="divider"></div>
-                                    <form>
                                     <div>
 										<div class="position-relative row form-group">
                                         	<label for="exampleEmail" class="col-sm-2 col-form-label">전산재고</label>
                                             <div class="col-sm-10">
-                                            	<input placeholder="전산재고" type="text" class="mb-2 form-control" style="display:inline ;width: 400px">
+                                            	<input id="inputEAmount" placeholder="전산재고" type="text" class="mb-2 form-control" style="display:inline ;width: 400px">
                                             </div>
                                         </div>
                                         
                                            <div class="position-relative row form-group">
-                                        	<label for="exampleEmail" class="col-sm-2 col-form-label">실질재고</label>
+                                        	<label id="inputRAmount" for="exampleEmail" class="col-sm-2 col-form-label">실질재고</label>
                                             <div class="col-sm-10">
                                             	<input placeholder="실질재고" type="text" class="mb-2 form-control" style="display:inline ;width: 400px">
                                             </div>
                                         	</div>
                                         	<div align="right">
                                         	<!-- 일치 시 submit // 아닐 시 수정 또는 보류 -->
-                                            <button class="btn btn-secondary" >Submit</button>
+                                            <button class="btn btn-secondary" type="button" id="submitButton">Submit</button>
                                             </div>
                                         	</div>
-                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -118,31 +114,57 @@
 <!-- drawer wapper 삽입 -->
 <div class="app-drawer-overlay d-none animated fadeIn"></div>
 <script>
+$(function(){
+	
 var formData = new FormData();
-
-	$("#submitButton").click(function(){
-		//uploadFileFunc();
-		$("#checkAmountForm").submit();
-	});
-	/*
-	function uploadFileFunc(){
-		$.ajax({
-			url:"/uploadFile",
-			type: "POST",
-			data: new FormData($("#upload_file_frm")[0]),
-			enctype: 'multipart/form-data',
-	        processData: false,
-	        contentType: false,
-	        cache: false,
-	        success: function () {
-	            $("#uload_result_msg").text("File Upload Success");
-
-	        },
-	        error: function () {
-	            $("#uload_result_msg").text("File Upload Error");
-	        }
+var code = null;
+var amount = 0;
+	$("#confirmButton").click(function(){
+		var formData = new FormData();
+		formData.append("file", $("input[name=file]")[0].files[0]);
+		$.ajax({ url: '/uploadFile', 
+				 data: formData, 
+				 processData: false, 
+				 contentType: false, 
+				 type: 'POST', 
+				 success: function(data){
+					 //$("#inputEAmount").val(data);
+					 alert(data);
+					 	 } 
 		});
-	}*/
+	});
+	
+	$("#searchButton").click(function(){
+		var g_oWindow = window.open("/goResearchInventoryCode", "Input Storage Information","width=700, height=500, location=no, toolbar=no, menubar=no, scrollbars=no, status=no, resizable=yes");
+		g_oInterval = window.setInterval(function() {
+	        try {
+	            // 창이 꺼졌는지 판단
+	            if( g_oWindow == null || g_oWindow.closed ) {
+	                window.clearInterval(g_oInterval);
+	                g_oWindow = null;
+
+	                $.ajax({
+	                	// 정보 가져오기
+	                	url:"getCodeANDAmount",
+	                	type:"POST",
+	                	success:function(serverData){
+	                		code = serverData.rawm_code;
+	                		amount = serverData.amount;
+	                		$("#inputCode").val(code);
+	                		$("#inputEAmount").val(amount);
+	                	}
+	                });
+	            }
+	        } catch (e) { }
+	    }, 500);
+	
+	});	
+
+	//submit 해서 같으면 완료
+	//다르면 수정하게 만들기
+	
+	
+});
 
 </script>
 </body>

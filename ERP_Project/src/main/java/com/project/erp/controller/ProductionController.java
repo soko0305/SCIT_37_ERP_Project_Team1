@@ -90,10 +90,6 @@ public class ProductionController {
  
  
 
-/*	@RequestMapping(value="/sample", method = RequestMethod.GET)
-	public String sample(){
-		return "production/sample";
-	} 	*/
 
  	@RequestMapping(value="/confirmproductionrequest", method = RequestMethod.GET)
 	public String 	confirmproductionrequest(){
