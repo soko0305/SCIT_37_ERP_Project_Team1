@@ -50,7 +50,7 @@ private static final Logger logger = LoggerFactory.getLogger(FileUploadControlle
 		}
         return result;
     }
-    
+
     /*@PostMapping("/uploadMultipleFiles")
     public List<FileUploadResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files){
         return Arrays.asList(files)

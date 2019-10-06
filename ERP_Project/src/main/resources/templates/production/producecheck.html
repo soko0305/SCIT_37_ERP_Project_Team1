@@ -76,11 +76,32 @@
 				$("#code").val(code);
 				$("#statusProduce").submit();				
 			} else{
-				location.href="goproduceinsert"
+				var g_oWindow = window.open("/goproduceinsert", "Input rawMaterial Information","width=400, height=500, location=no, toolbar=no, menubar=no, scrollbars=no, status=no, resizable=yes");
+				/* location.href="goproduceinsert" */
 			}
 		});
 	});
 	/*]]>*/
+/* 		$(function(){
+		var openWin;
+		$(".btn-primary").click(function(){
+			var type = $(this).attr("data-type")
+			var code = $(this).val();
+			if(type=='update'){
+				var url = "goMaterialsUpdate?rawm_code="+code;
+			    var name = "popup test";
+			    var option = "width = 500, height = 750, top = 100, left = 200, location = no"
+			    window.open(url, name, option);
+			    
+			}else if(type=='delete'){
+				$("#code1").val(code);
+				$("#deleteForm").submit();
+			}
+		});
+		$("#insertRawMaterial").click(function(){ 
+			var g_oWindow = window.open("/goMaterialsInsert", "Input rawMaterial Information","width=500, height=650, location=no, toolbar=no, menubar=no, scrollbars=no, status=no, resizable=yes");
+		});
+	}); */
 </script>
 	<script>
 	$(function(){	
@@ -140,7 +161,7 @@
  
                                 </tbody>
                             </table>
-                            <a href="/goproduceinsert"><button type="button" class="btn btn-shadow btn-wide btn-primary" id="write">
+                            <!-- <a href="/goproduceinsert"> --><button type="button" class="btn btn-shadow btn-wide btn-primary" id="write">
                                 <span class="btn-icon-wrapper pr-2 opacity-7">
                                     <i class="fa fa-plus fa-w-20"></i>
                                 </span>
