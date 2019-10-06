@@ -147,13 +147,4 @@ public class RawMaterialLinkController {
 	public String production_insert() {
 		return "production/production_insert";
 	}
-	
-	/*@RequestMapping(value = "/amount", method = RequestMethod.GET)
-	public String materials_request(String rmorder_code,Model model) {
-		ArrayList<RawMaterialVO> result = rService.rawMaterialAllSelect();
-		model.addAttribute("rList", result);
-		
-		model.addAttribute("rmorder_code",rmorder_code);
-		return "production/amount";
-	}*/
 }

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="utf-8">
+<html lang="utf-8" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -55,6 +55,41 @@
 							</div>
 						</div>
 					</div>
+							
+							<div class="col-lg-6">
+							<div class="main-card mb-3 card">
+								<div class="card-body">
+
+									<!-- buy -->
+									<h5 class="card-title">
+										구매 관리
+										<button
+											class="mb-2 mr-2 btn-pill btn-transition btn btn-outline-primary btn-sm"
+											type="button" style="float: right;"
+											onclick="location.href='goArrive'">detail</button>
+									</h5>
+									<table class="mb-0 table table-hover">
+										<thead>
+											<tr>
+												<th>일자</th>
+												<th>원자재명</th>
+												<th>수량</th>
+												<th>진행상태</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="list : ${orderList}">
+												<td th:text="${list.rmorder_date}"></td>
+												<td th:text="${list.rawm_name}"></td>
+												<td th:text="${list.rmorder_amount}"></td>
+												<td th:text="${list.rmorder_status}"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+							
 									
 				<ul
 						class="body-tabs body-tabs-layout tabs-animated body-tabs-animated nav">

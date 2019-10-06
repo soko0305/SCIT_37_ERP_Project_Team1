@@ -32,98 +32,73 @@
 				$("#rawm_sort").val(result.rawm_sort);
 				$("#rawm_price").val(result.rawm_price);
 				$("#supplierseq").val(result.supplierseq);
-				$("#rawm_autoorder").val(result.rawm_autoorder);
-				var autooder = $("#rawm_autoorder").val();
+				$("#rawm_notice").val(result.rawm_notice);
+				var notice = $("#rawm_notice").val();
 				var mini = result.rawm_minimum;
-				var set = result.rawm_set;
 				var checked = 'CHECKED';
 				var nocheck = 'UNCHECKED';
 				var min = 0;
-				var se = 0;
 				
-				
-				if(autooder =='CHECKED'){
+				if(notice =='CHECKED'){
 					
-					$("#rawm_autoorder").prop('checked', true) ;
+					$("#rawm_notice").prop('checked', true) ;
 					var str1 = '<label for="rawm_minimum" class="">원자재최저수량</label>'
 						+'<input name="rawm_minimum" id="rawm_minimum" type="number"'
 						+'value='+mini+' class="form-control">';
-					var str2 = '<label for="rawm_set" class="">원자재설정수량</label>'
-						+ '<input name="rawm_set" id="rawm_set" type="number"'
-						+'value='+set+' class="form-control">';
 						
 					$(".form-group1").html(str1);
-					$(".form-group2").html(str2);
 					
-					$("#rawm_autoorder").change(function() {
-						if ($("#rawm_autoorder").is(":checked")) {
-							$("#rawm_autoorder").val(checked);
+					$("#rawm_notice").change(function() {
+						if ($("#rawm_notice").is(":checked")) {
+							$("#rawm_notice").val(checked);
 							var str1 = '<label for="rawm_minimum" class="">원자재최저수량</label>'
 									+ '<input name="rawm_minimum" id="rawm_minimum" type="number" value='+mini+' class="form-control">'
-							var str2 = '<label for="rawm_set" class="">원자재설정수량</label>'
-									+ '<input name="rawm_set" id="rawm_set" type="number" value='+set+' class="form-control">'
 							$(".form-group1").html(str1);
-							$(".form-group2").html(str2);
 						} else {
-							
-							$("#rawm_autoorder").val(nocheck);
+							$("#rawm_notice").val(nocheck);
 							var str1 = '<input name="rawm_minimum" id="rawm_minimum" type="hidden"'
 								+'value='+min+' class="form-control">';
-							var str2 = '<input name="rawm_set" id="rawm_set" type="hidden"'
-								+'value='+se+' class="form-control">';
 							$(".form-group1").html(str1);
-							$(".form-group2").html(str2);
 						}
 					});
 				}else{
 					var str1 = '<input name="rawm_minimum" id="rawm_minimum" type="hidden"'
 						+'value='+mini+' class="form-control">';
-					var str2 = '<input name="rawm_set" id="rawm_set" type="hidden"'
-						+'value='+set+' class="form-control">';
 					$(".form-group1").html(str1);
-					$(".form-group2").html(str2);
 					
-					$("#rawm_autoorder").change(function() {
-						if ($("#rawm_autoorder").is(":checked")) {
-							$("#rawm_autoorder").val(checked);
+					$("#rawm_notice").change(function() {
+						if ($("#rawm_notice").is(":checked")) {
+							$("#rawm_notice").val(checked);
 							var str1 = '<label for="rawm_minimum" class="">원자재최저수량</label>'
 									+ '<input name="rawm_minimum" id="rawm_minimum" type="number" value='+mini+' class="form-control">'
-							var str2 = '<label for="rawm_set" class="">원자재설정수량</label>'
-									+ '<input name="rawm_set" id="rawm_set" type="number" value='+set+' class="form-control">'
 							$(".form-group1").html(str1);
-							$(".form-group2").html(str2);
 						} else {
 							
-							$("#rawm_autoorder").val(nocheck);
+							$("#rawm_notice").val(nocheck);
 							var str1 = '<input name="rawm_minimum" id="rawm_minimum" type="hidden"'
 								+'value='+min+' class="form-control">';
-							var str2 = '<input name="rawm_set" id="rawm_set" type="hidden"'
-								+'value='+se+' class="form-control">';
 							$(".form-group1").html(str1);
-							$(".form-group2").html(str2);
 						}
 					});
 				}
 			}
 		});
-		$(".btn-primary").click(function(){
+		$("#updateButton").click(function(){
 			var code = $("#rawm_code").val();
 			var name = $("#rawm_name").val();
 			var sort = $("#rawm_sort").val();
 			var price = $("#rawm_price").val();
 			var seq = $("#supplierseq").val();
-			var order = $("#rawm_autoorder").val();
+			var order = $("#rawm_notice").val();
 			var minimum = $("#rawm_minimum").val();
-			var set = $("#rawm_set").val();
 
 			var code1 = $("#rawm_code1").val(code);
 			var name1 = $("#rawm_name1").val(name);
 			var sort1 = $("#rawm_sort1").val(sort);
 			var price1 = $("#rawm_price1").val(price);
 			var seq1 = $("#supplierseq1").val(seq);
-			var order1 = $("#rawm_autoorder1").val(order);
+			var order1 = $("#rawm_notice1").val(order);
 			var minimum1 = $("#rawm_minimum1").val(minimum);
-			var set1 = $("#rawm_set1").val(set);
 			
 			
 			var code2 = $("#rawm_code1").val();
@@ -131,9 +106,8 @@
 			var sort2 = $("#rawm_sort1").val();
 			var price2 = $("#rawm_price1").val();
 			var seq2 = $("#supplierseq1").val();
-			var order2 = $("#rawm_autoorder1").val();
+			var order2 = $("#rawm_notice1").val();
 			var minimum2 = $("#rawm_minimum1").val();
-			var set2 = $("#rawm_set1").val();
 			
 			if(!name2){
 				alert("원자재명을 입력해주세요");
@@ -151,7 +125,7 @@
 				alert("공급처명을 입력해주세요");
 				return false;
 			}
-			if ($("#rawm_autoorder").is(":checked")) {
+			if ($("#rawm_notice").is(":checked")) {
 				if(minimum2.length < 1){
 					alert("원자재최저량을 1개이상 입력해주세요");
 					return false;
@@ -167,16 +141,14 @@
 </script>
 </head>
 <body>
-<form action="rawMaterialUpdate" method="post"
-		id="rawMaterialUpdateForm">
-	<input type="hidden" id="rawm_code1" name="rawm_code"> <input
-		type="hidden" id="rawm_name1" name="rawm_name"> <input
-		type="hidden" id="rawm_sort1" name="rawm_sort"> <input
-		type="hidden" id="rawm_price1" name="rawm_price"> <input
-		type="hidden" id="supplierseq1" name="supplierseq"> <input
-		type="hidden" id="rawm_autoorder1" name="rawm_autoorder"> <input
-		type="hidden" id="rawm_minimum1" name="rawm_minimum"> <input
-		type="hidden" id="rawm_set1" name="rawm_set">
+<form action="rawMaterialUpdate" method="post" id="rawMaterialUpdateForm">
+	<input type="hidden" id="rawm_code1" name="rawm_code">
+	<input type="hidden" id="rawm_name1" name="rawm_name">
+	<input type="hidden" id="rawm_sort1" name="rawm_sort">
+	<input type="hidden" id="rawm_price1" name="rawm_price">
+	<input type="hidden" id="supplierseq1" name="supplierseq">
+	<input type="hidden" id="rawm_notice1" name="rawm_notice">
+	<input type="hidden" id="rawm_minimum1" name="rawm_minimum">
 </form>
 
 <div class="app-container app-theme-white body-tabs-shadow">
@@ -228,9 +200,9 @@
 										</div>
 										<div class="position-relative form-group">
 											<div class="custom-checkbox custom-control">
-												<input type="checkbox" id="rawm_autoorder" name="rawm_autoorder"
+												<input type="checkbox" id="rawm_notice" name="rawm_notice"
 													class="custom-control-input">
-												<label class="custom-control-label" for="rawm_autoorder">&nbsp;자동구매</label>
+												<label class="custom-control-label" for="rawm_notice">&nbsp;자동구매</label>
 											</div>
 										</div>
 										<!-- if check -->
@@ -240,16 +212,7 @@
 								
 												</div>
 											</div>
-											<div class="col-md-6">
-												<div class="position-relative form-group2">
-								
-												</div>
-											</div>
 										</div>
-										<div class="form-group">
-											<button class="mb-2 mr-2 btn-square btn btn-primary">수정</button>
-										</div>
-								
 									</div>
 									<div class="modal-footer d-block text-center">
                                     <button id="updateButton" class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg" type="button">원자재 수정</button>
