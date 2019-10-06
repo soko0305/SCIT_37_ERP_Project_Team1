@@ -55,6 +55,7 @@
 					
 					for(var i = 0; i<list.length ; i++){
 					if(snapshot.key==list[i].pd_code){
+						
 						var amount = snapshot.child("systemamount").val();
 						var index = i+1;
 						var str1= '<tr align="center">';
@@ -95,14 +96,20 @@
 		}
 		
 		//판매하기 눌렀을때에 재고 빼주기, 재고 뺀 후에는 판매완료로 status update 시키기. 그 후 salesHistory로.
-	/* 	function sellProduct(){
+	 	function sellProduct(){
 			$('#goSell').click(function(){
-				database.ref('warehouse/').child("inventory").child(상품번호).once('child_added').then(function(snapshot){
-				       database.ref('warehouse/~').child("inventory").child(상품번호).update({"systemamount":snapshot.val()-@@@@주문받은만큼});
-				       
-				
-			})
-		} */
+				database.ref('warehouse/').on('child_added', function(data){
+					var warehouse_code = data.key;
+					var warehouse_name = data.val().warehouse_name;
+
+					for(var i = 0; i<list.length ; i++){
+						database.ref('warehouse/'+warehouse_code).child("inventory").child(list[i].pd_code).on('child_added', function(snapshot){
+						database.ref('warehouse/'+warehouse_code).child("inventory").child(list[i].pd_code).update({"systemamount":snapshot.val()-list[i].salesdetail_amount});  
+				})					
+			}
+		 })
+	})
+}
 		
 	/*]]>*/
 </script>
