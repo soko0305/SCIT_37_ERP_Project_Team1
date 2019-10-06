@@ -40,7 +40,7 @@ public class MemberController {
 		check = memberService.insertMember(member);
  		return "member/login";
 	}
-	@RequestMapping(value="/login", method = RequestMethod.GET)
+	@RequestMapping(value="/", method = RequestMethod.GET)
 	public String login(){ 
  		return "member/login";
 	}
