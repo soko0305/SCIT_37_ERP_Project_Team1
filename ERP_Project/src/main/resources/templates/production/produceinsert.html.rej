@@ -1,9 +1,0 @@
-diff a/ERP_Project/src/main/resources/templates/production/produceinsert.html b/ERP_Project/src/main/resources/templates/production/produceinsert.html	(rejected hunks)
-@@ -34,6 +34,7 @@
- <<<<<<< HEAD
-     
- 
-+=======
- >>>>>>> 4589e61907f6d5582bf2723115ae1b72dbe13d92
- <script>
- var database = firebase.database();
