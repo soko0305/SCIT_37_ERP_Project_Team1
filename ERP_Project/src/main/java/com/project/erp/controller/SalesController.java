@@ -62,5 +62,10 @@ public class SalesController {
 		return "redirect:/buyerList";
 	}
 	
+	@RequestMapping(value="/updateStatus", method=RequestMethod.POST)
+	public String updateSalesStatusDone(Sales sales){
+		service.updateSalesStatusDone(sales);
+		return "redirect:/salesHistory";
+	}
 	
 }
