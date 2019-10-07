@@ -10,7 +10,7 @@ PD_SORT varchar2(100) not null,
 WAREHOUSE_CODE varchar2(100) not null,
 PD_DELETE varchar2(10)check(PD_DELETE in('Y','N'))
 )
- create sequence pd_code;
+
 drop table MANUFACTURE;
 
 
