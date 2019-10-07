@@ -17,7 +17,6 @@
 	<!-- <script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script> -->
 	<link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
 
-
 <script>
 	$(function(){
 		var openWin;
@@ -86,11 +85,9 @@
                                     </button>
                                     
                                 </div>
-                            </div>    </div>
+                            </div>
+                        </div>
                     </div> 
-                    
-                    
-                    
                     
                     <!--  테이블 내용 -->
                     <div class="main-card mb-3 card">
@@ -104,9 +101,8 @@
 										<th>원자재종류</th>
 										<th>단가</th>
 										<th>원자재최저수량</th>
-										<th>원자재설정수량</th>
 										<th>공급처코드</th>
-										<th>자동구매란</th>
+										<th>자동알림란</th>
 										<th>업데이트란</th>
 									</tr>
 								</thead>
@@ -118,9 +114,8 @@
 										<td th:text="${list.rawm_sort}"></td>
 										<td th:text="${list.rawm_price}"></td>
 										<td th:text="${list.rawm_minimum}"></td>
-										<td th:text="${list.rawm_set}"></td>
 										<td th:text="${list.supplierseq}"></td>
-										<td th:text="${list.rawm_autoorder}"></td>
+										<td th:text="${list.rawm_notice}"></td>
 										<td>
 											<button class="mb-2 mr-2 btn-square btn btn-primary"
 												data-type="update" th:value="${list.rawm_code}">Update</button>
@@ -137,23 +132,15 @@
 										<th>원자재종류</th>
 										<th>단가</th>
 										<th>원자재최저수량</th>
-										<th>원자재설정수량</th>
 										<th>공급처코드</th>
-										<th>자동구매란</th>
+										<th>자동알림란</th>
 										<th>업데이트란</th>
 									</tr>
 								</tfoot>
 							</table>
 						</div>
                     </div>
-                    
-                        
-                        
-                        
                        <!-- 자바 스크리브로 앞으로 여기에 테이블이 추가되어야함 -->
-                        
-                        
-                        
                     </div>
                 </div>
                 <!--  footer wrapper -->   

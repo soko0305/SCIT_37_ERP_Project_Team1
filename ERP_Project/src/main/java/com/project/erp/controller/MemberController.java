@@ -13,12 +13,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.project.erp.dao.BoardDAO;
 
 import com.project.erp.dao.MemberDAO;
+<<<<<<< HEAD
 import com.project.erp.service.BoardService;
+=======
+import com.project.erp.dao.OrderDAO;
+>>>>>>> 3df202c0ee2a5775e18f334048a2e6d6348b9788
 import com.project.erp.service.MemberService;
 import com.project.erp.service.ProductionService;
 import com.project.erp.vo.BoardVO;
 import com.project.erp.vo.ManufactureVO;
 import com.project.erp.vo.MemberVO;
+import com.project.erp.vo.Order_rawMaterialVO;
 
 @Controller
 public class MemberController {
@@ -26,10 +31,15 @@ public class MemberController {
 	
 	@Autowired
 	MemberService memberService;
+<<<<<<< HEAD
 	@Autowired	
 	BoardService bService;
 	@Autowired
 	ProductionService pService;	
+=======
+	@Autowired
+	OrderDAO oDAO;
+>>>>>>> 3df202c0ee2a5775e18f334048a2e6d6348b9788
 	
 	@RequestMapping(value="/selectMemberById", method = RequestMethod.GET)
 	public @ResponseBody MemberVO selectMemberById(MemberVO member){
@@ -65,7 +75,11 @@ public class MemberController {
 		return m;
 	}
 	@RequestMapping(value="/loginSuccess", method = RequestMethod.GET)
+<<<<<<< HEAD
 	public  String loginSuccess(Model model, String userid, HttpSession session){
+=======
+	public  String loginSuccess(String userid, HttpSession session, Model model){
+>>>>>>> 3df202c0ee2a5775e18f334048a2e6d6348b9788
 					session.setAttribute("loginid", userid);
 					MemberVO member = new MemberVO();
 					member.setUserid(userid);
@@ -73,6 +87,7 @@ public class MemberController {
 					session.setAttribute("loginuserstatus", m.getUserstatus());
 					session.setAttribute("logindepartment", m.getUserdepartment());
 					memberService.updateLogin(m);
+<<<<<<< HEAD
 					ArrayList<BoardVO> list = null;
 					list = bService.boardAllSelect();
 					ArrayList<ManufactureVO> plist = pService.produceSelect();
@@ -85,6 +100,12 @@ public class MemberController {
 					model.addAttribute("boardlist", bbList);
 					model.addAttribute("producelist", ppList);
 										
+=======
+					
+					/*발주 및 구매관리*/
+					ArrayList<Order_rawMaterialVO> orderDash =  oDAO.orderDashSelect();
+					model.addAttribute("orderList", orderDash);
+>>>>>>> 3df202c0ee2a5775e18f334048a2e6d6348b9788
 		return "main/index";
 	}
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)

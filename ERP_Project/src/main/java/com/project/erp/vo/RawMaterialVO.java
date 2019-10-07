@@ -10,8 +10,7 @@ public class RawMaterialVO {
 	private String rawm_sort;		//원자재종류
 	private String rawm_price;		//원자재단가
 	private int rawm_minimum;		//원자재최저수량
-	private int rawm_set;			//원자재설정수량
-	private String rawm_autoorder;	//원자재자동구매
+	private String rawm_notice;	//원자재자동알림
 	private String rawm_delete;		//원자재삭제여부
 	private String warehouse_code;
 	private String systemamount;
