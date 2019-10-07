@@ -7,7 +7,6 @@
 <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
-
     <style>
       iframe {
         width: 100%;
@@ -25,185 +24,204 @@
 	 $("#setting").load("/setting");
 		
 	  handleClientLoad();
+
 	})
   
   </script>
     
   
-    <script type="text/javascript">
-    var clientId = '585813930953-hsugmq6k1kalmevvm553ek555jrgug2j.apps.googleusercontent.com';
-    var apiKey = 'AIzaSyAf7owsQ0t7h2_AJ0ifD-Cx6Qg6vc8niLA';
-    var scopes =
-        'https://www.googleapis.com/auth/gmail.readonly '+
-        'https://www.googleapis.com/auth/gmail.send';
+<script type="text/javascript">
+var clientId = '585813930953-hsugmq6k1kalmevvm553ek555jrgug2j.apps.googleusercontent.com';
+var apiKey = 'AIzaSyAf7owsQ0t7h2_AJ0ifD-Cx6Qg6vc8niLA';
+var scopes =
+    'https://www.googleapis.com/auth/gmail.readonly '+
+    'https://www.googleapis.com/auth/gmail.send';
     
-      function handleClientLoad() {
-
-        gapi.client.setApiKey(apiKey);
-        window.setTimeout(checkAuth, 1);
+    function handleClientLoad() {
+      gapi.client.setApiKey(apiKey);
+      window.setTimeout(checkAuth, 1);
+    }
+    
+    
+    function checkAuth() {
+      gapi.auth.authorize({
+        client_id: clientId,
+        scope: scopes,
+        immediate: true
+      }, handleAuthResult);
+    }
+    
+    
+    function handleAuthClick() {
+      gapi.auth.authorize({
+        client_id: clientId,
+        scope: scopes,
+        immediate: false
+      }, handleAuthResult);
+      return false;
+    }
+    
+    
+    function handleAuthResult(authResult) {
+      if(authResult && !authResult.error) {
+        loadGmailApi();
+        $('.table-inbox').removeClass("hidden");
+        $('#compose-button').removeClass("hidden");
+      } else {
+          handleAuthClick();
       }
-      
-      function checkAuth() {
-        gapi.auth.authorize({
-          client_id: clientId,
-          scope: scopes,
-          immediate: true
-        }, handleAuthResult);
-      }
-      
-      function handleAuthClick() {
-        gapi.auth.authorize({
-          client_id: clientId,
-          scope: scopes,
-          immediate: false
-        }, handleAuthResult);
-        return false;
-      }
-      
-      function handleAuthResult(authResult) {
-        if(authResult && !authResult.error) {
-          loadGmailApi();
-          $('.table-inbox').removeClass("hidden");
-          $('#compose-button').removeClass("hidden");
-        } else {
-            handleAuthClick();
-        }
-      }
-      
-      function loadGmailApi() {
-        gapi.client.load('gmail', 'v1', displayInbox);
-      }
-      
-      function displayInbox() {
-        var request = gapi.client.gmail.users.messages.list({
-          'userId': 'me',
-          'labelIds': 'INBOX',
-          'maxResults': 10
-        });
-        request.execute(function(response) {
-          $.each(response.messages, function() {
-            var messageRequest = gapi.client.gmail.users.messages.get({
-              'userId': 'me',
-              'id': this.id
-            });
-            messageRequest.execute(appendMessageRow);
+    }
+    
+    
+    function loadGmailApi() {
+      gapi.client.load('gmail', 'v1', displayInbox);
+    }
+    
+    
+    function displayInbox() {
+      var request = gapi.client.gmail.users.messages.list({
+        'userId': 'me',
+        'labelIds': 'INBOX',
+        'maxResults': 10
+      });
+      request.execute(function(response) {
+        $.each(response.messages, function() {
+          var messageRequest = gapi.client.gmail.users.messages.get({
+            'userId': 'me',
+            'id': this.id
           });
+          messageRequest.execute(appendMessageRow);
         });
-      }
+      });
+    }
+    
      
-      function appendMessageRow(message, callback) {
-    	  		
-            $('.table-inbox tbody').append(
-               '<tr>\<td>'+getHeader(message.payload.headers, 'From')+'</td>\<td>\<a href="#message-modal-' + message.id + '" data-toggle="modal" id="message-link-' + message.id+'">' +getHeader(message.payload.headers, 'Subject') +'</a>\</td>\<td>'+getHeader(message.payload.headers, 'Date')+'</td>\</tr>'
-              );
-               var reply_to = (getHeader(message.payload.headers, 'Reply-to') !== '' ?
-               getHeader(message.payload.headers, 'Reply-to') :
-               getHeader(message.payload.headers, 'From')).replace(/\"/g, '&quot;');
-               var reply_subject = 'Re: '+getHeader(message.payload.headers, 'Subject').replace(/\"/g, '&quot;');
-               
-               $('body').append(
-                       '<div class="modal fade" id="message-modal-' + message.id +
-                           '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">\
-                         <div class="modal-dialog modal-lg">\
-                           <div class="modal-content">\
-                             <div class="modal-header">\
-                               <h4 class="modal-title" id="myModalLabel">' +
-                                 getHeader(message.payload.headers, 'Subject') +
-                               '</h4>\
-                                  <button type="button"\
-                                       class="close"\
-                                       data-dismiss="modal"\
-                                       aria-label="Close">\
-                                 <span aria-hidden="true">&times;</span></button>\
-                             </div>\
-                             <div class="modal-body">\
-                               <iframe id="message-iframe-'+message.id+'" srcdoc="<p>Loading...</p>">\</iframe>\
-                               <button class="btn btn-primary" href="#" id="message-att-'+message.id+'" mid="'+message.id+'"/>Download</button>\
-                             </div>\
-                             <div class="modal-footer">\
-                               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\
-                               <button type="button" class="btn btn-primary reply-button" data-dismiss="modal" data-toggle="modal" data-target="#reply-modal"\
-                               onclick="fillInReply(\
-                                 \''+reply_to+'\', \
-                                 \''+reply_subject+'\', \
-                                 \''+getHeader(message.payload.headers, 'Message-ID')+'\'\
-                                 );"\
-                               >Reply</button>\
-                             </div>\
-                           </div>\
-                         </div>\
-                       </div>'
-                     );
-               
-               
-				$('#message-link-'+message.id).on('click', function(){
-         			var ifrm = $('#message-iframe-'+message.id)[0].contentWindow.document;
-         			$('body', ifrm).html(getBody(message.payload));
-				});              
-				 $('#message-att-'+message.id).on('click', function(){
-					 var mid=$(this).attr("mid");
-					 getAttachments('me',message,avCallBack,mid);
-				}); 
-				 
-      }
+    function appendMessageRow(message, callback) {
+  	  		
+       $('.table-inbox tbody').append(
+          '<tr>\<td>'+getHeader(message.payload.headers, 'From')+'</td>\<td>\<a href="#message-modal-' + message.id + '" data-toggle="modal" id="message-link-' + message.id+'">' +getHeader(message.payload.headers, 'Subject') +'</a>\</td>\<td>'+getHeader(message.payload.headers, 'Date')+'</td>\</tr>'
+         );
+          var reply_to = (getHeader(message.payload.headers, 'Reply-to') !== '' ?
+          getHeader(message.payload.headers, 'Reply-to') :
+          getHeader(message.payload.headers, 'From')).replace(/\"/g, '&quot;');
+          var reply_subject = 'Re: '+getHeader(message.payload.headers, 'Subject').replace(/\"/g, '&quot;');
+          
+          $('body').append(
+                  '<div class="modal fade" id="message-modal-' + message.id +
+                      '" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">\
+                    <div class="modal-dialog modal-lg">\
+                      <div class="modal-content">\
+                        <div class="modal-header">\
+                          <h4 class="modal-title" id="myModalLabel">' +
+                            getHeader(message.payload.headers, 'Subject') +
+                          '</h4>\
+                             <button type="button"\
+                                  class="close"\
+                                  data-dismiss="modal"\
+                                  aria-label="Close">\
+                            <span aria-hidden="true">&times;</span></button>\
+                        </div>\
+                        <div class="modal-body">\
+                          <iframe id="message-iframe-'+message.id+'" srcdoc="<p>Loading...</p>">\</iframe>\
+                          <button class="btn btn-primary" href="#" id="message-att-'+message.id+'" mid="'+message.id+'"/>Download</button>\
+                        </div>\
+                        <div class="modal-footer">\
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>\
+                          <button type="button" class="btn btn-primary reply-button" data-dismiss="modal" data-toggle="modal" data-target="#reply-modal"\
+                          onclick="fillInReply(\
+                            \''+reply_to+'\', \
+                            \''+reply_subject+'\', \
+                            \''+getHeader(message.payload.headers, 'Message-ID')+'\'\
+                            );"\
+                          >Reply</button>\</div>\</div>\</div>\</div>'
+                );
+          
+		$('#message-link-'+message.id).on('click', function(){
+       			var ifrm = $('#message-iframe-'+message.id)[0].contentWindow.document;
+       			$('body', ifrm).html(getBody(message.payload));
+		});              
+		 $('#message-att-'+message.id).on('click', function(){
+			 var mid=$(this).attr("mid");
+			 getAttachments('me',message,avCallBack,mid);
+		}); 
+		 
+    }
 
-      
-      
-      function sendEmail()
-      {
-        $('#send-button').addClass('disabled');
-        sendMessage(
-          {
-            'To': $('#compose-to').val(),
-            'Subject': $('#compose-subject').val()
-          },
-          $('#compose-message').val(),
-          composeTidy
-        );
-        return false;
-      }
-      function composeTidy()
-      {
-		location.reload(true);
-  	 
-        $('#compose-to').val('');
-        $('#compose-subject').val('');
-        $('#compose-message').val('');
-        $('#send-button').removeClass('disabled');
-      }
-      function sendReply()
-      {
-        $('#reply-button').addClass('disabled');
-        sendMessage(
-          {
-            'To': $('#reply-to').val(),
-            'Subject': $('#reply-subject').val(),
-            'In-Reply-To': $('#reply-message-id').val()
-          },
-          $('#reply-message').val(),
-          replyTidy
-        );
-        return false;
-      }
-      function replyTidy()
-      {
+     
+    function sendEmail(){
 
+    	var file = document.getElementById('files').files[0];
+    	var result = getBase64(file);
+
+    	
+    	alert(result);
+    	if(result == "FAILED"){ 
+			alert("!!");
+    	      $('#send-button').addClass('disabled');
+    	      sendMessage({
+    	          'To': $('#compose-to').val(),
+    	          'Subject': $('#compose-subject').val()
+    	        },
+    	        $('#compose-message').val(),
+    	        composeTidy
+    	      );
+    	      return false;
+    	      
+    	}else{
+    		
+    		alert("??");		
+    		alert(JSON.stringify(result));	
+    		
+    		return false;
+    	} 
+    	
+    	
+    	
+    }
+    
+    
+     function composeTidy(){
 		location.reload(true);
-       	$('#reply-message').val('');
-        $('#reply-button').removeClass('disabled');
-      }
-      function fillInReply(to, subject, message_id)
-      {
+ 	 
+       $('#compose-to').val('');
+       $('#compose-subject').val('');
+       $('#compose-message').val('');
+       $('#send-button').removeClass('disabled');
+     }
+     
+     function sendReply(){
+       $('#reply-button').addClass('disabled');
+       sendMessage({
+           'To': $('#reply-to').val(),
+           'Subject': $('#reply-subject').val(),
+           'In-Reply-To': $('#reply-message-id').val()
+         },
+         $('#reply-message').val(),
+         replyTidy
+       );
+       return false;
+     }
+     
+     
+     function replyTidy(){
+    	location.reload(true);
+      	$('#reply-message').val('');
+       	$('#reply-button').removeClass('disabled');
+     }
+
+     
+     function fillInReply(to, subject, message_id){
         $('#reply-to').val(to);
         $('#reply-subject').val(subject);
         $('#reply-message-id').val(message_id);
-      }
-      function sendMessage(headers_obj, message, callback)
-      {
+     }
+     
+     
+     function sendMessage(headers_obj, message, callback){
         var email = '';
         for(var header in headers_obj)
           email += header += ": "+headers_obj[header]+"\r\n";
-        email += "\r\n" + message;
+          email += "\r\n" + message;
         var sendRequest = gapi.client.gmail.users.messages.send({
           'userId': 'me',
           'resource': {
@@ -212,6 +230,8 @@
         });
         return sendRequest.execute(callback);
       }
+      
+      
       function getHeader(headers, index) {
         var header = '';
         $.each(headers, function(){
@@ -222,96 +242,231 @@
         return header;
       }
 
+	  //Mail의 첨부파일 가져오기
+   	  function getAttachments(userId, message, callback, mid) {
+  	    var parts = message.payload.parts;
+  	    for (var i = 0; i < parts.length; i++) {
+  	      var part = parts[i];
+  	      if (part.filename && part.filename.length > 0) {
+  	        var attachId = part.body.attachmentId;
+  	        var request = gapi.client.gmail.users.messages.attachments.get({
+  	          'id': attachId,
+  	          'messageId': message.id,
+  	          'userId': userId
+  	        });
+  	        request.execute(function(attachment) {
+  	          callback(part.filename, part.mimeType, attachment,mid);
+  	        });
+  	      }
+  	    }
+  	  }
 
-
-    	function getAttachments(userId, message, callback, mid) {
-    	    var parts = message.payload.parts;
-    	    for (var i = 0; i < parts.length; i++) {
-    	      var part = parts[i];
-    	      if (part.filename && part.filename.length > 0) {
-    	        var attachId = part.body.attachmentId;
-    	        var request = gapi.client.gmail.users.messages.attachments.get({
-    	          'id': attachId,
-    	          'messageId': message.id,
-    	          'userId': userId
-    	        });
-    	        request.execute(function(attachment) {
-    	          callback(part.filename, part.mimeType, attachment,mid);
-    	        });
-    	      }
-    	    }
-    	  }
-
-    	  function avCallBack(name, mimetype, file,mid){
-    	      /* alert ("->" + name + mimetype + file); */
-    	      var dataBase64Rep = file.data.replace(/-/g, '+').replace(/_/g, '/');
-    	      var urlBlob = b64toBlob(dataBase64Rep,mimetype,file.size);
-    	      var dlnk = document.getElementById('message-a-'+mid);
-    	       dlnk.href = urlBlob;
-    	       dlnk.download = name;
-    	       dlnk.click();
-    	       URL.revokeObjectURL(urlBlob);
+     function avCallBack(name, mimetype, file,mid){
+    	      
+ 	      var dataBase64Rep = file.data.replace(/-/g, '+').replace(/_/g, '/');
+ 	      var urlBlob = b64toBlob(dataBase64Rep,mimetype,file.size);
+ 	      var dlnk = document.getElementById('message-a-'+mid);
+ 	       dlnk.href = urlBlob;
+ 	       dlnk.download = name;
+ 	       dlnk.click();
+ 	       URL.revokeObjectURL(urlBlob);
     	  }
     
 
-    	  function b64toBlob (b64Data, contentType, sliceSize) {
-    		  contentType = contentType || ''
-    		  sliceSize = sliceSize || 512
+   	 function b64toBlob (b64Data, contentType, sliceSize) {
+ 		  contentType = contentType || ''
+ 		  sliceSize = sliceSize || 512
 
-    		  var byteCharacters = atob(b64Data)
-    		  var byteArrays = []
+ 		  var byteCharacters = atob(b64Data)
+ 		  var byteArrays = []
 
-    		  for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-    		    var slice = byteCharacters.slice(offset, offset + sliceSize)
+ 		  for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+ 		    var slice = byteCharacters.slice(offset, offset + sliceSize)
 
-    		    var byteNumbers = new Array(slice.length)
-    		    for (var i = 0; i < slice.length; i++) {
-    		      byteNumbers[i] = slice.charCodeAt(i)
-    		    }
+ 		    var byteNumbers = new Array(slice.length)
+ 		    for (var i = 0; i < slice.length; i++) {
+ 		      byteNumbers[i] = slice.charCodeAt(i)
+ 		    }
 
-    		    var byteArray = new Uint8Array(byteNumbers)
+ 		    var byteArray = new Uint8Array(byteNumbers)
 
-    		    byteArrays.push(byteArray)
-    		  }
+ 		    byteArrays.push(byteArray)
+ 		  }
 
-    		  var blob = new Blob(byteArrays, {type: contentType})
-    		  let urlBlob = URL.createObjectURL(blob)
-    		  return urlBlob
-    		}
+ 		  var blob = new Blob(byteArrays, {type: contentType})
+ 		  let urlBlob = URL.createObjectURL(blob)
+ 		  return urlBlob
+ 		  }
     	  
-      function getBody(message) {
-        var encodedBody = '';
-        if(typeof message.parts === 'undefined')
-        {
-          encodedBody = message.body.data;
-        }
-        else
-        {
-          encodedBody = getHTMLPart(message.parts);
-        }
-        encodedBody = encodedBody.replace(/-/g, '+').replace(/_/g, '/').replace(/\s/g, '');
-        return decodeURIComponent(escape(window.atob(encodedBody)));
-      }
-      function getHTMLPart(arr) {
-        for(var x = 0; x <= arr.length; x++)
-        {
-          if(typeof arr[x].parts === 'undefined')
-          {
-            if(arr[x].mimeType === 'text/html')
-            {
+     function getBody(message) {
+       var encodedBody = '';
+       if(typeof message.parts === 'undefined'){
+         encodedBody = message.body.data;
+       }else{
+         encodedBody = getHTMLPart(message.parts);
+       }
+       encodedBody = encodedBody.replace(/-/g, '+').replace(/_/g, '/').replace(/\s/g, '');
+       return decodeURIComponent(escape(window.atob(encodedBody)));
+     }
+     
+     
+     function getHTMLPart(arr) {
+        for(var x = 0; x <= arr.length; x++){
+          if(typeof arr[x].parts === 'undefined'){
+            if(arr[x].mimeType === 'text/html'){
               return arr[x].body.data;
             }
-          }
-          else
-          {
+          }else{
             return getHTMLPart(arr[x].parts);
           }
         }
         return '';
       }
-    </script>
-     </head>
-    <body>
+     
+     
+     
+
+     /* ======================================= ATTACHMENTS ======================================= */
+     /* ======================================= ATTACHMENTS ======================================= */
+     /* ======================================= ATTACHMENTS ======================================= */
+     /* ======================================= ATTACHMENTS ======================================= */
+     
+     
+     function getBase64(file) {
+    	 var f = file; // FileList object
+    	  var reader = new FileReader();
+    	  // Closure to capture the file information.
+    	  reader.onload = (function(theFile) {
+    	    return function(e) {
+    	      var binaryData = e.target.result;
+    	      //Converting Binary Data to base 64
+    	      var base64String = window.btoa(binaryData);
+    	      //showing file converted to base64
+    	     return base64String;
+    	    };
+    	  })(f);
+    	  // Read in the image file as a data URL.
+    	  reader.readAsBinaryString(f);
+	}
+
+
+     function sendEmailWithAttachments() {
+
+       var attachments = ["File_ID_1", "File_ID_2"];
+
+       var message = {
+         to: {
+           name: "Google Scripts",
+           email: "amit@labnol.org"
+         },
+         from: {
+           name: "Amit Agarwal",
+           email: "amit@labnol.org"
+         },
+         body: {
+           text: "Mr hänn is schon lang nümme g'she.",
+           html: "Mr hänn is schon <b>lang nümme</b> g'she."
+         },
+         subject: "ctrlq, tech à la carte",
+         files: getAttachments_(attachments)
+       };
+
+       // Compose Gmail message and send immediately
+       callGmailAPI_(message);
+
+     }
+
+
+     function callGmailAPI_(message) {
+
+       var payload = createMimeMessage_(message);
+
+       var response = UrlFetchApp.fetch(
+         "https://www.googleapis.com/upload/gmail/v1/users/me/messages/send?uploadType=media", {
+           method: "POST",
+           headers: {
+             "Authorization": "Bearer " + ScriptApp.getOAuthToken(),
+             "Content-Type": "message/rfc822",
+           },
+           muteHttpExceptions: true,
+           payload: payload
+         });
+
+       Logger.log(response.getResponseCode());
+       Logger.log(response.getContentText());
+
+     }
+
+     // UTF-8 characters in names and subject
+     function encode_(subject) {
+       var enc_subject = Utilities.base64Encode(subject, Utilities.Charset.UTF_8);
+       return '=?utf-8?B?' + enc_subject + '?=';
+     }
+
+     // Insert file attachments from Google Drive
+     function getAttachments_(ids) {
+       var att = [];
+       for (var i in ids) {
+         var file = DriveApp.getFileById(ids[i]);
+         att.push({
+           mimeType: file.getMimeType(),
+           fileName: file.getName(),
+           bytes: Utilities.base64Encode(file.getBlob().getBytes())
+         });
+       }
+       return att;
+     }
+
+     // Create a MIME message that complies with RFC 2822
+     function createMimeMessage_(msg) {
+
+       var nl = "\n";
+       var boundary = "__ctrlq_dot_org__";
+
+       var mimeBody = [
+
+         "MIME-Version: 1.0",
+         "To: "      + encode_(msg.to.name) + "<" + msg.to.email + ">",
+         "From: "    + encode_(msg.from.name) + "<" + msg.from.email + ">",
+         "Subject: " + encode_(msg.subject), // takes care of accented characters
+
+         "Content-Type: multipart/alternative; boundary=" + boundary + nl,
+         "--" + boundary,
+
+         "Content-Type: text/plain; charset=UTF-8",
+         "Content-Transfer-Encoding: base64" + nl,
+         Utilities.base64Encode(msg.body.text, Utilities.Charset.UTF_8) + nl,
+         "--" + boundary,
+
+         "Content-Type: text/html; charset=UTF-8",
+         "Content-Transfer-Encoding: base64" + nl,
+         Utilities.base64Encode(msg.body.html, Utilities.Charset.UTF_8) + nl
+
+       ];
+
+       for (var i = 0; i < msg.files.length; i++) {
+
+         var attachment = [
+           "--" + boundary,
+           "Content-Type: " + msg.files[i].mimeType + '; name="' + msg.files[i].fileName + '"',
+           'Content-Disposition: attachment; filename="' + msg.files[i].fileName + '"',
+           "Content-Transfer-Encoding: base64" + nl,
+           msg.files[i].bytes
+         ];
+
+         mimeBody.push(attachment.join(nl));
+
+       }
+
+       mimeBody.push("--" + boundary + "--");
+
+       return mimeBody.join(nl);
+
+     }
+     
+	</script>
+  </head>
+<body>
     <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
     <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Header삽입@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
     <div id="header"></div>
@@ -487,7 +642,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form onsubmit="return sendEmail();">
+          <form>
             <div class="modal-body">
               <div class="form-group">
                 <input type="email" class="form-control" id="compose-to" placeholder="To" required />
@@ -500,15 +655,19 @@
               <div class="form-group">
                 <textarea class="form-control" id="compose-message" placeholder="Message" rows="10" required></textarea>
               </div>
+              
+            <input type="file" id="files" name="files" />  
             </div>
+          
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="submit" id="send-button" class="btn btn-primary">Send</button>
+              <button type="button" onclick=" sendEmail();" id="send-button" class="btn btn-primary">Send</button>
             </div>
           </form>
         </div>
       </div>
     </div>
+
 
 
     <div class="modal fade" id="reply-modal" tabindex="-1" role="dialog">
@@ -536,12 +695,16 @@
               <div class="form-group">
                 <textarea class="form-control" id="reply-message" placeholder="Message" rows="10" required></textarea>
               </div>
-            </div>
+
+
+              </div>
+
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               <button type="submit" id="reply-button" class="btn btn-primary">Send</button>
-            </div>
-          </form>
-        </div>
-      </div>
+                            </div>
+   	       </form>
+         </div>
     </div>
+</div>
+     

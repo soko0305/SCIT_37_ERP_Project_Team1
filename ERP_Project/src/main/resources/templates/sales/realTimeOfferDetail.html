@@ -93,6 +93,7 @@
 			}
 			
 			sellProduct();
+			goProduction();
 		}
 		
 		//판매하기 눌렀을때에 재고 빼주기, 재고 뺀 후에는 판매완료로 status update 시키기. 그 후 salesHistory로.
@@ -108,12 +109,30 @@
 				})					
 			}
 		 })
+		 updateStatus();
 	})
 }
+		
+		function updateStatus(){
+		 	var form = $('#formTry');
+		 	var num =  /*[[${sales.sales_ordernum}]]*/;
+		 	$('#ordernum').val(num);
+		 	alert('주문번호 '+num+'건에 대한 주문 상품이 판매 완료 되었습니다. 판매 조회 페이지로 이동합니다.');
+		 	form.submit();
+		}
+		
+		function goProduction(){
+			$('#goProduct').click(function(){
+				alert('생산요청 페이지로 이동합니다.');
+			})
+		}
 		
 	/*]]>*/
 </script>
 <body>
+<form action="updateStatus" id="formTry" method="post">
+<input type="hidden" id="ordernum" name="sales_ordernum">
+</form>
 <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
     <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@Header삽입@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
     <div id="header"></div>

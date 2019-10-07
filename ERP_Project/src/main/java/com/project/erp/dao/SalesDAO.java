@@ -183,6 +183,17 @@ public class SalesDAO {
 		
 	}
 	
+	public int updateSalesStatusDone(Sales sales){
+		int result = 0;
+		try{
+		SalesMapper mapper = sqlSession.getMapper(SalesMapper.class);
+		result= mapper.updateSalesStatusDone(sales);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	
 	/*
 	 * delete
