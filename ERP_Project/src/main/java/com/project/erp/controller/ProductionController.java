@@ -158,8 +158,9 @@ public class ProductionController {
 	//생산품 삽입
 	@RequestMapping(value = "/produceInsert", method = RequestMethod.POST)
 	public String produceInsert(ManufactureVO manufacture, HttpSession session) {
-		System.out.println(manufacture);
 		/*manufacture.setManuf_requserid((String)session.getAttribute("loginid"));*/
+		manufacture.setManuf_requserid("user");
+		System.out.println(manufacture);
 		int result = pService.produceInsert(manufacture);
 		if (result == 0) {
 			return "redirect:/goproducecheck";
