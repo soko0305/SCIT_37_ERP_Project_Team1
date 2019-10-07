@@ -104,6 +104,19 @@ public class InventoryDAO {
 	}
 
 
+	public ArrayList<CheckstockVO> selectAllCheckstock() {
+		ArrayList<CheckstockVO> cList = null;
+		try{
+		InventoryMapper mapper = sqlSession.getMapper(InventoryMapper.class);
+		cList= mapper.selectAllCheckstock();
+		}catch(Exception e){
+			e.printStackTrace();
+			cList=null;
+		}
+		return cList;
+	}
+
+
 
 
 	

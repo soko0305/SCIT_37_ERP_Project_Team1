@@ -101,4 +101,17 @@
 		#{checkstock_reason}
 	)
 	</insert>
+	
+		<select id="selectAllCheckstock" resultType="com.project.erp.vo.CheckstockVO">
+		SELECT  CHECKSTOCK_CODE,
+				CHECKSTOCK_DATE,
+				CHECKSTOCK_ADMINID,
+				MMCODE,
+				WAREHOUSE_CODE,
+				CHECKSTOCK_SYSSTOCK,
+				CHECKSTOCK_RESULT,
+				CHECKSTOCK_REALSTOCK,
+				CHECKSTOCK_REASON
+		FROM checkstock
+	</select>
 </mapper>

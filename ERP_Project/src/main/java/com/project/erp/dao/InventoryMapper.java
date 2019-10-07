@@ -27,5 +27,7 @@ public interface InventoryMapper {
 
 	public int confirmInvenWizProbs(CheckstockVO checkstock);
 
+	public ArrayList<CheckstockVO> selectAllCheckstock();
+
 
 }

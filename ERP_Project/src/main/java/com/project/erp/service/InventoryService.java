@@ -76,6 +76,13 @@ public class InventoryService {
 	}
 
 
+	public ArrayList<CheckstockVO> selectAllCheckstock() {
+		ArrayList<CheckstockVO> cList = null;
+		cList = inventoryDAO.selectAllCheckstock();
+		return cList;
+	}
+
+
 
 
 
