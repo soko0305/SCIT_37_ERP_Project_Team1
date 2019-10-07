@@ -1,24 +1,21 @@
-
 <!doctype html>
-<html lang="UTF-8" xmlns:th="http://www.thymeleaf.org">
+<html lang="UTF-8">
 
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta http-equiv="Content-Language" content="en">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Data Tables - Choose between regular React Bootstrap
-	tables or advanced dynamic ones.</title>
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
-<meta name="description"
-	content="Choose between regular React Bootstrap tables or advanced dynamic ones.">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Grid Tables - Basic example of a Bootstrap 4 table with sort, search and filter functionality.</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"
+    />
+    <meta name="description" content="Basic example of a Bootstrap 4 table with sort, search and filter functionality.">
+
+    <!-- Disable tap highlight on IE -->
+    <meta name="msapplication-tap-highlight" content="no">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
 <link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
-
-<!-- Disable tap highlight on IE -->
-<meta name="msapplication-tap-highlight" content="no">
-
-<link href="./main.cba69814a806ecc7945a.css" rel="stylesheet">
 <!-- firebase -->
 	<script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-auth.js"></script>
@@ -30,175 +27,92 @@
   <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
   <!-- firebase Config and initialize -->	
   <script src="firebase/firebase-config.js"></script>
-</head>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script th:inline="javascript">
-/*<![CDATA[*/
- 	$(function(){
- 		var producelist = /*[[${producelist}]]*/;
-		var today = new Date();
- 		for(var i = 0 ; i<producelist.length; i++){
- 			str='';
- 			str+='<tr>';
- 			str+='<td>'+producelist[i].pd_code+'</td>';
- 			str+='<td>'+producelist[i].pd_name+'</td>';
- 			str+='<td>'+producelist[i].manuf_startdate+'</td>';
- 			str+='<td>'+producelist[i].manuf_status+'</td>';
- 			var startdate = producelist[i].manuf_startdate;
- 			var startdateOfSplit = startdate.split('-');
- 			var date = new Date(startdateOfSplit[0].toString(), startdateOfSplit[1]-1,startdateOfSplit[2]);
- 			var status =producelist[i].manuf_status;
-			str+='<td>';
-			if(status=='미완'& today.getTime()>date.getTime()){
-				str+='<button class="mb-2 mr-2 btn btn-primary" data-type="status" value="'+producelist[i].mfseq+'">완료</button>';
+  <script>
+/* 	function updateANDdelete(data){
+		var database = firebase.database();	
+		var button_type = $(data).attr("button-type");
+		var data_code = $(data).attr("data-code");
+		var warehouse_code = $(data).attr("wh-code");
+		
+		if(button_type=='update'||button_type=='move'){
+			var g_oWindow = window.open("/goUpdateInventory?warehouse_code="+warehouse_code+"&data_code="+data_code+"&button_type="+button_type+"", "Input Storage Information","width=400, height=500, location=no, toolbar=no, menubar=no, scrollbars=no, status=no, resizable=yes");
+			if(button_type=='move'){
+				$("#updateCheck").val('move');
 			}
- 	 		str+='</td>';
- 			str+='</tr>';
- 			$("#tbody1").append(str);
- 		}
-		$(".btn-primary").click(function(){
-			var type = $(this).attr("data-type");
-			var code = $(this).val();
-				$("#code").val(code);
-				$("#statusProduce").submit();				
-		});
-	});
-	/*]]>*/
-</script>
+		}else if(button_type=='delete'){
+			var checkDelete = confirm("정말로 재고 정보를 삭제하시겠습니까?");
+			if(checkDelete){
+				database.ref('warehouse/'+warehouse_code).child('inventory').child(data_code).remove();
+			}
+		}
+	} */
+  </script>
 <script>
 	$(function(){	
 		$("#header").load("/header");
 		$("#navbar").load("/navbar");
 		$("#setting").load("/setting");
 	});
-	</script>
-<link
-	href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css"
-	rel="stylesheet">
-<link href="./main.8d288f825d8dffbbe55e.css" rel="stylesheet">
+</script>
 </head>
 <body>
-	<form action="statusProduce" method="post" id="statusProduce">
-		<input type="hidden" name="mfseq" id="code">
-	</form>
-	<div
-		class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
-		<div class="app-main">
-			<div id="header"></div>
-			<div id="setting"></div>
-			<div class="app-main">
-				<div id="navbar"></div>
-				<div class="app-main__outer">
-					<div class="app-main__inner">
-					<!-- style="height: 300px; width: 906px; display: flex;" --> 
-							<div class="row">
-							<div class="col-lg-6">
-							<div class="main-card mb-3 card">
-								<div class="card-body">
-									<h5 class="card-title">
-										공지사항
-										<button
-											class="mb-2 mr-2 btn-pill btn-transition btn btn-outline-primary btn-sm"
-											type="button" style="float: right;"
-											onclick="location.href='goBoardList'">detail</button>
-									</h5>
-									<table class="mb-0 table table-hover">
-									<thead>
-										<tr>
-											<th>번호</th>
-											<th>제목</th>
-											<th>작성자</th>
-											<th>등록일</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr th:each="list : ${boardlist}">
-											<td th:text="${list.rn}"></td>
-											<td><a
-												th:href="@{http://localhost:9088/boarddetail(boardSeq=${list.board_seq})}">
-													<p th:text="${list.title}"></p>
-											</a></td>
-											<td th:text="${list.userid}"></td>
-											<td th:text="${list.time}"></td>
-										</tr>
-									</tbody>
-									</table>
-								</div>
-							</div>
-						</div>					
+<input type="hidden" id="updateCheck" value="">
+<div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
+    <div id="header"></div>
+    <div id="setting"></div> 
+            <div class="app-main">
+            
+                     <div id="navbar"></div>
+                <div class="app-main__outer">
+                <div class="app-main__inner">
+                    <div class="app-page-title">
+                        <div class="page-title-wrapper">
+                            <div class="page-title-heading">
+                                <div class="page-title-icon">
+                                    <i class="pe-7s-notebook icon-gradient bg-mixed-hopes">
+                                    </i>
+                                </div>
+                                <div>실시간 재고관리
+                                    <div class="page-title-subheading">
+                                    	실시간 재고 상황 검색, 수정 기능 
 
-							<div class="col-lg-6">
-							<div class="main-card mb-3 card">
-								<div class="card-body">
-									<h5 class="card-title">
-										생산 관리
-										<button
-											class="mb-2 mr-2 btn-pill btn-transition btn btn-outline-primary btn-sm"
-											type="button" style="float: right;"
-											onclick="location.href='goproducecheck'">detail</button>
-									</h5>
-									<table class="mb-0 table table-hover">
-									<thead>
-										<tr>
-											<th>제품번호</th>
-											<th>제품명</th>
-											<th>시작일</th>
-											<th>상태</th>
-											<th>기타</th>
-										</tr>
-									</thead>
-									<tbody id="tbody1">
-									</tbody>
-									</table>
-								</div>
-							</div>
-						</div>					
-						<div class="col-lg-6">
-							<div class="main-card mb-3 card">
-								<div class="card-body">
-									<h5 class="card-title">
-										구매 관리
-										<button
-											class="mb-2 mr-2 btn-pill btn-transition btn btn-outline-primary btn-sm"
-											type="button" style="float: right;"
-											onclick="location.href='goArrive'">detail</button>
-									</h5>
-									<table class="mb-0 table table-hover">
-										<thead>
-											<tr>
-												<th>일자</th>
-												<th>원자재명</th>
-												<th>수량</th>
-												<th>진행상태</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr th:each="list : ${orderList}">
-												<td th:text="${list.rmorder_date}"></td>
-												<td th:text="${list.rawm_name}"></td>
-												<td th:text="${list.rmorder_amount}"></td>
-												<td th:text="${list.rmorder_status}"></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div> 
-					<div class="col-lg-6">
-							<div class="main-card mb-3 card">
-								<div class="card-body">
-									<h5 class="card-title">
-										재고 현황
-										<button
-											class="mb-2 mr-2 btn-pill btn-transition btn btn-outline-primary btn-sm"
-											type="button" style="float: right;"
-											onclick="location.href='goInventoryManagement'">detail</button>
-									</h5>
-									<table class="mb-0 table table-hover">
-									<thead>
-										<tr>
-  										<th data-field="name"
+                                    </div>
+                                </div>
+                            </div>    
+                          </div>
+                    </div>              <div class="main-card mb-3 card">
+                        <div class="card-body">
+                            <!-- search 코딩 -->
+                        
+                           <select class="mb-2 form-control" style="display:inline ;width: 252px"  id="inventoryWarehouse">
+                                    <option value="">관리창고</option>
+                           </select>
+                            <select class="mb-2 form-control" style="display:inline ;width: 252px" id="inventoryType">
+                                    <option value="">재고분류</option>
+                                    <option value="product">생산품</option>
+                                    <option value="material">원자재</option>
+                           </select>
+                           <select class="mb-2 form-control" style="display:inline ;width: 252px" id="inventorySupplier">
+                                    <option value="">출처</option>
+                           </select>
+                           <select class="mb-2 form-control" style="display:inline ;width: 252px" id="inventorySort">
+                                    <option value="">재고종류</option>
+                           </select>
+                       		<input placeholder="재고코드 또는 재고명" type="text" class="mb-2 form-control" style="display:inline ;width: 530px" id="searchText">            
+                            <button class="mb-2 mr-2 btn btn-primary" style="display:inline ;height: 37px;width: 95px" id="searchButton">
+                                	Search
+                           </button>
+                       <div>
+                        <div class="input-group">
+                                     
+                               
+                        </div>
+                        </div>
+           
+                            <table class="mb-0 table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th data-field="name"
                                         data-sortable="true" width="100em">
                                         	재고코드
                                     </th>
@@ -210,7 +124,7 @@
                                         data-sortable="true" width="150em">
                                         	관리창고
                                     </th>
-                                     <th data-field="forks_count"
+<                                     <th data-field="forks_count"
                                         data-sortable="true" width="175em">
                                         	재고분류
                                     </th>
@@ -242,24 +156,21 @@
                                         data-sortable="true" width="100px">
                                         	재고삭제 
                                     </th>
-										</tr>
-									</thead>
+                                </tr>
+                                </thead>
                                 <tbody id="tBody">
                                 </tbody>
-									</table>
-								</div>
-							</div>
-						</div>				
-					</div>
-					<!--  footer wrapper -->
-				</div>
-			</div>
-		</div>
-		</div>
-		
-		<!-- drawer wrapper -->
-	</div>
-	<script>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- footer 삽입 -->    </div>
+    </div>
+</div>
+
+<!-- drawer 삽입 -->
+<div class="app-drawer-overlay d-none animated fadeIn"></div><script type="text/javascript" src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
+<script>
 	$(function(){
 		var database = firebase.database();	
 		
@@ -584,4 +495,3 @@
 </script>
 </body>
 </html>
-

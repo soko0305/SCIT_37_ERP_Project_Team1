@@ -32,6 +32,14 @@
 $(function(){
 	var status = 'ARRIVE';
 	var database = firebase.database();
+	$(".btn-light").click(function(){
+		var rmorder_code = $(this).val();
+		
+		var url = "order?rmorder_code="+rmorder_code;
+	    var name = "popup test";
+	    var option = "width = 750, height = 600, top = 100, left = 200, location = no"
+	    window.open(url, name, option);
+	});
 	$(".btn-primary").click(function(){
 		var rmorder_code = $(this).val();
 		$.ajax({
@@ -66,22 +74,22 @@ $(function(){
 				
 			}
 		});
-		
 	});
 	$("#insertOrder").click(function(){ 
 		var g_oWindow = window.open("/goOrderInsert", "Input rawMaterial Information","width=550, height=550, location=no, toolbar=no, menubar=no, scrollbars=no, status=no, resizable=yes");
 	});
-
+	
 });
 
 </script>
-	<script>
-	$(function(){	
-		$("#header").load("/header");
-		$("#navbar").load("/navbar");
-		$("#setting").load("/setting");
-	});
-	</script>
+
+<script>
+$(function(){	
+	$("#header").load("/header");
+	$("#navbar").load("/navbar");
+	$("#setting").load("/setting");
+});
+</script>
 </head>
 <body>
 <form action="orderUpdate" method="post" id="orderUpdateForm">
@@ -140,6 +148,7 @@ $(function(){
 										<th>수량</th>
 										<th>창고</th>
 										<th>구매상태</th>
+										<th>발주서</th>
 										<th>도착확인</th>
 									</tr>
 								</thead>
@@ -152,6 +161,8 @@ $(function(){
 										<td th:text="${list.rmorder_amount}"></td>
 										<td th:text="${list.warehouse_code}"></td>
 										<td th:text="${list.rmorder_status}"></td>
+										<td><button class="mb-2 mr-2 btn-square btn btn-light"
+												data-type="order" th:value="${list.rmorder_code}">발주서</button></td>
 										<td>
 										<!-- <span th:if="${account.getAccountStatus().toString().equals('ACTIVE')}">재직중</span> -->
 											<button class="mb-2 mr-2 btn-square btn btn-primary"
@@ -169,6 +180,7 @@ $(function(){
 										<th>수량</th>
 										<th>창고</th>
 										<th>구매상태</th>
+										<th>발주서</th>
 										<th>도착확인</th>
 									</tr>
 								</tfoot>
