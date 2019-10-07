@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" >
 
 <head>
     <meta charset="utf-8">
@@ -102,23 +102,23 @@
 										<td colspan=7 class=xl1258711 width=147 style='border-right: 1.0pt solid black; border-left: none; width: 112pt'>거래일자</td>
 									</tr>
 									<tr height=24 style='height: 18.0pt'>
-										<td colspan=7 height=24 class=xl1288711	style='border-right: 1.0pt solid black; height: 18.0pt; border-left: none' th:text="${sales.sales_orderdate}"></td>
+										<td colspan=7 height=24 class=xl1288711	style='border-right: 1.0pt solid black; height: 18.0pt; border-left: none' th:text="${result.rmorder_date}"></td>
 									</tr>
 									<tr height=24 style='height: 18.0pt'>
 										<td colspan=32 height=24 class=xl1338711 style='height: 18.0pt'></td>
 									</tr>
 									<tr height=23 style='mso-height-source: userset; height: 17.4pt'>
-										<td colspan=32 rowspan=2 height=46 class=xl1138711 style='border-right: 1.0pt solid black; border-bottom: 1.0pt solid black; height: 34.8pt'>거 래 명 세 서</td>
+										<td colspan=32 rowspan=2 height=46 class=xl1138711 style='border-right: 1.0pt solid black; border-bottom: 1.0pt solid black; height: 34.8pt'>발 주 서</td>
 									</tr>
 									<tr height=23 style='mso-height-source: userset; height: 17.4pt'>
 									</tr>
 									<tr height=23 style='height: 17.4pt'>
-										<td rowspan=8 height=185 class=xl1168711 width=21 style='border-bottom: 1.0pt solid black; height: 139.8pt; width: 16pt'>공<br>급<br> 받<br> 는<br> 자
+										<td rowspan=8 height=185 class=xl1168711 width=21 style='border-bottom: 1.0pt solid black; height: 139.8pt; width: 16pt'>공<br><br>급<br><br> 자
 										</td>
 										<td colspan=3 rowspan=2 class=xl1178711 width=63 style='border-right: .5pt solid black; border-bottom: .5pt solid black; width: 48pt'>상<span style='mso-spacerun: yes'>&nbsp; </span>호<br> (법인명)
 										</td>
-										<td colspan=11 rowspan=2 class=xl1188711 th:text="${buyer.buyer_corp}"></td>
-										<td rowspan=8 class=xl1198711 width=21 style='border-bottom: 1.0pt solid black; width: 16pt'>공<br><br> 급<br> <br> 자
+										<td colspan=11 rowspan=2 class=xl1188711 th:text="${result.supplier_name}"></td>
+										<td rowspan=8 class=xl1198711 width=21 style='border-bottom: 1.0pt solid black; width: 16pt'>공<br><br> 급<br><br> 받 <br><br> 는 <br><br> 자
 										</td>
 										<td colspan=3 rowspan=2 class=xl778711>등록번호</td>
 										<td colspan=13 rowspan=2 class=xl1208711 style='border-right: 1.0pt solid black'>scit-37-c-01</td>
@@ -128,7 +128,7 @@
 									<tr height=23 style='height: 17.4pt'>
 										<td colspan=3 rowspan=2 height=46 class=xl1128711 width=63 style='border-right: .5pt solid black; border-bottom: .5pt solid black; height: 34.8pt; width: 48pt'>사업장<br>주<span style='mso-spacerun: yes'>&nbsp; </span>소
 										</td>
-										<td colspan=11 rowspan=2 class=xl918711 th:text="${buyer.buyer_addr}"></td>
+										<td colspan=11 rowspan=2 class=xl918711 th:text="${result.supplier_addr}"></td>
 										<td colspan=3 rowspan=2 class=xl908711 width=63 style='width: 48pt'>상<span style='mso-spacerun: yes'>&nbsp;</span>호<br> (법인명)</td>
 										<td colspan=6 rowspan=2 class=xl808711>(주)최강전문</td>
 										<td colspan=2 rowspan=2 class=xl758711>성 명</td>
@@ -137,7 +137,7 @@
 									<tr height=23 style='height: 17.4pt'></tr>
 									<tr height=23 style='height: 17.4pt'>
 										<td colspan=3 rowspan=2 height=46 class=xl848711 style='border-right: .5pt solid black; border-bottom: .5pt solid black; height: 34.8pt'>전화번호</td>
-										<td colspan=11 rowspan=2 class=xl808711 th:text="${buyer.buyer_pictel}"></td>
+										<td colspan=11 rowspan=2 class=xl808711 th:text="${result.supplier_tel}"></td>
 										<td colspan=3 rowspan=2 class=xl908711 width=63 style='width: 48pt'>사업장<br> 주<span style='mso-spacerun: yes'>&nbsp; </span>소
 										</td>
 										<td colspan=13 rowspan=2 class=xl918711 style='border-right: 1.0pt solid black'>서울특별시 강남구 코엑스 4층</td>
@@ -146,7 +146,7 @@
 									</tr>
 									<tr height=23 style='height: 17.4pt'>
 										<td colspan=3 rowspan=2 height=47 class=xl938711 width=63 style='border-right: .5pt solid black; border-bottom: 1.0pt solid black; height: 35.4pt; width: 48pt'>합계금액</td>
-										<td colspan=11 rowspan=2 class=xl978711 style='border-bottom: 1.0pt solid black' th:text="'￦ '+${sales.sales_totalprice}"></td>
+										<td colspan=11 rowspan=2 class=xl978711 style='border-bottom: 1.0pt solid black' th:text="'￦ '+${totalPirce}"></td>
 										<td colspan=3 rowspan=2 class=xl758711 style='border-bottom: 1.0pt solid black'>전<span style='mso-spacerun: yes'>&nbsp; </span>화
 										</td>
 										<td colspan=13 rowspan=2 class=xl808711 style='border-right: 1.0pt solid black; border-bottom: 1.0pt solid black'>02-7777-7777</td>
@@ -157,71 +157,30 @@
 										<td height=23 class=xl668711 style='height: 17.4pt'>no</td>
 										<td colspan=11 class=xl778711 style='border-left: none'>품<span style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;&nbsp; </span>목
 										</td>
-										<td colspan=4 class=xl778711 style='border-left: none'>수량</td>
-										<td colspan=4 class=xl778711 style='border-left: none'>단<span style='mso-spacerun: yes'>&nbsp;&nbsp; </span>가
+										<td colspan=4 class=xl778711 style='border-left: none'>종&nbsp;&nbsp;류</td>
+										<td colspan=4 class=xl778711 style='border-left: none'>수<span style='mso-spacerun: yes'>&nbsp;&nbsp; </span>량
 										</td>
-										<td colspan=5 class=xl778711 style='border-left: none'>공 급 가 액</td>
+										<td colspan=5 class=xl778711 style='border-left: none'>단&nbsp;&nbsp;가</td>
 										<td colspan=7 class=xl778711 style='border-right: 1.0pt solid black; border-left: none'>비<span style='mso-spacerun: yes'>&nbsp;&nbsp; </span>고
 										</td>
 									</tr>
 									
 									
-									<tr height=23 style='height: 17.4pt' th:each="list,iterStat : ${detailList}">
-										<td height=23 th:text="${iterStat.count}" class=xl648711 style='height: 17.4pt; border-top: none; font-size: 9.0pt; color: black; font-weight: 400; text-decoration: none; text-underline-style: none; text-line-through: none; font-family: 돋움, monospace; mso-font-charset: 129; border-top: .5pt solid windowtext; border-right: .5pt solid windowtext; border-bottom: .5pt solid windowtext; border-left: 1.0pt solid windowtext'>
+									<tr height=23 style='height: 17.4pt'>
+										<td height=23 class=xl648711 style='height: 17.4pt; border-top: none; font-size: 9.0pt; color: black; font-weight: 400; text-decoration: none; text-underline-style: none; text-line-through: none; font-family: 돋움, monospace; mso-font-charset: 129; border-top: .5pt solid windowtext; border-right: .5pt solid windowtext; border-bottom: .5pt solid windowtext; border-left: 1.0pt solid windowtext'>
 										</td>
-										<td colspan=11 th:text="${list.salesdetail_name}" class=xl738711 style='border-left: none; font-size: 9.0pt; color: black; font-weight: 400; font-family: 돋움, monospace; mso-font-charset: 129; border: .5pt solid windowtext'>
+										<td colspan=11 th:text="${result.rawm_name}" class=xl738711 style='border-left: none; font-size: 9.0pt; color: black; font-weight: 400; font-family: 돋움, monospace; mso-font-charset: 129; border: .5pt solid windowtext'>
 										</td>
-										<td colspan=4 class=xl758711 th:text="${list.salesdetail_amount}+' '" style='border-left: none; font-size: 9.0pt; color: black; font-weight: 400; font-family: 돋움, monospace; mso-font-charset: 129; border: .5pt solid windowtext'>
+										<td colspan=4 class=xl758711 th:text="${result.rawm_sort}" style='border-left: none; font-size: 9.0pt; color: black; font-weight: 400; font-family: 돋움, monospace; mso-font-charset: 129; border: .5pt solid windowtext'>
 										</td>
-										<td colspan=4 class=xl728711 th:text="${list.salesdetail_price}+' '" style='border-left: none; font-size: 9.0pt; color: black; font-weight: 400; text-decoration: none; text-underline-style: none; text-line-through: none; font-family: 돋움, monospace; mso-font-charset: 129; border: .5pt solid windowtext'>
+										<td colspan=4 class=xl728711 th:text="${result.rmorder_amount}" style='border-left: none; font-size: 9.0pt; color: black; font-weight: 400; text-decoration: none; text-underline-style: none; text-line-through: none; font-family: 돋움, monospace; mso-font-charset: 129; border: .5pt solid windowtext'>
 										</td>
-										<td colspan=5 class=xl728711 th:text="${list.salesdetail_valueofsupply}+' '"style='border-left: none; font-size: 9.0pt; color: black; font-weight: 400; text-decoration: none; text-underline-style: none; text-line-through: none; font-family: 돋움, monospace; mso-font-charset: 129; border: .5pt solid windowtext'>
+										<td colspan=5 class=xl728711 th:text="${result.rawm_price}"style='border-left: none; font-size: 9.0pt; color: black; font-weight: 400; text-decoration: none; text-underline-style: none; text-line-through: none; font-family: 돋움, monospace; mso-font-charset: 129; border: .5pt solid windowtext'>
 										</td>
 										<td colspan=7 class=xl998711 style='border-right: 1.0pt solid black; border-left: none; font-size: 9.0pt; color: black; font-weight: 400; text-decoration: none; text-underline-style: none; text-line-through: none; font-family: 돋움, monospace; mso-font-charset: 129; border: .5pt solid windowtext'>
 										</td>
 									</tr>
 									
-									<tr height=23 style='height: 17.4pt'>
-										<td height=23 class=xl648711
-											style='height: 17.4pt; border-top: none; font-size: 9.0pt; color: white; font-weight: 400; text-decoration: none; text-underline-style: none; text-line-through: none; font-family: 돋움, monospace; mso-font-charset: 129; border-top: .5pt solid windowtext; border-right: .5pt solid windowtext; border-bottom: .5pt solid windowtext; border-left: 1.0pt solid windowtext'>
-										</td>
-										<td colspan=11 class=xl738711
-											style='border-left: none; font-size: 9.0pt; color: white; font-weight: 400; text-decoration: none; text-underline-style: none; text-line-through: none; font-family: 돋움, monospace; mso-font-charset: 129; border: .5pt solid windowtext'>
-										</td>
-										<td colspan=4 class=xl758711
-											style='border-left: none; font-size: 9.0pt; color: white; font-weight: 400; text-decoration: none; text-underline-style: none; text-line-through: none; font-family: 돋움, monospace; mso-font-charset: 129; border: .5pt solid windowtext'>
-										</td>
-										<td colspan=4 class=xl728711
-											style='border-left: none; font-size: 9.0pt; color: white; font-weight: 400; text-decoration: none; text-underline-style: none; text-line-through: none; font-family: 돋움, monospace; mso-font-charset: 129; border: .5pt solid windowtext'>
-										</td>
-										<td colspan=5 class=xl728711
-											style='border-left: none; font-size: 9.0pt; color: white; font-weight: 400; text-decoration: none; text-underline-style: none; text-line-through: none; font-family: 돋움, monospace; mso-font-charset: 129; border: .5pt solid windowtext'>
-										</td>
-										<td colspan=7 class=xl998711
-											style='border-right: 1.0pt solid black; border-left: none; font-size: 9.0pt; color: white; font-weight: 400; text-decoration: none; text-underline-style: none; text-line-through: none; font-family: 돋움, monospace; mso-font-charset: 129; border: .5pt solid windowtext'>
-										</td>
-									</tr>
-									
-									<tr height=24 style='height: 18.0pt'>
-										<td height=24 class=xl658711
-											style='height: 18.0pt; border-top: none; font-size: 9.0pt; color: white; font-weight: 400; text-decoration: none; text-underline-style: none; text-line-through: none; font-family: 돋움, monospace; mso-font-charset: 129; border-top: .5pt solid windowtext; border-right: .5pt solid windowtext; border-bottom: 1.0pt solid windowtext; border-left: 1.0pt solid windowtext'>
-										</td>
-										<td colspan=11 class=xl748711
-											style='border-left: none; font-size: 9.0pt; color: white; font-weight: 400; text-decoration: none; text-underline-style: none; text-line-through: none; font-family: 돋움, monospace; mso-font-charset: 129; border-top: .5pt solid windowtext; border-right: .5pt solid windowtext; border-bottom: 1.0pt solid windowtext; border-left: .5pt solid windowtext'>
-										</td>
-										<td colspan=4 class=xl768711
-											style='border-left: none; font-size: 9.0pt; color: white; font-weight: 400; text-decoration: none; text-underline-style: none; text-line-through: none; font-family: 돋움, monospace; mso-font-charset: 129; border-top: .5pt solid windowtext; border-right: .5pt solid windowtext; border-bottom: 1.0pt solid windowtext; border-left: .5pt solid windowtext'>
-										</td>
-										<td colspan=4 class=xl718711
-											style='border-left: none; font-size: 9.0pt; color: white; font-weight: 400; text-decoration: none; text-underline-style: none; text-line-through: none; font-family: 돋움, monospace; mso-font-charset: 129; border-top: .5pt solid windowtext; border-right: .5pt solid windowtext; border-bottom: 1.0pt solid windowtext; border-left: .5pt solid windowtext'>
-										</td>
-										<td colspan=5 class=xl718711
-											style='border-left: none; font-size: 9.0pt; color: white; font-weight: 400; text-decoration: none; text-underline-style: none; text-line-through: none; font-family: 돋움, monospace; mso-font-charset: 129; border-top: .5pt solid windowtext; border-right: .5pt solid windowtext; border-bottom: 1.0pt solid windowtext; border-left: .5pt solid windowtext'>
-										</td>
-										<td colspan=7 class=xl1018711
-											style='border-right: 1.0pt solid black; border-left: none; font-size: 9.0pt; color: white; font-weight: 400; text-decoration: none; text-underline-style: none; text-line-through: none; font-family: 돋움, monospace; mso-font-charset: 129; border-top: .5pt solid windowtext; border-right: .5pt solid windowtext; border-bottom: 1.0pt solid windowtext; border-left: .5pt solid windowtext'>
-										</td>
-									</tr>
 									<tr height=24 style='height: 18.0pt'>
 										<td colspan=32 height=24 class=xl688711
 											style='height: 18.0pt; font-size: 11.0pt; color: white; font-weight: 400; text-decoration: none; text-underline-style: none; text-line-through: none; font-family: 돋움, monospace; mso-font-charset: 129; border: none'></td>
@@ -230,9 +189,9 @@
 
 									<tr height=24 style='height: 18.0pt'>
 										<td colspan=5 height=24 class=xl698711 style='height: 18.0pt'>인수자</td>
-										<td colspan=10 class=xl678711 style='border-left: none' th:text="${buyer.buyer_pic}"></td>
+										<td colspan=10 class=xl678711 style='border-left: none' th:text="${result.rawm_name}"></td>
 										<td colspan=5 class=xl678711 style='border-left: none'>합계</td>
-										<td colspan=13 th:text="'￦ '+${sales.sales_totalprice}" class=xl678711 style='border-right: 1.0pt solid black; font-weight: 600; border-left: none'></td>
+										<td colspan=13 th:text="'￦ '+${totalPirce}" class=xl678711 style='border-right: 1.0pt solid black; font-weight: 600; border-left: none'></td>
 									</tr>
 								</table>
 							</div><br /><br />
