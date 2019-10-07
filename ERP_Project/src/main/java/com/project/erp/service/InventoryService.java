@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.erp.dao.InventoryDAO;
 import com.project.erp.dao.RawMaterialDAO;
+import com.project.erp.vo.CheckstockVO;
 import com.project.erp.vo.ProductVO;
 import com.project.erp.vo.RawMaterialVO;
 import com.project.erp.vo.SupplierVO;
@@ -58,6 +59,20 @@ public class InventoryService {
 		ArrayList<ProductVO> pList = null;
 		pList = inventoryDAO.selectDistinctProductSort();
 		return pList;
+	}
+
+
+	public int confirmInvenWizNoProbs(CheckstockVO checkstock) {
+		int check =0;
+		check = inventoryDAO.confirmInvenWizNoProbs(checkstock);
+		return check;
+	}
+
+
+	public int confirmInvenWizProbs(CheckstockVO checkstock) {
+		int check =0;
+		check = inventoryDAO.confirmInvenWizProbs(checkstock);
+		return check;
 	}
 
 

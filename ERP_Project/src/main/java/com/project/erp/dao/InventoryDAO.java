@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.project.erp.vo.CheckstockVO;
 import com.project.erp.vo.ProductVO;
 import com.project.erp.vo.RawMaterialVO;
 import com.project.erp.vo.SupplierVO;
@@ -74,6 +75,32 @@ public class InventoryDAO {
 			e.printStackTrace();
 		}
 		return pList;
+	}
+
+
+	public int confirmInvenWizNoProbs(CheckstockVO checkstock) {
+		int check = 0;
+		try{
+		InventoryMapper mapper = sqlSession.getMapper(InventoryMapper.class);
+		check= mapper.confirmInvenWizNoProbs(checkstock);
+		}catch(Exception e){
+			e.printStackTrace();
+			check=0;
+		}
+		return check;
+	}
+
+
+	public int confirmInvenWizProbs(CheckstockVO checkstock) {
+		int check = 0;
+		try{
+		InventoryMapper mapper = sqlSession.getMapper(InventoryMapper.class);
+		check= mapper.confirmInvenWizProbs(checkstock);
+		}catch(Exception e){
+			e.printStackTrace();
+			check=0;
+		}
+		return check;
 	}
 
 

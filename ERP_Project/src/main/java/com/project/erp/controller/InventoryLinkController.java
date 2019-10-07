@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.erp.service.InventoryService;
+import com.project.erp.vo.CheckstockVO;
 
 @Controller
 public class InventoryLinkController {
@@ -83,8 +84,12 @@ public class InventoryLinkController {
 		return "inventory/ResearchInventoryCode";
 	}
 	
-
-
+	
+	@RequestMapping(value="/goFixInventory", method = RequestMethod.GET)
+	public String goFixInventory(CheckstockVO checkstock, Model model){
+		model.addAttribute("checkstock", checkstock);
+		return "inventory/fixInventory";
+	}
 
 	
 }
