@@ -2,6 +2,8 @@ package com.project.erp.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.erp.service.InventoryService;
+import com.project.erp.vo.CheckstockVO;
 import com.project.erp.vo.ProductVO;
 import com.project.erp.vo.RawMaterialVO;
 import com.project.erp.vo.SupplierVO;
@@ -21,6 +24,7 @@ public class InventoryController {
 	int flag = 0;
 	int amount= 0;
 	String code = null;
+	String warehouse_code = null;
 	
 
 
@@ -74,12 +78,14 @@ public class InventoryController {
 	public @ResponseBody void setProductMaterialInfo(ProductVO product){
 		code= product.getPd_code();
 		amount = product.getAmount();
+		warehouse_code = product.getWarehouse_code();
 	}
 	
 	@RequestMapping(value="/setRawMaterialInfo", method = RequestMethod.POST)
 	public @ResponseBody void setRawMaterialInfo(RawMaterialVO rawmaterial){
 		code= rawmaterial.getRawm_code();
 		amount = rawmaterial.getAmount();
+		warehouse_code = rawmaterial.getWarehouse_code();
 	}
 	
 	
@@ -88,9 +94,24 @@ public class InventoryController {
 		RawMaterialVO rawmaterial = new RawMaterialVO();
 		rawmaterial.setRawm_code(code);
 		rawmaterial.setAmount(amount);
+		rawmaterial.setWarehouse_code(warehouse_code);
 		code = null;
 		amount =0;
 		return rawmaterial;
+	}
+	
+	@RequestMapping(value="/confirmInvenWizNoProbs", method = RequestMethod.POST)
+	public @ResponseBody void confirmInvenWizNoProbs(CheckstockVO checkstock, HttpSession session){
+		int check =0;
+		checkstock.setCheckstock_adminid((String)session.getAttribute("loginid"));
+		check = inventoryService.confirmInvenWizNoProbs(checkstock);
+	}
+	
+	@RequestMapping(value="/confirmInvenWizProbs", method = RequestMethod.POST)
+	public @ResponseBody void confirmInvenWizProbs(CheckstockVO checkstock, HttpSession session){
+		int check =0;
+		checkstock.setCheckstock_adminid((String)session.getAttribute("loginid"));
+		check = inventoryService.confirmInvenWizProbs(checkstock);
 	}
 	
 }

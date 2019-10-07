@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.project.erp.vo.CheckstockVO;
 import com.project.erp.vo.ProductVO;
 import com.project.erp.vo.RawMaterialVO;
 import com.project.erp.vo.SupplierVO;
@@ -21,6 +22,12 @@ public interface InventoryMapper {
 	public ArrayList<RawMaterialVO> selectDistinctMaterialSort();
 
 	public ArrayList<ProductVO> selectDistinctProductSort();
+
+	public int confirmInvenWizNoProbs(CheckstockVO checkstock);
+
+	public int confirmInvenWizProbs(CheckstockVO checkstock);
+
+	public ArrayList<CheckstockVO> selectAllCheckstock();
 
 
 }

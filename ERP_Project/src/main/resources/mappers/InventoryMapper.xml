@@ -45,8 +45,73 @@
 		FROM rawmaterial
 	</select>
 	
-		<select id="selectDistinctProductSort" resultType="com.project.erp.vo.ProductVO">
+	<select id="selectDistinctProductSort" resultType="com.project.erp.vo.ProductVO">
 		SELECT DISTINCT pd_sort
 		FROM product
+	</select>
+	
+	<insert id="confirmInvenWizNoProbs" parameterType="com.project.erp.vo.CheckstockVO">
+	insert into checkstock
+	(
+		CHECKSTOCK_CODE,
+		CHECKSTOCK_DATE,
+		CHECKSTOCK_ADMINID,
+		MMCODE,
+		WAREHOUSE_CODE,
+		CHECKSTOCK_SYSSTOCK,
+		CHECKSTOCK_RESULT,
+		CHECKSTOCK_REALSTOCK
+	)
+	values
+	(
+		'ci' || TO_CHAR(CHECKSTOCK_CODE.nextval),
+		SYSDATE,
+		#{checkstock_adminid},
+		#{mmcode},
+		#{warehouse_code},
+		#{checkstock_sysstock},
+		'일치',
+		#{checkstock_realstock}
+	)
+	</insert>
+	
+	<insert id="confirmInvenWizProbs" parameterType="com.project.erp.vo.CheckstockVO">
+	insert into checkstock
+	(
+		CHECKSTOCK_CODE,
+		CHECKSTOCK_DATE,
+		CHECKSTOCK_ADMINID,
+		MMCODE,
+		WAREHOUSE_CODE,
+		CHECKSTOCK_SYSSTOCK,
+		CHECKSTOCK_RESULT,
+		CHECKSTOCK_REALSTOCK,
+		CHECKSTOCK_REASON
+	)
+	values
+	(
+		'ci' || TO_CHAR(CHECKSTOCK_CODE.nextval),
+		SYSDATE,
+		#{checkstock_adminid},
+		#{mmcode},
+		#{warehouse_code},
+		#{checkstock_sysstock},
+		'불일치',
+		#{checkstock_realstock},
+		#{checkstock_reason}
+	)
+	</insert>
+	
+		<select id="selectAllCheckstock" resultType="com.project.erp.vo.CheckstockVO">
+		SELECT  CHECKSTOCK_CODE,
+				CHECKSTOCK_DATE,
+				CHECKSTOCK_ADMINID,
+				MMCODE,
+				WAREHOUSE_CODE,
+				CHECKSTOCK_SYSSTOCK,
+				CHECKSTOCK_RESULT,
+				CHECKSTOCK_REALSTOCK,
+				CHECKSTOCK_REASON
+		FROM checkstock
 	</select>
 </mapper>

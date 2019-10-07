@@ -51,6 +51,7 @@ private static final Logger logger = LoggerFactory.getLogger(FileUploadControlle
         return result;
     }
 
+
     /*@PostMapping("/uploadMultipleFiles")
     public List<FileUploadResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files){
         return Arrays.asList(files)
@@ -58,6 +59,7 @@ private static final Logger logger = LoggerFactory.getLogger(FileUploadControlle
                 .map(file -> uploadFile(file))
                 .collect(Collectors.toList());
     }*/
+
     
     @GetMapping("/downloadFile/{fileName:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request){
