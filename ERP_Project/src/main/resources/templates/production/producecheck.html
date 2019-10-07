@@ -43,7 +43,7 @@
  			var date = new Date(startdateOfSplit[0].toString(), startdateOfSplit[1]-1,startdateOfSplit[2]);
  			var status =producelist[i].manuf_status;
 			str+='<td>';
-			if(status=='미완'& today.getTime()<date.getTime()){
+			if(status=='미완'& today.getTime()>date.getTime()){
 				str+='<button class="mb-2 mr-2 btn btn-primary" data-type="status" value="'+producelist[i].mfseq+'">완료</button>';
 			}
  	 		if(today.getTime()<date.getTime()){
@@ -140,7 +140,7 @@
                                 </div>
                             </div>    </div>
                     </div>            <div class="main-card mb-3 card">
-                        <div class="card-body">
+                        <div class="card-body"><!--  여기에 와이드 헤이스 넣기ㅏ -->
                             <table style="width: 100%;" id="example" class="table table-hover table-striped table-bordered">
                                 <thead>
                                 <tr>

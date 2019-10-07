@@ -32,8 +32,7 @@
 		var database = firebase.database();	
 		var button_type = $(data).attr("button-type");
 		var data_code = $(data).attr("data-code");
-		var pd_code = null;
-		var rawm_code = null;
+		var warehouse_code= $(data).attr("wcode-data");
 		var amount = $(data).attr("amount-data");
 		
 		if(button_type=='selection'){
@@ -42,7 +41,8 @@
 					url:"setProductMaterialInfo",
 					type:"POST",
 					data:{pd_code:data_code,
-						  amount:amount
+						  amount:amount,
+						  warehouse_code:warehouse_code
 					},
 					success:function(){
 						window.open("about:blank","_self").close();
@@ -53,7 +53,8 @@
 					url:"setRawMaterialInfo",
 					type:"POST",
 					data:{rawm_code:data_code,
-						  amount:amount
+						  amount:amount,
+						  warehouse_code:warehouse_code
 					},
 					success:function(){
 						window.open("about:blank","_self").close();
@@ -266,7 +267,7 @@
 					str+='<td>'+serverData.rawm_sort+'</td>';
 					str+='<td>'+amount+'</td>';
 					str+='<td>'+serverData.rawm_price+'</td>';
-					str+='<td><button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary" onclick="selectSearchingStuff(this);" button-type="selection" data-code="'+serverData.rawm_code+'" amount-data="'+amount+'" style="margin-top: 0.7em;margin-left: 1.2em">선택</button></td>';
+					str+='<td><button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary" onclick="selectSearchingStuff(this);" button-type="selection" data-code="'+serverData.rawm_code+'" amount-data="'+amount+'" wcode-data="'+warehouse_code+'" style="margin-top: 0.7em;margin-left: 1.2em">선택</button></td>';
 					str+='</tr>';
 					$("#tBody").append(str);	
 					

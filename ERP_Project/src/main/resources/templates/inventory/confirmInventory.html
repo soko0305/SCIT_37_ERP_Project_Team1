@@ -91,9 +91,9 @@
                                         </div>
                                         
                                            <div class="position-relative row form-group">
-                                        	<label id="inputRAmount" for="exampleEmail" class="col-sm-2 col-form-label">실질재고</label>
+                                        	<label for="exampleEmail" class="col-sm-2 col-form-label">실질재고</label>
                                             <div class="col-sm-10">
-                                            	<input placeholder="실질재고" type="text" class="mb-2 form-control" style="display:inline ;width: 400px">
+                                            	<input id="inputRAmount"  placeholder="실질재고" type="text" class="mb-2 form-control" style="display:inline ;width: 400px">
                                             </div>
                                         	</div>
                                         	<div align="right">
@@ -115,9 +115,9 @@
 <div class="app-drawer-overlay d-none animated fadeIn"></div>
 <script>
 $(function(){
-	
 var formData = new FormData();
 var code = null;
+var warehouse_code = null;
 var amount = 0;
 	$("#confirmButton").click(function(){
 		var formData = new FormData();
@@ -128,8 +128,8 @@ var amount = 0;
 				 contentType: false, 
 				 type: 'POST', 
 				 success: function(data){
-					 //$("#inputEAmount").val(data);
-					 alert(data);
+					 $("#inputRAmount").val(data);
+					 $("#inputEAmount").val(amount);
 					 	 } 
 		});
 	});
@@ -150,8 +150,8 @@ var amount = 0;
 	                	success:function(serverData){
 	                		code = serverData.rawm_code;
 	                		amount = serverData.amount;
+	                		warehouse_code= serverData.warehouse_code;
 	                		$("#inputCode").val(code);
-	                		$("#inputEAmount").val(amount);
 	                	}
 	                });
 	            }
@@ -159,7 +159,47 @@ var amount = 0;
 	    }, 500);
 	
 	});	
+	
+	
+	$("#submitButton").click(function(){
+		var eAmount = $("#inputEAmount").val();
+		var rAmount = $("#inputRAmount").val();
+		if( $("#inputRAmount").val()!=""&&$("#inputEAmount").val()!=""){
+			if($("#inputRAmount").val()==$("#inputEAmount").val()){
+				$.ajax({
+					url:"confirmInvenWizNoProbs",
+                	type:"POST",
+                	data: {mmcode:code,
+                		   warehouse_code:warehouse_code,
+                		   checkstock_sysstock:amount,
+                		   checkstock_realstock:amount
+                		  },
+                	success:function(){
+                		alert("재고 확인 완료 ");
+                		window.location.href="/goConfirmInventory";
+                	}
+				});
+			}else{
+				var g_oWindow = window.open("/goFixInventory?warehouse_code="+warehouse_code+"&mmcode="+code+"&checkstock_sysstock="+eAmount+"&checkstock_realstock="+rAmount, "Input Storage Information","width=500, height=400, location=no, toolbar=no, menubar=no, scrollbars=no, status=no, resizable=yes");
+				g_oInterval = window.setInterval(function() {
+			        try {
+			            // 창이 꺼졌는지 판단
+			            if( g_oWindow == null || g_oWindow.closed ) {
+			                window.clearInterval(g_oInterval);
+			                g_oWindow = null;
 
+			                var check = confirm("재고 착오 조치 완료");
+			                if(check){
+			                	window.location.href="/goConfirmInventory";
+			                }
+			            }
+			        } catch (e) { }
+			    }, 500);
+			}
+		}else{
+			alert("수량 값이 없습니다. 수량값을 먼저 입력해주세요.");
+		}
+	});
 	//submit 해서 같으면 완료
 	//다르면 수정하게 만들기
 	

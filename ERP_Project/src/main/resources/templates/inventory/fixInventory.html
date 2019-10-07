@@ -40,7 +40,7 @@
                                      
                      
                                
-                                    <select class="mb-2 form-control">
+                                    <select class="mb-2 form-control" id="reasonSelect">
                                     				<option>재고 수량 오류 이유</option>
                                     				<option>전산 기입 오류</option>
                                                     <option>사고에 의한 손실</option>
@@ -58,7 +58,7 @@
                                    <!-- 재고가 몇개에서 몇개로 수정되는지 쓰기 -->
                                     </div>
                                 <div class="modal-footer d-block text-center">
-                                    <button class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg">재고 수정</button>
+                                    <button class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg" type="button" id="submitButton">재고 착오 보고</button>
                                 </div>
                             </div>
                         </div>
@@ -67,5 +67,33 @@
                 </div>
             </div>
         </div>
-</div></body>
+</div>
+<script th:inline="javascript">
+/*<![CDATA[*/
+	$(function(){
+		var warehouse_code = /*[[${checkstock.warehouse_code}]]*/;
+		var mmcode = /*[[${checkstock.mmcode}]]*/;
+		var checkstock_sysstock =  /*[[${checkstock.checkstock_sysstock}]]*/;
+		var checkstock_realstock =  /*[[${checkstock.checkstock_realstock}]]*/;
+		
+		$("#submitButton").click(function(){
+			var checkstock_reason = $("#reasonSelect").val();
+			$.ajax({
+				url:"confirmInvenWizProbs",
+            	type:"POST",
+            	data: {mmcode:mmcode,
+            		   warehouse_code:warehouse_code,
+            		   checkstock_sysstock:checkstock_sysstock,
+            		   checkstock_realstock:checkstock_realstock,
+            		   checkstock_reason:checkstock_reason
+            		  },
+            	success:function(){
+            		window.open("about:blank","_self").close();
+            	}
+			});
+		});
+	});
+/*]]>*/
+</script>
+</body>
 </html>
