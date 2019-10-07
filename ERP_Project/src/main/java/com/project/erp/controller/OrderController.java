@@ -35,7 +35,15 @@ public class OrderController {
 		Order_rawMaterialVO result = oService.requestOneSelect(rmorder_code);
 		return result;
 	}
-
+	
+	// 발주서 form
+		@RequestMapping(value = "/order", method = RequestMethod.GET)
+		public String order(String rmorder_code, Model model) {
+			Order_rawMaterialVO result = oService.requestOneSelect(rmorder_code);
+			model.addAttribute("totalPirce",result.getRawm_price()*result.getRmorder_amount());
+			model.addAttribute("result",result);
+			return "/rawMaterial/order";
+		}
 	@RequestMapping(value = "/orderInsert", method = RequestMethod.POST)
 	public String orderInsert(Order_rawMaterialVO order) {
 		System.out.println("order : " + order);

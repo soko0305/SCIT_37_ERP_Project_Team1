@@ -50,21 +50,32 @@
 	
 	<select id="requestOneSelect" parameterType="String" resultType="com.project.erp.vo.Order_rawMaterialVO">
 	select
-		rmorder_code,
-		rawm_code,
-		rawm_name,
-		supplierseq,
-		rmorder_date,
-		rmorder_amount,
-		warehouse_code,
-		rmorder_requserid,
-		rmorder_status,
-		mfseq,
-		rmorder_reqdate
+		rm.rmorder_code,
+		rm.rawm_code,
+		rm.rawm_name,
+		rm.supplierseq,
+		to_char(rm.rmorder_date, 'yyyy-mm-dd') as rmorder_date,
+		rm.rmorder_amount,
+		rm.warehouse_code,
+		rm.rmorder_requserid,
+		rm.rmorder_status,
+		rm.mfseq,
+		rm.rmorder_reqdate,
+		sp.supplierseq,
+		sp.supplier_name,
+		sp.supplier_owner,
+		sp.supplier_addr,
+		sp.supplier_tel,
+		sp.supplier_pic,
+		sp.supplier_email,
+		rw.rawm_price,
+		rw.rawm_sort
 	from
-		ORDER_RAWMATERIAL
+		ORDER_RAWMATERIAL rm, SUPPLIER sp, RAWMATERIAL rw
 	where
-		rmorder_code=#{rmorder_code}
+		rm.rmorder_code=#{rmorder_code} AND
+		rm.supplierseq = sp.supplierseq AND
+		sp.supplierseq = rw.supplierseq
 	</select>
 	
 	<update id="orderUpdate" parameterType="com.project.erp.vo.Order_rawMaterialVO">
