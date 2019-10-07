@@ -83,7 +83,7 @@ public class MemberController {
 					ArrayList<ManufactureVO> plist = pService.produceSelect();
 					ArrayList<BoardVO> bbList = new ArrayList<>();
 					ArrayList<ManufactureVO> ppList = new ArrayList<>();
-					for(int i=0;i<10;i++){
+				
 					ArrayList<Order_rawMaterialVO> orderDash =  oDAO.orderDashSelect();
 					ArrayList<Order_rawMaterialVO> orderDash1 =  new ArrayList<>();
 					
