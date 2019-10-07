@@ -30,16 +30,6 @@
   <!-- firebase Config and initialize -->	
   <script src="firebase/firebase-config.js"></script>
 
-<<<<<<< HEAD
-     
-      $("#insertButton").click(function(){
-         $("#produceinsertForm").submit();
-         opener.location.href='goproducecheck'
-         window.open("about:blank","_self").close();
-      });
-      
-   });
-=======
 <script>
 var database = firebase.database();
 
@@ -113,7 +103,7 @@ var database = firebase.database();
 
 												 }
 								    		}
-										
+										// 가지고 있는 수량보다 적을 때 에러발생 + 값이 2번 들어감 
 										}else{
 											database.ref('warehouse/'+warehouse_code).child("inventory").child(result[i].rawm_code).on('child_added', function(snapshot){
 											database.ref('warehouse/'+warehouse_code).child("inventory").child(result[i].rawm_code).update({"systemamount":snapshot.val() - totalAmount});
