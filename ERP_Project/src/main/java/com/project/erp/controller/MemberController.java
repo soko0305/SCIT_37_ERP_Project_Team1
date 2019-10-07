@@ -10,9 +10,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import com.project.erp.dao.BoardDAO;
 
 import com.project.erp.dao.MemberDAO;
+import com.project.erp.service.BoardService;
 import com.project.erp.service.MemberService;
+import com.project.erp.service.ProductionService;
+import com.project.erp.vo.BoardVO;
+import com.project.erp.vo.ManufactureVO;
 import com.project.erp.vo.MemberVO;
 
 @Controller
@@ -21,6 +26,10 @@ public class MemberController {
 	
 	@Autowired
 	MemberService memberService;
+	@Autowired	
+	BoardService bService;
+	@Autowired
+	ProductionService pService;	
 	
 	@RequestMapping(value="/selectMemberById", method = RequestMethod.GET)
 	public @ResponseBody MemberVO selectMemberById(MemberVO member){
@@ -56,7 +65,7 @@ public class MemberController {
 		return m;
 	}
 	@RequestMapping(value="/loginSuccess", method = RequestMethod.GET)
-	public  String loginSuccess(String userid, HttpSession session){
+	public  String loginSuccess(Model model, String userid, HttpSession session){
 					session.setAttribute("loginid", userid);
 					MemberVO member = new MemberVO();
 					member.setUserid(userid);
@@ -64,6 +73,18 @@ public class MemberController {
 					session.setAttribute("loginuserstatus", m.getUserstatus());
 					session.setAttribute("logindepartment", m.getUserdepartment());
 					memberService.updateLogin(m);
+					ArrayList<BoardVO> list = null;
+					list = bService.boardAllSelect();
+					ArrayList<ManufactureVO> plist = pService.produceSelect();
+					ArrayList<BoardVO> bbList = new ArrayList<>();
+					ArrayList<ManufactureVO> ppList = new ArrayList<>();
+					for(int i=0;i<10;i++){
+						bbList.add(list.get(i));
+						ppList.add(plist.get(i));
+					}
+					model.addAttribute("boardlist", bbList);
+					model.addAttribute("producelist", ppList);
+										
 		return "main/index";
 	}
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)

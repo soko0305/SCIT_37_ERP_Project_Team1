@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="utf-8">
+<html lang="utf-8" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -35,7 +35,7 @@
      
       $("#insertButton").click(function(){
          $("#produceinsertForm").submit();
-         opener.location.href='gorpoducecheck'
+         opener.location.href='goproducecheck'
          window.open("about:blank","_self").close();
       });
       

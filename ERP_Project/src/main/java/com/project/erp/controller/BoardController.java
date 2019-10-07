@@ -70,7 +70,6 @@ public class BoardController {
 	// 게시물 출력을 위한 redirect(List출력)
 		@RequestMapping(value = "/goBoardList", method = RequestMethod.GET)
 		public String goSupplierList(Model model,HttpSession session) {
-//			System.out.println("상세화면 세션 : " + session.getAttribute("loginid"));
 			ArrayList<BoardVO> result = bService.boardAllSelect();
 			model.addAttribute("boardlist", result);
 			return "member/board";

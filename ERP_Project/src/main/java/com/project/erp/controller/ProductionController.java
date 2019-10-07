@@ -111,7 +111,6 @@ public class ProductionController {
 	@RequestMapping(value = "/deleteProduce", method = RequestMethod.POST)
 	public String deleteProduce(ManufactureVO manufacture) {
 		int result = pService.deleteProduce(manufacture);
-		System.out.println("con"+manufacture);	
 		if (result == 0) {
 			return "redirect:/goproducecheck";
 		} else {
@@ -122,7 +121,6 @@ public class ProductionController {
 	@RequestMapping(value = "/statusProduce", method = RequestMethod.POST)
 	public String statusProduce(ManufactureVO manufacture) {
 		int result = pService.statusProduce(manufacture);
-		System.out.println(manufacture);
 
 		if (result == 0) {
 			return "redirect:/goproducecheck";

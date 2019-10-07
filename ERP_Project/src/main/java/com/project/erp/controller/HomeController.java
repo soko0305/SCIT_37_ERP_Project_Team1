@@ -21,6 +21,7 @@ public class HomeController {
 		return "main/index";
 		}*/
 	
+	
 	@RequestMapping(value="/header", method = RequestMethod.GET)
 	public String header(){	
 		
