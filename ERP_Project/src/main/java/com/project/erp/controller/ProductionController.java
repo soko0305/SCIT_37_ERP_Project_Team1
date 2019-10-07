@@ -90,10 +90,6 @@ public class ProductionController {
  
  
 
-/*	@RequestMapping(value="/sample", method = RequestMethod.GET)
-	public String sample(){
-		return "production/sample";
-	} 	*/
 
  	@RequestMapping(value="/confirmproductionrequest", method = RequestMethod.GET)
 	public String 	confirmproductionrequest(){
@@ -162,7 +158,8 @@ public class ProductionController {
 	//생산품 삽입
 	@RequestMapping(value = "/produceInsert", method = RequestMethod.POST)
 	public String produceInsert(ManufactureVO manufacture, HttpSession session) {
-		manufacture.setManuf_requserid((String)session.getAttribute("loginid"));
+		System.out.println(manufacture);
+		/*manufacture.setManuf_requserid((String)session.getAttribute("loginid"));*/
 		int result = pService.produceInsert(manufacture);
 		if (result == 0) {
 			return "redirect:/goproducecheck";
@@ -183,6 +180,7 @@ public class ProductionController {
 		@RequestMapping(value = "/amountCheck", method = RequestMethod.GET)
 		public @ResponseBody ArrayList<ProductMaterialVO> amount(String pd_code) {
 			ArrayList<ProductMaterialVO> result = pService.selectAllProductMaterial(pd_code);
+			System.out.println(result);
 			return result;
 		}
 

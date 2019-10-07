@@ -12,9 +12,8 @@
 			,rawm_name
 			,rawm_sort
 			,rawm_price
-			,rawm_autoorder
+			,rawm_notice
 			,rawm_minimum
-			,rawm_set
 			,rawm_delete
 		)
 		VALUES
@@ -33,7 +32,6 @@
 			</otherwise>
 			</choose>
 			,#{rawm_minimum}
-			,#{rawm_set}
 			,#{rawm_delete}
 		)
 	</insert>
@@ -45,9 +43,8 @@
 			,rawm_name
 			,rawm_sort
 			,rawm_price
-			,rawm_autoorder
+			,rawm_notice
 			,rawm_minimum
-			,rawm_set
 			,rawm_delete
 		from
 			RAWMATERIAL
@@ -62,9 +59,8 @@
 			,rawm_name
 			,rawm_sort
 			,rawm_price
-			,rawm_autoorder
+			,rawm_notice
 			,rawm_minimum
-			,rawm_set
 			,rawm_delete
 		from
 			RAWMATERIAL
@@ -79,9 +75,8 @@
 			,rawm_name
 			,rawm_sort
 			,rawm_price
-			,rawm_autoorder
+			,rawm_notice
 			,rawm_minimum
-			,rawm_set
 			,rawm_delete
 		from
 			RAWMATERIAL
@@ -109,9 +104,8 @@
 			,rawm_name=#{rawm_name}
 			,rawm_sort=#{rawm_sort}
 			,rawm_price=#{rawm_price}
-			,rawm_autoorder=#{rawm_autoorder}
+			,rawm_notice=#{rawm_notice}
 			,rawm_minimum=#{rawm_minimum}
-			,rawm_set=#{rawm_set}
 		where
 			rawm_code=#{rawm_code}
 	</update>

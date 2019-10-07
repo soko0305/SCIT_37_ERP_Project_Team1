@@ -24,17 +24,12 @@
 		$("#rawm_autoorder").change(
 		function() {
 			if ($("#rawm_autoorder").is(":checked")) {
-				var str1 = '<label for="rawm_minimum" class="">원자재최저수량</label>'
+				var str1 = '<label for="rawm_minimum" class="">최저수량</label>'
 						+ '<input name="rawm_minimum" id="rawm_minimum" type="number" class="form-control">'
-				var str2 = '<label for="rawm_set" class="">원자재설정수량</label>'
-						+ '<input name="rawm_set" id="rawm_set" type="number" class="form-control">'
 				$(".form-group1").html(str1);
-				$(".form-group2").html(str2);
 			} else {
 				var str1 = "";
-				var str2 = "";
 				$(".form-group1").html(str1);
-				$(".form-group2").html(str2);
 			}
 		});
 		$("#insertButton").click(function(){
@@ -43,7 +38,6 @@
 			var price = $("#rawm_price").val();
 			var seq = $("#supplierseq").val();
 			var minimum = $("#rawm_minimum").val();
-			var set = $("#rawm_set").val();
 			
 			if(!name){
 				alert("원자재명을 입력해주세요");
@@ -63,7 +57,7 @@
 			}
 			if ($("#rawm_autoorder").is(":checked")) {
 				if(minimum.length < 1){
-					alert("원자재최저량을 1개이상 입력해주세요");
+					alert("최저수량을 1개이상 입력해주세요");
 					return false;
 				}
 			}
@@ -96,15 +90,13 @@
 											<div class="col-md-6">
 												<div class="position-relative form-group">
 													<label for="rawm_name" class="">원자재명</label><input
-														name="rawm_name" id="rawm_name" placeholder="카카오"
-														type="text" class="form-control">
+														name="rawm_name" id="rawm_name" type="text" class="form-control">
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="position-relative form-group">
 													<label for="rawm_sort" class="">원자재종류</label><input
-														name="rawm_sort" id="rawm_sort" placeholder="쪼꼬렛"
-														type="text" class="form-control">
+														name="rawm_sort" id="rawm_sort" type="text" class="form-control">
 												</div>
 											</div>
 										</div>
@@ -112,8 +104,7 @@
 											<div class="col-md-6">
 												<div class="position-relative form-group">
 													<label for="rawm_price" class="">원자재단가</label><input
-														name="rawm_price" id="rawm_price" placeholder="1000원"
-														type="text" class="form-control">
+														name="rawm_price" id="rawm_price" type="text" class="form-control">
 												</div>
 											</div>
 											<div class="col-md-6">
@@ -134,7 +125,7 @@
 											<div class="custom-checkbox custom-control">
 												<input type="checkbox" id="rawm_autoorder"
 													name="rawm_autoorder" class="custom-control-input">
-												<label class="custom-control-label" for="rawm_autoorder">&nbsp;자동구매</label>
+												<label class="custom-control-label" for="rawm_autoorder">&nbsp;최저수량알림</label>
 											</div>
 										</div>
 										<!-- if check -->
@@ -144,11 +135,11 @@
 
 												</div>
 											</div>
-											<div class="col-md-6">
+											<!-- <div class="col-md-6">
 												<div class="position-relative form-group2">
 
 												</div>
-											</div>
+											</div> -->
 										</div>
 									<div class="modal-footer d-block text-center">
                                     <button id="insertButton" class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg" type="button">공급처 등록</button>

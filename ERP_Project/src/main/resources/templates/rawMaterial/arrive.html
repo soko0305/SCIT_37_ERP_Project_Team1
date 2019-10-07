@@ -68,6 +68,9 @@ $(function(){
 		});
 		
 	});
+	$("#insertOrder").click(function(){ 
+		var g_oWindow = window.open("/goOrderInsert", "Input rawMaterial Information","width=550, height=550, location=no, toolbar=no, menubar=no, scrollbars=no, status=no, resizable=yes");
+	});
 
 });
 
@@ -100,10 +103,21 @@ $(function(){
                                     <i class="lnr-hand icon-gradient bg-plum-plate">
                                     </i>
                                 </div>
-                                <div>도착 관리
+                                <div>발주 및 도착 관리
                                     <div class="page-title-subheading">
-                                    	도착 미확인 및 확인
+                                    	발주 / 도착 미확인 및 확인
                                     </div>
+                                </div>
+                            </div>
+                            <div class="page-title-actions">
+                                <div class="d-inline-block dropdown">
+                                    <button type="button" id="insertOrder" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn-shadow  btn btn-info">
+                                        <span class="btn-icon-wrapper pr-2 opacity-7">
+                                            <i class="fa fa-business-time fa-w-20"></i>
+                                        </span>
+                                        	발주 신청
+                                    </button>
+                                    
                                 </div>
                             </div>
                         </div>

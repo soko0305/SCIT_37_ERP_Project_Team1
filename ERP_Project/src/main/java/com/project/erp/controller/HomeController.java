@@ -16,10 +16,10 @@ public class HomeController {
 		return "getFaceDetection";
 	} 
 	
-	@RequestMapping(value="/", method = RequestMethod.GET)
+/*	@RequestMapping(value="/", method = RequestMethod.GET)
 	public String home(){
 		return "main/index";
-		}
+		}*/
 	
 	@RequestMapping(value="/header", method = RequestMethod.GET)
 	public String header(){	
