@@ -14,6 +14,6 @@ public class ProductMaterialVO {
 	private String rawm_sort;		//원자재종류
 	private String rawm_price;		//원자재단가
 	private int rawm_minimum;		//원자재최저수량
-	private String rawm_notice;	//원자재자동구매
+	private String rawm_notice;		//원자재자동구매
 	private String rawm_delete;		//원자재삭제여부
 }
