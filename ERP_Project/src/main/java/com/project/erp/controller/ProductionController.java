@@ -93,7 +93,7 @@ public class ProductionController {
 
  	@RequestMapping(value="/confirmproductionrequest", method = RequestMethod.GET)
 	public String 	confirmproductionrequest(){
-		return "production/	confirmproductionrequest";
+		return "production/confirmproductionrequest";
 	} 	
 	
 	
@@ -158,7 +158,7 @@ public class ProductionController {
 	public String produceInsert(ManufactureVO manufacture, HttpSession session) {
 		/*manufacture.setManuf_requserid((String)session.getAttribute("loginid"));*/
 		manufacture.setManuf_requserid("user");
-		System.out.println(manufacture);
+/*		System.out.println(manufacture);*/
 		int result = pService.produceInsert(manufacture);
 		if (result == 0) {
 			return "redirect:/goproducecheck";
@@ -179,7 +179,7 @@ public class ProductionController {
 		@RequestMapping(value = "/amountCheck", method = RequestMethod.GET)
 		public @ResponseBody ArrayList<ProductMaterialVO> amount(String pd_code) {
 			ArrayList<ProductMaterialVO> result = pService.selectAllProductMaterial(pd_code);
-			System.out.println(result);
+			System.out.println("result는"+result);
 			return result;
 		}
 
@@ -208,7 +208,8 @@ public class ProductionController {
 			return "redirect:/goproducecheck";
 		}
 	}
-	//생산품 업데이트로 가기
+	
+	//생산품 관련 정보 및 필요 원자재 정보 수정
 	@RequestMapping(value = "/goProductionUpdate", method = RequestMethod.GET)
 	public String goProductionUpdate(String pd_code, Model model) {
 		ProductVO product = pService.selelctProductByCode(pd_code);

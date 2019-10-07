@@ -1,0 +1,239 @@
+
+<!doctype html>
+<html lang="UTF-8" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Language" content="en">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Data Tables - Choose between regular React Bootstrap
+	tables or advanced dynamic ones.</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+<meta name="description"
+	content="Choose between regular React Bootstrap tables or advanced dynamic ones.">
+
+<!-- Disable tap highlight on IE -->
+<meta name="msapplication-tap-highlight" content="no">
+
+<link href="./main.cba69814a806ecc7945a.css" rel="stylesheet">
+</head>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+ 	$(function(){
+ 		var producelist = /*[[${producelist}]]*/;
+		var today = new Date();
+ 		for(var i = 0 ; i<producelist.length; i++){
+ 			str='';
+ 			str+='<tr>';
+ 			str+='<td>'+producelist[i].pd_code+'</td>';
+ 			str+='<td>'+producelist[i].pd_name+'</td>';
+ 			str+='<td>'+producelist[i].manuf_startdate+'</td>';
+ 			str+='<td>'+producelist[i].manuf_status+'</td>';
+ 			var startdate = producelist[i].manuf_startdate;
+ 			var startdateOfSplit = startdate.split('-');
+ 			var date = new Date(startdateOfSplit[0].toString(), startdateOfSplit[1]-1,startdateOfSplit[2]);
+ 			var status =producelist[i].manuf_status;
+			str+='<td>';
+			if(status=='미완'& today.getTime()>date.getTime()){
+				str+='<button class="mb-2 mr-2 btn btn-primary" data-type="status" value="'+producelist[i].mfseq+'">완료</button>';
+			}
+ 	 		str+='</td>';
+ 			str+='</tr>';
+ 			$("#tbody").append(str);
+ 		}
+		$(".btn-primary").click(function(){
+			var type = $(this).attr("data-type");
+			var code = $(this).val();
+				$("#code").val(code);
+				$("#statusProduce").submit();				
+		});
+	});
+	/*]]>*/
+</script>
+<script>
+	$(function(){	
+		$("#header").load("/header");
+		$("#navbar").load("/navbar");
+		$("#setting").load("/setting");
+	});
+	</script>
+<link
+	href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css"
+	rel="stylesheet">
+<link href="./main.8d288f825d8dffbbe55e.css" rel="stylesheet">
+</head>
+<body>
+	<form action="statusProduce" method="post" id="statusProduce">
+		<input type="hidden" name="mfseq" id="code">
+	</form>
+	<div
+		class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">
+		<div class="app-main">
+			<div id="header"></div>
+			<div id="setting"></div>
+			<div class="app-main">
+				<div id="navbar"></div>
+				<div class="app-main__outer">
+					<div class="app-main__inner"
+					style="height: 300px; width: 906px; display: flex;">
+						<div class="main-card mb-3 card" style="margin-right:15px;">
+							<div class="card-body" style="margin-right:15px;
+							" >
+								<table style="width: 100%;" 
+									class="table table-hover table-striped table-bordered">
+									<thead>
+										<tr>
+											<th>번호</th>
+											<th>제목</th>
+											<th>작성자</th>
+											<th>등록일</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="list : ${boardlist}">
+											<td th:text="${list.rn}"></td>
+											<td><a
+												th:href="@{http://localhost:9088/boarddetail(boardSeq=${list.board_seq})}">
+													<p th:text="${list.title}"></p>
+											</a></td>
+											<td th:text="${list.userid}"></td>
+											<td th:text="${list.time}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+<!-- 					 -->
+							<div class="col-lg-6">
+							<div class="main-card mb-3 card">
+								<div class="card-body">
+
+									<!-- buy -->
+									<h5 class="card-title">
+										구매 관리
+										<button
+											class="mb-2 mr-2 btn-pill btn-transition btn btn-outline-primary btn-sm"
+											type="button" style="float: right;"
+											onclick="location.href='goArrive'">detail</button>
+									</h5>
+									<table class="mb-0 table table-hover">
+									<thead>
+										<tr>
+											<th>번호</th>
+											<th>제목</th>
+											<th>작성자</th>
+											<th>등록일</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="list : ${boardlist}">
+											<td th:text="${list.rn}"></td>
+											<td><a
+												th:href="@{http://localhost:9088/boarddetail(boardSeq=${list.board_seq})}">
+													<p th:text="${list.title}"></p>
+											</a></td>
+											<td th:text="${list.userid}"></td>
+											<td th:text="${list.time}"></td>
+										</tr>
+									</tbody>
+									</table>
+								</div>
+							</div>
+						</div>					
+<!-- 						 -->
+						<div class="main-card mb-3 card" >
+							<div class="card-body"  >
+								<!--  여기에 와이드 헤이스 넣기ㅏ -->
+								<table style="width: 100%;" 
+									class="table table-hover table-striped table-bordered">
+									<thead>
+										<tr>
+											<th>제품번호</th>
+											<th>제품명</th>
+											<th>시작일</th>
+											<th>상태</th>
+											<th>기타</th>
+										</tr>
+									</thead>
+									<tbody id="tbody">
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+<!-- 											 -->
+							<div class="col-lg-6">
+							<div class="main-card mb-3 card">
+								<div class="card-body">
+
+									<!-- buy -->
+									<h5 class="card-title">
+										구매 관리
+										<button
+											class="mb-2 mr-2 btn-pill btn-transition btn btn-outline-primary btn-sm"
+											type="button" style="float: right;"
+											onclick="location.href='goArrive'">detail</button>
+									</h5>
+									<table class="mb-0 table table-hover">
+									<thead>
+										<tr>
+											<th>제품번호</th>
+											<th>제품명</th>
+											<th>시작일</th>
+											<th>상태</th>
+											<th>기타</th>
+										</tr>
+									</thead>
+									<tbody id="tbody">
+									</tbody>
+									</table>
+								</div>
+							</div>
+						</div>					
+													<div class="col-lg-6">
+							<div class="main-card mb-3 card">
+								<div class="card-body">
+
+									<!-- buy -->
+									<h5 class="card-title">
+										구매 관리
+										<button
+											class="mb-2 mr-2 btn-pill btn-transition btn btn-outline-primary btn-sm"
+											type="button" style="float: right;"
+											onclick="location.href='goArrive'">detail</button>
+									</h5>
+									<table class="mb-0 table table-hover">
+										<thead>
+											<tr>
+												<th>일자</th>
+												<th>원자재명</th>
+												<th>수량</th>
+												<th>진행상태</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="list : ${orderList}">
+												<td th:text="${list.rmorder_date}"></td>
+												<td th:text="${list.rawm_name}"></td>
+												<td th:text="${list.rmorder_amount}"></td>
+												<td th:text="${list.rmorder_status}"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					<!--  footer wrapper -->
+				</div>
+			</div>
+		</div>
+		<!-- drawer wrapper -->
+	</div>
+</body>
+</html>
+
