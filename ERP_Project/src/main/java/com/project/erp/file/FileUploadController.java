@@ -52,6 +52,15 @@ private static final Logger logger = LoggerFactory.getLogger(FileUploadControlle
     }
 
 
+<<<<<<< HEAD
+=======
+    
+   /* @PostMapping("/uploadMultipleFiles")
+=======
+=======
+>>>>>>> master
+
+>>>>>>> hara
     /*@PostMapping("/uploadMultipleFiles")
     public List<FileUploadResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files){
         return Arrays.asList(files)

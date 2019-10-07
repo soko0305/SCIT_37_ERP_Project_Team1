@@ -160,5 +160,10 @@ public class SalesService {
 		return list;
 	}
 	
+	public int updateSalesStatusDone(Sales sales){
+		int result = dao.updateSalesStatusDone(sales);
+		return result;
+	}
+	
 	
 }
