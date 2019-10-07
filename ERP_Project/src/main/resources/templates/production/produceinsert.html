@@ -30,24 +30,26 @@
   <!-- firebase Config and initialize -->	
   <script src="firebase/firebase-config.js"></script>
 
+    
+
 <script>
 var database = firebase.database();
 
 	$(function(){
-		selelctInventoryINWarehouse();
+		selectInventoryINWarehouse();
+		buttonEvent();
+		
 	});
    
-	function selelctInventoryINWarehouse(){
+	function selectInventoryINWarehouse(){
 		database.ref('warehouse/').on('child_added', function(data){
 			var warehouse_code = data.key;
 			var warehouse_name = data.val().warehouse_name;
 			
 			setWarehouseDropbox(warehouse_code, warehouse_name);
-			/* alert(warehouse_name); */
-			call(warehouse_code);
-			
 		});
 	}
+	
 	
 	//창고 드롭박스 세팅 함수
 	function setWarehouseDropbox(warehouse_code, warehouse_name){
@@ -56,20 +58,62 @@ var database = firebase.database();
 		$("#codeList").append(str);
 	}
 	
-	function call(warehouse_code){
-		database.ref('warehouse/'+warehouse_code).child("inventory").on('child_added', function(snapshot){
+	function buttonEvent(){
+		$("#insertButton").click(function(){
+			var manuf_amount = $("#manuf_amount").val();
+			var pd_code = $("#pd_code").val();
+			var warehouse_code = $("#warehouse_code").val();
+			var manuf_startdate = $("#manuf_startdate").val();
+				$.ajax({
+					url:"amountCheck",
+					type:"GET",
+					data:{pd_code : pd_code},
+					success:function(result){
+						database.ref('warehouse/').on('child_added', function(data){
+							var warehouse_code = data.key;
+							var warehouse_name = data.val().warehouse_name;
+			 			
+							for(var i = 0 ; i<result.length ; i++){
+			 					database.ref('warehouse/'+warehouse_code).child("inventory").child(result[i].rawm_code).on('child_added', function(snapshot){
+			 			
+			 			})
+			 		}
+				})
+			}	
+		})
+	})
+}
+						
+						/* if(code==result[i].rawm_code){
+						totalAmount = (result[i].product_material_amount * manuf_amount);
+							if(totalAmount > sysamount){
+								get = (totalAmount - sysamount);
+								alert(result[i].rawm_name+"가 "+get+"개 부족합니다");
+					    	}
+						} 
+						}) */
+					
+						/* $("#produceinsertForm").submit();
+				         opener.location.href='goproducecheck'
+				         window.open("about:blank","_self").close(); */
+			
+		/* 	}
+		}) 
+		
+		}) */
+	
+		
+	/* 	database.ref('warehouse/'+warehouse_code).child("inventory").on('child_added', function(snapshot){
+			
 			if(snapshot.key.charAt(0)=='m'){
 				var rawm_code = snapshot.key;
-				/* alert(rawm_code); */
 				database.ref('warehouse/'+warehouse_code).child("inventory").child(rawm_code).on('value', function(snapshot){
 					var code = snapshot.key;
-					var amount = snapshot.val().systemamount;
+					var sysamount = snapshot.val().systemamount;
 					
 					var totalAmount=0;
-					/* alert("code" + code + "amount" + amount); */
 					
 					$("#insertButton").click(function(){
-						
 						var manuf_amount = $("#manuf_amount").val();
 						var pd_code = $("#pd_code").val();
 						var warehouse_code = $("#warehouse_code").val();
@@ -79,64 +123,27 @@ var database = firebase.database();
 							type:"GET",
 							data:{pd_code : pd_code},
 							success:function(result){
-								var count  =0;
-								/* alert(JSON.stringify(result)); */
-								for(var i in result){
-									
-									alert("for문 code : " + code);
-									if(code==result[i].rawm_code){
-										totalAmount = (result[i].product_material_amount * manuf_amount);
-										if(totalAmount > amount){
-											get = (totalAmount - amount);
+							for(var i = 0 ; i<result.length ; i++){
+								alert(i);
+								if(code==result[i].rawm_code){
+									totalAmount = (result[i].product_material_amount * manuf_amount);
+										if(totalAmount > sysamount){
+											get = (totalAmount - sysamount);
 											alert(result[i].rawm_name+"가 "+get+"개 부족합니다");
-											if(count == result.length-1){
-									    		if (confirm("원자재 발주로 넘어가시겠습니까?") == true){    //확인
-
-												 	var url = "goOrderInsert";
-												    var name = "popup test";
-												    var option = "width = 500, height = 500, top = 100, left = 200, location = no"
-												    window.open(url, name, option);
-												    return false;
-												 }else{   //취소
-
-											     	return false;
-
-												 }
-								    		}
-										
-										}else{
-											database.ref('warehouse/'+warehouse_code).child("inventory").child(result[i].rawm_code).on('child_added', function(snapshot){
-											database.ref('warehouse/'+warehouse_code).child("inventory").child(result[i].rawm_code).update({"systemamount":snapshot.val() - totalAmount});
-											});
-											$.ajax({
-												url:"produceInsert",
-												data:{pd_code : pd_code,
-													manuf_amount : manuf_amount,
-													warehouse_code : warehouse_code,
-													manuf_startdate : manuf_startdate},
-												type:"POST",
-												success:function(){
-														alert("!!");
-														opener.location.href='goproducecheck'
-												        window.open("about:blank","_self").close();
-												}
-											
-											/* $("#produceinsertForm").submit();
-									         opener.location.href='goproducecheck'
-									         window.open("about:blank","_self").close();
-									         return false; */
-											});
-										}
+								    	}
 									}
-									count ++;
 								}
+									 $("#produceinsertForm").submit();
+							         opener.location.href='goproducecheck'
+							         window.open("about:blank","_self").close(); 
 							}
 						});
-					});
-				});
-		};
-	});
-	}
+					}) 
+				})		
+			}
+		})
+} */
+
 </script>
 </head>
 <body>
@@ -151,14 +158,12 @@ var database = firebase.database();
                             <div class="modal-content">
                                 <div class="modal-body">
                                     <h5 class="modal-title">
-                                        <h4 class="mt-2">
-                                       
-                                            <div>생산 추가</div>
-                                            <span>새로 생산을 하실 <span class="text-success">생산 정보</span> 를 기입해주세요</span></h4>
+                                        <h4 class="mt-2"><div>생산 추가</div>
+                                            <span>새로 생산을 하실 <span class="text-success">생산 정보</span> 를 기입해주세요.</span></h4>
                                     </h5>
                                     
                                     <div class="col-md-3">
-                                  	<!-- <form action="produceInsert" method="post" id="produceinsertForm"> -->
+                                  	<form action="produceInsert" method="post" id="produceinsertForm">
      								<input type="hidden" name="manuf_requserid" value="user">
                                     <div class="form-group">
                                     <label for="pd_code">생산품코드</label>
@@ -194,12 +199,11 @@ var database = firebase.database();
                                 </div>
                                 
                                </div>
-                               <!-- </form> -->
+                               </form>
                                      </div>
 
                             </div>
                         </div>
-                        <div class="text-center text-white opacity-8 mt-3">Copyright © ArchitectUI 2019</div>
                 	</div>
 				</div>
 			</div>
