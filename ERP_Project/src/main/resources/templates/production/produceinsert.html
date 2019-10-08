@@ -30,8 +30,6 @@
   <!-- firebase Config and initialize -->	
   <script src="firebase/firebase-config.js"></script>
 
-    
-
 <script>
 var database = firebase.database();
 
@@ -130,7 +128,48 @@ var database = firebase.database();
 										if(totalAmount > sysamount){
 											get = (totalAmount - sysamount);
 											alert(result[i].rawm_name+"가 "+get+"개 부족합니다");
+<<<<<<< HEAD
+											if(count == result.length-1){
+									    		if (confirm("원자재 발주로 넘어가시겠습니까?") == true){    //확인
+
+												 	var url = "goOrderInsert";
+												    var name = "popup test";
+												    var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+												    window.open(url, name, option);
+												    return false;
+												 }else{   //취소
+
+											     	return false;
+
+												 }
+								    		}
+										// 가지고 있는 수량보다 적을 때 에러발생 + 값이 2번 들어감 
+										}else{
+											database.ref('warehouse/'+warehouse_code).child("inventory").child(result[i].rawm_code).on('child_added', function(snapshot){
+											database.ref('warehouse/'+warehouse_code).child("inventory").child(result[i].rawm_code).update({"systemamount":snapshot.val() - totalAmount});
+											});
+											$.ajax({
+												url:"produceInsert",
+												data:{pd_code : pd_code,
+													manuf_amount : manuf_amount,
+													warehouse_code : warehouse_code,
+													manuf_startdate : manuf_startdate},
+												type:"POST",
+												success:function(){
+														alert("!!");
+														opener.location.href='goproducecheck'
+												        window.open("about:blank","_self").close();
+												}
+											
+											/* $("#produceinsertForm").submit();
+									         opener.location.href='goproducecheck'
+									         window.open("about:blank","_self").close();
+									         return false; */
+											});
+										}
+
 								    	}
+
 									}
 								}
 									 $("#produceinsertForm").submit();
