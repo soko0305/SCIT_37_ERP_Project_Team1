@@ -58,6 +58,10 @@ public class MemberController {
 	public String login(){ 
  		return "member/login";
 	}
+	@RequestMapping(value="/login", method = RequestMethod.GET)
+	public String login1(){ 
+ 		return "member/login";
+	}
 	@RequestMapping(value="/signup", method = RequestMethod.GET)
 	public String signup(){ 
  		return "member/signup";
