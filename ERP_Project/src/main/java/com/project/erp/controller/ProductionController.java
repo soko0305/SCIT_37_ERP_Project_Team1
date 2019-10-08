@@ -179,7 +179,6 @@ public class ProductionController {
 		@RequestMapping(value = "/amountCheck", method = RequestMethod.GET)
 		public @ResponseBody ArrayList<ProductMaterialVO> amount(String pd_code) {
 			ArrayList<ProductMaterialVO> result = pService.selectAllProductMaterial(pd_code);
-			System.out.println("result는"+result);
 			return result;
 		}
 
