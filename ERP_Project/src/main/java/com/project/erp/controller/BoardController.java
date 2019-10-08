@@ -34,7 +34,7 @@ public class BoardController {
 	public String boardInsert(BoardVO board) {
 		int result = bService.boardInsert(board);
 		if (result == 0) {
-			return "member/boardinsert";
+			return "redirect:/goBoardList";
 		} else {
 			return "redirect:/goBoardList";
 		}
