@@ -31,7 +31,9 @@
 	
 <script>
 var database = firebase.database();
-	$(function(){
+var arraylist = new Array();
+var count =0;
+$(function(){
 		$(".btn-primary").click(function(){
 			var type = $(this).attr("data-type")
 			var code = $(this).val();
@@ -55,6 +57,7 @@ var database = firebase.database();
 	
 	function call(){
 		database.ref('warehouse/').on('child_added', function(data){
+			alert("스타트1");
 			var warehouse_code = data.key;
 			database.ref('warehouse/'+warehouse_code).child("inventory").once('value').then(function(snapshot){
 				for(var key in snapshot.val()){
@@ -62,44 +65,39 @@ var database = firebase.database();
 						rawm_code = key;
 						call2(warehouse_code, rawm_code);
 					}
+					
 				}
 				
 			});
+			
 		});
 	}
 	
 	function call2(warehouse_code, rawm_code){
 		database.ref('warehouse/'+warehouse_code).child("inventory").child(rawm_code).once('value').then(function(snapshot1){
+			alert("스타트2");
 			var amount = snapshot1.val().systemamount;
 				$.ajax({
 				url:"materialAllselect",
 				type:"GET",
 				success:function(result){
-					var count = 0;
 					for(var i in result){
+						alert("스타트3 : " + count);
 						if(result[i].rawm_notice=='CHECKED'){
 							if(result[i].rawm_code==rawm_code){
 								if(result[i].rawm_minimum>amount){
-									alert(result[i].rawm_name + "의 수량이 부족합니다");
-										alert(count);
-										if (confirm("원자재 발주로 넘어가시겠습니까?") == true){    //확인
-
-										 	var url = "goOrderInsert";
-										    var name = "popup test";
-										    var option = "width = 500, height = 500, top = 100, left = 200, location = no"
-										    window.open(url, name, option);
-										    return false;
-										 }else{   //취소
-
-									     	return false;
-
-										 }
+									arraylist.push(result[i].rawm_name);
 									}
 								}
 							}
 						count++;
 						}
+					
+
+					
 					}
+				
+				
 				});
 			});
 		}
