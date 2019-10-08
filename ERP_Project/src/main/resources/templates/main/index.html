@@ -12,14 +12,13 @@
    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
 <meta name="description"
    content="Choose between regular React Bootstrap tables or advanced dynamic ones.">
+<meta name="msapplication-tap-highlight" content="no">   
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
 <link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
 
-<!-- Disable tap highlight on IE -->
-<meta name="msapplication-tap-highlight" content="no">
-
-<link href="./main.cba69814a806ecc7945a.css" rel="stylesheet">
 <!-- firebase -->
-   <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-auth.js"></script>
   <!-- TODO: Add SDKs for Firebase products that you want to use
        https://firebase.google.com/docs/web/setup#config-web-app -->
@@ -27,11 +26,9 @@
   <script src="https://cdn.firebase.com/libs/firebaseui/4.0.0/firebaseui.js"></script>
   <!-- firebase -->
   <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
-  <!-- firebase Config and initialize -->   
+  <!-- firebase Config and initialize -->	
   <script src="firebase/firebase-config.js"></script>
 </head>
-<script
-   src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script th:inline="javascript">
 /*<![CDATA[*/
     $(function(){
@@ -72,10 +69,6 @@
       $("#setting").load("/setting");
    });
    </script>
-<link
-   href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css"
-   rel="stylesheet">
-<link href="./main.8d288f825d8dffbbe55e.css" rel="stylesheet">
 </head>
 <body>
    <form action="statusProduce" method="post" id="statusProduce">
@@ -207,11 +200,11 @@
                                     </th>
                                     <th data-field="company"
                                         data-sortable="true" width="150em">
-                                           관리창고
+                                           창고
                                     </th>
                                      <th data-field="forks_count"
                                         data-sortable="true" width="175em">
-                                           재고분류
+                                           분류
                                     </th>
                                     <th data-field="prorobuy"
                                         data-sortable="true" width="250em">
@@ -231,7 +224,7 @@
                                     </th>
                                    <th data-field="ff"
                                         data-sortable="true" width="100px">
-                                           재고수정
+<!--                                            재고수정
                                     </th>
                                     <th data-field="ff"
                                         data-sortable="true" width="100px">
@@ -240,7 +233,7 @@
                                     <th data-field="ff"
                                         data-sortable="true" width="100px">
                                            재고삭제 
-                                    </th>
+                                    </th> -->
                               </tr>
                            </thead>
                                 <tbody id="tBody">
@@ -262,61 +255,32 @@
    $(function(){
       var database = firebase.database();   
       
-      $(".btn-outline-primary").click(function(){
-         alert("1");
-      });
-      
-      //최신화 부분 수정 필요
-      /*
-      database.ref().on('value', function(snapshot){
-         selelctInventoryINWarehouse();
-      });*/
+    
          database.ref('warehouse/').on('value',function(snapshot){
-            var updateCheck = $("#updateCheck").val();
-            if(updateCheck==''){
                selelctInventoryINWarehouse(snapshot);
-            }else if(updateCheck=='move'){
-               $("#updateCheck").val('');
-            }
          });
       
       
       
-      /*
-      function selelctInventoryINWarehouse(snapshot){
-         $("#tBody").html('');
-         database.ref('warehouse/').on('child_added', function(data){
-            var warehouse_code = data.key;
-            var warehouse_name = data.val().warehouse_name;
-            setWarehouseDropbox(warehouse_code, warehouse_name);
-            database.ref('warehouse/'+warehouse_code).child("inventory").on('child_added', function(snapshot){
-               if(snapshot.key.charAt(0)=='p'){
-                  var pd_code = snapshot.key;   
-                  getProductAmount(pd_code, warehouse_name, warehouse_code);
-               }else if(snapshot.key.charAt(0)=='m'){
-                  var rawm_code = snapshot.key;   
-                  getMaterialAmount(rawm_code, warehouse_name, warehouse_code);
-               }
-             });
-         });
-         setSupplierDropbox();   
-         setInventorySortDropbox();
-      }*/
+     
       function selelctInventoryINWarehouse(snapshot){
          $("#tBody").html('');
          for(key in snapshot.val()){
             var warehouse_code = key;
             database.ref('warehouse/'+warehouse_code).once('value', function(data){
             var warehouse_name = data.val().warehouse_name;
-            setWarehouseDropbox(warehouse_code, warehouse_name);
             database.ref('warehouse/'+warehouse_code).child("inventory").once('value', function(snapshot1){
                //for문 3번 돌리기
+               var cList = new Array();
                for(key1 in snapshot1.val()){
-                  if(key1.charAt(0)=='p'){
-                  var pd_code = key1;   
+               		cList.push(key1);
+               }
+               for(var i = 0; i<3; i++){
+                  if(cList[i].charAt(0)=='p'){
+                  var pd_code = cList[i];   
                   getProductAmount(pd_code, warehouse_name, warehouse_code);
-               }else if(key1.charAt(0)=='m'){
-                  var rawm_code = key1;   
+               }else if(cList[i].charAt(0)=='m'){
+                  var rawm_code = cList[i];   
                   getMaterialAmount(rawm_code, warehouse_name, warehouse_code);
                }
                }
@@ -324,8 +288,6 @@
             });
             
       }
-         setSupplierDropbox();   
-         setInventorySortDropbox();
       }
       
 
@@ -365,9 +327,9 @@
                str+='<td>'+serverData.rawm_sort+'</td>';
                str+='<td>'+amount+'</td>';
                str+='<td>'+serverData.rawm_price+'</td>';
-               str+='<td><button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary" onclick="updateANDdelete(this);" button-type="update" data-code="'+serverData.rawm_code+'" wh-code="'+warehouse_code+'" style="margin-top: 0.7em;margin-left: 1.2em">Update</button></td>';
+/*                str+='<td><button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary" onclick="updateANDdelete(this);" button-type="update" data-code="'+serverData.rawm_code+'" wh-code="'+warehouse_code+'" style="margin-top: 0.7em;margin-left: 1.2em">Update</button></td>';
                str+='<td><button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary" onclick="updateANDdelete(this);" button-type="move" data-code="'+serverData.rawm_code+'" wh-code="'+warehouse_code+'" style="margin-top: 0.7em;margin-left: 1.2em">Move</button></button></td>';
-               str+='<td><button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary" onclick="updateANDdelete(this);" button-type="delete" data-code="'+serverData.rawm_code+'" wh-code="'+warehouse_code+'" style="margin-top: 0.7em;margin-left: 1.2em">Delete</button></button></td>';
+               str+='<td><button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary" onclick="updateANDdelete(this);" button-type="delete" data-code="'+serverData.rawm_code+'" wh-code="'+warehouse_code+'" style="margin-top: 0.7em;margin-left: 1.2em">Delete</button></button></td>'; */
                str+='</tr>';
                $("#tBody").append(str);   
                
@@ -404,179 +366,15 @@
          str+='<td>'+serverData.pd_sort+'</td>';
          str+='<td>'+amount+'</td>';
          str+='<td>'+(parseInt(serverData.pd_rmcost)+parseInt(serverData.pd_manufcost))+'</td>';
-         str+='<td><button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary"   onclick="updateANDdelete(this);" button-type="update" data-code="'+serverData.pd_code+'" wh-code="'+warehouse_code+'" style="margin-top: 0.7em;margin-left: 1.2em">Update</button></td>';
+/*          str+='<td><button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary"   onclick="updateANDdelete(this);" button-type="update" data-code="'+serverData.pd_code+'" wh-code="'+warehouse_code+'" style="margin-top: 0.7em;margin-left: 1.2em">Update</button></td>';
          str+='<td><button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary"  onclick="updateANDdelete(this);"  button-type="move" data-code="'+serverData.pd_code+'" wh-code="'+warehouse_code+'" style="margin-top: 0.7em;margin-left: 1.2em">Move</button></button></td>';
-         str+='<td><button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary"  onclick="updateANDdelete(this);"  button-type="delete" data-code="'+serverData.pd_code+'" wh-code="'+warehouse_code+'" style="margin-top: 0.7em;margin-left: 1.2em">Delete</button></button></td>';
+         str+='<td><button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary"  onclick="updateANDdelete(this);"  button-type="delete" data-code="'+serverData.pd_code+'" wh-code="'+warehouse_code+'" style="margin-top: 0.7em;margin-left: 1.2em">Delete</button></button></td>'; */
          str+='</tr>';
          $("#tBody").append(str);
       }
 
-   /*    //창고 드롭박스 세팅 함수
-      function setWarehouseDropbox(warehouse_code, warehouse_name){
-         var str='';
-         str+='<option value="'+warehouse_code+'">';
-         str+=warehouse_name;
-         str+='</option>';
-         $("#inventoryWarehouse").append(str);
-      }
-      
-
-      //출처 세팅 함수
-      function setSupplierDropbox(){
-         $("#inventorySupplier").append("<option value='자사'>자사</option>");
-         $.ajax({
-            url: "selectDistinctMaterialSupplier",
-            type: "get",
-            success:function(serverData){
-               for(var i = 0 ; i<serverData.length ; i++){
-                  var str='';
-                  str+='<option value="'+serverData[i].supplierseq+'">';
-                  str+=serverData[i].supplier_name;
-                  str+='</option>';
-                  $("#inventorySupplier").append(str);
-               }
-            }
-         });      
-      }
-         
-      //재고 종류 드롭박스 세팅
-      function setInventorySortDropbox(){
-         $.ajax({
-            url: "selectDistinctMaterialSort",
-            type: "get",
-            success:function(serverData){
-               for(var i = 0 ; i<serverData.length ; i++){
-                  var str='';
-                  str+='<option value="'+serverData[i].rawm_sort+'">';
-                  str+=serverData[i].rawm_sort;
-                  str+='</option>';
-                  $("#inventorySort").append(str);
-               }
-            }
-         });   
-         
-         $.ajax({
-            url: "selectDistinctProductSort",
-            type: "get",
-            success:function(serverData){
-               for(var i = 0 ; i<serverData.length ; i++){
-                  var str='';
-                  str+='<option value="'+serverData[i].pd_sort+'">';
-                  str+=serverData[i].pd_sort;
-                  str+='</option>';
-                  $("#inventorySort").append(str);
-               }
-            }
-         });
-      }
-      
-      
-      
-      
-      //검색 기능 구현
-      $("#searchButton").click(function(){
-         $("#tBody").html('');
-         var inventoryWarehouse= $("#inventoryWarehouse").val();
-         var inventoryType = $("#inventoryType").val();
-         var inventorySupplier= $("#inventorySupplier").val();
-         var inventorySort= $("#inventorySort").val();
-         var searchText= $("#searchText").val();   
-         database.ref('warehouse/').on('child_added', function(data){
-            var warehouse_code = data.key;
-            var warehouse_name = data.val().warehouse_name;
-            database.ref('warehouse/'+warehouse_code).child("inventory").on('child_added', function(snapshot){
-            if(snapshot.key.charAt(0)=='p'){
-            var pd_code = snapshot.key;   
-            $.ajax({
-               url: "selectProductByCode",
-               type: "get",
-               data:{pd_code:pd_code},
-               success:function(serverData){
-                  var flag = true;
-                  if(inventoryWarehouse!=""){
-                     if(warehouse_code!=inventoryWarehouse){
-                        flag=false;
-                     }
-                  }
-                  
-                  
-                  if(inventoryType!=""){
-                     if(inventoryType!="product"){
-                           flag=false;
-                     }
-                  }
-                  
-                  if(inventorySupplier!=""){
-                     if(inventorySupplier !='자사'){
-                        flag=false;
-                     }
-                  }
-                  if(inventorySort!=""){
-                     if(serverData.pd_sort !=inventorySort){
-                        flag=false;
-                     }
-                  }
-                  if(searchText!=""){
-                     if(serverData.pd_name.includes(searchText)==false &&serverData.pd_code.includes(searchText)==false){
-                        flag=false;
-                     }
-                  }
-                  
-                  if(flag){
-                     getProductAmount(pd_code, warehouse_name, warehouse_code);
-                  }
-                  
-               }
-            });
-            
-            
-         }else if(snapshot.key.charAt(0)=='m'){
-            var rawm_code = snapshot.key;   
-            $.ajax({
-               url: "selectMaterialByCode",
-               type: "get",
-               data:{rawm_code:rawm_code},
-               success:function(serverData){
-                  var flag = true;
-                  if(inventoryWarehouse!=""){
-                     if(warehouse_code!=inventoryWarehouse){
-                        flag=false;
-                     }
-                  }
-                  
-                  if(inventoryType!=""){
-                     if(inventoryType!="material"){
-                           flag=false;
-                     }
-                  }
-                  
-                  if(inventorySupplier!=""){
-                     if(serverData.supplierseq !=inventorySupplier){
-                        flag=false;
-                     }
-                  }
-                  if(inventorySort!=""){
-                     if(serverData.rawm_sort !=inventorySort){
-                        flag=false;
-                     }
-                  }
-                  if(searchText!=""){
-                     if(serverData.rawm_name.includes(searchText)==false &&serverData.rawm_code.includes(searchText)==false){
-                        flag=false;
-                     }
-                  }
-                  if(flag){
-                     getMaterialAmount(rawm_code, warehouse_name, warehouse_code);
-                  }
-               }
-            }); 
-         }
-         });
-      });
-      });*/
-      
-      //수정 기능
-      //삭제 기능
+   
+   
 
       
    });
