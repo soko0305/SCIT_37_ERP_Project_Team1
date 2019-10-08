@@ -17,7 +17,17 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
 <link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
-
+<!-- firebase -->
+	<script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-auth.js"></script>
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+       https://firebase.google.com/docs/web/setup#config-web-app -->
+  <!-- firebaseUI -->
+  <script src="https://cdn.firebase.com/libs/firebaseui/4.0.0/firebaseui.js"></script>
+  <!-- firebase -->
+  <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
+  <!-- firebase Config and initialize -->	
+  <script src="firebase/firebase-config.js"></script>
 </head>
 <body>
 <div class="app-container app-theme-white body-tabs-shadow">
@@ -71,6 +81,7 @@
 <script th:inline="javascript">
 /*<![CDATA[*/
 	$(function(){
+		var database = firebase.database();	
 		var warehouse_code = /*[[${checkstock.warehouse_code}]]*/;
 		var mmcode = /*[[${checkstock.mmcode}]]*/;
 		var checkstock_sysstock =  /*[[${checkstock.checkstock_sysstock}]]*/;
@@ -88,6 +99,7 @@
             		   checkstock_reason:checkstock_reason
             		  },
             	success:function(){
+            		database.ref('warehouse/'+warehouse_code).child('inventory').child(mmcode).update({"systemamount": checkstock_realstock});
             		window.open("about:blank","_self").close();
             	}
 			});

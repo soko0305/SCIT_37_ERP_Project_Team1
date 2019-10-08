@@ -58,6 +58,10 @@ public class MemberController {
 	public String login(){ 
  		return "member/login";
 	}
+	@RequestMapping(value="/login", method = RequestMethod.GET)
+	public String login1(){ 
+ 		return "member/login";
+	}
 	@RequestMapping(value="/signup", method = RequestMethod.GET)
 	public String signup(){ 
  		return "member/signup";
@@ -86,11 +90,12 @@ public class MemberController {
 				
 					ArrayList<Order_rawMaterialVO> orderDash =  oDAO.orderDashSelect();
 					ArrayList<Order_rawMaterialVO> orderDash1 =  new ArrayList<>();
-					
+					if(list!=null&&list.size()!=0&&plist!=null&&plist.size()!=0){
 					for(int i=0;i<3;i++){
 						bbList.add(list.get(i));
 						ppList.add(plist.get(i));
 						orderDash1.add(orderDash.get(i));
+					}
 					}
 					model.addAttribute("boardlist", bbList);
 					model.addAttribute("producelist", ppList);

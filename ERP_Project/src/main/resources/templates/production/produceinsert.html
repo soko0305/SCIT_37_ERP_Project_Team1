@@ -18,27 +18,24 @@
 <script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script>
 <link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
 
-  	<!-- firebase -->
-	<script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-auth.js"></script>
-  <!-- TODO: Add SDKs for Firebase products that you want to use
-       https://firebase.google.com/docs/web/setup#config-web-app -->
-  <!-- firebaseUI -->
-  <script src="https://cdn.firebase.com/libs/firebaseui/4.0.0/firebaseui.js"></script>
-  <!-- firebase -->
-  <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
-  <!-- firebase Config and initialize -->	
-  <script src="firebase/firebase-config.js"></script>
-
-    
+<!-- firebase -->
+<script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-auth.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use https://firebase.google.com/docs/web/setup#config-web-app -->
+<!-- firebaseUI -->
+<script src="https://cdn.firebase.com/libs/firebaseui/4.0.0/firebaseui.js"></script>
+<!-- firebase -->
+<script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
+<!-- firebase Config and initialize -->	
+<script src="firebase/firebase-config.js"></script>
 
 <script>
 var database = firebase.database();
+var checkMaterials = 0;
 
 	$(function(){
 		selectInventoryINWarehouse();
-		buttonEvent();
-		
+		buttonEvent();		
 	});
    
 	function selectInventoryINWarehouse(){
@@ -74,76 +71,36 @@ var database = firebase.database();
 							var warehouse_name = data.val().warehouse_name;
 			 			
 							for(var i = 0 ; i<result.length ; i++){
+								
+								var neededMaterial = (result[i].product_material_amount * manuf_amount);
+								
 			 					database.ref('warehouse/'+warehouse_code).child("inventory").child(result[i].rawm_code).on('child_added', function(snapshot){
-			 			
-			 			})
-			 		}
-				})
-			}	
-		})
-	})
-}
-						
-						/* if(code==result[i].rawm_code){
-						totalAmount = (result[i].product_material_amount * manuf_amount);
-							if(totalAmount > sysamount){
-								get = (totalAmount - sysamount);
-								alert(result[i].rawm_name+"가 "+get+"개 부족합니다");
-					    	}
-						} 
-						}) */
-					
-						/* $("#produceinsertForm").submit();
-				         opener.location.href='goproducecheck'
-				         window.open("about:blank","_self").close(); */
-			
-		/* 	}
-		}) 
-		
-		}) */
-	
-		
-	/* 	database.ref('warehouse/'+warehouse_code).child("inventory").on('child_added', function(snapshot){
-			
-			if(snapshot.key.charAt(0)=='m'){
-				var rawm_code = snapshot.key;
-				database.ref('warehouse/'+warehouse_code).child("inventory").child(rawm_code).on('value', function(snapshot){
-					var code = snapshot.key;
-					var sysamount = snapshot.val().systemamount;
-					
-					var totalAmount=0;
-					
-					$("#insertButton").click(function(){
-						var manuf_amount = $("#manuf_amount").val();
-						var pd_code = $("#pd_code").val();
-						var warehouse_code = $("#warehouse_code").val();
-						var manuf_startdate = $("#manuf_startdate").val();
-						$.ajax({
-							url:"amountCheck",
-							type:"GET",
-							data:{pd_code : pd_code},
-							success:function(result){
-							for(var i = 0 ; i<result.length ; i++){
-								alert(i);
-								if(code==result[i].rawm_code){
-									totalAmount = (result[i].product_material_amount * manuf_amount);
-										if(totalAmount > sysamount){
-											get = (totalAmount - sysamount);
-											alert(result[i].rawm_name+"가 "+get+"개 부족합니다");
-								    	}
-									}
-								}
-									 $("#produceinsertForm").submit();
-							         opener.location.href='goproducecheck'
-							         window.open("about:blank","_self").close(); 
+			 					
+									if(neededMaterial>snapshot.val()){
+										var get = (neededMaterial - snapshot.val());
+										alert(result[i].rawm_name+"가 "+get+"개 부족합니다");
+										checkMaterials++; //생산불가할때마다 카운트 1++
+										}
+			 					})	 						
+							}	
+						})
+				
+						if(checkMaterials!=0){
+							if (confirm("원자재 발주 페이지로 이동하시겠습니까?")){
+								var url = "goOrderInsert";
+							    var name = "popup test";
+						    	var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+						   	 window.open(url, name, option);
 							}
-						});
-					}) 
-				})		
-			}
-		})
-} */
-
+						}else{
+							$("#produceinsertForm").submit();
+							opener.document.location.href="/goproducecheck";
+							self.close();
+						}
+					}
+				})
+			})
+		}
 </script>
 </head>
 <body>
@@ -191,7 +148,7 @@ var database = firebase.database();
                                         	<i class="fa fa-calendar-alt"></i>
                                         </div>
                                     </div>
-									<input type="text" id="manuf_startdate" name="manuf_startdate" placeholder="생산시작일" class="form-control" data-toggle="datepicker-icon">
+									<input type="text" id="manuf_startdate" name="manuf_startdate" autocomplete="off" placeholder="생산시작일" class="form-control" data-toggle="datepicker-icon">
                                 </div>
                                 
                                 <div class="modal-footer d-block text-center">
