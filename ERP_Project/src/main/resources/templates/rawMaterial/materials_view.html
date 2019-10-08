@@ -17,9 +17,21 @@
 	<!-- <script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script> -->
 	<link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
 
+  	<!-- firebase -->
+	<script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-auth.js"></script>
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+	     https://firebase.google.com/docs/web/setup#config-web-app -->
+	<!-- firebaseUI -->
+	<script src="https://cdn.firebase.com/libs/firebaseui/4.0.0/firebaseui.js"></script>
+	<!-- firebase -->
+	<script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
+	<!-- firebase Config and initialize -->	
+	<script src="firebase/firebase-config.js"></script>
+	
 <script>
+var database = firebase.database();
 	$(function(){
-		var openWin;
 		$(".btn-primary").click(function(){
 			var type = $(this).attr("data-type")
 			var code = $(this).val();
@@ -37,15 +49,68 @@
 		$("#insertRawMaterial").click(function(){ 
 			var g_oWindow = window.open("/goMaterialsInsert", "Input rawMaterial Information","width=500, height=650, location=no, toolbar=no, menubar=no, scrollbars=no, status=no, resizable=yes");
 		});
+		
+		call();
 	});
+	
+	function call(){
+		database.ref('warehouse/').on('child_added', function(data){
+			var warehouse_code = data.key;
+			database.ref('warehouse/'+warehouse_code).child("inventory").once('value').then(function(snapshot){
+				for(var key in snapshot.val()){
+					if(key.charAt(0)=='m'){
+						rawm_code = key;
+						call2(warehouse_code, rawm_code);
+					}
+				}
+				
+			});
+		});
+	}
+	
+	function call2(warehouse_code, rawm_code){
+		database.ref('warehouse/'+warehouse_code).child("inventory").child(rawm_code).once('value').then(function(snapshot1){
+			var amount = snapshot1.val().systemamount;
+				$.ajax({
+				url:"materialAllselect",
+				type:"GET",
+				success:function(result){
+					var count = 0;
+					for(var i in result){
+						if(result[i].rawm_notice=='CHECKED'){
+							if(result[i].rawm_code==rawm_code){
+								if(result[i].rawm_minimum>amount){
+									alert(result[i].rawm_name + "의 수량이 부족합니다");
+										alert(count);
+										if (confirm("원자재 발주로 넘어가시겠습니까?") == true){    //확인
+
+										 	var url = "goOrderInsert";
+										    var name = "popup test";
+										    var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+										    window.open(url, name, option);
+										    return false;
+										 }else{   //취소
+
+									     	return false;
+
+										 }
+									}
+								}
+							}
+						count++;
+						}
+					}
+				});
+			});
+		}
 </script>
-	<script>
-	$(function(){	
-		$("#header").load("/header");
-		$("#navbar").load("/navbar");
-		$("#setting").load("/setting");
-	});
-	</script>
+<script>
+$(function(){	
+	$("#header").load("/header");
+	$("#navbar").load("/navbar");
+	$("#setting").load("/setting");
+});
+</script>
 </head>
 <body>
 <form action="goMaterialsUpdate" method="post" id="updateForm">
