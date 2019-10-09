@@ -17,9 +17,21 @@
 	<!-- <script src="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/assets/scripts/main.8d288f825d8dffbbe55e.js"></script> -->
 	<link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet">
 
+  	<!-- firebase -->
+	<script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-auth.js"></script>
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+	     https://firebase.google.com/docs/web/setup#config-web-app -->
+	<!-- firebaseUI -->
+	<script src="https://cdn.firebase.com/libs/firebaseui/4.0.0/firebaseui.js"></script>
+	<!-- firebase -->
+	<script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
+	<!-- firebase Config and initialize -->	
+	<script src="firebase/firebase-config.js"></script>
+	
 <script>
-	$(function(){
-		var openWin;
+var database = firebase.database();
+$(function(){
 		$(".btn-primary").click(function(){
 			var type = $(this).attr("data-type")
 			var code = $(this).val();
@@ -37,15 +49,52 @@
 		$("#insertRawMaterial").click(function(){ 
 			var g_oWindow = window.open("/goMaterialsInsert", "Input rawMaterial Information","width=500, height=650, location=no, toolbar=no, menubar=no, scrollbars=no, status=no, resizable=yes");
 		});
+		
+		call();		/* HTML문서 로딩 후 call()호출 */
 	});
+	/* 파이어베이스의 데이터 key를 불러들인 후 각각의 데이터 하나하나의 value를 가져오기 위해 call2()를 호출 */
+	function call(){
+		database.ref('warehouse/').on('child_added', function(data){
+			var warehouse_code = data.key;
+			database.ref('warehouse/'+warehouse_code).child("inventory").once('value').then(function(snapshot){
+				for(var key in snapshot.val()){
+					if(key.charAt(0)=='m'){
+						rawm_code = key;
+						call2(warehouse_code, rawm_code);
+					}
+				}
+			});
+		});
+	}
+	/* 각 데이터의 수량을 sql 데이터와 파이어베이스 데이터를 비교하여 부족할 경우 alert를 띄운다 */
+	function call2(warehouse_code, rawm_code){
+		database.ref('warehouse/'+warehouse_code).child("inventory").child(rawm_code).once('value').then(function(snapshot1){
+			var amount = snapshot1.val().systemamount;
+				$.ajax({
+				url:"materialAllselect",
+				type:"GET",
+				success:function(result){
+					for(var i in result){
+						if(result[i].rawm_notice=='CHECKED'){
+							if(result[i].rawm_code==rawm_code){
+								if(result[i].rawm_minimum>amount){
+									alert(result[i].rawm_name + "의 설정 수량 미만입니다.");
+									}
+								}
+							}
+						}
+					}
+				});
+			});
+		}
 </script>
-	<script>
-	$(function(){	
-		$("#header").load("/header");
-		$("#navbar").load("/navbar");
-		$("#setting").load("/setting");
-	});
-	</script>
+<script>
+$(function(){	
+	$("#header").load("/header");
+	$("#navbar").load("/navbar");
+	$("#setting").load("/setting");
+});
+</script>
 </head>
 <body>
 <form action="goMaterialsUpdate" method="post" id="updateForm">
@@ -69,7 +118,7 @@
                                     <i class="lnr-database icon-gradient bg-night-fade">
                                     </i>
                                 </div>
-                                <div>원자재 관리
+                                <div>원자재관리
                                     <div class="page-title-subheading">
                                     	원자재 등록 및 갱신
                                     </div>
@@ -103,7 +152,7 @@
 										<th>원자재최저수량</th>
 										<th>공급처코드</th>
 										<th>자동알림란</th>
-										<th>업데이트란</th>
+										<th>업데이트</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -134,7 +183,7 @@
 										<th>원자재최저수량</th>
 										<th>공급처코드</th>
 										<th>자동알림란</th>
-										<th>업데이트란</th>
+										<th>업데이트</th>
 									</tr>
 								</tfoot>
 							</table>
