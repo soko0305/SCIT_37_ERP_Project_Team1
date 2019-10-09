@@ -80,8 +80,7 @@
                                 <tbody>
   								<tr th:each="list : ${boardlist}">
 									<td th:text="${list.rn}"></td>
-									<td><a th:href="@{http://localhost:9088/boarddetail(boardSeq=${list.board_seq})}" target="blank"><p th:text="${list.title}"></p></a></td>
-<!-- <td><a href="#" onClick="window.open('http://localhost:9088/boarddetail(boardSeq=${list.board_seq})}"','_blank','toolbar=no,location=no,status=no,menubar=no, scrollbars=yes,resizable=no,width=700,height=600, top=30, left=30')"><p th:text="${list.title}"></p></a></td> -->
+									<td><a th:href="@{http://localhost:9088/boarddetail(boardSeq=${list.board_seq})}" onclick="openWindow();" ><p th:text="${list.title}"></p></a></td>
 									<td th:text="${list.userid}"></td>
  									<td th:text="${list.time}"></td>
 								</tr>
