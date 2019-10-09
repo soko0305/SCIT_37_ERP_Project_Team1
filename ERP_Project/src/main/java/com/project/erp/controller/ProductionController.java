@@ -1,6 +1,7 @@
 package com.project.erp.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -37,6 +38,13 @@ public class ProductionController {
 		
 		return "production/producecheck";
 	}
+	
+	
+	@RequestMapping(value = "/getMaterialList", method = RequestMethod.GET)
+	public @ResponseBody List<ProductMaterialVO> getMaterialList(String pd_code,  Model model,HttpSession session) {
+		List<ProductMaterialVO> result = pService.selectAllProductMaterial(pd_code);
+		return result;
+	}
 	//생산품 수정
 	@RequestMapping(value = "/goproduceupdate", method = RequestMethod.GET)
 	public String goproduceupdate(String mfseq, Model model) {
@@ -51,12 +59,7 @@ public class ProductionController {
 		model.addAttribute("productionlist", plist);
 		return "production/productioncheck";
 	}
- /*	@RequestMapping(value = "/goproductionupdate", method = RequestMethod.GET)
-	public String goproductionupdate(ProductVO product, Model model,HttpSession session) {
-		ArrayList<ProductVO> plist = pService.productionSelect(product);
-		model.addAttribute("productionlist", plist);
-		return "production/productionupdate";
-	}*/
+
  	//생산 1개 가져오기
 	@RequestMapping(value = "/produceOneSelect", method = RequestMethod.POST)
 	public @ResponseBody ManufactureVO produceOneSelect(String mfseq, Model model) {
@@ -79,6 +82,12 @@ public class ProductionController {
 		return "production/produceinsert";
 	} 
 	
+	@RequestMapping(value = "/insertProudctMaterial", method = RequestMethod.POST)
+	public @ResponseBody void insertProudctMaterial(ProductMaterialVO productMaterial) {
+			int result =pService.insertProudctMaterial(productMaterial);
+
+	}
+
 	//생산품 삽입
 	@RequestMapping(value="/productioninsert", method = RequestMethod.GET)
 	public String productioninsert(Model model){
@@ -88,14 +97,10 @@ public class ProductionController {
 		return "production/production_insert2";
 	} 
  
- 
-
-
  	@RequestMapping(value="/confirmproductionrequest", method = RequestMethod.GET)
 	public String 	confirmproductionrequest(){
 		return "production/confirmproductionrequest";
 	} 	
-	
 	
 	//생산품 등록 이동 Form
 	@RequestMapping(value = "/gopRegistration", method = RequestMethod.GET)
@@ -218,6 +223,7 @@ public class ProductionController {
 		model.addAttribute("materialList", mList);
 		model.addAttribute("product", product);
 		model.addAttribute("pmList", pmList);
+
 		return "production/production_update";
 	}
 	

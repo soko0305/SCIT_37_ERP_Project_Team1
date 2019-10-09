@@ -48,11 +48,31 @@ var database = firebase.database();
 			}); 
 		});
 		$("#insertButton").click(function(){
-			var code = $("#rawm_code").val();
-			var amount = $("#rmorder_amount").val();
-			$("#orderInsertForm").submit();
-			opener.location.href='goArrive'
-			window.open("about:blank","_self").close();
+			var rawm_code = $("#rawm_code").val();
+			var rmorder_amount = $("#rmorder_amount").val();
+			var rawm_name = $("#rawm_name").val();
+			var supplierseq = $("#supplierseq").val();
+			var warehouse_code = $("#warehouse_code").val();
+			var rmorder_status = $("#rmorder_status").val();
+			var rmorder_requserid = $("#rmorder_requserid").val();
+			
+			$.ajax({
+				url:"orderInsert",
+				type:"POST",
+				data:{rawm_code:rawm_code,
+					rmorder_amount:rmorder_amount,
+					rawm_name:rawm_name,
+					supplierseq:supplierseq,
+					warehouse_code:warehouse_code,
+					rmorder_status:rmorder_status,
+					rmorder_requserid:rmorder_requserid},
+				success:function(){
+					opener.location.href='goArrive';
+					window.open("about:blank","_self").close();
+				}
+			});
+			/* $("#orderInsertForm").submit(); */
+			
 		});
 
 	});

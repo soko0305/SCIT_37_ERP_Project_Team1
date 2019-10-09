@@ -87,23 +87,46 @@ public class MemberController {
 					ArrayList<ManufactureVO> plist = pService.produceSelect();
 					ArrayList<BoardVO> bbList = new ArrayList<>();
 					ArrayList<ManufactureVO> ppList = new ArrayList<>();
-				
 					ArrayList<Order_rawMaterialVO> orderDash =  oDAO.orderDashSelect();
 					ArrayList<Order_rawMaterialVO> orderDash1 =  new ArrayList<>();
-					
+					if(list!=null&&list.size()!=0&&plist!=null&&plist.size()!=0){
 					for(int i=0;i<3;i++){
 						bbList.add(list.get(i));
 						ppList.add(plist.get(i));
 						orderDash1.add(orderDash.get(i));
 					}
+					}	
 					model.addAttribute("boardlist", bbList);
 					model.addAttribute("producelist", ppList);
-										
-					
 					/*발주 및 구매관리*/
 					model.addAttribute("orderList", orderDash1);
 		return "main/index";
 	}
+	@RequestMapping(value="/goMain", method = RequestMethod.GET)
+	public  String goMain( Model model){
+					MemberVO member = new MemberVO();
+					MemberVO m = memberService.selectMemberById(member);
+					memberService.updateLogin(m);
+					ArrayList<BoardVO> list = null;
+					list = bService.boardAllSelect();
+					ArrayList<ManufactureVO> plist = pService.produceSelect();
+					ArrayList<BoardVO> bbList = new ArrayList<>();
+					ArrayList<ManufactureVO> ppList = new ArrayList<>();
+					ArrayList<Order_rawMaterialVO> orderDash =  oDAO.orderDashSelect();
+					ArrayList<Order_rawMaterialVO> orderDash1 =  new ArrayList<>();
+					if(list!=null&&list.size()!=0&&plist!=null&&plist.size()!=0){
+					for(int i=0;i<3;i++){
+						bbList.add(list.get(i));
+						ppList.add(plist.get(i));
+						orderDash1.add(orderDash.get(i));
+					}
+					}
+					model.addAttribute("boardlist", bbList);
+					model.addAttribute("producelist", ppList);
+					/*발주 및 구매관리*/
+					model.addAttribute("orderList", orderDash1);
+		return "main/index";
+	}	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
 			int check =0;
