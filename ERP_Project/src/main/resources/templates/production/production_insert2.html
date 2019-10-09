@@ -93,6 +93,7 @@ $(function() {
 						  pd_rmcost:totalMaterialPrice
 						 },
 					success:function(serverData){
+						alert(JSON.stringify(serverData));
 						for(var k = 0 ; k<mArray.length ; k++){
 							$.ajax({
 								url:"insertProudctMaterial",
