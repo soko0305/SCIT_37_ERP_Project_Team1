@@ -51,12 +51,7 @@ public class ProductionController {
 		model.addAttribute("productionlist", plist);
 		return "production/productioncheck";
 	}
- /*	@RequestMapping(value = "/goproductionupdate", method = RequestMethod.GET)
-	public String goproductionupdate(ProductVO product, Model model,HttpSession session) {
-		ArrayList<ProductVO> plist = pService.productionSelect(product);
-		model.addAttribute("productionlist", plist);
-		return "production/productionupdate";
-	}*/
+
  	//생산 1개 가져오기
 	@RequestMapping(value = "/produceOneSelect", method = RequestMethod.POST)
 	public @ResponseBody ManufactureVO produceOneSelect(String mfseq, Model model) {
@@ -82,11 +77,8 @@ public class ProductionController {
 	@RequestMapping(value = "/insertProudctMaterial", method = RequestMethod.POST)
 	public @ResponseBody void insertProudctMaterial(ProductMaterialVO productMaterial) {
 			int result =pService.insertProudctMaterial(productMaterial);
-			System.out.println("pm인서트"+productMaterial);
 
 	}
-	
-
 
 	//생산품 삽입
 	@RequestMapping(value="/productioninsert", method = RequestMethod.GET)
@@ -223,11 +215,7 @@ public class ProductionController {
 		model.addAttribute("materialList", mList);
 		model.addAttribute("product", product);
 		model.addAttribute("pmList", pmList);
-		System.out.println("메터리얼리스트"+mList);
-		System.out.println("프로덕트vo"+product);
-		System.out.println("pm리스트"+pmList);
-		
-		
+
 		return "production/production_update";
 	}
 	
