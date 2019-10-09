@@ -45,16 +45,11 @@ public class OrderController {
 			return "/rawMaterial/order";
 		}
 	@RequestMapping(value = "/orderInsert", method = RequestMethod.POST)
-	public String orderInsert(Order_rawMaterialVO order) {
+	public @ResponseBody int orderInsert(Order_rawMaterialVO order) {
 		System.out.println("order : " + order);
 		int result = oService.orderInsert(order);
-
-		if (result == 0) {
-			return "/rawMaterial/all_view";
-		} else {
-			return "/rawMaterial/order_view";
+		return result;
 		}
-	}
 
 	@RequestMapping(value = "/orderUpdate", method = RequestMethod.POST)
 	public String orderUpdate(Order_rawMaterialVO order, Model model) {

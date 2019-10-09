@@ -75,7 +75,8 @@
 	where
 		rm.rmorder_code=#{rmorder_code} AND
 		rm.supplierseq = sp.supplierseq AND
-		sp.supplierseq = rw.supplierseq
+		sp.supplierseq = rw.supplierseq AND
+        rm.rawm_code = rw.rawm_code
 	</select>
 	
 	<update id="orderUpdate" parameterType="com.project.erp.vo.Order_rawMaterialVO">
