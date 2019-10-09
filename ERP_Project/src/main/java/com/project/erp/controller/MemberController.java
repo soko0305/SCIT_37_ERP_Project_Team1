@@ -96,7 +96,7 @@ public class MemberController {
 						ppList.add(plist.get(i));
 						orderDash1.add(orderDash.get(i));
 					}
-					}
+					}	
 					model.addAttribute("boardlist", bbList);
 					model.addAttribute("producelist", ppList);
 										

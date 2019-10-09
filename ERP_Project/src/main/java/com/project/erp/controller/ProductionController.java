@@ -1,6 +1,7 @@
 package com.project.erp.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -36,6 +37,13 @@ public class ProductionController {
 		model.addAttribute("producelist", plist);
 		
 		return "production/producecheck";
+	}
+	
+	
+	@RequestMapping(value = "/getMaterialList", method = RequestMethod.GET)
+	public @ResponseBody List<ProductMaterialVO> getMaterialList(String pd_code,  Model model,HttpSession session) {
+		List<ProductMaterialVO> result = pService.selectAllProductMaterial(pd_code);
+		return result;
 	}
 	//생산품 수정
 	@RequestMapping(value = "/goproduceupdate", method = RequestMethod.GET)
