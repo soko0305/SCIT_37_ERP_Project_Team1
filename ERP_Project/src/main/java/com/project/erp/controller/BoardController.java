@@ -27,16 +27,25 @@ public class BoardController {
 
 	@Autowired
 	BoardService bService;
-
+	//게시물 삽입
+	@RequestMapping(value = "/goBoardInsert", method = RequestMethod.GET)
+	public String goBoardInsert(BoardVO board,HttpSession session) {
+		
+		    if (session.getAttribute("userid") != null) {
+        String userid = (String) session.getAttribute("userid");
+        board.setUserid(userid);
+	     }
+		return "member/boardinsert";
+	}
  
 	// 게시물 등록
 	@RequestMapping(value = "/boardInsert", method = RequestMethod.POST)
 	public String boardInsert(BoardVO board) {
 		int result = bService.boardInsert(board);
 		if (result == 0) {
-			return "redirect:/goBoardList";
+			return "member/boardinsert";
 		} else {
-			return "redirect:/goBoardList";
+			return "member/boardinsert";
 		}
 	}
 
@@ -75,16 +84,7 @@ public class BoardController {
 			return "member/board";
 		}
 		
-		//게시물 삽입
-		@RequestMapping(value = "/goBoardInsert", method = RequestMethod.GET)
-		public String goBoardInsert(BoardVO board,HttpSession session) {
-			
-			    if (session.getAttribute("userid") != null) {
-	        String userid = (String) session.getAttribute("userid");
-	        board.setUserid(userid);
- 	     }
-			return "member/boardinsert";
-		}
+
  
 		//게시물 상세
 		@RequestMapping(value = "/boarddetail", method = RequestMethod.GET)

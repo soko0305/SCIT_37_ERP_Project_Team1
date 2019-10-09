@@ -28,39 +28,40 @@
                     </span>
                 </button>
             </span>
-        </div>    <div class="app-header__content">
-            <div class="app-header-left">
+        </div> 
+           <div class="app-header__content">
+            <div class="app-header-right">
                 <div class="search-wrapper">
 
                     <button class="close"></button>
                 </div>
                 <ul class="header-megamenu nav">
-                    <li class="nav-item">
+<!--                     <li class="nav-item">
                         <a href="javascript:void(0);" data-placement="bottom" rel="popover-focus" data-offset="300" data-toggle="popover-custom" class="nav-link">
-                            <i class="btn-group nav-item"> </i>
+                            <i class="btn-group nav-item" style="margin-right: 1200px;"> </i>
                             Main Link
                             <i class="fa fa-angle-down ml-2 opacity-5"></i>
                         </a>
                         <div class="rm-max-width">
-                            <div class="d-none popover-custom-content">
-                                <div class="menu" >
+                            <div class="d-none popover-custom-content" >
+                                <div class="menu"  >
                                     <div class="grid-menu grid-menu-3col">
                                         <div class="no-gutters row">
                                             <div class="col-sm-6 col-xl-4">
-                                                <ul class="nav flex-column">
+                                                <ul class="nav flex-column" >
                                                     <li class="nav-item-header nav-item">
-                                                        <!-- Member -->
-                                                    </li>
-                                                    <li class="nav-item">
-                                                        <a href="/signup" class="nav-link">
-                                                            <i class="nav-link-icon lnr-inbox">
+                                                        Member
+                                                    </li> -->
+                                                <li class="nav-item" th:if="${session.loginid==null}">
+                                                			<a href="/signup" class="nav-link">
+                                                            <i class="nav-link-icon lnr-inbox" >
                                                             </i>
                                                             <span>
                                                                 signup
                                                             </span>
                                                         </a>
                                                     </li>
-                                                    <li class="nav-item">
+                                                    <li class="nav-item" th:if="${session.loginid==null}">
                                                         <a href="/login" class="nav-link">
                                                             <i class="nav-link-icon lnr-book">
                                                             </i>
@@ -71,7 +72,7 @@
                                                             </div> -->
                                                         </a>
                                                     </li>
-                                                    <li class="nav-item">
+                                                    <li class="nav-item" th:if="${session.loginid!=null}">
                                                         <a href="/logout" class="nav-link">
                                                             <i class="nav-link-icon lnr-picture">
                                                             </i>
@@ -90,7 +91,7 @@
                                                         </a>
                                                     </li>
                                                     <li class="nav-item">
-                                                        <a href="/main" class="nav-link">
+                                                        <a href="/goMain" class="nav-link">
                                                             <i class="nav-link-icon lnr-file-empty">
                                                             </i>
                                                             <span>
@@ -98,7 +99,7 @@
                                                             </span>
                                                         </a>
                                                     </li>                                                    
-                                                    <li class="nav-item" th:if="${session.loginid!=null and session.logindepartment.toString().equals('�씤�궗')}">
+                                                    <li class="nav-item" th:if="${session.loginid!=null and session.logindepartment.toString().equals('인사')}">
                                                         <a href="/goPermitAccount" class="nav-link">
                                                             <i class="nav-link-icon lnr-file-empty">
                                                             </i>
@@ -150,7 +151,7 @@
                                                             </div>
                                                         </a>
                                                     </li>
-                                                    <li class="nav-item">
+                                                    <li cl	ass="nav-item">
                                                         <a href="javascript:void(0);" class="nav-link">Campaigns
                                                         </a>
                                                     </li>

@@ -79,6 +79,15 @@ public class ProductionController {
 		return "production/produceinsert";
 	} 
 	
+	@RequestMapping(value = "/insertProudctMaterial", method = RequestMethod.POST)
+	public @ResponseBody void insertProudctMaterial(ProductMaterialVO productMaterial) {
+			int result =pService.insertProudctMaterial(productMaterial);
+			System.out.println("pm인서트"+productMaterial);
+
+	}
+	
+
+
 	//생산품 삽입
 	@RequestMapping(value="/productioninsert", method = RequestMethod.GET)
 	public String productioninsert(Model model){
@@ -88,14 +97,10 @@ public class ProductionController {
 		return "production/production_insert2";
 	} 
  
- 
-
-
  	@RequestMapping(value="/confirmproductionrequest", method = RequestMethod.GET)
 	public String 	confirmproductionrequest(){
 		return "production/confirmproductionrequest";
 	} 	
-	
 	
 	//생산품 등록 이동 Form
 	@RequestMapping(value = "/gopRegistration", method = RequestMethod.GET)
@@ -218,6 +223,11 @@ public class ProductionController {
 		model.addAttribute("materialList", mList);
 		model.addAttribute("product", product);
 		model.addAttribute("pmList", pmList);
+		System.out.println("메터리얼리스트"+mList);
+		System.out.println("프로덕트vo"+product);
+		System.out.println("pm리스트"+pmList);
+		
+		
 		return "production/production_update";
 	}
 	

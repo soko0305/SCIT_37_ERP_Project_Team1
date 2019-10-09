@@ -25,7 +25,25 @@
 	});
 	</script>
 <link href="architectui-html-pro-theme-package/architectui-html-pro-theme/architectui-html-pro/main.8d288f825d8dffbbe55e.css" rel="stylesheet"><link href="./main.8d288f825d8dffbbe55e.css" rel="stylesheet"></head>
+<script>
+		function openWindow(){
+			var g_oWindow =window.open('/goBoardInsert','win','width=430,height=500,location=no,status=no,scrollbars=yes');
+			g_oInterval = window.setInterval(function() {
+		        try {
+		            // 창이 꺼졌는지 판단
+		            if( g_oWindow == null || g_oWindow.closed ) {
+		                window.clearInterval(g_oInterval);
+		                g_oWindow = null;
+						window.location.href="/goBoardList";
+		            }
+		        } catch (e) { }
+		    }, 500);
+			
+		}
 
+</script>
+
+</head>
 <body>
 <div class="app-container app-theme-white body-tabs-shadow fixed-header fixed-sidebar">    <div class="app-main">
  			<div id="header"></div>
@@ -62,25 +80,16 @@
                                 <tbody>
   								<tr th:each="list : ${boardlist}">
 									<td th:text="${list.rn}"></td>
-									<td><a th:href="@{http://localhost:9088/boarddetail(boardSeq=${list.board_seq})}"><p th:text="${list.title}"></p></a></td>
-									
+									<td><a th:href="@{http://localhost:9088/boarddetail(boardSeq=${list.board_seq})}" target="blank"><p th:text="${list.title}"></p></a></td>
+<!-- <td><a href="#" onClick="window.open('http://localhost:9088/boarddetail(boardSeq=${list.board_seq})}"','_blank','toolbar=no,location=no,status=no,menubar=no, scrollbars=yes,resizable=no,width=700,height=600, top=30, left=30')"><p th:text="${list.title}"></p></a></td> -->
 									<td th:text="${list.userid}"></td>
  									<td th:text="${list.time}"></td>
 								</tr>
                                 </tbody>
-
                             </table>
-                                <a href="/goBoardInsert"><button type="button" class="btn btn-shadow btn-wide btn-primary" id="write">
-                                <span class="btn-icon-wrapper pr-2 opacity-7">
-                                    <i class="fa fa-plus fa-w-20"></i>
-                                </span>
-                               	새글쓰기
-                            </button></a>              	 
- <button onclick="window.open('/goBoardInsert','win','width=430,height=500,location=no,status=no,scrollbars=yes');">button</button>
+        	 
+ <button class="mb-2 mr-2 btn btn-primary" onclick="openWindow();">새글쓰기</button>
  									 
-									
-
-                            <!-- </button></a> -->
                         </div>
                     </div>
                 </div>
@@ -92,7 +101,6 @@
 <div class="app-drawer-overlay d-none animated fadeIn"></div><script type="text/javascript" src="./assets/scripts/main.cba69814a806ecc7945a.js"></script>
 
 </div>
-
 </body>
 </html>
 
