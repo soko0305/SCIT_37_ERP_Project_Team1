@@ -98,7 +98,7 @@ public class MemberController {
 					}	
 					model.addAttribute("boardlist", bbList);
 					model.addAttribute("producelist", ppList);
-					/*발주 및 구매관리*/
+					/*諛쒖＜ 諛� 援щℓ愿�由�*/
 					model.addAttribute("orderList", orderDash1);
 		return "main/index";
 	}
@@ -123,7 +123,7 @@ public class MemberController {
 					}
 					model.addAttribute("boardlist", bbList);
 					model.addAttribute("producelist", ppList);
-					/*발주 및 구매관리*/
+					/*諛쒖＜ 諛� 援щℓ愿�由�*/
 					model.addAttribute("orderList", orderDash1);
 		return "main/index";
 	}	
