@@ -31,8 +31,6 @@
 	
 <script>
 var database = firebase.database();
-var arraylist = new Array();
-var count =0;
 $(function(){
 		$(".btn-primary").click(function(){
 			var type = $(this).attr("data-type")
@@ -52,12 +50,11 @@ $(function(){
 			var g_oWindow = window.open("/goMaterialsInsert", "Input rawMaterial Information","width=500, height=650, location=no, toolbar=no, menubar=no, scrollbars=no, status=no, resizable=yes");
 		});
 		
-		call();
+		call();		/* HTML문서 로딩 후 call()호출 */
 	});
-	
+	/* 파이어베이스의 데이터 key를 불러들인 후 각각의 데이터 하나하나의 value를 가져오기 위해 call2()를 호출 */
 	function call(){
 		database.ref('warehouse/').on('child_added', function(data){
-			alert("스타트1");
 			var warehouse_code = data.key;
 			database.ref('warehouse/'+warehouse_code).child("inventory").once('value').then(function(snapshot){
 				for(var key in snapshot.val()){
@@ -65,39 +62,28 @@ $(function(){
 						rawm_code = key;
 						call2(warehouse_code, rawm_code);
 					}
-					
 				}
-				
 			});
-			
 		});
 	}
-	
+	/* 각 데이터의 수량을 sql 데이터와 파이어베이스 데이터를 비교하여 부족할 경우 alert를 띄운다 */
 	function call2(warehouse_code, rawm_code){
 		database.ref('warehouse/'+warehouse_code).child("inventory").child(rawm_code).once('value').then(function(snapshot1){
-			alert("스타트2");
 			var amount = snapshot1.val().systemamount;
 				$.ajax({
 				url:"materialAllselect",
 				type:"GET",
 				success:function(result){
 					for(var i in result){
-						alert("스타트3 : " + count);
 						if(result[i].rawm_notice=='CHECKED'){
 							if(result[i].rawm_code==rawm_code){
 								if(result[i].rawm_minimum>amount){
-									arraylist.push(result[i].rawm_name);
+									alert(result[i].rawm_name + "의 설정 수량 미만입니다.");
 									}
 								}
 							}
-						count++;
 						}
-					
-
-					
 					}
-				
-				
 				});
 			});
 		}
