@@ -21,9 +21,9 @@
 <script>
 	$(function() {
 		/* 자동구매 체크시 수량설정 출력 */
-		$("#rawm_autoorder").change(
+		$("#rawm_notice").change(
 		function() {
-			if ($("#rawm_autoorder").is(":checked")) {
+			if ($("#rawm_notice").is(":checked")) {
 				var str1 = '<label for="rawm_minimum" class="">최저수량</label>'
 						+ '<input name="rawm_minimum" id="rawm_minimum" type="number" class="form-control">'
 				$(".form-group1").html(str1);
@@ -55,7 +55,7 @@
 				alert("공급처명을 입력해주세요");
 				return false;
 			}
-			if ($("#rawm_autoorder").is(":checked")) {
+			if ($("#rawm_notice").is(":checked")) {
 				if(minimum.length < 1){
 					alert("최저수량을 1개이상 입력해주세요");
 					return false;
@@ -123,9 +123,9 @@
 										</div>
 										<div class="position-relative form-group">
 											<div class="custom-checkbox custom-control">
-												<input type="checkbox" id="rawm_autoorder"
-													name="rawm_autoorder" class="custom-control-input">
-												<label class="custom-control-label" for="rawm_autoorder">&nbsp;최저수량알림</label>
+												<input type="checkbox" id="rawm_notice"
+													name="rawm_notice" class="custom-control-input">
+												<label class="custom-control-label" for="rawm_notice">&nbsp;최저수량알림</label>
 											</div>
 										</div>
 										<!-- if check -->

@@ -52,7 +52,9 @@ $(function(){
 						database.ref('warehouse/'+result.warehouse_code).child("inventory").once('child_added').then(function(data2){
 						if(data2.key==result.rawm_code){
 							database.ref('warehouse/'+result.warehouse_code).child("inventory").child(result.rawm_code).once('child_added').then(function(snapshot){
-								database.ref('warehouse/'+result.warehouse_code).child("inventory").child(result.rawm_code).update({"systemamount":snapshot.val() + result.rmorder_amount});
+								alert("1");
+								var amount1 = (parseInt(snapshot.val())+parseInt(result.rmorder_amount)).toString();
+								database.ref('warehouse/'+result.warehouse_code).child("inventory").child(result.rawm_code).update({"systemamount":amount1});
 								$("#rmorder_code1").val(rmorder_code);
 								$("#rmorder_status1").val(status);
 								$("#orderUpdateForm").submit();
