@@ -25,10 +25,10 @@ public class RawMaterialLinkController {
 
 	@Autowired
 	RawMaterialService rService;
-	
+
 	@Autowired
 	OrderService oService;
-	
+
 	@Autowired
 	OrderDAO oDAO;
 
@@ -40,10 +40,10 @@ public class RawMaterialLinkController {
 
 		ArrayList<RawMaterialVO> result1 = rService.rawMaterialDashSelect();
 		model.addAttribute("rawMaterialList", result1);
-		
-		ArrayList<Order_rawMaterialVO> result2 =  oDAO.orderDashSelect();
+
+		ArrayList<Order_rawMaterialVO> result2 = oDAO.orderDashSelect();
 		model.addAttribute("orderList", result2);
-		
+
 		return "rawMaterial/All_view";
 	}
 
@@ -85,6 +85,13 @@ public class RawMaterialLinkController {
 		return "rawMaterial/materials_view";
 	}
 
+	// 원자재 전체 가져오기
+	@RequestMapping(value = "/materialAllselect", method = RequestMethod.GET)
+	public @ResponseBody ArrayList<RawMaterialVO> materialAllselect() {
+		ArrayList<RawMaterialVO> result = rService.rawMaterialAllSelect();
+		return result;
+	}
+
 	// 원자재 전체 출력화면 Form
 	@RequestMapping(value = "/goMaterials", method = RequestMethod.GET)
 	public String goMaterials(Model model) {
@@ -102,20 +109,24 @@ public class RawMaterialLinkController {
 	// 원자재 수정 Form
 	@RequestMapping(value = "/goMaterialsUpdate", method = RequestMethod.GET)
 	public String goMaterialsUpdate(String rawm_code, Model model) {
-		/*RawMaterialVO result = rService.rawMaterialOneSelect(rawm_code);
-		model.addAttribute("result", result);*/
+		/*
+		 * RawMaterialVO result = rService.rawMaterialOneSelect(rawm_code);
+		 * model.addAttribute("result", result);
+		 */
 		ArrayList<SupplierVO> result1 = sService.supplierAllSelect();
 		model.addAttribute("supplierList", result1);
-		
+
 		model.addAttribute("rawm_code", rawm_code);
 		return "rawMaterial/materials_update";
 	}
+
 	// 원자재 하나 가져오기
 	@RequestMapping(value = "/rawMaterialOneSelect", method = RequestMethod.POST)
 	public @ResponseBody RawMaterialVO rawMaterialOneSelect(String rawm_code, Model model) {
 		RawMaterialVO result = rService.rawMaterialOneSelect(rawm_code);
 		return result;
 	}
+
 	//
 	//
 	// 발주 전체 출력 Form
@@ -133,6 +144,7 @@ public class RawMaterialLinkController {
 		model.addAttribute("rList", result);
 		return "rawMaterial/order_insert";
 	}
+
 	//
 	//
 	// 구매 관리 전체 출력 Form
