@@ -60,16 +60,17 @@
 				$("#salesdetailseq").val(result.salesdetailseq);
 				$("#manuf_status").val(result.manuf_status);
 				$("#warehouse_code").val(result.warehouse_code);
-				buttonEvent();	
+			
 			}
 		});
 
-		
+		buttonEvent();	
 	});
 	/*]]>*/
 	
 function buttonEvent(){
 	$(".btn-primary").click(function(){
+	
 		var manuf_amount = $("#manuf_amount").val();
 		var pd_code = $("#pd_code").val();
 		var warehouse_code = $("#warehouse_code").val();
@@ -89,7 +90,7 @@ function buttonEvent(){
 						var neededMaterial = (result[i].product_material_amount * manuf_amount);
 						
 	 					database.ref('warehouse/'+warehouse_code).child("inventory").child(result[i].rawm_code).on('child_added', function(snapshot){
-	 						
+
 							if(neededMaterial>snapshot.val()){
 								var get = (neededMaterial - snapshot.val());
 								alert(result[i].rawm_name+"가 "+get+"개 부족합니다");
@@ -182,7 +183,7 @@ function buttonEvent(){
 
                                     
                                 <div class="modal-footer d-block text-center">
-                                    <button id="insertButton" class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg" type="button">수정 하기</button>
+                                    <button class="btn-wide btn-pill btn-shadow btn-hover-shine btn btn-primary btn-lg" type="button">수정 하기</button>
                                 </div>
                             </div>
                         </div>
