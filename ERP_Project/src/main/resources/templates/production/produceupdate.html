@@ -70,11 +70,7 @@
 	
 function buttonEvent(){
 	$(".btn-primary").click(function(){
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> 88f535635766219e437832c549f81f440f350cc8
 		var manuf_amount = $("#manuf_amount").val();
 		var pd_code = $("#pd_code").val();
 		var warehouse_code = $("#warehouse_code").val();
@@ -95,10 +91,7 @@ function buttonEvent(){
 						var neededMaterial = (result[i].product_material_amount * manuf_amount);
 						
 	 					database.ref('warehouse/'+warehouse_code).child("inventory").child(result[i].rawm_code).on('child_added', function(snapshot){
-<<<<<<< HEAD
-=======
 
->>>>>>> 88f535635766219e437832c549f81f440f350cc8
 							if(neededMaterial>snapshot.val()){
 								var get = (neededMaterial - snapshot.val());
 								alert(result[i].rawm_name+"가 "+get+"개 부족합니다");
