@@ -26,81 +26,81 @@
 <script src="https://cdn.firebase.com/libs/firebaseui/4.0.0/firebaseui.js"></script>
 <!-- firebase -->
 <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
-<!-- firebase Config and initialize -->	
+<!-- firebase Config and initialize -->   
 <script src="firebase/firebase-config.js"></script>
 
 <script>
 var database = firebase.database();
 var checkMaterials = 0;
 
-	$(function(){
-		selectInventoryINWarehouse();
-		buttonEvent();		
-	});
+   $(function(){
+      selectInventoryINWarehouse();
+      buttonEvent();      
+   });
    
-	function selectInventoryINWarehouse(){
-		database.ref('warehouse/').on('child_added', function(data){
-			var warehouse_code = data.key;
-			var warehouse_name = data.val().warehouse_name;
-			
-			setWarehouseDropbox(warehouse_code, warehouse_name);
-		});
-	}
-	
-	
-	//창고 드롭박스 세팅 함수
-	function setWarehouseDropbox(warehouse_code, warehouse_name){
-		var str='';
-		str+='<option value="'+warehouse_code+'" label="'+warehouse_name+'"></option>';
-		$("#codeList").append(str);
-	}
-	
-	function buttonEvent(){
-		$("#insertButton").click(function(){
-			var manuf_amount = $("#manuf_amount").val();
-			var pd_code = $("#pd_code").val();
-			var warehouse_code = $("#warehouse_code").val();
-			var manuf_startdate = $("#manuf_startdate").val();
-				$.ajax({
-					url:"amountCheck",
-					type:"GET",
-					data:{pd_code : pd_code},
-					success:function(result){
-						database.ref('warehouse/').on('child_added', function(data){
-							var warehouse_code = data.key;
-							var warehouse_name = data.val().warehouse_name;
-			 			
-							for(var i = 0 ; i<result.length ; i++){
-								
-								var neededMaterial = (result[i].product_material_amount * manuf_amount);
-								
-			 					database.ref('warehouse/'+warehouse_code).child("inventory").child(result[i].rawm_code).on('child_added', function(snapshot){
-			 					
-									if(neededMaterial>snapshot.val()){
-										var get = (neededMaterial - snapshot.val());
-										alert(result[i].rawm_name+"가 "+get+"개 부족합니다");
-										checkMaterials++; //생산불가할때마다 카운트 1++
-										}
-			 					})	 						
-							}	
-						})
-				
-						if(checkMaterials!=0){
-							if (confirm("원자재 발주 페이지로 이동하시겠습니까?")){
-								var url = "goOrderInsert";
-							    var name = "popup test";
-						    	var option = "width = 500, height = 500, top = 100, left = 200, location = no"
-						   	 window.open(url, name, option);
-							}
-						}else{
-							$("#produceinsertForm").submit();
-							opener.document.location.href="/goproducecheck";
-							self.close();
-						}
-					}
-				})
-			})
-		}
+   function selectInventoryINWarehouse(){
+      database.ref('warehouse/').on('child_added', function(data){
+         var warehouse_code = data.key;
+         var warehouse_name = data.val().warehouse_name;
+         
+         setWarehouseDropbox(warehouse_code, warehouse_name);
+      });
+   }
+   
+   
+   //창고 드롭박스 세팅 함수
+   function setWarehouseDropbox(warehouse_code, warehouse_name){
+      var str='';
+      str+='<option value="'+warehouse_code+'" label="'+warehouse_name+'"></option>';
+      $("#codeList").append(str);
+   }
+   
+   function buttonEvent(){
+      $("#insertButton").click(function(){
+         var manuf_amount = $("#manuf_amount").val();
+         var pd_code = $("#pd_code").val();
+         var warehouse_code = $("#warehouse_code").val();
+         var manuf_startdate = $("#manuf_startdate").val();
+            $.ajax({
+               url:"amountCheck",
+               type:"GET",
+               data:{pd_code : pd_code},
+               success:function(result){
+                  database.ref('warehouse/').on('child_added', function(data){
+                     var warehouse_code = data.key;
+                     var warehouse_name = data.val().warehouse_name;
+                   
+                     for(var i = 0 ; i<result.length ; i++){
+                        
+                        var neededMaterial = (result[i].product_material_amount * manuf_amount);
+                        
+                         database.ref('warehouse/'+warehouse_code).child("inventory").child(result[i].rawm_code).on('child_added', function(snapshot){
+                         
+                           if(neededMaterial>snapshot.val()){
+                              var get = (neededMaterial - snapshot.val());
+                              alert(result[i].rawm_name+"가 "+get+"개 부족합니다");
+                              checkMaterials++; //생산불가할때마다 카운트 1++
+                              }
+                         })                      
+                     }   
+                  })
+            
+                  if(checkMaterials!=0){
+                     if (confirm("원자재 발주 페이지로 이동하시겠습니까?")){
+                        var url = "goOrderInsert";
+                         var name = "popup test";
+                         var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+                         window.open(url, name, option);
+                     }
+                  }else{
+                     $("#produceinsertForm").submit();
+                     opener.document.location.href="/goproducecheck";
+                     self.close();
+                  }
+               }
+            })
+         })
+      }
 </script>
 </head>
 <body>
@@ -120,35 +120,35 @@ var checkMaterials = 0;
                                     </h5>
                                     
                                     <div class="col-md-3">
-                                  	<form action="produceInsert" method="post" id="produceinsertForm">
-     								<input type="hidden" name="manuf_requserid" value="user">
+                                     <form action="produceInsert" method="post" id="produceinsertForm">
+                             <input type="hidden" name="manuf_requserid" value="user">
                                     <div class="form-group">
                                     <label for="pd_code">생산품코드</label>
-										<input id="pd_code" name="pd_code" list="test" class="form-control" autocomplete="off">
-        										 <datalist class="select" id="test">
-          		 									 <option class="pList" th:each="list : ${pList}"
-              									 th:text="${list.pd_name}" th:value="${list.pd_code}">
-            									</option>
-         								</datalist>                                           
+                              <input id="pd_code" name="pd_code" list="test" class="form-control" autocomplete="off">
+                                       <datalist class="select" id="test">
+                                             <option class="pList" th:each="list : ${pList}"
+                                          th:text="${list.pd_name}" th:value="${list.pd_code}">
+                                       </option>
+                                 </datalist>                                           
                                       </div>
                                        <div class="form-group">
-											<label for="manuf_amount">생산품수량</label> <input id="manuf_amount"
-												name="manuf_amount" type="number" class="form-control" autocomplete="off">
-										</div>
+                                 <label for="manuf_amount">생산품수량</label> <input id="manuf_amount"
+                                    name="manuf_amount" type="number" class="form-control" autocomplete="off">
+                              </div>
                                        <div class="form-group">
-										<label for="warehouse_code" class="select">창고코드</label>
-										<input type="text" name="warehouse_code" list="codeList" id="warehouse_code" class="form-control" autocomplete="off">
-											<datalist class="select" id="codeList">			
-											</datalist>
-									</div>
+                              <label for="warehouse_code" class="select">창고코드</label>
+                              <input type="text" name="warehouse_code" list="codeList" id="warehouse_code" class="form-control" autocomplete="off">
+                                 <datalist class="select" id="codeList">         
+                                 </datalist>
+                           </div>
                              <div class="form-group">
-                            	<div class="input-group">
-                                	<div class="input-group-prepend datepicker-trigger">
-                                    	<div class="input-group-text">
-                                        	<i class="fa fa-calendar-alt"></i>
+                               <div class="input-group">
+                                   <div class="input-group-prepend datepicker-trigger">
+                                       <div class="input-group-text">
+                                           <i class="fa fa-calendar-alt"></i>
                                         </div>
                                     </div>
-									<input type="text" id="manuf_startdate" name="manuf_startdate" autocomplete="off" placeholder="생산시작일" class="form-control" data-toggle="datepicker-icon">
+                           <input type="text" id="manuf_startdate" name="manuf_startdate" autocomplete="off" placeholder="생산시작일" class="form-control" data-toggle="datepicker-icon">
                                 </div>
                                 
                                 <div class="modal-footer d-block text-center">
@@ -161,11 +161,11 @@ var checkMaterials = 0;
 
                             </div>
                         </div>
-                	</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                   </div>
+            </div>
+         </div>
+      </div>
+   </div>
 </div>
 </body>
 </html>

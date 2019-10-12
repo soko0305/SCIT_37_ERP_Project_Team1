@@ -24,7 +24,7 @@
 			,#{rawm_sort}
 			,#{rawm_price}
 			<choose>
-			<when test="rawm_autoorder!=null">
+			<when test="rawm_notice!=null">
 			,'CHECKED'
 			</when>
 			<otherwise>

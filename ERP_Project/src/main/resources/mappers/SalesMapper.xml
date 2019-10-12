@@ -27,9 +27,10 @@ salesdetailseq.nextval,
 #{salesdetail_name},
 #{salesdetail_amount},
 #{salesdetail_price},
+#{salesdetail_valueofsupply},
 #{sales_ordernum},
-#{pd_code},
-#{salesdetail_valueofsupply}
+#{pd_code}
+
 )
 </insert>
 

@@ -4,222 +4,222 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.project.erp.dao.ProductionMapper">
-	 <insert id="productionInsert" parameterType="com.project.erp.vo.ProductVO">
-	insert into PRODUCT
-	(
-		pd_code,
-		pd_name,
-		pd_rmcost,
-		pd_manufcost,
-		pd_sort,
-		pd_delete	
-	)
-	values
-	(
-		'p' || TO_CHAR(pd_code.nextval),
-		#{pd_name},
-		#{pd_rmcost},
-		#{pd_manufcost},
-		#{pd_sort},
-		'N'
-	)
-	</insert>
-	
-	
-	 <insert id="produceInsert" parameterType="com.project.erp.vo.ManufactureVO">
-	insert into manufacture
-	(
-		mfseq,
-		pd_code,
-		manuf_startdate,
-		manuf_status,
-		warehouse_code,
-		manuf_amount,
-		manuf_requserid,
-		manuf_reqdate,
-		mf_delete
+    <insert id="productionInsert" parameterType="com.project.erp.vo.ProductVO">
+   insert into PRODUCT
+   (
+      pd_code,
+      pd_name,
+      pd_rmcost,
+      pd_manufcost,
+      pd_sort,
+      pd_delete   
+   )
+   values
+   (
+      'p' || TO_CHAR(pd_code.nextval),
+      #{pd_name},
+      #{pd_rmcost},
+      #{pd_manufcost},
+      #{pd_sort},
+      'N'
+   )
+   </insert>
+   
+   
+    <insert id="produceInsert" parameterType="com.project.erp.vo.ManufactureVO">
+   insert into manufacture
+   (
+      mfseq,
+      pd_code,
+      manuf_startdate,
+      manuf_status,
+      warehouse_code,
+      manuf_amount,
+      manuf_requserid,
+      manuf_reqdate,
+      mf_delete
 
-	)
-	values
-	(
-		'm' || TO_CHAR(mfseq.nextval),
-		#{pd_code},	
-		to_char(to_date(#{manuf_startdate},'MM/DD/YYYY'),'YYYY-MM-DD'),	
-		'미완',	
-		#{warehouse_code},
-		#{manuf_amount},
-		#{manuf_requserid},	
-		sysdate,			
-		'N'	
+   )
+   values
+   (
+      'm' || TO_CHAR(mfseq.nextval),
+      #{pd_code},   
+      to_char(to_date(#{manuf_startdate},'MM/DD/YYYY'),'YYYY-MM-DD'),   
+      '미완',   
+      #{warehouse_code},
+      #{manuf_amount},
+      #{manuf_requserid},   
+      sysdate,         
+      'N'   
 
-	)
-	</insert>	
-	
-	<select id="produceSelect" resultType="com.project.erp.vo.ManufactureVO" >
-		 SELECT
-		 	m.mfseq
- 			,m.pd_code 
- 			,p.pd_name
- 			,to_char(manuf_startdate, 'yyyy-mm-dd') as manuf_startdate
- 			,to_char(manuf_enddate, 'yyyy-mm-dd') as manuf_enddate
-			,m.manuf_status 
-			,m.warehouse_code 
-		 	,m.manuf_amount
- 			,m.manuf_requserid 
- 			,to_char(manuf_reqdate, 'yyyy-mm-dd') as manuf_reqdate 			
-			,m.mf_delete
- 	 	FROM
-		manufacture m, product p
-		WHERE	m.pd_code = p.pd_code
-		and m.mf_delete='N'
+   )
+   </insert>   
+   
+   <select id="produceSelect" resultType="com.project.erp.vo.ManufactureVO" >
+       SELECT
+          m.mfseq
+          ,m.pd_code 
+          ,p.pd_name
+          ,to_char(manuf_startdate, 'yyyy-mm-dd') as manuf_startdate
+          ,to_char(manuf_enddate, 'yyyy-mm-dd') as manuf_enddate
+         ,m.manuf_status 
+         ,m.warehouse_code 
+          ,m.manuf_amount
+          ,m.manuf_requserid 
+          ,to_char(manuf_reqdate, 'yyyy-mm-dd') as manuf_reqdate          
+         ,m.mf_delete
+        FROM
+      manufacture m, product p
+      WHERE   m.pd_code = p.pd_code
+      and m.mf_delete='N'
 </select>
-	<select id="produceOneSelect" parameterType="String" resultType="com.project.erp.vo.ManufactureVO" >
-		 SELECT
-		 	m.mfseq
- 			,m.pd_code 
- 			,p.pd_name
- 			,to_char(manuf_startdate, 'yyyy-mm-dd') as manuf_startdate 
- 			,manuf_enddate
-			,m.manuf_status 
-			,m.warehouse_code 
-		 	,m.manuf_amount
- 			,m.manuf_requserid 
-			,manuf_reqdate
-			,mf_delete
- 	 	FROM
-		manufacture m, product p
-		WHERE	m.pd_code = p.pd_code
-		and m.mf_delete='N'
-		and mfseq=#{mfseq}
+   <select id="produceOneSelect" parameterType="String" resultType="com.project.erp.vo.ManufactureVO" >
+       SELECT
+          m.mfseq
+          ,m.pd_code 
+          ,p.pd_name
+          ,to_char(manuf_startdate, 'yyyy-mm-dd') as manuf_startdate 
+          ,manuf_enddate
+         ,m.manuf_status 
+         ,m.warehouse_code 
+          ,m.manuf_amount
+          ,m.manuf_requserid 
+         ,manuf_reqdate
+         ,mf_delete
+        FROM
+      manufacture m, product p
+      WHERE   m.pd_code = p.pd_code
+      and m.mf_delete='N'
+      and mfseq=#{mfseq}
 </select>
 
-	
-	<select id="productionSelect" resultType="com.project.erp.vo.ProductVO" >
-		 SELECT
-			 pd_code			 
-			 ,pd_name 		 
-			 ,pd_rmcost  		 
-			 ,pd_manufcost 	 
-			 ,pd_sort
-			 ,pd_delete			 
- 	 	FROM
-			product 
-	 	WHERE	pd_delete='N'
+   
+   <select id="productionSelect" resultType="com.project.erp.vo.ProductVO" >
+       SELECT
+          pd_code          
+          ,pd_name        
+          ,pd_rmcost         
+          ,pd_manufcost     
+          ,pd_sort
+          ,pd_delete          
+        FROM
+         product 
+       WHERE   pd_delete='N'
  </select>
 
  
-		<update id="statusProduce" parameterType="com.project.erp.vo.ManufactureVO">
-			update
-				manufacture
-			set
-				manuf_status=#{manuf_status},
-				manuf_enddate=sysdate
-			where
-				mfseq=#{mfseq}
-		</update>
-	
-		<update id="deleteProduction" parameterType="com.project.erp.vo.ProductVO">
-		update
-			product
-		set
-			pd_delete=#{pd_delete}
-		where
-			pd_code=#{pd_code}
-	</update>
-	<update id="deleteProduce"  parameterType="com.project.erp.vo.ManufactureVO">
-		update
- 			 manufacture	
-		set
-			mf_delete=#{mf_delete}
-		where
-			mfseq=#{mfseq}
-	</update>
-	
-	
-	<select id="selectLatestProduct" resultType="com.project.erp.vo.ProductVO">
-		SELECT
-	 		pd_code
-			,pd_name
- 			,pd_rmcost
- 			,pd_manufcost
-			,pd_sort
-	 	FROM product
-	 	WHERE pd_code=(SELECT MAX(pd_code)
-	 				   FROM product)
-	</select>
-	
-	<insert id="insertProudctMaterial" parameterType="com.project.erp.vo.ProductMaterialVO">
-		INSERT INTO product_material
-		(
-			product_material_code
-			, pd_code
-			, rawm_code
-			, product_material_amount
-		)
-		VALUES
-		(
-			 'pm' || TO_CHAR(product_material_code.NEXTVAL)
-			, #{pd_code}
-			, #{rawm_code}
-			, #{product_material_amount}
-		)
-	</insert>
-	
-	
-	<select id="selelctProductByCode" parameterType="String" resultType="com.project.erp.vo.ProductVO">
-		SELECT
-	 		pd_code
-			,pd_name
- 			,pd_rmcost
- 			,pd_manufcost
-			,pd_sort
-	 	FROM product
-	 	WHERE pd_code=#{pd_code}
-	</select>
-	
-	<select id="selectAllProductMaterial" parameterType="String" resultType="com.project.erp.vo.ProductMaterialVO">
-		SELECT
-	 		pm.product_material_code
-			,pm.pd_code
- 			,pm.rawm_code
- 			,pm.product_material_amount
- 			,rm.supplierseq
-			,rm.rawm_name
-			,rm.rawm_sort
-			,rm.rawm_price
-			,rm.rawm_notice
-			,rm.rawm_minimum
-			,rm.rawm_delete
-	 	FROM product_material pm JOIN rawmaterial rm
-	 	ON pm.rawm_code = rm.rawm_code
-	 	WHERE pm.pd_code=#{pd_code}
-	</select>
-	
-	<delete id="deleteProudctMaterial">
-		DELETE product_material
-		WHERE pd_code=#{pd_code}
-	</delete>
-	
-	<update id="productionUpdate" parameterType="com.project.erp.vo.ProductVO">
-		update product
-		set
-			pd_name = #{pd_name}
- 			,pd_rmcost = #{pd_rmcost}
- 			,pd_manufcost = #{pd_manufcost}
-			,pd_sort = #{pd_sort}
-		WHERE pd_code=#{pd_code}
-	</update>
-	<update id="produceUpdate" parameterType="com.project.erp.vo.ManufactureVO">
-	update
-			manufacture
-	set
-		pd_code = #{pd_code},
-		manuf_startdate = to_char(to_date(#{manuf_startdate},'MM/DD/YYYY'),'YYYY-MM-DD'),	
-		warehouse_code= #{warehouse_code}, 
-		manuf_amount= #{manuf_amount},
-		manuf_requserid= #{manuf_requserid}
-		<!-- salesdetailseq= #{salesdetailseq} -->
-		where
-			mfseq = #{mfseq}
-	</update>
+      <update id="statusProduce" parameterType="com.project.erp.vo.ManufactureVO">
+         update
+            manufacture
+         set
+            manuf_status=#{manuf_status},
+            manuf_enddate=sysdate
+         where
+            mfseq=#{mfseq}
+      </update>
+   
+      <update id="deleteProduction" parameterType="com.project.erp.vo.ProductVO">
+      update
+         product
+      set
+         pd_delete=#{pd_delete}
+      where
+         pd_code=#{pd_code}
+   </update>
+   <update id="deleteProduce"  parameterType="com.project.erp.vo.ManufactureVO">
+      update
+           manufacture   
+      set
+         mf_delete=#{mf_delete}
+      where
+         mfseq=#{mfseq}
+   </update>
+   
+   
+   <select id="selectLatestProduct" resultType="com.project.erp.vo.ProductVO">
+      SELECT
+          pd_code
+         ,pd_name
+          ,pd_rmcost
+          ,pd_manufcost
+         ,pd_sort
+       FROM product
+       WHERE pd_code=(SELECT MAX(pd_code)
+                   FROM product)
+   </select>
+   
+   <insert id="insertProudctMaterial" parameterType="com.project.erp.vo.ProductMaterialVO">
+      INSERT INTO product_material
+      (
+         product_material_code
+         , pd_code
+         , rawm_code
+         , product_material_amount
+      )
+      VALUES
+      (
+          'pm' || TO_CHAR(product_material_code.NEXTVAL)
+         , #{pd_code}
+         , #{rawm_code}
+         , #{product_material_amount}
+      )
+   </insert>
+   
+   
+   <select id="selelctProductByCode" parameterType="String" resultType="com.project.erp.vo.ProductVO">
+      SELECT
+          pd_code
+         ,pd_name
+          ,pd_rmcost
+          ,pd_manufcost
+         ,pd_sort
+       FROM product
+       WHERE pd_code=#{pd_code}
+   </select>
+   
+   <select id="selectAllProductMaterial" parameterType="String" resultType="com.project.erp.vo.ProductMaterialVO">
+      SELECT
+          pm.product_material_code
+         ,pm.pd_code
+          ,pm.rawm_code
+          ,pm.product_material_amount
+          ,rm.supplierseq
+         ,rm.rawm_name
+         ,rm.rawm_sort
+         ,rm.rawm_price
+         ,rm.rawm_notice
+         ,rm.rawm_minimum
+         ,rm.rawm_delete
+       FROM product_material pm JOIN rawmaterial rm
+       ON pm.rawm_code = rm.rawm_code
+       WHERE pm.pd_code=#{pd_code}
+   </select>
+   
+   <delete id="deleteProudctMaterial">
+      DELETE product_material
+      WHERE pd_code=#{pd_code}
+   </delete>
+   
+   <update id="productionUpdate" parameterType="com.project.erp.vo.ProductVO">
+      update product
+      set
+         pd_name = #{pd_name}
+          ,pd_rmcost = #{pd_rmcost}
+          ,pd_manufcost = #{pd_manufcost}
+         ,pd_sort = #{pd_sort}
+      WHERE pd_code=#{pd_code}
+   </update>
+   <update id="produceUpdate" parameterType="com.project.erp.vo.ManufactureVO">
+   update
+         manufacture
+   set
+      pd_code = #{pd_code},
+      manuf_startdate = to_char(to_date(#{manuf_startdate},'MM/DD/YYYY'),'YYYY-MM-DD'),   
+      warehouse_code= #{warehouse_code}, 
+      manuf_amount= #{manuf_amount},
+      manuf_requserid= #{manuf_requserid}
+      <!-- salesdetailseq= #{salesdetailseq} -->
+      where
+         mfseq = #{mfseq}
+   </update>
 </mapper>

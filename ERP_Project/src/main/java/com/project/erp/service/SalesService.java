@@ -69,7 +69,7 @@ public class SalesService {
 			totalPrice += Integer.parseInt(salesdetail_valueofsupply);
 			String price = Integer.toString(totalPrice);
 			
-			
+			System.out.println("일어나");
 			if(i==0){
 			//회사이름으로 바이어 시퀀스 불러오기.
 			Buyer buyer = new Buyer();

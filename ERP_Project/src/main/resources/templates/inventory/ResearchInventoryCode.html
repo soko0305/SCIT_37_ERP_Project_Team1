@@ -306,7 +306,7 @@
 			str+='<td>'+serverData.pd_sort+'</td>';
 			str+='<td>'+amount+'</td>';
 			str+='<td>'+(parseInt(serverData.pd_rmcost)+parseInt(serverData.pd_manufcost))+'</td>';
-			str+='<td><button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary" onclick="selectSearchingStuff(this);" button-type="selection" data-code="'+serverData.rawm_code+'" amount-data="'+amount+'" style="margin-top: 0.7em;margin-left: 1.2em">선택</button></td>';
+			str+='<td><button class="mb-2 mr-2 border-0 btn-transition btn btn-outline-primary" onclick="selectSearchingStuff(this);" button-type="selection" data-code="'+serverData.pd_code+'" amount-data="'+amount+'" wcode-data="'+warehouse_code+'" style="margin-top: 0.7em;margin-left: 1.2em">선택</button></td>';
 			str+='</tr>';
 			$("#tBody").append(str);
 		}

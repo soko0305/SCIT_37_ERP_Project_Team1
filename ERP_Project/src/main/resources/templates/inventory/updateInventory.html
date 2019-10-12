@@ -145,7 +145,7 @@
 		$("#updateButton").click(function(){
 			if($("#amount").val()>=0){
 			if(button_type=='update'){
-				var u_amount = $("#amount").val();
+				var u_amount = parseInt($("#amount").val());
 				database.ref('warehouse/'+warehouse_code).child('inventory').child(data_code).update({"systemamount": u_amount});
 				alert("재고 수량 변경을 완료했습니다.");
 				window.open("about:blank","_self").close();
@@ -167,8 +167,8 @@
 							count = snapshot.val();
 						});
 						
-						var mAmount = (parseInt(count)+parseInt(u_amount)).toString();
-						var dAmount =  (parseInt(amount1)-parseInt(u_amount)).toString();
+						var mAmount = (parseInt(count)+parseInt(u_amount));
+						var dAmount =  (parseInt(amount1)-parseInt(u_amount));
 
 						database.ref('warehouse/'+u_warehouse_code).child('inventory').child(data_code).update({"systemamount":mAmount});
 						database.ref('warehouse/'+warehouse_code).child('inventory').child(data_code).update({"systemamount":dAmount});
